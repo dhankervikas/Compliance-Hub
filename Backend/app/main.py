@@ -34,7 +34,7 @@ app.include_router(auditor_portal.router, prefix=f"{settings.API_V1_PREFIX}", ta
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.BACKEND_CORS_ORIGINS, # Use settings
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
