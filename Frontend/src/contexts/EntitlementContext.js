@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import api from '../services/api';
 import { useAuth } from './AuthContext';
 
@@ -9,56 +8,33 @@ export const EntitlementProvider = ({ children }) => {
     const { user, token } = useAuth();
     const [entitlements, setEntitlements] = useState(null);
     const [loading, setLoading] = useState(true);
-    const location = useLocation();
-    const hasFetched = useRef(false);
-    const retryCount = useRef(0);
-
-    const fetchEntitlements = useCallback(async () => {
-        if (!user || !token) {
-            setLoading(false);
-            return;
-        }
-
-        // Prevent infinite retries
-        if (retryCount.current >= 2) {
-            console.warn("EntitlementContext: Max retries reached, using fallback");
-            setEntitlements({ frameworks: [], features: [], account_status: 'unknown' });
-            setLoading(false);
-            return;
-        }
-
-        try {
-            const match = location.pathname.match(/\/t\/([^/]+)/);
-            const tenantId = match ? match[1] : null;
-
-            let headers = {};
-            if (tenantId && user && user.tenant_id !== tenantId) {
-                headers['X-Target-Tenant-ID'] = tenantId;
-            }
-
-            const response = await api.get('/users/me/entitlements', { headers });
-            setEntitlements(response.data);
-            hasFetched.current = true;
-            retryCount.current = 0;
-        } catch (error) {
-            console.error("Failed to fetch entitlements:", error);
-            retryCount.current += 1;
-            setEntitlements({ frameworks: [], features: [], account_status: 'unknown' });
-        } finally {
-            setLoading(false);
-        }
-    }, [user, token, location.pathname]);
+    const fetchedRef = useRef(false);
 
     useEffect(() => {
-        if (token) {
-            fetchEntitlements();
-        } else {
+        if (!token || !user) {
             setLoading(false);
             setEntitlements(null);
-            hasFetched.current = false;
-            retryCount.current = 0;
+            fetchedRef.current = false;
+            return;
         }
-    }, [token, fetchEntitlements]);
+
+        if (fetchedRef.current) return;
+        fetchedRef.current = true;
+
+        const doFetch = async () => {
+            try {
+                const response = await api.get('/users/me/entitlements');
+                setEntitlements(response.data);
+            } catch (error) {
+                console.warn("EntitlementContext: fetch failed, using fallback");
+                setEntitlements({ frameworks: [], features: [], account_status: 'unknown' });
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        doFetch();
+    }, [token, user]);
 
     const hasFeature = (featureKey) => {
         if (!entitlements) return false;
@@ -78,17 +54,18 @@ export const EntitlementProvider = ({ children }) => {
         return framework ? framework.is_active : false;
     };
 
-    const value = {
-        entitlements,
-        loading,
-        hasFeature,
-        hasFramework,
-        isFrameworkActive,
-        refreshEntitlements: fetchEntitlements
+    const refreshEntitlements = async () => {
+        fetchedRef.current = false;
+        try {
+            const response = await api.get('/users/me/entitlements');
+            setEntitlements(response.data);
+        } catch (error) {
+            console.warn("EntitlementContext: refresh failed");
+        }
     };
 
     return (
-        <EntitlementContext.Provider value={value}>
+        <EntitlementContext.Provider value={{ entitlements, loading, hasFeature, hasFramework, isFrameworkActive, refreshEntitlements }}>
             {children}
         </EntitlementContext.Provider>
     );
