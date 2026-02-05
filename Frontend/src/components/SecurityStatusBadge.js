@@ -74,7 +74,7 @@ const SecurityStatusBadge = () => {
             <div className="flex justify-center gap-8">
                 <Indicator
                     label="Isolation"
-                    active={status.checks.tenant_isolation}
+                    active={status?.checks?.tenant_isolation}
                     icon={Users}
                 />
                 <Indicator
