@@ -79,12 +79,12 @@ const SecurityStatusBadge = () => {
                 />
                 <Indicator
                     label="Encryption"
-                    active={status.checks.data_encryption}
+                    active={status?.checks?.data_encryption}
                     icon={Lock}
                 />
                 <Indicator
                     label="Guard"
-                    active={status.checks.access_guard}
+                    active={status?.checks?.access_guard}
                     icon={Activity}
                 />
             </div>
