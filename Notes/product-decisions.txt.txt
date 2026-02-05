@@ -1,0 +1,4 @@
+Framework: ISO/IEC 27001:2022
+Interpretation style: Conservative
+Evidence priority: System configuration > Logs > Tickets > Policies
+AI role: Explain only, never decide

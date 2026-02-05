@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-01-15T09:28:53.301844",
+  "summary": {
+    "total": 2,
+    "fail": 2,
+    "pass": 0
+  },
+  "findings": [
+    {
+      "control": "A.8.24",
+      "status": "FAIL",
+      "resource": "unencrypted-bucket",
+      "execution_id": "EXEC-1768498133-S3",
+      "details": "S3 Encryption Missing (Simulated)",
+      "context": {
+        "source": "AWS Config",
+        "region": "us-east-1",
+        "account_id": "000000000000"
+      },
+      "raw_data": {
+        "Name": "unencrypted-bucket",
+        "CreationDate": "2026-01-15T12:00:00+00:00",
+        "ServerSideEncryptionConfiguration": null
+      },
+      "remediation": "**Steps to Fix:**\n1. Log into AWS Console > S3.\n2. Select bucket `unencrypted-bucket`.\n3. Go to **Properties** tab.\n4. Scroll to **Default Encryption**.\n5. Click **Edit**, select **SSE-S3**, and Save."
+    },
+    {
+      "control": "A.9.4",
+      "title": "GitHub Scan: Branch Protection",
+      "status": "FAIL",
+      "resource": "master-branch",
+      "execution_id": "EXEC-1768498133-GH",
+      "details": "Branch Protection Missing on Main",
+      "context": {
+        "source": "GitHub API",
+        "repo": "dhankervikas/assurisk-backend",
+        "branch": "main"
+      },
+      "raw_data": {
+        "url": "https://api.github.com/repos/dhankervikas/assurisk-backend/branches/main/protection",
+        "enabled": false,
+        "required_status_checks": {
+          "checks": []
+        },
+        "required_pull_request_reviews": {
+          "required_approving_review_count": 0
+        },
+        "enforce_admins": {
+          "enabled": false
+        }
+      },
+      "remediation": "**Steps to Fix:**\n1. Go to GitHub Repo Settings > Branches.\n2. Click **Add Branch Protection Rule**.\n3. Pattern: `main`.\n4. Check **Require a pull request before merging**.\n5. Set **Required approvals** to 1."
+    }
+  ]
+}

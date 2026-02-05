@@ -1,0 +1,1421 @@
+!!! LOADER DEBUG: MAIN.PY LOADED !!!
+DEBUG: initialized OpenAI GPT-4-Turbo client for Policy Generation.
+DEBUG: Configured for OpenAI GPT-4-Turbo...
+DEBUG: OpenAI Client Configured Successfully. Model: gpt-4-turbo
+DEBUG: Loading OPENAI_API_KEY from settings. Value: sk-pr...
+[DEBUG] DataSourceAdapter initialized. Mode: AuditMode.HYBRID
+2026-02-03 18:04:09,314 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:04:09,314 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("users")
+2026-02-03 18:04:09,314 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,315 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("frameworks")
+2026-02-03 18:04:09,315 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,316 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("controls")
+2026-02-03 18:04:09,316 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,316 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("evidence")
+2026-02-03 18:04:09,316 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,316 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("control_mappings")
+2026-02-03 18:04:09,316 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,316 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("policies")
+2026-02-03 18:04:09,316 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,317 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("assessments")
+2026-02-03 18:04:09,317 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,317 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("process_control_mapping")
+2026-02-03 18:04:09,317 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,317 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("processes")
+2026-02-03 18:04:09,317 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,317 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("sub_processes")
+2026-02-03 18:04:09,317 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,318 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("compliance_settings")
+2026-02-03 18:04:09,318 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,318 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("documents")
+2026-02-03 18:04:09,318 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,318 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("tenants")
+2026-02-03 18:04:09,318 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,318 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("tenant_frameworks")
+2026-02-03 18:04:09,318 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,318 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("tenant_features")
+2026-02-03 18:04:09,318 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,319 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("common_controls")
+2026-02-03 18:04:09,319 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,319 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("framework_mappings")
+2026-02-03 18:04:09,319 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,319 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("universal_intents")
+2026-02-03 18:04:09,319 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,319 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("intent_framework_crosswalk")
+2026-02-03 18:04:09,319 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,320 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("standard_process_overlay")
+2026-02-03 18:04:09,320 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,320 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("scope_justifications")
+2026-02-03 18:04:09,320 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,320 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("people")
+2026-02-03 18:04:09,320 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,320 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("compliance_results")
+2026-02-03 18:04:09,320 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,320 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("context_issues")
+2026-02-03 18:04:09,320 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,321 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("interested_parties")
+2026-02-03 18:04:09,321 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,321 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("scope_documents")
+2026-02-03 18:04:09,321 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,321 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("master_templates")
+2026-02-03 18:04:09,321 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,321 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("requirement_master")
+2026-02-03 18:04:09,321 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,322 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("requirement_status")
+2026-02-03 18:04:09,322 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,322 INFO sqlalchemy.engine.Engine COMMIT
+C:\Projects\Compliance_Product\Backend\main.py:54: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+[OK] CORS CONFIGURATION LOADED: Allowed access from localhost:3000 and localhost:3001
+!!! LOADER DEBUG: MAIN.PY LOADED !!!
+2026-02-03 18:04:09,462 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:04:09,463 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("users")
+2026-02-03 18:04:09,463 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,463 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("frameworks")
+2026-02-03 18:04:09,463 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,463 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("controls")
+2026-02-03 18:04:09,463 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,463 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("evidence")
+2026-02-03 18:04:09,463 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,464 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("control_mappings")
+2026-02-03 18:04:09,464 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,464 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("policies")
+2026-02-03 18:04:09,464 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,464 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("assessments")
+2026-02-03 18:04:09,464 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,464 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("process_control_mapping")
+2026-02-03 18:04:09,464 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,465 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("processes")
+2026-02-03 18:04:09,465 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,465 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("sub_processes")
+2026-02-03 18:04:09,465 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,465 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("compliance_settings")
+2026-02-03 18:04:09,465 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,465 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("documents")
+2026-02-03 18:04:09,465 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,465 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("tenants")
+2026-02-03 18:04:09,465 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,466 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("tenant_frameworks")
+2026-02-03 18:04:09,466 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,466 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("tenant_features")
+2026-02-03 18:04:09,466 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,466 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("common_controls")
+2026-02-03 18:04:09,466 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,466 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("framework_mappings")
+2026-02-03 18:04:09,466 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,467 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("universal_intents")
+2026-02-03 18:04:09,467 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,467 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("intent_framework_crosswalk")
+2026-02-03 18:04:09,467 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,467 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("standard_process_overlay")
+2026-02-03 18:04:09,467 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,467 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("scope_justifications")
+2026-02-03 18:04:09,467 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,467 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("people")
+2026-02-03 18:04:09,467 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,468 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("compliance_results")
+2026-02-03 18:04:09,468 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,468 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("context_issues")
+2026-02-03 18:04:09,468 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,468 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("interested_parties")
+2026-02-03 18:04:09,468 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,468 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("scope_documents")
+2026-02-03 18:04:09,468 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,469 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("master_templates")
+2026-02-03 18:04:09,469 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,469 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("requirement_master")
+2026-02-03 18:04:09,469 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,469 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("requirement_status")
+2026-02-03 18:04:09,469 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,469 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("cloud_resources")
+2026-02-03 18:04:09,469 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,470 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     Started server process [11108]
+INFO:     Waiting for application startup.
+[OK] CORS CONFIGURATION LOADED: Allowed access from localhost:3000 and localhost:3001
+2026-02-03 18:04:09,575 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:04:09,578 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:04:09,578 INFO sqlalchemy.engine.Engine [generated in 0.00016s] ('admin', 1, 0)
+[STARTUP] Admin user already exists. Checking/Resetting password...
+2026-02-03 18:04:09,788 INFO sqlalchemy.engine.Engine UPDATE users SET hashed_password=?, updated_at=CURRENT_TIMESTAMP WHERE users.id = ?
+2026-02-03 18:04:09,788 INFO sqlalchemy.engine.Engine [generated in 0.00020s] ('$2b$12$Q8..vtD26/Yy06ia86HHkeqSudTGIvCenXiO2XwuwnxalZYI7accy', 1)
+2026-02-03 18:04:09,790 INFO sqlalchemy.engine.Engine COMMIT
+[STARTUP] Admin password reset to 'admin123'.
+2026-02-03 18:04:09,796 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:04:09,796 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("users")
+2026-02-03 18:04:09,796 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,796 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("frameworks")
+2026-02-03 18:04:09,796 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,796 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("controls")
+2026-02-03 18:04:09,796 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,797 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("evidence")
+2026-02-03 18:04:09,797 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,797 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("control_mappings")
+2026-02-03 18:04:09,797 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,797 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("policies")
+2026-02-03 18:04:09,797 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,797 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("assessments")
+2026-02-03 18:04:09,797 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,798 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("process_control_mapping")
+2026-02-03 18:04:09,798 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,798 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("processes")
+2026-02-03 18:04:09,798 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,798 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("sub_processes")
+2026-02-03 18:04:09,798 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,798 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("compliance_settings")
+2026-02-03 18:04:09,798 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,798 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("documents")
+2026-02-03 18:04:09,798 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,799 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("tenants")
+2026-02-03 18:04:09,799 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,799 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("tenant_frameworks")
+2026-02-03 18:04:09,799 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,799 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("tenant_features")
+2026-02-03 18:04:09,799 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,799 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("common_controls")
+2026-02-03 18:04:09,799 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,799 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("framework_mappings")
+2026-02-03 18:04:09,800 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,800 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("universal_intents")
+2026-02-03 18:04:09,800 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,800 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("intent_framework_crosswalk")
+2026-02-03 18:04:09,800 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,800 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("standard_process_overlay")
+2026-02-03 18:04:09,800 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,800 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("scope_justifications")
+2026-02-03 18:04:09,800 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,801 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("people")
+2026-02-03 18:04:09,801 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,801 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("compliance_results")
+2026-02-03 18:04:09,801 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,801 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("context_issues")
+2026-02-03 18:04:09,801 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,801 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("interested_parties")
+2026-02-03 18:04:09,801 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,801 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("scope_documents")
+2026-02-03 18:04:09,802 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,802 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("master_templates")
+2026-02-03 18:04:09,802 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,802 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("requirement_master")
+2026-02-03 18:04:09,802 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,802 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("requirement_status")
+2026-02-03 18:04:09,802 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,802 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("cloud_resources")
+2026-02-03 18:04:09,802 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-03 18:04:09,803 INFO sqlalchemy.engine.Engine COMMIT
+2026-02-03 18:04:09,803 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:04:09,810 INFO sqlalchemy.engine.Engine SELECT count(*) AS count_1 
+FROM (SELECT controls.id AS controls_id, controls.control_id AS controls_control_id, controls.title AS controls_title, controls.description AS controls_description, controls.tenant_id AS controls_tenant_id, controls.ai_explanation AS controls_ai_explanation, controls.ai_requirements_json AS controls_ai_requirements_json, controls.framework_id AS controls_framework_id, controls.status AS controls_status, controls.owner AS controls_owner, controls.implementation_notes AS controls_implementation_notes, controls.category AS controls_category, controls.priority AS controls_priority, controls.is_applicable AS controls_is_applicable, controls.justification AS controls_justification, controls.justification_reason AS controls_justification_reason, controls.implementation_method AS controls_implementation_method, controls.domain AS controls_domain, controls.classification AS controls_classification, controls.automation_status AS controls_automation_status, controls.last_automated_check AS controls_last_automated_check, controls.created_at AS controls_created_at, controls.updated_at AS controls_updated_at, controls.owner_id AS controls_owner_id, controls.department_id AS controls_department_id 
+FROM controls 
+WHERE controls.control_id LIKE ?) AS anon_1
+2026-02-03 18:04:09,810 INFO sqlalchemy.engine.Engine [generated in 0.00014s] ('CC%',)
+[STARTUP] Checking SOC 2 Controls... Count: 132
+[STARTUP] SOC 2 Data appears healthy.
+2026-02-03 18:04:09,811 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8001 (Press CTRL+C to quit)
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+INFO:     127.0.0.1:58202 - "GET /api/v1/frameworks/ HTTP/1.1" 401 Unauthorized
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+INFO:     127.0.0.1:58206 - "GET /api/v1/frameworks/ HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:62960 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55037 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+INFO:     127.0.0.1:62960 - "GET /api/v1/auth/me HTTP/1.1" 401 Unauthorized
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+INFO:     127.0.0.1:62960 - "GET /api/v1/auth/me HTTP/1.1" 401 Unauthorized
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/health/security-integrity
+2026-02-03 18:05:59,553 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:05:59,553 INFO sqlalchemy.engine.Engine SELECT 1
+2026-02-03 18:05:59,553 INFO sqlalchemy.engine.Engine [generated in 0.00023s] ()
+2026-02-03 18:05:59,553 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:62960 - "GET /api/v1/health/security-integrity HTTP/1.1" 200 OK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/health/security-integrity
+2026-02-03 18:05:59,557 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:05:59,557 INFO sqlalchemy.engine.Engine SELECT 1
+2026-02-03 18:05:59,557 INFO sqlalchemy.engine.Engine [cached since 0.004221s ago] ()
+2026-02-03 18:05:59,557 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:55037 - "GET /api/v1/health/security-integrity HTTP/1.1" 200 OK
+DEBUG: verify_tenant called. Method=POST, Path=/api/v1/auth/login
+2026-02-03 18:06:05,637 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:05,638 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ? AND users.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:05,638 INFO sqlalchemy.engine.Engine [generated in 0.00013s] ('admin', 'default_tenant', 1, 0)
+INFO:     127.0.0.1:53680 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+2026-02-03 18:06:05,848 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=default_tenant
+2026-02-03 18:06:05,852 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:05,852 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:05,852 INFO sqlalchemy.engine.Engine [cached since 116.3s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:53680 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+2026-02-03 18:06:05,854 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=default_tenant
+2026-02-03 18:06:05,855 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:05,855 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:05,855 INFO sqlalchemy.engine.Engine [cached since 116.3s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:53680 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+2026-02-03 18:06:05,856 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:53680 - "OPTIONS /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53680 - "OPTIONS /api/v1/users/tenants HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53680 - "OPTIONS /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53680 - "OPTIONS /api/v1/users/tenants HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53680 - "OPTIONS /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=default_tenant
+2026-02-03 18:06:05,912 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:05,912 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:05,912 INFO sqlalchemy.engine.Engine [cached since 116.3s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='default_tenant' (Type: <class 'str'>)
+2026-02-03 18:06:05,913 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:06:05,914 INFO sqlalchemy.engine.Engine [generated in 0.00010s] ()
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:06:05,915 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:05,915 INFO sqlalchemy.engine.Engine [generated in 0.00013s] ('default_tenant', 'default_tenant', 'default_tenant', 1, 0)
+2026-02-03 18:06:05,916 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:06:05,916 INFO sqlalchemy.engine.Engine [generated in 0.00010s] ()
+2026-02-03 18:06:05,918 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:06:05,918 INFO sqlalchemy.engine.Engine [generated in 0.00012s] ('5c388945-3ebb-4856-99d9-ebf2f448ae73',)
+2026-02-03 18:06:05,919 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:06:05,919 INFO sqlalchemy.engine.Engine [generated in 0.00010s] ('5c388945-3ebb-4856-99d9-ebf2f448ae73',)
+INFO:     127.0.0.1:53680 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:06:05,921 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/tenants
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=default_tenant
+2026-02-03 18:06:05,922 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:05,923 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:05,923 INFO sqlalchemy.engine.Engine [cached since 116.3s ago] ('admin', 1, 0)
+2026-02-03 18:06:05,924 INFO sqlalchemy.engine.Engine SELECT users.tenant_id AS users_tenant_id, count(users.id) AS count_1 
+FROM users GROUP BY users.tenant_id
+2026-02-03 18:06:05,924 INFO sqlalchemy.engine.Engine [generated in 0.00009s] ()
+2026-02-03 18:06:05,924 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:06:05,924 INFO sqlalchemy.engine.Engine [cached since 0.01088s ago] ()
+INFO:     127.0.0.1:53680 - "GET /api/v1/users/tenants HTTP/1.1" 200 OK
+2026-02-03 18:06:05,925 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=default_tenant
+2026-02-03 18:06:05,926 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:05,926 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:05,926 INFO sqlalchemy.engine.Engine [cached since 116.3s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='default_tenant' (Type: <class 'str'>)
+2026-02-03 18:06:05,927 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:06:05,927 INFO sqlalchemy.engine.Engine [cached since 0.01363s ago] ()
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:06:05,928 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:05,928 INFO sqlalchemy.engine.Engine [cached since 0.0129s ago] ('default_tenant', 'default_tenant', 'default_tenant', 1, 0)
+2026-02-03 18:06:05,928 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:06:05,928 INFO sqlalchemy.engine.Engine [cached since 0.01212s ago] ()
+2026-02-03 18:06:05,929 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:06:05,929 INFO sqlalchemy.engine.Engine [cached since 0.0106s ago] ('5c388945-3ebb-4856-99d9-ebf2f448ae73',)
+2026-02-03 18:06:05,929 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:06:05,929 INFO sqlalchemy.engine.Engine [cached since 0.009851s ago] ('5c388945-3ebb-4856-99d9-ebf2f448ae73',)
+INFO:     127.0.0.1:53680 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:06:05,930 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/tenants
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=default_tenant
+2026-02-03 18:06:05,931 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:05,931 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:05,931 INFO sqlalchemy.engine.Engine [cached since 116.4s ago] ('admin', 1, 0)
+2026-02-03 18:06:05,932 INFO sqlalchemy.engine.Engine SELECT users.tenant_id AS users_tenant_id, count(users.id) AS count_1 
+FROM users GROUP BY users.tenant_id
+2026-02-03 18:06:05,932 INFO sqlalchemy.engine.Engine [cached since 0.008347s ago] ()
+2026-02-03 18:06:05,932 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:06:05,932 INFO sqlalchemy.engine.Engine [cached since 0.01906s ago] ()
+INFO:     127.0.0.1:53680 - "GET /api/v1/users/tenants HTTP/1.1" 200 OK
+2026-02-03 18:06:05,933 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=default_tenant
+2026-02-03 18:06:05,934 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:05,935 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:05,935 INFO sqlalchemy.engine.Engine [cached since 116.4s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='default_tenant' (Type: <class 'str'>)
+2026-02-03 18:06:05,935 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:06:05,935 INFO sqlalchemy.engine.Engine [cached since 0.0218s ago] ()
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:06:05,936 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:05,936 INFO sqlalchemy.engine.Engine [cached since 0.02107s ago] ('default_tenant', 'default_tenant', 'default_tenant', 1, 0)
+2026-02-03 18:06:05,936 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:06:05,936 INFO sqlalchemy.engine.Engine [cached since 0.02027s ago] ()
+2026-02-03 18:06:05,937 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:06:05,937 INFO sqlalchemy.engine.Engine [cached since 0.01867s ago] ('5c388945-3ebb-4856-99d9-ebf2f448ae73',)
+2026-02-03 18:06:05,937 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:06:05,937 INFO sqlalchemy.engine.Engine [cached since 0.01792s ago] ('5c388945-3ebb-4856-99d9-ebf2f448ae73',)
+INFO:     127.0.0.1:53680 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:06:05,938 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:53680 - "OPTIONS /api/v1/auth/impersonate HTTP/1.1" 200 OK
+DEBUG: verify_tenant called. Method=POST, Path=/api/v1/auth/impersonate
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=default_tenant
+2026-02-03 18:06:07,243 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:07,243 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:07,243 INFO sqlalchemy.engine.Engine [cached since 117.7s ago] ('admin', 1, 0)
+2026-02-03 18:06:07,244 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:07,244 INFO sqlalchemy.engine.Engine [generated in 0.00011s] ('testtest', 1, 0)
+2026-02-03 18:06:07,245 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:53680 - "POST /api/v1/auth/impersonate HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53680 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60448 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=default_tenant
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:07,649 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:07,649 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:07,649 INFO sqlalchemy.engine.Engine [cached since 118.1s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:60448 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+2026-02-03 18:06:07,650 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=default_tenant
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:07,651 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:07,651 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:07,651 INFO sqlalchemy.engine.Engine [cached since 118.1s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:53680 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+2026-02-03 18:06:07,652 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:53680 - "OPTIONS /api/v1/health/security-integrity HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60448 - "OPTIONS /api/v1/health/security-integrity HTTP/1.1" 200 OK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=default_tenant
+2026-02-03 18:06:07,696 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:07,697 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:07,697 INFO sqlalchemy.engine.Engine [cached since 118.1s ago] ('admin', 1, 0)
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/health/security-integrity
+DEBUG: _get_entitlements_logic called for slug='default_tenant' (Type: <class 'str'>)
+2026-02-03 18:06:07,698 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:06:07,698 INFO sqlalchemy.engine.Engine [cached since 1.785s ago] ()
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:06:07,699 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:07,699 INFO sqlalchemy.engine.Engine [cached since 1.784s ago] ('default_tenant', 'default_tenant', 'default_tenant', 1, 0)
+2026-02-03 18:06:07,699 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:07,699 INFO sqlalchemy.engine.Engine SELECT 1
+2026-02-03 18:06:07,699 INFO sqlalchemy.engine.Engine [cached since 8.146s ago] ()
+2026-02-03 18:06:07,699 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:06:07,699 INFO sqlalchemy.engine.Engine [cached since 1.783s ago] ()
+2026-02-03 18:06:07,700 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:06:07,700 INFO sqlalchemy.engine.Engine [cached since 1.782s ago] ('5c388945-3ebb-4856-99d9-ebf2f448ae73',)
+2026-02-03 18:06:07,700 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:06:07,700 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:06:07,701 INFO sqlalchemy.engine.Engine [cached since 1.781s ago] ('5c388945-3ebb-4856-99d9-ebf2f448ae73',)
+INFO:     127.0.0.1:60448 - "GET /api/v1/health/security-integrity HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56085 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/health/security-integrity
+2026-02-03 18:06:07,702 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:06:07,702 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:07,703 INFO sqlalchemy.engine.Engine SELECT 1
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+2026-02-03 18:06:07,703 INFO sqlalchemy.engine.Engine [cached since 8.15s ago] ()
+2026-02-03 18:06:07,703 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=default_tenant
+2026-02-03 18:06:07,704 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:07,704 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+INFO:     127.0.0.1:53680 - "GET /api/v1/health/security-integrity HTTP/1.1" 200 OK
+2026-02-03 18:06:07,704 INFO sqlalchemy.engine.Engine [cached since 118.1s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='default_tenant' (Type: <class 'str'>)
+2026-02-03 18:06:07,705 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:06:07,705 INFO sqlalchemy.engine.Engine [cached since 1.792s ago] ()
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:06:07,706 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:07,706 INFO sqlalchemy.engine.Engine [cached since 1.791s ago] ('default_tenant', 'default_tenant', 'default_tenant', 1, 0)
+2026-02-03 18:06:07,706 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:06:07,706 INFO sqlalchemy.engine.Engine [cached since 1.79s ago] ()
+2026-02-03 18:06:07,707 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:06:07,707 INFO sqlalchemy.engine.Engine [cached since 1.789s ago] ('5c388945-3ebb-4856-99d9-ebf2f448ae73',)
+2026-02-03 18:06:07,707 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:06:07,707 INFO sqlalchemy.engine.Engine [cached since 1.788s ago] ('5c388945-3ebb-4856-99d9-ebf2f448ae73',)
+INFO:     127.0.0.1:61659 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:06:07,708 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:61776 - "OPTIONS /api/v1/auth/login HTTP/1.1" 200 OK
+DEBUG: verify_tenant called. Method=POST, Path=/api/v1/auth/login
+2026-02-03 18:06:12,979 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:12,979 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:12,979 INFO sqlalchemy.engine.Engine [cached since 7.064s ago] ('testtest', 'testtest', 'testtest', 1, 0)
+2026-02-03 18:06:12,980 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ? AND users.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:12,980 INFO sqlalchemy.engine.Engine [cached since 7.342s ago] ('admin', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+2026-02-03 18:06:13,188 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,188 INFO sqlalchemy.engine.Engine [generated in 0.00021s] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+INFO:     127.0.0.1:61776 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+2026-02-03 18:06:13,190 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,193 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,194 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,194 INFO sqlalchemy.engine.Engine [cached since 123.6s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:61776 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+2026-02-03 18:06:13,195 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+2026-02-03 18:06:13,197 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,197 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,198 INFO sqlalchemy.engine.Engine [cached since 123.6s ago] ('admin', 1, 0)
+2026-02-03 18:06:13,197 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,198 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,198 INFO sqlalchemy.engine.Engine [cached since 123.6s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='a61624c9-b0d9-4125-9bd5-edf7af8fb78e' (Type: <class 'str'>)
+2026-02-03 18:06:13,198 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:06:13,199 INFO sqlalchemy.engine.Engine [cached since 7.285s ago] ()
+INFO:     127.0.0.1:65260 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:06:13,199 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,199 INFO sqlalchemy.engine.Engine [cached since 7.285s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+2026-02-03 18:06:13,200 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:06:13,200 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:06:13,200 INFO sqlalchemy.engine.Engine [cached since 7.284s ago] ()
+2026-02-03 18:06:13,201 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:06:13,201 INFO sqlalchemy.engine.Engine [cached since 7.283s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+2026-02-03 18:06:13,201 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:06:13,201 INFO sqlalchemy.engine.Engine [cached since 7.282s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+INFO:     127.0.0.1:61776 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:06:13,202 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+2026-02-03 18:06:13,226 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,226 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,226 INFO sqlalchemy.engine.Engine [cached since 123.6s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='a61624c9-b0d9-4125-9bd5-edf7af8fb78e' (Type: <class 'str'>)
+2026-02-03 18:06:13,227 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:06:13,227 INFO sqlalchemy.engine.Engine [cached since 7.314s ago] ()
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:06:13,228 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,228 INFO sqlalchemy.engine.Engine [cached since 7.313s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+2026-02-03 18:06:13,228 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:06:13,229 INFO sqlalchemy.engine.Engine [cached since 7.313s ago] ()
+2026-02-03 18:06:13,230 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:06:13,230 INFO sqlalchemy.engine.Engine [cached since 7.312s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+2026-02-03 18:06:13,230 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:06:13,230 INFO sqlalchemy.engine.Engine [cached since 7.311s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+INFO:     127.0.0.1:61776 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:06:13,232 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:61776 - "OPTIONS /api/v1/settings/scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65260 - "OPTIONS /api/v1/health/session-check?tenant_id=testtest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61776 - "OPTIONS /api/v1/settings/scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65260 - "OPTIONS /api/v1/health/session-check?tenant_id=testtest HTTP/1.1" 200 OK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/settings/scope
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,250 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,251 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,251 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+2026-02-03 18:06:13,251 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,251 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,251 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='a61624c9-b0d9-4125-9bd5-edf7af8fb78e' (Type: <class 'str'>)
+2026-02-03 18:06:13,252 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:06:13,252 INFO sqlalchemy.engine.Engine [cached since 7.338s ago] ()
+2026-02-03 18:06:13,252 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,252 INFO sqlalchemy.engine.Engine [cached since 0.06432s ago] ('testtest', 1, 0)
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:06:13,253 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,253 INFO sqlalchemy.engine.Engine [cached since 7.338s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+2026-02-03 18:06:13,254 INFO sqlalchemy.engine.Engine SELECT compliance_settings.section_key AS compliance_settings_section_key, compliance_settings.tenant_id AS compliance_settings_tenant_id, compliance_settings.content AS compliance_settings_content, compliance_settings.completeness_score AS compliance_settings_completeness_score, compliance_settings.updated_at AS compliance_settings_updated_at, compliance_settings.updated_by AS compliance_settings_updated_by 
+FROM compliance_settings 
+WHERE compliance_settings.section_key = ? AND compliance_settings.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,254 INFO sqlalchemy.engine.Engine [generated in 0.00020s] ('scope', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+2026-02-03 18:06:13,254 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:06:13,254 INFO sqlalchemy.engine.Engine [cached since 7.338s ago] ()
+2026-02-03 18:06:13,255 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:06:13,256 INFO sqlalchemy.engine.Engine [cached since 7.338s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+INFO:     127.0.0.1:65260 - "GET /api/v1/settings/scope HTTP/1.1" 200 OK
+2026-02-03 18:06:13,257 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:06:13,257 INFO sqlalchemy.engine.Engine [cached since 7.338s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+2026-02-03 18:06:13,257 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/health/session-check
+INFO:     127.0.0.1:61776 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:06:13,260 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,260 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,260 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,260 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/settings/scope
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,262 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,262 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,262 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:65260 - "GET /api/v1/health/session-check?tenant_id=testtest HTTP/1.1" 200 OK
+2026-02-03 18:06:13,263 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:06:13,263 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,263 INFO sqlalchemy.engine.Engine [cached since 0.07543s ago] ('testtest', 1, 0)
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+2026-02-03 18:06:13,264 INFO sqlalchemy.engine.Engine SELECT compliance_settings.section_key AS compliance_settings_section_key, compliance_settings.tenant_id AS compliance_settings_tenant_id, compliance_settings.content AS compliance_settings_content, compliance_settings.completeness_score AS compliance_settings_completeness_score, compliance_settings.updated_at AS compliance_settings_updated_at, compliance_settings.updated_by AS compliance_settings_updated_by 
+FROM compliance_settings 
+WHERE compliance_settings.section_key = ? AND compliance_settings.tenant_id = ?
+ LIMIT ? OFFSET ?
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+2026-02-03 18:06:13,265 INFO sqlalchemy.engine.Engine [cached since 0.01088s ago] ('scope', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+INFO:     127.0.0.1:61776 - "GET /api/v1/settings/scope HTTP/1.1" 200 OK
+2026-02-03 18:06:13,265 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,266 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,266 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+2026-02-03 18:06:13,266 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:61776 - "OPTIONS /api/v1/frameworks/ HTTP/1.1" 200 OK
+DEBUG: _get_entitlements_logic called for slug='a61624c9-b0d9-4125-9bd5-edf7af8fb78e' (Type: <class 'str'>)
+2026-02-03 18:06:13,267 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:06:13,267 INFO sqlalchemy.engine.Engine [cached since 7.354s ago] ()
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/health/session-check
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:06:13,268 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,268 INFO sqlalchemy.engine.Engine [cached since 7.353s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,268 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,269 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,269 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+2026-02-03 18:06:13,269 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:06:13,269 INFO sqlalchemy.engine.Engine [cached since 7.353s ago] ()
+INFO:     127.0.0.1:61776 - "GET /api/v1/health/session-check?tenant_id=testtest HTTP/1.1" 200 OK
+2026-02-03 18:06:13,270 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:06:13,270 INFO sqlalchemy.engine.Engine [cached since 7.352s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+2026-02-03 18:06:13,270 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:06:13,271 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:06:13,271 INFO sqlalchemy.engine.Engine [cached since 7.352s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/settings/scope
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,272 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,272 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,272 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:65260 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:06:13,274 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,274 INFO sqlalchemy.engine.Engine [cached since 0.08614s ago] ('testtest', 1, 0)
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+2026-02-03 18:06:13,274 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:06:13,275 INFO sqlalchemy.engine.Engine SELECT compliance_settings.section_key AS compliance_settings_section_key, compliance_settings.tenant_id AS compliance_settings_tenant_id, compliance_settings.content AS compliance_settings_content, compliance_settings.completeness_score AS compliance_settings_completeness_score, compliance_settings.updated_at AS compliance_settings_updated_at, compliance_settings.updated_by AS compliance_settings_updated_by 
+FROM compliance_settings 
+WHERE compliance_settings.section_key = ? AND compliance_settings.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,275 INFO sqlalchemy.engine.Engine [cached since 0.02165s ago] ('scope', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,276 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,276 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,276 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:61776 - "GET /api/v1/settings/scope HTTP/1.1" 200 OK
+2026-02-03 18:06:13,277 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:06:13,278 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,278 INFO sqlalchemy.engine.Engine [cached since 0.09s ago] ('testtest', 1, 0)
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/settings/scope
+2026-02-03 18:06:13,280 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks JOIN tenant_frameworks ON frameworks.id = tenant_frameworks.framework_id 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,280 INFO sqlalchemy.engine.Engine [generated in 0.00014s] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 100, 0)
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,280 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,280 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,280 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:65260 - "GET /api/v1/frameworks/ HTTP/1.1" 200 OK
+2026-02-03 18:06:13,282 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:06:13,282 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,282 INFO sqlalchemy.engine.Engine [cached since 0.09421s ago] ('testtest', 1, 0)
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+2026-02-03 18:06:13,283 INFO sqlalchemy.engine.Engine SELECT compliance_settings.section_key AS compliance_settings_section_key, compliance_settings.tenant_id AS compliance_settings_tenant_id, compliance_settings.content AS compliance_settings_content, compliance_settings.completeness_score AS compliance_settings_completeness_score, compliance_settings.updated_at AS compliance_settings_updated_at, compliance_settings.updated_by AS compliance_settings_updated_by 
+FROM compliance_settings 
+WHERE compliance_settings.section_key = ? AND compliance_settings.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,283 INFO sqlalchemy.engine.Engine [cached since 0.02918s ago] ('scope', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,283 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,284 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,284 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:61776 - "GET /api/v1/settings/scope HTTP/1.1" 200 OK
+2026-02-03 18:06:13,285 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,285 INFO sqlalchemy.engine.Engine [cached since 0.09696s ago] ('testtest', 1, 0)
+2026-02-03 18:06:13,285 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:06:13,285 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks JOIN tenant_frameworks ON frameworks.id = tenant_frameworks.framework_id 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,286 INFO sqlalchemy.engine.Engine [cached since 0.006038s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 100, 0)
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/settings/scope
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,286 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,287 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,287 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+2026-02-03 18:06:13,288 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,288 INFO sqlalchemy.engine.Engine [cached since 0.09976s ago] ('testtest', 1, 0)
+INFO:     127.0.0.1:65260 - "GET /api/v1/frameworks/ HTTP/1.1" 200 OK
+2026-02-03 18:06:13,288 INFO sqlalchemy.engine.Engine SELECT compliance_settings.section_key AS compliance_settings_section_key, compliance_settings.tenant_id AS compliance_settings_tenant_id, compliance_settings.content AS compliance_settings_content, compliance_settings.completeness_score AS compliance_settings_completeness_score, compliance_settings.updated_at AS compliance_settings_updated_at, compliance_settings.updated_by AS compliance_settings_updated_by 
+FROM compliance_settings 
+WHERE compliance_settings.section_key = ? AND compliance_settings.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,288 INFO sqlalchemy.engine.Engine [cached since 0.0346s ago] ('scope', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+2026-02-03 18:06:13,289 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+INFO:     127.0.0.1:61776 - "GET /api/v1/settings/scope HTTP/1.1" 200 OK
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,290 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/settings/scope
+2026-02-03 18:06:13,291 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,291 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,292 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,292 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,292 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,293 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+2026-02-03 18:06:13,293 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,293 INFO sqlalchemy.engine.Engine [cached since 0.1052s ago] ('testtest', 1, 0)
+2026-02-03 18:06:13,294 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks JOIN tenant_frameworks ON frameworks.id = tenant_frameworks.framework_id 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,294 INFO sqlalchemy.engine.Engine [cached since 0.01446s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 100, 0)
+2026-02-03 18:06:13,294 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,294 INFO sqlalchemy.engine.Engine [cached since 0.1065s ago] ('testtest', 1, 0)
+2026-02-03 18:06:13,295 INFO sqlalchemy.engine.Engine SELECT compliance_settings.section_key AS compliance_settings_section_key, compliance_settings.tenant_id AS compliance_settings_tenant_id, compliance_settings.content AS compliance_settings_content, compliance_settings.completeness_score AS compliance_settings_completeness_score, compliance_settings.updated_at AS compliance_settings_updated_at, compliance_settings.updated_by AS compliance_settings_updated_by 
+FROM compliance_settings 
+WHERE compliance_settings.section_key = ? AND compliance_settings.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,295 INFO sqlalchemy.engine.Engine [cached since 0.0414s ago] ('scope', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+INFO:     127.0.0.1:65260 - "GET /api/v1/frameworks/ HTTP/1.1" 200 OK
+2026-02-03 18:06:13,296 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:61776 - "GET /api/v1/settings/scope HTTP/1.1" 200 OK
+2026-02-03 18:06:13,297 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,298 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,298 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,298 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+2026-02-03 18:06:13,298 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,298 INFO sqlalchemy.engine.Engine [cached since 0.1106s ago] ('testtest', 1, 0)
+2026-02-03 18:06:13,299 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks JOIN tenant_frameworks ON frameworks.id = tenant_frameworks.framework_id 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,299 INFO sqlalchemy.engine.Engine [cached since 0.01951s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 100, 0)
+INFO:     127.0.0.1:65260 - "GET /api/v1/frameworks/ HTTP/1.1" 200 OK
+2026-02-03 18:06:13,300 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,301 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,301 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,301 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+2026-02-03 18:06:13,302 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,302 INFO sqlalchemy.engine.Engine [cached since 0.114s ago] ('testtest', 1, 0)
+2026-02-03 18:06:13,302 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks JOIN tenant_frameworks ON frameworks.id = tenant_frameworks.framework_id 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,302 INFO sqlalchemy.engine.Engine [cached since 0.0229s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 100, 0)
+INFO:     127.0.0.1:61776 - "GET /api/v1/frameworks/ HTTP/1.1" 200 OK
+2026-02-03 18:06:13,303 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:06:13,321 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:06:13,321 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,321 INFO sqlalchemy.engine.Engine [cached since 123.7s ago] ('admin', 1, 0)
+2026-02-03 18:06:13,322 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,322 INFO sqlalchemy.engine.Engine [cached since 0.1341s ago] ('testtest', 1, 0)
+2026-02-03 18:06:13,322 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks JOIN tenant_frameworks ON frameworks.id = tenant_frameworks.framework_id 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+ LIMIT ? OFFSET ?
+2026-02-03 18:06:13,323 INFO sqlalchemy.engine.Engine [cached since 0.04304s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 100, 0)
+INFO:     127.0.0.1:61776 - "GET /api/v1/frameworks/ HTTP/1.1" 200 OK
+2026-02-03 18:06:13,324 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:62826 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53262 - "OPTIONS /api/v1/auth/me HTTP/1.1" 200 OK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:10:49,883 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:10:49,883 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,883 INFO sqlalchemy.engine.Engine [cached since 400.3s ago] ('admin', 1, 0)
+2026-02-03 18:10:49,883 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:10:49,884 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,884 INFO sqlalchemy.engine.Engine [cached since 400.3s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:62826 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53262 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+2026-02-03 18:10:49,885 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:10:49,885 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/health/session-check
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:10:49,914 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:10:49,914 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,914 INFO sqlalchemy.engine.Engine [cached since 400.3s ago] ('admin', 1, 0)
+2026-02-03 18:10:49,914 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:10:49,914 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,915 INFO sqlalchemy.engine.Engine [cached since 400.3s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='a61624c9-b0d9-4125-9bd5-edf7af8fb78e' (Type: <class 'str'>)
+2026-02-03 18:10:49,915 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:10:49,916 INFO sqlalchemy.engine.Engine [cached since 284s ago] ()
+INFO:     127.0.0.1:53262 - "GET /api/v1/health/session-check?tenant_id=testtest HTTP/1.1" 200 OK
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:10:49,916 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,916 INFO sqlalchemy.engine.Engine [cached since 284s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+2026-02-03 18:10:49,917 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:10:49,917 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:10:49,917 INFO sqlalchemy.engine.Engine [cached since 284s ago] ()
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/health/session-check
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:10:49,918 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:10:49,918 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,918 INFO sqlalchemy.engine.Engine [cached since 400.3s ago] ('admin', 1, 0)
+2026-02-03 18:10:49,919 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:10:49,919 INFO sqlalchemy.engine.Engine [cached since 284s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+INFO:     127.0.0.1:53262 - "GET /api/v1/health/session-check?tenant_id=testtest HTTP/1.1" 200 OK
+2026-02-03 18:10:49,920 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:10:49,920 INFO sqlalchemy.engine.Engine [cached since 284s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+2026-02-03 18:10:49,920 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:62826 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:10:49,921 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+2026-02-03 18:10:49,922 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:10:49,922 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,922 INFO sqlalchemy.engine.Engine [cached since 400.3s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='a61624c9-b0d9-4125-9bd5-edf7af8fb78e' (Type: <class 'str'>)
+2026-02-03 18:10:49,923 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:10:49,923 INFO sqlalchemy.engine.Engine [cached since 284s ago] ()
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:10:49,923 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,923 INFO sqlalchemy.engine.Engine [cached since 284s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+2026-02-03 18:10:49,924 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:10:49,924 INFO sqlalchemy.engine.Engine [cached since 284s ago] ()
+2026-02-03 18:10:49,924 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:10:49,924 INFO sqlalchemy.engine.Engine [cached since 284s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+2026-02-03 18:10:49,925 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:10:49,925 INFO sqlalchemy.engine.Engine [cached since 284s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+INFO:     127.0.0.1:53262 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:10:49,926 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/settings/scope
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:10:49,947 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:10:49,947 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,948 INFO sqlalchemy.engine.Engine [cached since 400.4s ago] ('admin', 1, 0)
+2026-02-03 18:10:49,948 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,948 INFO sqlalchemy.engine.Engine [cached since 276.8s ago] ('testtest', 1, 0)
+2026-02-03 18:10:49,949 INFO sqlalchemy.engine.Engine SELECT compliance_settings.section_key AS compliance_settings_section_key, compliance_settings.tenant_id AS compliance_settings_tenant_id, compliance_settings.content AS compliance_settings_content, compliance_settings.completeness_score AS compliance_settings_completeness_score, compliance_settings.updated_at AS compliance_settings_updated_at, compliance_settings.updated_by AS compliance_settings_updated_by 
+FROM compliance_settings 
+WHERE compliance_settings.section_key = ? AND compliance_settings.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,949 INFO sqlalchemy.engine.Engine [cached since 276.7s ago] ('scope', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+INFO:     127.0.0.1:53262 - "GET /api/v1/settings/scope HTTP/1.1" 200 OK
+2026-02-03 18:10:49,950 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/settings/scope
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:10:49,951 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:10:49,951 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,951 INFO sqlalchemy.engine.Engine [cached since 400.4s ago] ('admin', 1, 0)
+2026-02-03 18:10:49,951 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,952 INFO sqlalchemy.engine.Engine [cached since 276.8s ago] ('testtest', 1, 0)
+2026-02-03 18:10:49,952 INFO sqlalchemy.engine.Engine SELECT compliance_settings.section_key AS compliance_settings_section_key, compliance_settings.tenant_id AS compliance_settings_tenant_id, compliance_settings.content AS compliance_settings_content, compliance_settings.completeness_score AS compliance_settings_completeness_score, compliance_settings.updated_at AS compliance_settings_updated_at, compliance_settings.updated_by AS compliance_settings_updated_by 
+FROM compliance_settings 
+WHERE compliance_settings.section_key = ? AND compliance_settings.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,952 INFO sqlalchemy.engine.Engine [cached since 276.7s ago] ('scope', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:10:49,953 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:10:49,953 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,953 INFO sqlalchemy.engine.Engine [cached since 400.4s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:62826 - "GET /api/v1/settings/scope HTTP/1.1" 200 OK
+2026-02-03 18:10:49,954 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-02-03 18:10:49,955 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,955 INFO sqlalchemy.engine.Engine [cached since 276.8s ago] ('testtest', 1, 0)
+2026-02-03 18:10:49,956 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks JOIN tenant_frameworks ON frameworks.id = tenant_frameworks.framework_id 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,956 INFO sqlalchemy.engine.Engine [cached since 276.7s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 100, 0)
+INFO:     127.0.0.1:53262 - "GET /api/v1/frameworks/ HTTP/1.1" 200 OK
+2026-02-03 18:10:49,957 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:10:49,958 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:10:49,958 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,958 INFO sqlalchemy.engine.Engine [cached since 400.4s ago] ('admin', 1, 0)
+2026-02-03 18:10:49,959 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,959 INFO sqlalchemy.engine.Engine [cached since 276.8s ago] ('testtest', 1, 0)
+2026-02-03 18:10:49,959 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks JOIN tenant_frameworks ON frameworks.id = tenant_frameworks.framework_id 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+ LIMIT ? OFFSET ?
+2026-02-03 18:10:49,960 INFO sqlalchemy.engine.Engine [cached since 276.7s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 100, 0)
+INFO:     127.0.0.1:62826 - "GET /api/v1/frameworks/ HTTP/1.1" 200 OK
+2026-02-03 18:10:49,961 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:12:10,207 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,207 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,207 INFO sqlalchemy.engine.Engine [cached since 480.6s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:58901 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+2026-02-03 18:12:10,208 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/auth/me
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:12:10,210 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,210 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,210 INFO sqlalchemy.engine.Engine [cached since 480.6s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:58901 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+2026-02-03 18:12:10,211 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/health/session-check
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:12:10,247 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,247 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,247 INFO sqlalchemy.engine.Engine [cached since 480.7s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:58901 - "GET /api/v1/health/session-check?tenant_id=testtest HTTP/1.1" 200 OK
+2026-02-03 18:12:10,248 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+2026-02-03 18:12:10,250 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,250 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,250 INFO sqlalchemy.engine.Engine [cached since 480.7s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='a61624c9-b0d9-4125-9bd5-edf7af8fb78e' (Type: <class 'str'>)
+2026-02-03 18:12:10,251 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:12:10,251 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ()
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:12:10,251 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,251 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+2026-02-03 18:12:10,252 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:12:10,252 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ()
+2026-02-03 18:12:10,252 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:12:10,252 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+2026-02-03 18:12:10,253 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:12:10,253 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+INFO:     127.0.0.1:58901 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:12:10,254 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/health/session-check
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:12:10,255 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,255 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,255 INFO sqlalchemy.engine.Engine [cached since 480.7s ago] ('admin', 1, 0)
+INFO:     127.0.0.1:58901 - "GET /api/v1/health/session-check?tenant_id=testtest HTTP/1.1" 200 OK
+2026-02-03 18:12:10,256 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+2026-02-03 18:12:10,257 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,257 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,258 INFO sqlalchemy.engine.Engine [cached since 480.7s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='a61624c9-b0d9-4125-9bd5-edf7af8fb78e' (Type: <class 'str'>)
+2026-02-03 18:12:10,258 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:12:10,258 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ()
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:12:10,259 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,259 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+2026-02-03 18:12:10,259 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:12:10,259 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ()
+2026-02-03 18:12:10,260 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:12:10,260 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+2026-02-03 18:12:10,260 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:12:10,260 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+INFO:     127.0.0.1:58901 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:12:10,261 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/users/me/entitlements
+DEBUG: Auth Header Check. User=admin, MsgHeader=None, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+2026-02-03 18:12:10,263 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,263 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,263 INFO sqlalchemy.engine.Engine [cached since 480.7s ago] ('admin', 1, 0)
+DEBUG: _get_entitlements_logic called for slug='a61624c9-b0d9-4125-9bd5-edf7af8fb78e' (Type: <class 'str'>)
+2026-02-03 18:12:10,264 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants
+2026-02-03 18:12:10,264 INFO sqlalchemy.engine.Engine [cached since 364.4s ago] ()
+DEBUG: Visible Tenants in DB Session: ['default_tenant', 'testtest']
+2026-02-03 18:12:10,264 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ? OR tenants.internal_tenant_id = ? OR tenants.id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,264 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+2026-02-03 18:12:10,264 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks
+2026-02-03 18:12:10,265 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ()
+2026-02-03 18:12:10,265 INFO sqlalchemy.engine.Engine SELECT tenant_frameworks.id AS tenant_frameworks_id, tenant_frameworks.tenant_id AS tenant_frameworks_tenant_id, tenant_frameworks.framework_id AS tenant_frameworks_framework_id, tenant_frameworks.is_active AS tenant_frameworks_is_active, tenant_frameworks.is_locked AS tenant_frameworks_is_locked, tenant_frameworks.created_at AS tenant_frameworks_created_at, tenant_frameworks.updated_at AS tenant_frameworks_updated_at 
+FROM tenant_frameworks 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+2026-02-03 18:12:10,265 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+2026-02-03 18:12:10,266 INFO sqlalchemy.engine.Engine SELECT tenant_features.id AS tenant_features_id, tenant_features.tenant_id AS tenant_features_tenant_id, tenant_features.feature_key AS tenant_features_feature_key, tenant_features.is_active AS tenant_features_is_active, tenant_features.created_at AS tenant_features_created_at, tenant_features.updated_at AS tenant_features_updated_at 
+FROM tenant_features 
+WHERE tenant_features.tenant_id = ? AND tenant_features.is_active = 1
+2026-02-03 18:12:10,266 INFO sqlalchemy.engine.Engine [cached since 364.3s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e',)
+INFO:     127.0.0.1:58901 - "GET /api/v1/users/me/entitlements HTTP/1.1" 200 OK
+2026-02-03 18:12:10,266 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/settings/scope
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:12:10,280 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,280 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,280 INFO sqlalchemy.engine.Engine [cached since 480.7s ago] ('admin', 1, 0)
+2026-02-03 18:12:10,281 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,281 INFO sqlalchemy.engine.Engine [cached since 357.1s ago] ('testtest', 1, 0)
+2026-02-03 18:12:10,281 INFO sqlalchemy.engine.Engine SELECT compliance_settings.section_key AS compliance_settings_section_key, compliance_settings.tenant_id AS compliance_settings_tenant_id, compliance_settings.content AS compliance_settings_content, compliance_settings.completeness_score AS compliance_settings_completeness_score, compliance_settings.updated_at AS compliance_settings_updated_at, compliance_settings.updated_by AS compliance_settings_updated_by 
+FROM compliance_settings 
+WHERE compliance_settings.section_key = ? AND compliance_settings.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,281 INFO sqlalchemy.engine.Engine [cached since 357s ago] ('scope', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+INFO:     127.0.0.1:58901 - "GET /api/v1/settings/scope HTTP/1.1" 200 OK
+2026-02-03 18:12:10,282 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/settings/scope
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:12:10,294 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,294 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,294 INFO sqlalchemy.engine.Engine [cached since 480.7s ago] ('admin', 1, 0)
+2026-02-03 18:12:10,295 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,295 INFO sqlalchemy.engine.Engine [cached since 357.1s ago] ('testtest', 1, 0)
+2026-02-03 18:12:10,295 INFO sqlalchemy.engine.Engine SELECT compliance_settings.section_key AS compliance_settings_section_key, compliance_settings.tenant_id AS compliance_settings_tenant_id, compliance_settings.content AS compliance_settings_content, compliance_settings.completeness_score AS compliance_settings_completeness_score, compliance_settings.updated_at AS compliance_settings_updated_at, compliance_settings.updated_by AS compliance_settings_updated_by 
+FROM compliance_settings 
+WHERE compliance_settings.section_key = ? AND compliance_settings.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,295 INFO sqlalchemy.engine.Engine [cached since 357s ago] ('scope', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+INFO:     127.0.0.1:58901 - "GET /api/v1/settings/scope HTTP/1.1" 200 OK
+2026-02-03 18:12:10,296 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:12:10,298 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,298 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,298 INFO sqlalchemy.engine.Engine [cached since 480.7s ago] ('admin', 1, 0)
+2026-02-03 18:12:10,298 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,299 INFO sqlalchemy.engine.Engine [cached since 357.1s ago] ('testtest', 1, 0)
+2026-02-03 18:12:10,299 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks JOIN tenant_frameworks ON frameworks.id = tenant_frameworks.framework_id 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,299 INFO sqlalchemy.engine.Engine [cached since 357s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 100, 0)
+INFO:     127.0.0.1:58901 - "GET /api/v1/frameworks/ HTTP/1.1" 200 OK
+2026-02-03 18:12:10,300 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/settings/scope
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:12:10,301 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,301 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,302 INFO sqlalchemy.engine.Engine [cached since 480.7s ago] ('admin', 1, 0)
+2026-02-03 18:12:10,302 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,302 INFO sqlalchemy.engine.Engine [cached since 357.1s ago] ('testtest', 1, 0)
+2026-02-03 18:12:10,303 INFO sqlalchemy.engine.Engine SELECT compliance_settings.section_key AS compliance_settings_section_key, compliance_settings.tenant_id AS compliance_settings_tenant_id, compliance_settings.content AS compliance_settings_content, compliance_settings.completeness_score AS compliance_settings_completeness_score, compliance_settings.updated_at AS compliance_settings_updated_at, compliance_settings.updated_by AS compliance_settings_updated_by 
+FROM compliance_settings 
+WHERE compliance_settings.section_key = ? AND compliance_settings.tenant_id = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,303 INFO sqlalchemy.engine.Engine [cached since 357s ago] ('scope', 'a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 1, 0)
+INFO:     127.0.0.1:58901 - "GET /api/v1/settings/scope HTTP/1.1" 200 OK
+2026-02-03 18:12:10,304 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:12:10,305 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,305 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,305 INFO sqlalchemy.engine.Engine [cached since 480.7s ago] ('admin', 1, 0)
+2026-02-03 18:12:10,305 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,305 INFO sqlalchemy.engine.Engine [cached since 357.1s ago] ('testtest', 1, 0)
+2026-02-03 18:12:10,306 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks JOIN tenant_frameworks ON frameworks.id = tenant_frameworks.framework_id 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,306 INFO sqlalchemy.engine.Engine [cached since 357s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 100, 0)
+INFO:     127.0.0.1:58901 - "GET /api/v1/frameworks/ HTTP/1.1" 200 OK
+2026-02-03 18:12:10,307 INFO sqlalchemy.engine.Engine ROLLBACK
+DEBUG: verify_tenant called. Method=GET, Path=/api/v1/frameworks/
+DEBUG: Auth Header Check. User=admin, MsgHeader=testtest, TokenTenant=a61624c9-b0d9-4125-9bd5-edf7af8fb78e
+DEBUG: Masquerading as testtest (Admin Override)
+2026-02-03 18:12:10,310 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-03 18:12:10,310 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.email AS users_email, users.username AS users_username, users.hashed_password AS users_hashed_password, users.tenant_id AS users_tenant_id, users.full_name AS users_full_name, users.role AS users_role, users.allowed_frameworks AS users_allowed_frameworks, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.username = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,310 INFO sqlalchemy.engine.Engine [cached since 480.7s ago] ('admin', 1, 0)
+2026-02-03 18:12:10,311 INFO sqlalchemy.engine.Engine SELECT tenants.id AS tenants_id, tenants.name AS tenants_name, tenants.slug AS tenants_slug, tenants.internal_tenant_id AS tenants_internal_tenant_id, tenants.encryption_key AS tenants_encryption_key, tenants.metadata_json AS tenants_metadata_json, tenants.is_active AS tenants_is_active, tenants.created_at AS tenants_created_at, tenants.updated_at AS tenants_updated_at 
+FROM tenants 
+WHERE tenants.slug = ?
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,311 INFO sqlalchemy.engine.Engine [cached since 357.1s ago] ('testtest', 1, 0)
+2026-02-03 18:12:10,311 INFO sqlalchemy.engine.Engine SELECT frameworks.id AS frameworks_id, frameworks.name AS frameworks_name, frameworks.code AS frameworks_code, frameworks.description AS frameworks_description, frameworks.version AS frameworks_version, frameworks.tenant_id AS frameworks_tenant_id, frameworks.is_active AS frameworks_is_active, frameworks.created_at AS frameworks_created_at, frameworks.updated_at AS frameworks_updated_at 
+FROM frameworks JOIN tenant_frameworks ON frameworks.id = tenant_frameworks.framework_id 
+WHERE tenant_frameworks.tenant_id = ? AND tenant_frameworks.is_active = 1
+ LIMIT ? OFFSET ?
+2026-02-03 18:12:10,311 INFO sqlalchemy.engine.Engine [cached since 357s ago] ('a61624c9-b0d9-4125-9bd5-edf7af8fb78e', 100, 0)
+INFO:     127.0.0.1:58901 - "GET /api/v1/frameworks/ HTTP/1.1" 200 OK
+2026-02-03 18:12:10,313 INFO sqlalchemy.engine.Engine ROLLBACK

@@ -1,0 +1,116 @@
+{
+    "Governance & Policy": [
+        "planning",
+        "change",
+        "objective",
+        "strategy",
+        "management system",
+        "leadership",
+        "policy",
+        "scope",
+        "roles",
+        "context",
+        "support",
+        "communication",
+        "documented information"
+    ],
+    "HR Security": [
+        "employee",
+        "training",
+        "hiring",
+        "termination",
+        "screening",
+        "awareness",
+        "staff",
+        "personnel",
+        "human resource",
+        "disciplinary"
+    ],
+    "Access Control (IAM)": [
+        "password",
+        "mfa",
+        "authentication",
+        "user rights",
+        "identity",
+        "privilege",
+        "access control",
+        "authorization",
+        "secret authentication"
+    ],
+    "Risk Management": [
+        "assessment",
+        "treatment",
+        "impact",
+        "likelihood",
+        "threat",
+        "vulnerability scan",
+        "risk analysis",
+        "risk acceptance"
+    ],
+    "Physical Security": [
+        "physical",
+        "secure areas",
+        "entry",
+        "offices",
+        "rooms",
+        "facilities",
+        "clear desk",
+        "clear screen",
+        "cabling",
+        "equipment siting"
+    ],
+    "Asset Management": [
+        "asset",
+        "inventory",
+        "ownership",
+        "return of assets",
+        "classification",
+        "labeling",
+        "media",
+        "disposal"
+    ],
+    "Operations (General)": [
+        "malware",
+        "backup",
+        "logging",
+        "monitoring",
+        "installation",
+        "vulnerability management",
+        "audit logging",
+        "clock",
+        "network security"
+    ],
+    "Supplier Mgmt": [
+        "supplier",
+        "vendor",
+        "service provider",
+        "supply chain"
+    ],
+    "Incident & Resilience": [
+        "incident",
+        "continuity",
+        "disaster",
+        "resilience",
+        "response"
+    ],
+    "Legal & Compliance": [
+        "legal",
+        "compliance",
+        "intellectual property",
+        "privacy",
+        "protection of records"
+    ],
+    "Performance Evaluation": [
+        "audit",
+        "review",
+        "performance",
+        "monitoring",
+        "measurement",
+        "analysis"
+    ],
+    "Improvement": [
+        "nonconformity",
+        "corrective action",
+        "improvement"
+    ]
+}

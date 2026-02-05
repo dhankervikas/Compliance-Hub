@@ -1,0 +1,53 @@
+# Task: Implement SOC 2 Framework
+
+## Status
+
+- [x] Create Unified SOC 2 Seed Script `seed_soc2_unified.py` <!-- id: 13 -->
+- [x] Run SOC 2 Seed Script <!-- id: 14 -->
+- [x] Update `ScopeProfile` Schema for SOC 2 Selection <!-- id: 15 -->
+- [x] Implement `FrameworkSetupWizard.js` <!-- id: 16 -->
+- [x] Update `Dashboard.js` with Scope Filtering & Health Widget <!-- id: 17 -->
+- [x] Update `AuditorDashboard.js` with Scope Filtering & Strict Framework Isolation <!-- id: 18 -->
+- [x] Update `Policies.js` with Framework Badges & Priority Logic <!-- id: 20 -->
+- [x] Seed Policies with Framework Links (seed_policies.py) <!-- id: 21 -->
+- [x] Verify Wizard and Scope Logic <!-- id: 19 -->
+- [x] Verify Dashboard Calculation Logic (Scope-Aware) <!-- id: 22 -->
+- [x] Add Framework Selection to Settings/Profile Page <!-- id: 23 -->
+- [x] **Debug**: Ensure Framework Detail page respects SOC 2 filtering <!-- id: 24 -->
+- [x] **Fix**: Resolve Data Consistency & Persistence Issues <!-- id: 25 -->
+- [x] **Fix**: Restart Backend after Crash <!-- id: 26 -->
+- [x] **Feature**: Implement ISO 27001 "Gold Standard" Policy Templates (15 Policies + ISMS Docs) <!-- id: 41 -->
+- [x] **Feature**: Implement Clause 4 Context Registers (Issues, Interested Parties, Scope) <!-- id: 42 -->
+- [x] **Architecture**: Initialize Storage Layer (Directories for Templates/PDFs) <!-- id: 44 -->
+- [x] **Data**: Implement Word-to-Database Pipeline (Mammoth Seeder) <!-- id: 45 -->
+- [x] **Backend**: Implement Document Controller (Immutable Templates vs User Drafts) <!-- id: 46 -->
+- [ ] **Frontend**: Implement Rich Text Editor & Auditor Split-Screen Sidebar <!-- id: 47 -->
+- [/] **Project Integrity Verification & Repair:**
+  - [x] Compare `C:\Projects` vs `OneDrive` directories.
+  - [x] Sync missing files/directories (ensure `app` folder is complete).
+  - [x] Verify backend `venv` and dependencies.
+  - [x] Resolve `pydantic-core` build failure (relaxed versions).
+  - [x] Fix `deps.py` 500 Error (Tenant Authentication).
+  - [x] Debug Environment Path issues (Server loading from OneDrive vs Projects).
+  - [x] Kill Zombie Processes (Port 8000 Conflict).
+  - [x] Verify Server Startup & API Response.
+  - [x] Workaround: Started Server on Port 8001 to bypass Zombies.
+  - [x] Validated Fix: API returns 401 (not 500) for invalid token.
+- [x] **Fix**: Restart Frontend (Localhost refused connection) <!-- id: 27 -->
+- [x] **Feature**: Map and Group Controls by COSO Principles (Enforce Default) <!-- id: 28 -->
+- [x] **Configure**: Seed Evidence Mappings for SOC 2 Criteria (CC1.1, CC1.2, A1.1, A1.2, A1.3) <!-- id: 29 -->
+- [x] **UI**: Enhance Control Detail Drawer (Auditor Perspective, Artifacts, Examples) <!-- id: 30 -->
+- [x] **Logic**: Implement Status Sync for Document Uploads <!-- id: 31 -->
+- [x] **Verify**: Browser Verification of Evidence Pane <!-- id: 32 -->
+- [x] **Deploy**: Push latest changes to Git, Vercel, and Render <!-- id: 34 -->
+- [ ] **Verify**: Confirm Production Deployment (`app.assurisk.ai`) Matches Localhost (Wait for User Confirmation) <!-- id: 35 -->
+- [ ] **Fix**: Refactor `App.js` to use Layout Routes (Fixes Navigation/F5 Issue) (Wait for User Confirmation) <!-- id: 36 -->
+- [x] **Feature**: Auto-link Evidence across controls sharing the same Policy (via `LINK_ID`) <!-- id: 37 -->
+- [ ] **Verify**: Re-upload Evidence to ISO 27001 (A.5.15) and confirm sync to SOC 2 (CC6.1) (Previous data was reset) <!-- id: 38 -->
+- [x] **Feature**: Implement ISO 27001 "Gold Standard" Policy Templates (15 Policies + ISMS Docs) <!-- id: 41 -->
+- [x] **Feature**: Implement Clause 4 Context Registers (Issues, Interested Parties, Scope) <!-- id: 42 -->
+- [x] **Architecture**: Initialize Storage Layer (Directories for Templates/PDFs) <!-- id: 44 -->
+- [x] **Data**: Implement Word-to-Database Pipeline (Mammoth Seeder) <!-- id: 45 -->
+- [x] **Backend**: Implement Document Controller (Immutable Templates vs User Drafts) <!-- id: 46 -->
+- [ ] **Frontend**: Implement Rich Text Editor & Auditor Split-Screen Sidebar <!-- id: 47 -->
+- [ ] **Config**: Add `ANTHROPIC_API_KEY` to Backend `.env` (Postponed by User) <!-- id: 39 -->

@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-01-15T09:08:37.614039",
+  "summary": {
+    "total": 2,
+    "fail": 2,
+    "pass": 0
+  },
+  "findings": [
+    {
+      "control": "A.8.24",
+      "status": "FAIL",
+      "resource": "unencrypted-bucket",
+      "details": "S3 Encryption Missing (Simulated)"
+    },
+    {
+      "control": "A.9.4",
+      "status": "FAIL",
+      "resource": "insecure-user",
+      "details": "MFA Not Enabled (Simulated)"
+    }
+  ]
+}

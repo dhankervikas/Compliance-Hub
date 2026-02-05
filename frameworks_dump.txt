@@ -1,0 +1,13 @@
+Listing All Frameworks and Control Counts:
+ID: 1 | Code: ISO27001 | Name: ISO 27001:2022 | Controls: 123
+ID: 2 | Code: SOC2 | Name: SOC 2 Type II | Controls: 63
+ID: 3 | Code: HIPAA | Name: HIPAA Security Rule | Controls: 0
+ID: 4 | Code: GDPR | Name: GDPR | Controls: 0
+ID: 5 | Code: NIST-CSF | Name: NIST CSF 2.0 | Controls: 156
+ID: 6 | Code: ISO42001 | Name: ISO 42001:2023 | Controls: 123
+ID: 7 | Code: AI_FRAMEWORK | Name: AI Frameworks | Controls: 146
+ID: 8 | Code: ADMIN_SEC_001 | Name: Admin Secret Framework | Controls: 0
+ID: 9 | Code: TENANT_SEC_001 | Name: Tenant Secret Framework | Controls: 0
+ID: 10 | Code: TENANT_SEC_NEW | Name: Tenant Secret Framework V2 | Controls: 0
+ID: 11 | Code: ISO42001_MOCK | Name: ISO 42001 (Mock) | Controls: 0
+ID: 12 | Code: ISO27001_ISMS | Name: ISO 27001:2022 - ISMS Requirements | Controls: 0

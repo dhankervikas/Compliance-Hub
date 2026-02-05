@@ -1,0 +1,8 @@
+Total Frameworks: 7
+Framework: ISO 27001:2022 (ISO27001) - Controls: 97
+Framework: SOC 2 Type II (SOC2) - Controls: 63
+Framework: HIPAA Security Rule (HIPAA) - Controls: 1
+Framework: GDPR (GDPR) - Controls: 1
+Framework: NIST CSF 2.0 (NIST-CSF) - Controls: 134
+Framework: ISO 42001:2023 (ISO42001) - Controls: 70
+Framework: AI Frameworks (AI_FRAMEWORK) - Controls: 146

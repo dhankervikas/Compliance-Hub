@@ -1,0 +1,27 @@
+{
+    "ServerSideEncryptionConfiguration": {
+        "Rules": [
+            {
+                "ApplyServerSideEncryptionByDefault": {
+                    "SSEAlgorithm": "AES256"
+                },
+                "BucketKeyEnabled": true
+            }
+        ]
+    },
+    "Owner": {
+        "DisplayName": "cloud-admin",
+        "ID": "AIDEXAMPLE123456789"
+    },
+    "Tags": [
+        {
+            "Key": "Environment",
+            "Value": "Production"
+        },
+        {
+            "Key": "CostCenter",
+            "Value": "C-123"
+        }
+    ],
+    "CreationDate": "2025-01-01T12:00:00Z"
+}

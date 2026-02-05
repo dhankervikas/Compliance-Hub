@@ -1,0 +1,3144 @@
+{
+  "current_evidence": [
+    {
+      "id": "EV-2000",
+      "control_id": "4.1",
+      "control_name": "Understanding the organization",
+      "control_description": "Determine external and internal issues.",
+      "domain": "Context",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-613",
+      "status": "VERIFIED",
+      "submitted_at": "2025-11-17T14:54:42.485638",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      },
+      "updated_at": "NOW"
+    },
+    {
+      "id": "EV-2001",
+      "control_id": "4.2",
+      "control_name": "Understanding needs of stakeholders",
+      "control_description": "Determine interested parties and requirements.",
+      "domain": "Context",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-865",
+      "status": "VERIFIED",
+      "submitted_at": "2025-11-21T14:54:42.485673",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      },
+      "updated_at": "NOW"
+    },
+    {
+      "id": "EV-2002",
+      "control_id": "4.3",
+      "control_name": "Scope of the ISMS",
+      "control_description": "Determine the boundaries and applicability.",
+      "domain": "Context",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-372",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-10T14:54:42.485681",
+      "auditor_comment": "Compliant",
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      },
+      "updated_at": "NOW"
+    },
+    {
+      "id": "EV-2003",
+      "control_id": "4.4",
+      "control_name": "ISMS",
+      "control_description": "Establish, implement, maintain and continually improve the ISMS.",
+      "domain": "Context",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-227",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-11T14:54:42.485686",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      },
+      "updated_at": "NOW"
+    },
+    {
+      "id": "EV-2004",
+      "control_id": "5.1",
+      "control_name": "Leadership and commitment",
+      "control_description": "Top management commitment.",
+      "domain": "Leadership",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-375",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-26T14:54:42.485691",
+      "auditor_comment": "In line with standard requirement",
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      },
+      "updated_at": "NOW"
+    },
+    {
+      "id": "EV-2005",
+      "control_id": "5.2",
+      "control_name": "Policy",
+      "control_description": "Establish information security policy.",
+      "domain": "Leadership",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-730",
+      "status": "PENDING",
+      "submitted_at": "2026-01-11T14:54:42.485696",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2006",
+      "control_id": "5.3",
+      "control_name": "Organizational roles",
+      "control_description": "Assign responsibilities and authorities.",
+      "domain": "Leadership",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-330",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-23T14:54:42.485702",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2007",
+      "control_id": "6.1.1",
+      "control_name": "General planning",
+      "control_description": "Plan actions to address risks and opportunities.",
+      "domain": "Planning",
+      "type": "CLAUSE",
+      "process": "Risk Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-323",
+      "status": "PENDING",
+      "submitted_at": "2025-12-26T14:54:42.485707",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2008",
+      "control_id": "6.1.2",
+      "control_name": "Information security risk assessment",
+      "control_description": "Define and apply a risk assessment process.",
+      "domain": "Planning",
+      "type": "CLAUSE",
+      "process": "Risk Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-810",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-30T14:54:42.485711",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2009",
+      "control_id": "6.1.3",
+      "control_name": "Information security risk treatment",
+      "control_description": "Define and apply a risk treatment process.",
+      "domain": "Planning",
+      "type": "CLAUSE",
+      "process": "Risk Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-780",
+      "status": "MINOR_NC",
+      "submitted_at": "2026-01-07T14:54:42.485716",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2010",
+      "control_id": "6.2",
+      "control_name": "Information security objectives",
+      "control_description": "Establish objectives and plans to achieve them.",
+      "domain": "Planning",
+      "type": "CLAUSE",
+      "process": "Risk Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-169",
+      "status": "OFI",
+      "submitted_at": "2025-12-15T14:54:42.485721",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2011",
+      "control_id": "6.3",
+      "control_name": "Planning of changes",
+      "control_description": "Changes to the ISMS shall be carried out in a planned manner.",
+      "domain": "Planning",
+      "type": "CLAUSE",
+      "process": "Risk Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-269",
+      "status": "MAJOR_NC",
+      "submitted_at": "2025-12-20T14:54:42.485725",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2012",
+      "control_id": "7.1",
+      "control_name": "Resources",
+      "control_description": "Determine and provide resources.",
+      "domain": "Support",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-927",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-19T14:54:42.485730",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2013",
+      "control_id": "7.2",
+      "control_name": "Competence",
+      "control_description": "Ensure necessary competence of persons.",
+      "domain": "Support",
+      "type": "CLAUSE",
+      "process": "HR Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-402",
+      "status": "PENDING",
+      "submitted_at": "2025-11-19T14:54:42.485734",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2014",
+      "control_id": "7.3",
+      "control_name": "Awareness",
+      "control_description": "Persons doing work shall be aware of policy.",
+      "domain": "Support",
+      "type": "CLAUSE",
+      "process": "HR Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-474",
+      "status": "OFI",
+      "submitted_at": "2025-12-18T14:54:42.485740",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2015",
+      "control_id": "7.4",
+      "control_name": "Communication",
+      "control_description": "Determine internal and external communications.",
+      "domain": "Support",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-574",
+      "status": "VERIFIED",
+      "submitted_at": "2025-11-23T14:54:42.485746",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2016",
+      "control_id": "7.5.1",
+      "control_name": "General Documented Info",
+      "control_description": "ISMS shall include documented information.",
+      "domain": "Support",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-760",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-12T14:54:42.485751",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2017",
+      "control_id": "7.5.2",
+      "control_name": "Creating and updating",
+      "control_description": "Appropriate identification and format.",
+      "domain": "Support",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-886",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-07T14:54:42.485756",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2018",
+      "control_id": "7.5.3",
+      "control_name": "Control of documented info",
+      "control_description": "Protected and available.",
+      "domain": "Support",
+      "type": "CLAUSE",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-397",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-10T14:54:42.485761",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      },
+      "updated_at": "NOW"
+    },
+    {
+      "id": "EV-2019",
+      "control_id": "8.1",
+      "control_name": "Operational planning and control",
+      "control_description": "Plan, implement and control processes.",
+      "domain": "Operation",
+      "type": "CLAUSE",
+      "process": "Risk Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-604",
+      "status": "OFI",
+      "submitted_at": "2026-01-15T14:54:42.485765",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2020",
+      "control_id": "8.2",
+      "control_name": "Information security risk assessment",
+      "control_description": "Perform risk assessments at planned intervals.",
+      "domain": "Operation",
+      "type": "CLAUSE",
+      "process": "Risk Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-844",
+      "status": "OFI",
+      "submitted_at": "2025-12-08T14:54:42.485770",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2021",
+      "control_id": "8.3",
+      "control_name": "Information security risk treatment",
+      "control_description": "Implement risk treatment plan.",
+      "domain": "Operation",
+      "type": "CLAUSE",
+      "process": "Risk Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-133",
+      "status": "VERIFIED",
+      "submitted_at": "2025-11-28T14:54:42.485774",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2022",
+      "control_id": "9.1",
+      "control_name": "Monitoring, measurement, analysis",
+      "control_description": "Evaluate the information security performance.",
+      "domain": "Performance",
+      "type": "CLAUSE",
+      "process": "Performance Evaluation",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-727",
+      "status": "MINOR_NC",
+      "submitted_at": "2025-11-20T14:54:42.485778",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2023",
+      "control_id": "9.2.1",
+      "control_name": "General Internal Audit",
+      "control_description": "Conduct internal audits at planned intervals.",
+      "domain": "Performance",
+      "type": "CLAUSE",
+      "process": "Performance Evaluation",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-AUDIT-01",
+        "name": "Internal Audit Program"
+      },
+      "badges": [
+        "ISO-9.2",
+        "SOC2-CC1.2"
+      ],
+      "resource_name": "Risk-Register-XLS-921",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-29T14:54:42.485784",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2024",
+      "control_id": "9.2.2",
+      "control_name": "Internal Audit Programme",
+      "control_description": "Plan, establish, implement audit programme.",
+      "domain": "Performance",
+      "type": "CLAUSE",
+      "process": "Performance Evaluation",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-755",
+      "status": "NEEDS_CLARIFICATION",
+      "submitted_at": "2025-11-30T14:54:42.485788",
+      "auditor_comment": "Please clarify.",
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2025",
+      "control_id": "9.3.1",
+      "control_name": "General Management Review",
+      "control_description": "Top management shall review ISMS.",
+      "domain": "Performance",
+      "type": "CLAUSE",
+      "process": "Performance Evaluation",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-994",
+      "status": "PENDING",
+      "submitted_at": "2025-11-22T14:54:42.485793",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2026",
+      "control_id": "9.3.2",
+      "control_name": "Management Review Inputs",
+      "control_description": "Include status of actions, changes, and feedback.",
+      "domain": "Performance",
+      "type": "CLAUSE",
+      "process": "Performance Evaluation",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-966",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-07T14:54:42.485798",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2027",
+      "control_id": "9.3.3",
+      "control_name": "Management Review Results",
+      "control_description": "Decisions related to improvement opportunities.",
+      "domain": "Performance",
+      "type": "CLAUSE",
+      "process": "Performance Evaluation",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-519",
+      "status": "PENDING",
+      "submitted_at": "2025-12-29T14:54:42.485803",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2028",
+      "control_id": "10.1",
+      "control_name": "Continual improvement",
+      "control_description": "Continually improve suitability, adequacy, effectiveness.",
+      "domain": "Improvement",
+      "type": "CLAUSE",
+      "process": "Improvement",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-304",
+      "status": "OFI",
+      "submitted_at": "2025-12-04T14:54:42.485808",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2029",
+      "control_id": "10.2",
+      "control_name": "Nonconformity and corrective action",
+      "control_description": "React to nonconformity and take action.",
+      "domain": "Improvement",
+      "type": "CLAUSE",
+      "process": "Improvement",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-462",
+      "status": "OFI",
+      "submitted_at": "2025-12-13T14:54:42.485812",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2030",
+      "control_id": "A.5.1",
+      "control_name": "Policies for information security",
+      "control_description": "Policies for information security.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-588",
+      "status": "OBSERVATION",
+      "submitted_at": "2025-11-23T14:54:42.485817",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2031",
+      "control_id": "A.5.2",
+      "control_name": "Information security roles",
+      "control_description": "Information security roles and responsibilities.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-569",
+      "status": "VERIFIED",
+      "submitted_at": "2025-11-19T14:54:42.485822",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      },
+      "updated_at": "NOW"
+    },
+    {
+      "id": "EV-2032",
+      "control_id": "A.5.3",
+      "control_name": "Segregation of duties",
+      "control_description": "Segregation of duties.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-481",
+      "status": "PENDING",
+      "submitted_at": "2025-12-18T14:54:42.485826",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2033",
+      "control_id": "A.5.4",
+      "control_name": "Management responsibilities",
+      "control_description": "Management responsibilities.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-979",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-04T14:54:42.485831",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2034",
+      "control_id": "A.5.5",
+      "control_name": "Contact with authorities",
+      "control_description": "Contact with authorities.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-137",
+      "status": "OFI",
+      "submitted_at": "2025-11-19T14:54:42.485835",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2035",
+      "control_id": "A.5.6",
+      "control_name": "Contact with special interest groups",
+      "control_description": "Contact with special interest groups.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-483",
+      "status": "OFI",
+      "submitted_at": "2025-11-23T14:54:42.485839",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2036",
+      "control_id": "A.5.7",
+      "control_name": "Threat intelligence",
+      "control_description": "Threat intelligence.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Threat Intel",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-999",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-02T14:54:42.485847",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2037",
+      "control_id": "A.5.8",
+      "control_name": "Information security in project management",
+      "control_description": "Information security in project management.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Governance & Policy",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-808",
+      "status": "PENDING",
+      "submitted_at": "2025-12-03T14:54:42.485852",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2038",
+      "control_id": "A.5.9",
+      "control_name": "Inventory of information and other associated assets",
+      "control_description": "Inventory of information and other associated assets.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-760",
+      "status": "VERIFIED",
+      "submitted_at": "2025-11-26T14:54:42.485856",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2039",
+      "control_id": "A.5.10",
+      "control_name": "Acceptable use of information and other associated assets",
+      "control_description": "Acceptable use of information and other associated assets.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-613",
+      "status": "PENDING",
+      "submitted_at": "2026-01-14T14:54:42.485860",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2040",
+      "control_id": "A.5.11",
+      "control_name": "Return of assets",
+      "control_description": "Return of assets.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-719",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-16T14:54:42.485865",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2041",
+      "control_id": "A.5.12",
+      "control_name": "Classification of information",
+      "control_description": "Classification of information.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-503",
+      "status": "MINOR_NC",
+      "submitted_at": "2025-12-13T14:54:42.485869",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2042",
+      "control_id": "A.5.13",
+      "control_name": "Labelling of information",
+      "control_description": "Labelling of information.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-929",
+      "status": "PENDING",
+      "submitted_at": "2025-11-29T14:54:42.485874",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2043",
+      "control_id": "A.5.14",
+      "control_name": "Information transfer",
+      "control_description": "Information transfer.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Network Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-751",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-27T14:54:42.485878",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2044",
+      "control_id": "A.5.15",
+      "control_name": "Access control",
+      "control_description": "Access control.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Access Control (IAM)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-IAM-01",
+        "name": "Access Control Policy"
+      },
+      "badges": [
+        "SOC2-CC6.1",
+        "ISO-A.5.15"
+      ],
+      "resource_name": "Access-Review-Q4-832",
+      "status": "MAJOR_NC",
+      "submitted_at": "2025-12-12T14:54:42.485882",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2045",
+      "control_id": "A.5.16",
+      "control_name": "Identity management",
+      "control_description": "Identity management.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Access Control (IAM)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-655",
+      "status": "MAJOR_NC",
+      "submitted_at": "2025-12-24T14:54:42.485886",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2046",
+      "control_id": "A.5.17",
+      "control_name": "Authentication information",
+      "control_description": "Authentication information.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Access Control (IAM)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-953",
+      "status": "MINOR_NC",
+      "submitted_at": "2025-12-04T14:54:42.485893",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2047",
+      "control_id": "A.5.18",
+      "control_name": "Access rights",
+      "control_description": "Access rights.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Access Control (IAM)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-692",
+      "status": "MINOR_NC",
+      "submitted_at": "2025-12-28T14:54:42.485898",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2048",
+      "control_id": "A.5.19",
+      "control_name": "Information security in supplier relationships",
+      "control_description": "Information security in supplier relationships.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Supplier Mgmt",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-764",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-10T14:54:42.485903",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2049",
+      "control_id": "A.5.20",
+      "control_name": "Addressing information security within supplier agreements",
+      "control_description": "Addressing information security within supplier agreements.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Supplier Mgmt",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-650",
+      "status": "NEEDS_CLARIFICATION",
+      "submitted_at": "2025-12-10T14:54:42.485907",
+      "auditor_comment": "Please clarify.",
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2050",
+      "control_id": "A.5.21",
+      "control_name": "Managing information security in the ICT supply chain",
+      "control_description": "Managing information security in the ICT supply chain.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Supplier Mgmt",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-511",
+      "status": "VERIFIED",
+      "submitted_at": "2025-11-30T14:54:42.485911",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2051",
+      "control_id": "A.5.22",
+      "control_name": "Monitoring, review and change management of supplier services",
+      "control_description": "Monitoring, review and change management of supplier services.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Supplier Mgmt",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-669",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-03T14:54:42.485916",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2052",
+      "control_id": "A.5.23",
+      "control_name": "Information security for use of cloud services",
+      "control_description": "Information security for use of cloud services.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Supplier Mgmt",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-296",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-05T14:54:42.485920",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2053",
+      "control_id": "A.5.24",
+      "control_name": "Information security incident management planning and preparation",
+      "control_description": "Information security incident management planning and preparation.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Incident & Resilience",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-542",
+      "status": "VERIFIED",
+      "submitted_at": "2025-11-18T14:54:42.485924",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2054",
+      "control_id": "A.5.25",
+      "control_name": "Assessment and decision on information security events",
+      "control_description": "Assessment and decision on information security events.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Incident & Resilience",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-451",
+      "status": "VERIFIED",
+      "submitted_at": "2025-11-20T14:54:42.485929",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2055",
+      "control_id": "A.5.26",
+      "control_name": "Response to information security incidents",
+      "control_description": "Response to information security incidents.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Incident & Resilience",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-671",
+      "status": "PENDING",
+      "submitted_at": "2025-12-27T14:54:42.485933",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2056",
+      "control_id": "A.5.27",
+      "control_name": "Learning from information security incidents",
+      "control_description": "Learning from information security incidents.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Incident & Resilience",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-365",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-05T14:54:42.485938",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2057",
+      "control_id": "A.5.28",
+      "control_name": "Collection of evidence",
+      "control_description": "Collection of evidence.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Incident & Resilience",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-615",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-18T14:54:42.485943",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2058",
+      "control_id": "A.5.29",
+      "control_name": "Information security during disruption",
+      "control_description": "Information security during disruption.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Incident & Resilience",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-148",
+      "status": "OFI",
+      "submitted_at": "2025-11-22T14:54:42.485949",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2059",
+      "control_id": "A.5.30",
+      "control_name": "ICT readiness for business continuity",
+      "control_description": "ICT readiness for business continuity.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Incident & Resilience",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-822",
+      "status": "MAJOR_NC",
+      "submitted_at": "2025-11-20T14:54:42.485953",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2060",
+      "control_id": "A.5.31",
+      "control_name": "Legal, statutory, regulatory and contractual requirements",
+      "control_description": "Legal, statutory, regulatory and contractual requirements.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Legal & Compliance",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-864",
+      "status": "PENDING",
+      "submitted_at": "2025-11-26T14:54:42.485958",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2061",
+      "control_id": "A.5.32",
+      "control_name": "Intellectual property rights",
+      "control_description": "Intellectual property rights.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Legal & Compliance",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-351",
+      "status": "MINOR_NC",
+      "submitted_at": "2026-01-15T14:54:42.485962",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2062",
+      "control_id": "A.5.33",
+      "control_name": "Protection of records",
+      "control_description": "Protection of records.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-149",
+      "status": "OBSERVATION",
+      "submitted_at": "2026-01-06T14:54:42.485967",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2063",
+      "control_id": "A.5.34",
+      "control_name": "Privacy and protection of PII",
+      "control_description": "Privacy and protection of PII.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Legal & Compliance",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-883",
+      "status": "MAJOR_NC",
+      "submitted_at": "2025-11-19T14:54:42.485973",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2064",
+      "control_id": "A.5.35",
+      "control_name": "Independent review of information security",
+      "control_description": "Independent review of information security.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Performance Evaluation",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-507",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-18T14:54:42.485977",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2065",
+      "control_id": "A.5.36",
+      "control_name": "Compliance with policies, rules and standards",
+      "control_description": "Compliance with policies, rules and standards.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Legal & Compliance",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-558",
+      "status": "OBSERVATION",
+      "submitted_at": "2025-12-22T14:54:42.485982",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2066",
+      "control_id": "A.5.37",
+      "control_name": "Documented operating procedures",
+      "control_description": "Documented operating procedures.",
+      "domain": "Organizational",
+      "type": "CONTROL",
+      "process": "Operations (General)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-347",
+      "status": "PENDING",
+      "submitted_at": "2025-11-25T14:54:42.485987",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2067",
+      "control_id": "A.6.1",
+      "control_name": "Screening",
+      "control_description": "Screening.",
+      "domain": "People",
+      "type": "CONTROL",
+      "process": "HR Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-445",
+      "status": "PENDING",
+      "submitted_at": "2025-11-17T14:54:42.485992",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2068",
+      "control_id": "A.6.2",
+      "control_name": "Terms and conditions of employment",
+      "control_description": "Terms and conditions of employment.",
+      "domain": "People",
+      "type": "CONTROL",
+      "process": "HR Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-904",
+      "status": "PENDING",
+      "submitted_at": "2025-11-25T14:54:42.485996",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2069",
+      "control_id": "A.6.3",
+      "control_name": "Information security awareness, education and training",
+      "control_description": "Information security awareness, education and training.",
+      "domain": "People",
+      "type": "CONTROL",
+      "process": "HR Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-790",
+      "status": "OBSERVATION",
+      "submitted_at": "2025-12-28T14:54:42.486000",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2070",
+      "control_id": "A.6.4",
+      "control_name": "Disciplinary process",
+      "control_description": "Disciplinary process.",
+      "domain": "People",
+      "type": "CONTROL",
+      "process": "HR Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-479",
+      "status": "MINOR_NC",
+      "submitted_at": "2026-01-15T14:54:42.486004",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2071",
+      "control_id": "A.6.5",
+      "control_name": "Responsibilities after termination or change of employment",
+      "control_description": "Responsibilities after termination or change of employment.",
+      "domain": "People",
+      "type": "CONTROL",
+      "process": "HR Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-359",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-30T14:54:42.486009",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2072",
+      "control_id": "A.6.6",
+      "control_name": "Confidentiality or non-disclosure agreements",
+      "control_description": "Confidentiality or non-disclosure agreements.",
+      "domain": "People",
+      "type": "CONTROL",
+      "process": "HR Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-815",
+      "status": "OBSERVATION",
+      "submitted_at": "2025-12-08T14:54:42.486013",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2073",
+      "control_id": "A.6.7",
+      "control_name": "Remote working",
+      "control_description": "Remote working.",
+      "domain": "People",
+      "type": "CONTROL",
+      "process": "HR Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-941",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-02T14:54:42.486017",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2074",
+      "control_id": "A.6.8",
+      "control_name": "Information security event reporting",
+      "control_description": "Information security event reporting.",
+      "domain": "People",
+      "type": "CONTROL",
+      "process": "Incident & Resilience",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-511",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-09T14:54:42.486023",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2075",
+      "control_id": "A.7.1",
+      "control_name": "Physical security perimeters",
+      "control_description": "Physical security perimeters.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Physical Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-776",
+      "status": "OBSERVATION",
+      "submitted_at": "2026-01-06T14:54:42.486027",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2076",
+      "control_id": "A.7.2",
+      "control_name": "Physical entry",
+      "control_description": "Physical entry.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Physical Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-175",
+      "status": "PENDING",
+      "submitted_at": "2025-12-10T14:54:42.486032",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2077",
+      "control_id": "A.7.3",
+      "control_name": "Securing offices, rooms and facilities",
+      "control_description": "Securing offices, rooms and facilities.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Physical Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-196",
+      "status": "MINOR_NC",
+      "submitted_at": "2025-12-18T14:54:42.486037",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2078",
+      "control_id": "A.7.4",
+      "control_name": "Physical security monitoring",
+      "control_description": "Physical security monitoring.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Physical Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-781",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-03T14:54:42.486042",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2079",
+      "control_id": "A.7.5",
+      "control_name": "Protecting against physical and environmental threats",
+      "control_description": "Protecting against physical and environmental threats.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Physical Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-756",
+      "status": "NEEDS_CLARIFICATION",
+      "submitted_at": "2026-01-02T14:54:42.486048",
+      "auditor_comment": "Please clarify.",
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2080",
+      "control_id": "A.7.6",
+      "control_name": "Working in secure areas",
+      "control_description": "Working in secure areas.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Physical Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-641",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-07T14:54:42.486052",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2081",
+      "control_id": "A.7.7",
+      "control_name": "Clear desk and clear screen",
+      "control_description": "Clear desk and clear screen.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-759",
+      "status": "PENDING",
+      "submitted_at": "2026-01-11T14:54:42.486057",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2082",
+      "control_id": "A.7.8",
+      "control_name": "Equipment siting and protection",
+      "control_description": "Equipment siting and protection.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Physical Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-993",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-10T14:54:42.486061",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2083",
+      "control_id": "A.7.9",
+      "control_name": "Security of assets off-premises",
+      "control_description": "Security of assets off-premises.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Physical Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-446",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-24T14:54:42.486065",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2084",
+      "control_id": "A.7.10",
+      "control_name": "Storage media",
+      "control_description": "Storage media.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-747",
+      "status": "OBSERVATION",
+      "submitted_at": "2025-12-24T14:54:42.486070",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2085",
+      "control_id": "A.7.11",
+      "control_name": "Supporting utilities",
+      "control_description": "Supporting utilities.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Physical Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-370",
+      "status": "MAJOR_NC",
+      "submitted_at": "2025-11-30T14:54:42.486074",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2086",
+      "control_id": "A.7.12",
+      "control_name": "Cabling security",
+      "control_description": "Cabling security.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Network Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-333",
+      "status": "MAJOR_NC",
+      "submitted_at": "2025-11-21T14:54:42.486080",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2087",
+      "control_id": "A.7.13",
+      "control_name": "Equipment maintenance",
+      "control_description": "Equipment maintenance.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Physical Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-355",
+      "status": "PENDING",
+      "submitted_at": "2026-01-05T14:54:42.486084",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2088",
+      "control_id": "A.7.14",
+      "control_name": "Secure disposal or re-use of equipment",
+      "control_description": "Secure disposal or re-use of equipment.",
+      "domain": "Physical",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-556",
+      "status": "MINOR_NC",
+      "submitted_at": "2025-11-23T14:54:42.486089",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2089",
+      "control_id": "A.8.1",
+      "control_name": "User endpoint devices",
+      "control_description": "User endpoint devices.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-186",
+      "status": "MINOR_NC",
+      "submitted_at": "2025-12-20T14:54:42.486093",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2090",
+      "control_id": "A.8.2",
+      "control_name": "Privileged access rights",
+      "control_description": "Privileged access rights.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Access Control (IAM)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-433",
+      "status": "OFI",
+      "submitted_at": "2025-12-05T14:54:42.486098",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2091",
+      "control_id": "A.8.3",
+      "control_name": "Information access restriction",
+      "control_description": "Information access restriction.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Access Control (IAM)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-501",
+      "status": "VERIFIED",
+      "submitted_at": "2025-11-30T14:54:42.486103",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2092",
+      "control_id": "A.8.4",
+      "control_name": "Access to source code",
+      "control_description": "Access to source code.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "SDLC (Development)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-114",
+      "status": "MINOR_NC",
+      "submitted_at": "2025-12-13T14:54:42.486108",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2093",
+      "control_id": "A.8.5",
+      "control_name": "Secure authentication",
+      "control_description": "Secure authentication.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Access Control (IAM)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-596",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-16T14:54:42.486114",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2094",
+      "control_id": "A.8.6",
+      "control_name": "Capacity management",
+      "control_description": "Capacity management.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Capacity Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-963",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-08T14:54:42.486120",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2095",
+      "control_id": "A.8.7",
+      "control_name": "Protection against malware",
+      "control_description": "Protection against malware.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Operations (General)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-221",
+      "status": "OFI",
+      "submitted_at": "2025-12-10T14:54:42.486126",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2096",
+      "control_id": "A.8.8",
+      "control_name": "Management of technical vulnerabilities",
+      "control_description": "Management of technical vulnerabilities.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Vulnerability Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-235",
+      "status": "OFI",
+      "submitted_at": "2025-12-29T14:54:42.486131",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2097",
+      "control_id": "A.8.9",
+      "control_name": "Configuration management",
+      "control_description": "Configuration management.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Configuration Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-824",
+      "status": "OFI",
+      "submitted_at": "2025-12-26T14:54:42.486135",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2098",
+      "control_id": "A.8.10",
+      "control_name": "Information deletion",
+      "control_description": "Information deletion.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-815",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-05T14:54:42.486140",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2099",
+      "control_id": "A.8.11",
+      "control_name": "Data masking",
+      "control_description": "Data masking.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Asset Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-662",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-16T14:54:42.486144",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2100",
+      "control_id": "A.8.12",
+      "control_name": "Data leakage prevention",
+      "control_description": "Data leakage prevention.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Operations (General)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-644",
+      "status": "MINOR_NC",
+      "submitted_at": "2025-11-21T14:54:42.486148",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2101",
+      "control_id": "A.8.13",
+      "control_name": "Information backup",
+      "control_description": "Information backup.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Backup Management",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-377",
+      "status": "MINOR_NC",
+      "submitted_at": "2025-12-16T14:54:42.486152",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2102",
+      "control_id": "A.8.14",
+      "control_name": "Redundancy of information processing facilities",
+      "control_description": "Redundancy of information processing facilities.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Operations (General)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-653",
+      "status": "OBSERVATION",
+      "submitted_at": "2025-12-18T14:54:42.486158",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2103",
+      "control_id": "A.8.15",
+      "control_name": "Logging",
+      "control_description": "Logging.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Logging & Monitoring",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-762",
+      "status": "OBSERVATION",
+      "submitted_at": "2025-11-27T14:54:42.486162",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2104",
+      "control_id": "A.8.16",
+      "control_name": "Monitoring activities",
+      "control_description": "Monitoring activities.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Logging & Monitoring",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-253",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-04T14:54:42.486166",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2105",
+      "control_id": "A.8.17",
+      "control_name": "Clock synchronization",
+      "control_description": "Clock synchronization.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Clock Synchronization",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-535",
+      "status": "PENDING",
+      "submitted_at": "2025-12-25T14:54:42.486171",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2106",
+      "control_id": "A.8.18",
+      "control_name": "Use of privileged utility programs",
+      "control_description": "Use of privileged utility programs.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Operations (General)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-122",
+      "status": "MAJOR_NC",
+      "submitted_at": "2025-12-11T14:54:42.486176",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2107",
+      "control_id": "A.8.19",
+      "control_name": "Installation of software on operational systems",
+      "control_description": "Installation of software on operational systems.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Operations (General)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-413",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-10T14:54:42.486180",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2108",
+      "control_id": "A.8.20",
+      "control_name": "Networks security",
+      "control_description": "Networks security.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Network Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-126",
+      "status": "MAJOR_NC",
+      "submitted_at": "2026-01-11T14:54:42.486185",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2109",
+      "control_id": "A.8.21",
+      "control_name": "Security of network services",
+      "control_description": "Security of network services.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Network Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-201",
+      "status": "MINOR_NC",
+      "submitted_at": "2025-12-31T14:54:42.486191",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2110",
+      "control_id": "A.8.22",
+      "control_name": "Segregation of networks",
+      "control_description": "Segregation of networks.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Network Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-355",
+      "status": "PENDING",
+      "submitted_at": "2026-01-12T14:54:42.486196",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2111",
+      "control_id": "A.8.23",
+      "control_name": "Web filtering",
+      "control_description": "Web filtering.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Network Security",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "AWS-Config-Prod-344",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-09T14:54:42.486201",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2112",
+      "control_id": "A.8.24",
+      "control_name": "Use of cryptography",
+      "control_description": "Use of cryptography.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "Cryptography",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-ENC-01",
+        "name": "Encryption at Rest"
+      },
+      "badges": [
+        "HIPAA-164.312",
+        "ISO-A.8.24"
+      ],
+      "resource_name": "Access-Review-Q4-994",
+      "status": "PENDING",
+      "submitted_at": "2025-12-05T14:54:42.486208",
+      "auditor_comment": null,
+      "raw_payload": {
+        "resource_type": "RDS",
+        "volume_id": "vol-34596",
+        "encryption_status": "ENCRYPTED",
+        "algorithm": "AES-256",
+        "check": "passed"
+      }
+    },
+    {
+      "id": "EV-2113",
+      "control_id": "A.8.25",
+      "control_name": "Secure development lifecycle",
+      "control_description": "Secure development lifecycle.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "SDLC (Development)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-935",
+      "status": "VERIFIED",
+      "submitted_at": "2025-12-30T14:54:42.486212",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2114",
+      "control_id": "A.8.26",
+      "control_name": "Application security requirements",
+      "control_description": "Application security requirements.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "SDLC (Development)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "PenTest-Report-2025-964",
+      "status": "OBSERVATION",
+      "submitted_at": "2026-01-03T14:54:42.486217",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2115",
+      "control_id": "A.8.27",
+      "control_name": "Secure system architecture and engineering principles",
+      "control_description": "Secure system architecture and engineering principles.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "SDLC (Development)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-496",
+      "status": "PENDING",
+      "submitted_at": "2026-01-13T14:54:42.486222",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2116",
+      "control_id": "A.8.28",
+      "control_name": "Secure coding",
+      "control_description": "Secure coding.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "SDLC (Development)",
+      "is_applicable": false,
+      "intent": {
+        "id": "INT-SDLC-04",
+        "name": "Secure Coding Standards"
+      },
+      "badges": [
+        "SOC2-CC7.1",
+        "ISO-A.8.28"
+      ],
+      "resource_name": "PenTest-Report-2025-497",
+      "status": "NOT_APPLICABLE",
+      "submitted_at": "2025-11-26T14:54:42.486228",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2117",
+      "control_id": "A.8.29",
+      "control_name": "Security testing in development and acceptance",
+      "control_description": "Security testing in development and acceptance.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "SDLC (Development)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-336",
+      "status": "OBSERVATION",
+      "submitted_at": "2026-01-16T14:54:42.486232",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2118",
+      "control_id": "A.8.30",
+      "control_name": "Outsourced development",
+      "control_description": "Outsourced development.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "SDLC (Development)",
+      "is_applicable": false,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-783",
+      "status": "NOT_APPLICABLE",
+      "submitted_at": "2026-01-16T14:54:42.486237",
+      "auditor_comment": null,
+      "raw_payload": {
+        "uploaded_by": "user",
+        "file_type": "pdf"
+      }
+    },
+    {
+      "id": "EV-2119",
+      "control_id": "A.8.31",
+      "control_name": "Separation of development, test and production environments",
+      "control_description": "Separation of development, test and production environments.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "SDLC (Development)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-416",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-14T14:54:42.486241",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2120",
+      "control_id": "A.8.32",
+      "control_name": "Change management",
+      "control_description": "Change management.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "SDLC (Development)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Emp-Handbook-v2-974",
+      "status": "VERIFIED",
+      "submitted_at": "2025-11-24T14:54:42.486246",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    },
+    {
+      "id": "EV-2121",
+      "control_id": "A.8.33",
+      "control_name": "Test information",
+      "control_description": "Test information.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "SDLC (Development)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Access-Review-Q4-480",
+      "status": "MINOR_NC",
+      "submitted_at": "2026-01-02T14:54:42.486250",
+      "auditor_comment": null,
+      "raw_payload": {
+        "error": "Non-Conformity Detected",
+        "details": "Control implementation does not meet policy requirements."
+      }
+    },
+    {
+      "id": "EV-2122",
+      "control_id": "A.8.34",
+      "control_name": "Protection of information systems during audit testing",
+      "control_description": "Protection of information systems during audit testing.",
+      "domain": "Technological",
+      "type": "CONTROL",
+      "process": "SDLC (Development)",
+      "is_applicable": true,
+      "intent": {
+        "id": "INT-GEN",
+        "name": "General Compliance"
+      },
+      "badges": [
+        "ISO-27001"
+      ],
+      "resource_name": "Risk-Register-XLS-706",
+      "status": "VERIFIED",
+      "submitted_at": "2026-01-03T14:54:42.486254",
+      "auditor_comment": null,
+      "raw_payload": {
+        "check": "passed",
+        "verified_by": "System"
+      }
+    }
+  ],
+  "historical_trends": [
+    {
+      "month": "Feb",
+      "score": 33
+    },
+    {
+      "month": "Mar",
+      "score": 37
+    },
+    {
+      "month": "Apr",
+      "score": 39
+    },
+    {
+      "month": "May",
+      "score": 44
+    },
+    {
+      "month": "Jun",
+      "score": 48
+    },
+    {
+      "month": "Jul",
+      "score": 51
+    },
+    {
+      "month": "Aug",
+      "score": 53
+    },
+    {
+      "month": "Sep",
+      "score": 58
+    },
+    {
+      "month": "Oct",
+      "score": 61
+    },
+    {
+      "month": "Nov",
+      "score": 63
+    },
+    {
+      "month": "Dec",
+      "score": 67
+    },
+    {
+      "month": "Jan",
+      "score": 71
+    }
+  ],
+  "generated_at": "2026-01-16T14:54:42.486324"
+}
