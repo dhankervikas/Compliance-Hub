@@ -37,10 +37,13 @@ class Settings(BaseSettings):
     # CORS
     # Allow all for Vercel/Render ease of use
     BACKEND_CORS_ORIGINS: List[str] = [
-        "http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://localhost:3003",
-        "http://localhost:8000", "http://localhost:8001", "http://localhost:8002",
-        "http://127.0.0.1:3000", "http://127.0.0.1:3001", "http://127.0.0.1:8000", "http://127.0.0.1:8002"
-    ]
+    "http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://localhost:3003",
+    "http://localhost:8000", "http://localhost:8001", "http://localhost:8002",
+    "http://127.0.0.1:3000", "http://127.0.0.1:3001", "http://127.0.0.1:8000", "http://127.0.0.1:8002",
+    "https://compliance-hub-g1vy.vercel.app",
+    "https://app.assurisk.ai",
+    "https://*.assurisk.ai"
+]
     # BACKEND_CORS_ORIGINS: List[str] = ["*"]
     
     @field_validator("BACKEND_CORS_ORIGINS", mode='before')
