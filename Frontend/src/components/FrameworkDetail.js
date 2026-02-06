@@ -825,6 +825,7 @@ const FrameworkDetail = () => {
                     } else {
                         // STANDARD BUSINESS VIEW (ISO 27001 etc.)
                         const rawName = c.process_name ||
+                            c.category ||
                             (c.domain && !c.domain.startsWith("Clause") && !c.domain.startsWith("Annex") ? c.domain : null) ||
                             "Uncategorized Controls";
 
@@ -1545,12 +1546,12 @@ const FrameworkDetail = () => {
 
                                 // Default ISO 27001 Custom Sort Order for Domains
                                 const ISO_ORDER = [
-                                    "Governance",
+                                    "Governance & Policy",
                                     "HR Security",
                                     "Asset Management",
                                     "Access Control (IAM)",
                                     "Physical Security",
-                                    "Operations",
+                                    "Operations (General)",
                                     "Configuration Management",
                                     "Cryptography",
                                     "Logging & Monitoring",
