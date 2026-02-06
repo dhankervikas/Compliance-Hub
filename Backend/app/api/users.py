@@ -309,7 +309,7 @@ def _get_entitlements_logic(db: Session, tenant_slug: str):
         visible_slugs = [t.slug for t in all_ts]
         debug_msg = f"Tenant '{tenant_slug}' NOT FOUND. Visible: {visible_slugs}"
         print(f"DEBUG: {debug_msg}")
-        return {"error": "debug_not_found", "detail": debug_msg} # Return dict to be raised by caller or returned
+        return None # Return None to let caller raise 404
         
     # 1. Frameworks
     all_frameworks = db.query(Framework).all()

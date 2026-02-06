@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import config from '../config';
+import SecurityStatusBadge from './SecurityStatusBadge';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -109,6 +110,7 @@ const Login = () => {
           </button>
         </form>
 
+        <SecurityStatusBadge />
       </div>
     </div>
   );

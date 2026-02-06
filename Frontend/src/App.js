@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { EntitlementProvider } from './contexts/EntitlementContext';
 import EntitlementGuard from './components/EntitlementGuard';
+import Unauthorized from './components/Unauthorized';
 import Login from './components/Login';
 import TenantLogin from './components/TenantLogin';
 import Workspaces from './components/Workspaces';
@@ -289,6 +290,9 @@ function App() {
                                     </ProtectedRoute>
                                 }
                             />
+
+                            {/* UNAUTHORIZED PAGE */}
+                            <Route path="/unauthorized" element={<Unauthorized />} />
 
                             {/* FALLBACK */}
                             <Route path="/" element={<Navigate to="/login" replace />} />
