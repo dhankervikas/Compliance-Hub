@@ -40,22 +40,24 @@ const SettingsForm = () => {
 
     const currentSchema = schemas[section] || [];
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            setMessage(null);
-            try {
-                const res = await axios.get(`/settings/${section}`);
-                setData(res.data.content || {});
-            } catch (err) {
-                console.error("Failed to fetch settings", err);
-                setMessage({ type: 'error', text: 'Failed to load settings.' });
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
+    const fetchData = React.useCallback(async () => {
+        setLoading(true);
+        setMessage(null);
+        try {
+            const res = await axios.get(`/settings/${section}`);
+            setData(res.data.content || {});
+        } catch (err) {
+            console.error("Failed to fetch settings", err);
+            const msg = err.response?.data?.detail || err.message || "Unknown error";
+            setMessage({ type: 'error', text: `Failed to load settings: ${msg}` });
+        } finally {
+            setLoading(false);
+        }
     }, [section]);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -93,6 +95,10 @@ const SettingsForm = () => {
                 content: cleanData
             });
             setMessage({ type: 'success', text: 'Settings saved successfully.' });
+
+            // Re-fetch to ensure sync (optional but good practice)
+            await fetchData();
+
         } catch (err) {
             console.error("Failed to save settings", err);
             const errorMsg = err.response?.data?.detail
@@ -104,13 +110,16 @@ const SettingsForm = () => {
         }
     };
 
-    if (loading) return <div className="p-8">Loading settings...</div>;
+    if (loading && !data) return <div className="p-8">Loading settings...</div>; // Allow loading state update without unmounting if data exists
 
     return (
         <div className="bg-white shadow rounded-lg p-6">
             {showWizard && (
                 <FrameworkSetupWizard
-                    onComplete={() => setShowWizard(false)}
+                    onComplete={() => {
+                        setShowWizard(false);
+                        fetchData(); // Refresh data from backend to avoid stale overwrite
+                    }}
                     onCancel={() => setShowWizard(false)}
                 />
             )}
@@ -125,9 +134,20 @@ const SettingsForm = () => {
                         </div>
                         <div>
                             <h3 className="text-lg font-bold text-gray-900">SOC 2 Type II Configuration</h3>
-                            <p className="text-sm text-gray-600">
-                                configure your Trust Services Criteria (TSC) scope. Select active principles like Availability and Privacy.
+                            <p className="text-sm text-gray-600 mb-2">
+                                Configure your Trust Services Criteria (TSC) scope.
                             </p>
+                            <div className="flex flex-wrap gap-2">
+                                {data.soc2_selected_principles && data.soc2_selected_principles.length > 0 ? (
+                                    data.soc2_selected_principles.map(p => (
+                                        <span key={p} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                            {p}
+                                        </span>
+                                    ))
+                                ) : (
+                                    <span className="text-xs text-gray-400 italic">No principles selected (Security is mandatory)</span>
+                                )}
+                            </div>
                         </div>
                     </div>
                     <button

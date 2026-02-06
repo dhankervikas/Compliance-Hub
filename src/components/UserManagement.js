@@ -17,19 +17,29 @@ const UserManagement = () => {
         allowed_frameworks: []
     });
 
+    const [error, setError] = useState(null);
+
     useEffect(() => {
-        fetchUsers();
+        if (token) {
+            fetchUsers();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [token]);
 
     const fetchUsers = async () => {
+        setLoading(true);
+        setError(null);
         try {
+            console.log("Fetching users from:", `${config.API_BASE_URL}/users/`);
             const res = await axios.get(`${config.API_BASE_URL}/users/`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
+            console.log("Users response:", res.data);
             setUsers(res.data);
+            if (res.data.length === 0) setError("No users returned from API.");
         } catch (err) {
             console.error("Failed to fetch users", err);
+            setError(err.message || "Failed to load users");
         } finally {
             setLoading(false);
         }
@@ -82,6 +92,17 @@ const UserManagement = () => {
                 <Users className="w-6 h-6 text-blue-600" />
                 User Management
             </h1>
+
+            {error && (
+                <div className="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                    <strong className="font-bold">Error:</strong>
+                    <span className="block sm:inline ml-2">{error}</span>
+                    <div className="text-xs mt-2 text-red-800">
+                        Attempted: {config.API_BASE_URL}/users/
+                    </div>
+                    <button onClick={fetchUsers} className="ml-4 underline">Retry</button>
+                </div>
+            )}
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <table className="w-full text-left border-collapse">

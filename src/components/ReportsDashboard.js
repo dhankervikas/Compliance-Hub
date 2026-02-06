@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useEntitlements } from '../contexts/EntitlementContext';
 import axios from 'axios';
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -102,10 +103,13 @@ const GitHubMetrics = ({ data }) => (
 );
 
 const ReportsDashboard = () => {
+    const { entitlements } = useEntitlements();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [generatingPack, setGeneratingPack] = useState(false);
+
+    const [mappingData, setMappingData] = useState([]);
 
     useEffect(() => {
         fetchData();
@@ -115,16 +119,154 @@ const ReportsDashboard = () => {
     const fetchData = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get(`${API_URL}/reports/dashboard`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            setData(res.data);
+            const headers = { Authorization: `Bearer ${token}` };
+
+            const res = await axios.get(`${API_URL}/reports/dashboard`, { headers });
+            let reportData = res.data;
+
+            // STRICT FILTERING: Hide inactive frameworks from Coverage Chart
+            if (reportData.framework_coverage && entitlements && entitlements.frameworks) {
+                const activeCodes = new Set(entitlements.frameworks.filter(f => f.is_active).map(f => f.name));
+                // Note: Chart uses 'name' e.g. "ISO 27001:2022". Logic must match.
+                // If chart data uses codes, we'd map codes.
+                // Assuming Name matching for now based on screenshot.
+                reportData.framework_coverage = reportData.framework_coverage.filter(item =>
+                    activeCodes.has(item.name) || entitlements.frameworks.some(f => f.is_active && f.name === item.name)
+                );
+            }
+
+            setData(reportData);
+
+            // Fetch Mapping Data
+            const mapRes = await axios.get(`${API_URL}/reports/ai-mapping`, { headers });
+            if (mapRes.data?.data) {
+                setMappingData(mapRes.data.data);
+            }
+
             setLoading(false);
         } catch (err) {
             console.error("Failed to fetch reports", err);
             setError(err.message || "Failed to load report data");
             setLoading(false);
         }
+    };
+
+    // MAPPING TABLE COMPONENT
+    const MappingTable = ({ data }) => {
+        const [searchTerm, setSearchTerm] = useState('');
+        const [selectedModule, setSelectedModule] = useState('All');
+        const [selectedDomain, setSelectedDomain] = useState('All');
+
+        if (!data || data.length === 0) return null;
+
+        // Extract unique values for filters
+        const modules = ['All', ...new Set(data.map(d => d['AI Category']).filter(Boolean))];
+        const domains = ['All', ...new Set(data.map(d => d['AI Domain']).filter(Boolean))];
+
+        const filtered = data.filter(row => {
+            const matchesSearch =
+                row["AI Control Title"]?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                row["Mapped ISO 42001 ID"]?.toLowerCase().includes(searchTerm.toLowerCase());
+
+            const matchesModule = selectedModule === 'All' || row["AI Category"] === selectedModule;
+            const matchesDomain = selectedDomain === 'All' || row["AI Domain"] === selectedDomain;
+
+            return matchesSearch && matchesModule && matchesDomain;
+        });
+
+        return (
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 col-span-1 md:col-span-2 mt-8">
+                <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                    <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                        <TrendingUp className="text-indigo-500 w-5 h-5" />
+                        AI Framework to ISO 42001 Mapping
+                    </h3>
+
+                    <div className="flex flex-wrap gap-2">
+                        {/* Module Filter */}
+                        <select
+                            className="border border-gray-300 rounded px-3 py-1 text-sm bg-white"
+                            value={selectedModule}
+                            onChange={(e) => setSelectedModule(e.target.value)}
+                        >
+                            {modules.map(m => <option key={m} value={m}>Module: {m}</option>)}
+                        </select>
+
+                        {/* Domain Filter */}
+                        <select
+                            className="border border-gray-300 rounded px-3 py-1 text-sm bg-white"
+                            value={selectedDomain}
+                            onChange={(e) => setSelectedDomain(e.target.value)}
+                        >
+                            {domains.map(d => <option key={d} value={d}>Domain: {d}</option>)}
+                        </select>
+
+                        <input
+                            type="text"
+                            placeholder="Search controls..."
+                            className="border border-gray-300 rounded px-3 py-1 text-sm"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+                </div>
+
+                <div className="overflow-x-auto max-h-[600px] overflow-y-auto">
+                    <table className="w-full text-sm text-left">
+                        <thead className="text-xs text-gray-500 uppercase bg-gray-50 sticky top-0 z-10 shadow-sm">
+                            <tr>
+                                <th className="px-4 py-3 bg-gray-50">AI ID & Domain</th>
+                                <th className="px-4 py-3 bg-gray-50">Control Details</th>
+                                <th className="px-4 py-3 bg-gray-50">Requirements</th>
+                                <th className="px-4 py-3 bg-gray-50">ISO 42001 Match</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-100">
+                            {filtered.map((row, i) => (
+                                <tr key={i} className="hover:bg-gray-50 align-top">
+                                    {/* ID & Domain */}
+                                    <td className="px-4 py-3 whitespace-nowrap">
+                                        <div className="font-bold text-gray-900">{row["AI Control ID"]}</div>
+                                        <div className="text-xs inline-block bg-blue-100 text-blue-800 px-2 py-0.5 rounded mt-1">
+                                            {row["AI Domain"]}
+                                        </div>
+                                        <div className="text-xs text-gray-400 mt-1">{row["AI Category"]}</div>
+                                    </td>
+
+                                    {/* Description (Title) */}
+                                    <td className="px-4 py-3 min-w-[200px]">
+                                        <div className="font-medium text-gray-800">{row["AI Control Title"]}</div>
+                                    </td>
+
+                                    {/* Requirements */}
+                                    <td className="px-4 py-3 min-w-[300px]">
+                                        <div className="text-xs text-gray-600 whitespace-pre-wrap">
+                                            {row["Requirements"] || "-"}
+                                        </div>
+                                    </td>
+
+                                    {/* ISO Match */}
+                                    <td className="px-4 py-3 whitespace-nowrap">
+                                        <span className="bg-indigo-50 text-indigo-700 px-2 py-1 rounded text-xs font-bold font-mono">
+                                            {row["Mapped ISO 42001 ID"]}
+                                        </span>
+                                        <div className="text-xs text-gray-500 mt-1 w-48 truncate" title={row["Mapped ISO 42001 Title"]}>
+                                            {row["Mapped ISO 42001 Title"]}
+                                        </div>
+                                        <div className="text-[10px] text-gray-400 mt-1 italic">
+                                            {row["Mapping Rationale"]}
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                            {filtered.length === 0 && (
+                                <tr><td colSpan="4" className="text-center py-8 text-gray-500">No matches found for the selected filters</td></tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
     };
 
     const handleDownloadSoA = async () => {
@@ -177,6 +319,15 @@ const ReportsDashboard = () => {
                             <FileSpreadsheet className="w-4 h-4" />
                             {generatingPack ? "Generating Excel..." : "Download SoA (.xlsx)"}
                         </button>
+                        <a
+                            href={`${API_URL.replace('/api/v1', '')}/static/reports/AI_ISO_42001_Mapping_Report.xlsx?t=${new Date().getTime()}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-indigo-700 transition-colors shadow-lg"
+                        >
+                            <TrendingUp className="w-4 h-4" />
+                            AI Standards Mapping (.xlsx)
+                        </a>
                     </div>
                 </div>
 
@@ -238,6 +389,13 @@ const ReportsDashboard = () => {
                                 </PieChart>
                             </ResponsiveContainer>
                         </div>
+                    </div>
+
+                    {/* NEW: AI MAPPING TABLE - Conditional Rendering */}
+                    <div className="col-span-1 md:col-span-2">
+                        {entitlements?.frameworks?.some(f => f.is_active && (f.code.includes("ISO42001") || f.code.includes("AI"))) && (
+                            <MappingTable data={mappingData} />
+                        )}
                     </div>
                 </div>
             </div>

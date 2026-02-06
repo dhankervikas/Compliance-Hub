@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, CheckCircle, AlertTriangle, ArrowRight, X, Info } from 'lucide-react';
-import axios from 'axios';
-import config from '../../config';
+import { auditService } from '../../services/auditService';
+import api from '../../services/api';
 
-const API_URL = config.API_BASE_URL;
+// const API_URL = config.API_BASE_URL; // api service handles base URL
 
 const FrameworkSetupWizard = ({ onComplete, onCancel }) => {
     const [step, setStep] = useState(1);
@@ -17,10 +17,8 @@ const FrameworkSetupWizard = ({ onComplete, onCancel }) => {
     useEffect(() => {
         const fetchSettings = async () => {
             try {
-                const token = localStorage.getItem('token');
-                const res = await axios.get(`${API_URL}/settings/scope`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+                // api.get automatically attaches token
+                const res = await api.get(`/settings/scope`);
                 const content = res.data.content || {};
 
                 if (content.soc2_selected_principles && Array.isArray(content.soc2_selected_principles)) {
@@ -92,36 +90,46 @@ const FrameworkSetupWizard = ({ onComplete, onCancel }) => {
     const handleSave = async () => {
         setLoading(true);
         try {
-            const token = localStorage.getItem('token');
-            const headers = { Authorization: `Bearer ${token}` };
+            // 1. Save Framework Activation (Legacy/Mock)
+            // We still might want to save the selected principles list to legacy settings 
+            // if other parts of the app use it (e.g., policy generation).
+            // For now, we will do BOTH: Save legacy principles + New Strict Justifications.
 
-            // 1. Fetch current Scope Settings first (to preserve other data)
+            // A. Legacy Save (for Principles List)
             let currentContent = {};
             try {
-                const res = await axios.get(`${API_URL}/settings/scope`, { headers });
+                const res = await api.get(`/settings/scope`);
                 currentContent = res.data.content || {};
-            } catch (e) {
-                console.log("No existing settings, creating new...");
-            }
+            } catch (e) { console.log("No settings, creating new..."); }
 
-            // 2. Merge Updates
             const payload = {
                 section: "scope",
                 content: {
                     ...currentContent,
-                    soc2_selected_principles: selectedPrinciples,
-                    soc2_exclusions: justifications
+                    soc2_selected_principles: selectedPrinciples
+                    // soc2_exclusions is DEPRECATED in favor of new table
                 }
             };
+            await api.put(`/settings/scope`, payload);
 
-            await axios.put(`${API_URL}/settings/scope`, payload, { headers });
+            // B. Strict Scope API Save (For Exclusions)
+            const promises = Object.entries(justifications).map(([criteriaId, reason]) => {
+                return auditService.saveScopeJustification({
+                    standard_type: 'SOC2',
+                    criteria_id: criteriaId,
+                    reason_code: 'NOT_APPLICABLE',
+                    justification_text: reason
+                });
+            });
+            await Promise.all(promises);
 
             // Success
             if (onComplete) onComplete();
 
         } catch (err) {
             console.error("Failed to save SOC 2 Scope", err);
-            alert("Failed to save settings. Please try again.");
+            const msg = err.response?.data?.detail || err.message || "Unknown error";
+            alert(`Failed to save settings: ${msg}`);
         } finally {
             setLoading(false);
         }

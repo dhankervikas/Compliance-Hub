@@ -45,16 +45,20 @@ const ControlsToolbar = ({
                 </div>
 
                 {/* Owner Filter (Placeholder) */}
-                <div className="relative min-w-[120px]">
+                <div className="relative min-w-[150px]">
                     <select
                         value={filters.owner}
                         onChange={(e) => updateFilter('owner', e.target.value)}
-                        className="w-full appearance-none pl-3 pr-8 py-2 font-medium text-gray-600 bg-white border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer focus:outline-none"
+                        className="w-full appearance-none pl-3 pr-8 py-2 font-medium text-gray-600 bg-white border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     >
                         <option value="All">Owner: All</option>
-                        <option value="IT">Owner: IT</option>
-                        <option value="HR">Owner: HR</option>
-                        <option value="Legal">Owner: Legal</option>
+                        <option value="My Tasks" className="font-bold text-blue-600">★ My Responsibilities</option>
+                        <hr />
+                        <option value="Unassigned">Unassigned</option>
+                        <option value="IT">IT</option>
+                        <option value="HR">HR</option>
+                        <option value="Legal">Legal</option>
+                        <option value="Finance">Finance</option>
                     </select>
                     <ChevronDown className="w-3 h-3 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
                 </div>
@@ -73,7 +77,6 @@ const ControlsToolbar = ({
                                 const element = document.getElementById(`section-${e.target.value}`);
                                 if (element) {
                                     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                    // Reset select after jump
                                     e.target.value = "";
                                 }
                             }
@@ -87,23 +90,6 @@ const ControlsToolbar = ({
                     </select>
                     <Layers className="w-3 h-3 text-gray-500 absolute right-8 top-1/2 transform -translate-y-1/2 pointer-events-none" />
                     <ChevronDown className="w-3 h-3 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
-                </div>
-
-                {/* Group By Toggle */}
-                <div className="relative min-w-[160px]">
-                    <select
-                        value={grouping.groupBy}
-                        onChange={(e) => setGrouping(prev => ({ ...prev, groupBy: e.target.value }))}
-                        className="w-full appearance-none pl-3 pr-8 py-2 font-bold text-blue-700 bg-blue-50 border border-blue-100 rounded-lg hover:bg-blue-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-200"
-                    >
-                        <option value="section">
-                            {framework?.code?.includes('SOC2') ? 'Group: COSO Principles' : 'Group: Domain'}
-                        </option>
-                        <option value="framework">
-                            {framework?.code?.includes('SOC2') ? 'Group: Category' : 'Group: ISO Theme'}
-                        </option>
-                    </select>
-                    <ChevronDown className="w-3 h-3 text-blue-500 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
                 </div>
             </div>
         </div>

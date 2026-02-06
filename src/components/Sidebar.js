@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useEntitlements } from '../contexts/EntitlementContext';
 import {
     Home, Shield, FileText, AlertTriangle, Users,
     Settings, LogOut, ChevronDown, ChevronRight,
@@ -10,8 +11,9 @@ import {
 
 const Sidebar = () => {
     const { user, logout } = useAuth();
-    // const location = useLocation(); // Unused
-
+    const { hasFeature } = useEntitlements();
+    const { tenantId } = useParams();
+    const baseUrl = tenantId ? `/t/${tenantId}` : '';
 
     // Group State (Open/Close) - Default all open
     const [groups, setGroups] = useState({
@@ -38,54 +40,57 @@ const Sidebar = () => {
             key: 'overview',
             label: 'OVERVIEW',
             items: [
-                { label: 'Dashboard', path: '/dashboard', icon: Home },
-                { label: 'Effectiveness', path: '/effectiveness', icon: BarChart2, badge: 'NEW' },
-                { label: 'Controls', path: '/controls', icon: Shield },
-                { label: 'Monitors', path: '/monitors', icon: Monitor },
-                { label: 'Get started', path: '/get-started', icon: CheckSquare, badge: '16 of 17' }
+                { label: 'Dashboard', path: `${baseUrl}/dashboard`, icon: Home },
+                { label: 'Effectiveness', path: `${baseUrl}/effectiveness`, icon: BarChart2, badge: 'NEW' },
+                { label: 'Controls', path: `${baseUrl}/controls`, icon: Shield },
+                // Only show Monitors if scanners are enabled (Example Logic)
+                ...((hasFeature('aws_scanner') || hasFeature('github_scanner')) ?
+                    [{ label: 'Monitors', path: `${baseUrl}/monitors`, icon: Monitor }] : []),
+                { label: 'Get started', path: `${baseUrl}/get-started`, icon: CheckSquare, badge: '16 of 17' }
             ]
         },
         {
             key: 'document',
             label: 'DOCUMENT',
             items: [
-                { label: 'Policies', path: '/policies', icon: FileText },
-                { label: 'Documents', path: '/documents', icon: ShieldCheck },
-                { label: 'Evidence', path: '/evidence', icon: Upload },
-                { label: 'Risk management', path: '/risk', icon: AlertTriangle },
-                { label: 'Vendors', path: '/vendors', icon: Briefcase }
+                { label: 'Policies', path: `${baseUrl}/policies`, icon: FileText },
+                { label: 'Documents', path: `${baseUrl}/documents`, icon: ShieldCheck },
+                { label: 'Evidence', path: `${baseUrl}/evidence`, icon: Upload },
+                { label: 'Risk management', path: `${baseUrl}/risk`, icon: AlertTriangle },
+                { label: 'Vendors', path: `${baseUrl}/vendors`, icon: Briefcase }
             ]
         },
         {
             key: 'governance',
             label: 'GOVERNANCE',
             items: [
-                { label: 'Context', path: '/governance/context', icon: Layers },
-                { label: 'Risk Register', path: '/risk', icon: AlertTriangle },
+                { label: 'Risk Register', path: `${baseUrl}/risk`, icon: AlertTriangle },
             ]
         },
         {
             key: 'report',
             label: 'REPORT',
             items: [
-                { label: 'Frameworks', path: '/frameworks', icon: Layers },
-                { label: 'Trust Reports', path: '/trust-report', icon: Lock },
-                { label: 'Statement of Applicability', path: '/soa-preview', icon: FileText },
-                { label: 'Auditor Portal', path: '/auditor-portal', icon: Shield }
+                { label: 'Frameworks', path: `${baseUrl}/dashboard`, icon: Layers },
+                { label: 'Trust Reports', path: `${baseUrl}/trust-report`, icon: Lock },
+                { label: 'Statement of Applicability', path: `${baseUrl}/soa-preview`, icon: FileText },
+                { label: 'Auditor Portal', path: `${baseUrl}/auditor-portal/dashboard`, icon: Shield },
+                { label: 'Compliance Overview', path: `${baseUrl}/compliance-dashboard`, icon: ShieldCheck, badge: 'ISO 42001' }
             ]
         },
         {
             key: 'manage',
             label: 'MANAGE',
             items: [
-                { label: 'People', path: '/people', icon: Users },
-                { label: 'Groups', path: '/groups', icon: Users },
-                { label: 'Computers', path: '/computers', icon: HardDrive },
-                { label: 'Checklists', path: '/checklists', icon: CheckSquare },
-                { label: 'Access', path: '/access', icon: Wifi },
-                { label: 'Access reviews', path: '/access-reviews', icon: CheckSquare },
-                ...(user?.role === 'admin' ? [{ label: 'User Management', path: '/admin/users', icon: Users }] : []),
-                { label: 'Settings', path: '/settings', icon: Settings }
+                { label: 'People', path: `${baseUrl}/people`, icon: Users },
+                { label: 'Identity Risks', path: `${baseUrl}/people/risks`, icon: AlertTriangle, badge: '!' },
+                { label: 'Groups', path: `${baseUrl}/groups`, icon: Users },
+                { label: 'Computers', path: `${baseUrl}/computers`, icon: HardDrive },
+                { label: 'Checklists', path: `${baseUrl}/checklists`, icon: CheckSquare },
+                { label: 'Access', path: `${baseUrl}/access`, icon: Wifi },
+                { label: 'Access reviews', path: `${baseUrl}/access-reviews`, icon: CheckSquare },
+                ...(user?.role === 'admin' ? [{ label: 'User Management', path: `${baseUrl}/admin/users`, icon: Users }] : []),
+                { label: 'Settings', path: `${baseUrl}/settings`, icon: Settings }
             ]
         }
     ];

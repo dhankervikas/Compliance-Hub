@@ -83,84 +83,72 @@ const ControlDetailModal = ({ control, onClose, onUpdate }) => {
                 {/* Content */}
                 <div className="flex-1 overflow-y-auto p-6">
 
-                    {activeTab === 'overview' && (
-                        <div className="space-y-6">
-                            <div>
-                                <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-2">Description</h3>
-                                <p className="text-gray-700 leading-relaxed text-sm">{control.description}</p>
-                            </div>
+                    {/* UNIFIED IMPLEMENTATION VIEW */}
+                    <div className="space-y-8">
 
-                            {/* Remediation */}
-                            <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                                <h3 className="text-sm font-bold text-blue-900 mb-2 flex items-center gap-2">
-                                    <CheckCircle className="w-4 h-4" /> Recommended Action
-                                </h3>
-                                <p className="text-sm text-blue-800">
-                                    Ensure that a formal policy is documented and approved by management.
-                                    Upload the signed PDF to the Evidence tab.
-                                </p>
-                            </div>
+                        {/* 1. BUSINESS GOAL (Explanation) */}
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
+                            <h3 className="text-xs font-bold text-blue-800 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <Brain className="w-4 h-4" /> Business Goal
+                            </h3>
+                            <p className="text-lg font-medium text-blue-900 leading-relaxed">
+                                {aiAnalysis?.explanation || control.ai_explanation || control.description}
+                            </p>
                         </div>
-                    )}
 
-                    {activeTab === 'evidence' && (
+                        {/* 2. IMPLEMENTATION CHECKLIST (Requirements) */}
                         <div>
-                            <div className="flex justify-between items-center mb-4">
-                                <h3 className="font-bold text-gray-900">Linked Evidence</h3>
-                                <label className="cursor-pointer bg-white border border-gray-300 text-gray-700 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-gray-50 shadow-sm flex items-center gap-2">
-                                    <Upload className="w-4 h-4" /> Upload New
-                                    <input type="file" className="hidden" disabled />
-                                </label>
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-sm font-bold text-gray-900 uppercase tracking-widest flex items-center gap-2">
+                                    <CheckCircle className="w-4 h-4 text-emerald-500" /> Implementation Tasks
+                                </h3>
+                                <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                                    {aiAnalysis?.requirements?.length || 0} Steps
+                                </span>
                             </div>
 
-                            <div className="bg-gray-50 rounded-lg border border-gray-200 p-8 text-center text-gray-500 text-sm">
-                                <FileText className="w-8 h-8 mx-auto mb-2 text-gray-400" />
-                                <p>No evidence linked explicitly to this control yet.</p>
-                                <p className="text-xs mt-1">Go to <b>Evidence Library</b> to manage files.</p>
+                            <div className="space-y-3">
+                                {(aiAnalysis?.requirements || JSON.parse(control.ai_requirements_json || '[]')).map((req, i) => (
+                                    <div key={i} className="group flex items-start gap-4 p-4 rounded-xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50/30 transition-all bg-white shadow-sm">
+                                        <div className="mt-1">
+                                            <input
+                                                type="checkbox"
+                                                className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                                            />
+                                        </div>
+                                        <div className="flex-1">
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <h4 className="font-bold text-gray-900 text-base">{req.Requirement_Name || req.name}</h4>
+                                                {req.Automation_Potential && (
+                                                    <span className="text-[10px] font-bold bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded border border-purple-200">
+                                                        AUTO
+                                                    </span>
+                                                )}
+                                                <span className="text-[10px] font-bold bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded border border-gray-200 uppercase">
+                                                    {req.Source || 'MANUAL'}
+                                                </span>
+                                            </div>
+                                            <p className="text-sm text-gray-600 leading-relaxed">{req.Description || req.desc}</p>
+
+                                            {/* GUIDANCE HOVER */}
+                                            {(req.Auditor_Guidance || req.audit_guidance) && (
+                                                <div className="mt-3 text-xs bg-gray-50 p-2 rounded border border-gray-100 text-gray-500 italic pb-1">
+                                                    <strong className="text-gray-700 not-italic">Auditor Note: </strong>
+                                                    {req.Auditor_Guidance || req.audit_guidance}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
+
+                                {(!control.ai_requirements_json && !aiAnalysis) && (
+                                    <div className="text-center py-8 text-gray-400 italic">
+                                        No implementation tasks defined. Run AI Analysis to generate.
+                                    </div>
+                                )}
                             </div>
                         </div>
-                    )}
-
-                    {activeTab === 'ai' && (
-                        <div className="space-y-6">
-                            {loadingAi ? (
-                                <div className="text-center py-12">
-                                    <Brain className="w-12 h-12 text-purple-200 animate-pulse mx-auto mb-4" />
-                                    <p className="text-gray-500">Analyzing control effectiveness...</p>
-                                </div>
-                            ) : aiAnalysis ? (
-                                <div className="animate-fade-in">
-                                    <div className="flex items-center justify-between mb-6">
-                                        <h3 className="text-lg font-bold text-gray-900">AI Assessment</h3>
-                                        <span className={`text-xl font-bold ${aiAnalysis.score >= 80 ? 'text-green-600' : 'text-orange-500'}`}>
-                                            {aiAnalysis.score}/100
-                                        </span>
-                                    </div>
-
-                                    <div className="space-y-4">
-                                        <div className="bg-red-50 p-4 rounded-lg border border-red-100">
-                                            <h4 className="font-bold text-red-800 mb-2 text-sm">Detected Gaps</h4>
-                                            <ul className="list-disc pl-4 space-y-1">
-                                                {aiAnalysis.gaps.map((gap, i) => (
-                                                    <li key={i} className="text-sm text-red-700">{gap}</li>
-                                                ))}
-                                                {aiAnalysis.gaps.length === 0 && <li className="text-sm text-gray-500 italic">No gaps detected.</li>}
-                                            </ul>
-                                        </div>
-
-                                        <div className="bg-green-50 p-4 rounded-lg border border-green-100">
-                                            <h4 className="font-bold text-green-800 mb-2 text-sm">Recommendations</h4>
-                                            <ul className="list-disc pl-4 space-y-1">
-                                                {aiAnalysis.recommendations.map((rec, i) => (
-                                                    <li key={i} className="text-sm text-green-700">{rec}</li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : null}
-                        </div>
-                    )}
+                    </div>
                 </div>
 
                 {/* Footer */}

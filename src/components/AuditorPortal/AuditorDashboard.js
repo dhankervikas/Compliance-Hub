@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import config from '../../config';
 import { auditService } from '../../services/auditService';
-import { Shield, Layers, AlertTriangle, CheckCircle, Clock, ArrowRight, FileText, Lock, X, MessageSquare, BarChart2, Info, ChevronDown, Home, LogOut } from 'lucide-react';
+import api from '../../services/api';
+import AssessmentDrawer from './AssessmentDrawer';
+import { Shield, Layers, AlertTriangle, CheckCircle, Clock, ArrowRight, FileText, MessageSquare, BarChart2, Info, Home, LogOut, XCircle } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend } from 'recharts';
 import { useAuth } from '../../contexts/AuthContext';
+import { useEntitlements } from '../../contexts/EntitlementContext';
 
 const mockBanner = (
     <div className="bg-amber-100 border-b border-amber-300 text-amber-900 px-6 py-2 flex items-center justify-center gap-2 text-sm font-bold shadow-inner">
@@ -18,6 +19,8 @@ const AuditorDashboard = () => {
     const { user, logout } = useAuth(); // Get user for RBAC
     const [viewMode, setViewMode] = useState(null); // null (Selector), ISO_STRUCTURE, PROCESS, POLICIES, DOCUMENTS
     const [evidence, setEvidence] = useState([]);
+    const [assessments, setAssessments] = useState({}); // Map: control_id -> assessment
+    const [drawerContext, setDrawerContext] = useState(null); // { frameworkId, controlId, evidenceData, initialAssessment }
     const [stats, setStats] = useState({
         total: 0,
         verified: 0,
@@ -34,87 +37,141 @@ const AuditorDashboard = () => {
     const [loading, setLoading] = useState(true);
     // eslint-disable-next-line
     const [filter, setFilter] = useState('ALL');
-    const [selectedEvidence, setSelectedEvidence] = useState(null);
-    const [reviewComment, setReviewComment] = useState('');
-    const [selectedOutcome, setSelectedOutcome] = useState('VERIFIED'); // Default
 
+    // const [reviewComment, setReviewComment] = useState(''); // Moved to Drawer
+    // const [selectedOutcome, setSelectedOutcome] = useState('VERIFIED'); // Moved to Drawer
+
+    const [selectedFramework, setSelectedFramework] = useState(null); // 'ISO27001' or 'SOC2'
     const [searchQuery, setSearchQuery] = useState('');
 
     const [scopeSettings, setScopeSettings] = useState(null);
 
     // Filter Frameworks based on Permissions
+    const { isFrameworkActive, loading: loadingEntitlements } = useEntitlements();
+
+    // Filter Frameworks based on Permissions AND Entitlements
     const allowed = user?.allowed_frameworks || 'ALL';
-    const canAccess = (fw) => allowed === 'ALL' || allowed.includes(fw);
 
-    useEffect(() => {
-        // AUTO-SELECT LOGIC
-        if (allowed !== 'ALL') {
-            const frameworks = allowed.split(',');
-            if (frameworks.length === 1) {
-                const fw = frameworks[0].trim();
-                setSelectedFramework(fw);
-                // Ensure ViewMode is set so dashboard renders immediately
-                // For ISO, typically we might leave it null for sub-choice, but user likely wants to see content.
-                // Based on UI buttons: SOC2/NIST set 'ISO_STRUCTURE', ISO sets nothing?
-                // Actually, if ViewMode is null, the top bar "SWITCH" button thinks we are in dashboard mode but content is hidden?
-                // No, looking at render: if (!viewMode) return (Preference Screen).
-                // So for ISO, we must also set setViewMode('ISO_STRUCTURE') to skip the preference screen if desired.
-                // Or leave it null to let them choose "Standard vs Process". 
-                // Requirement: "bypass that screen".
-                // I will set it to 'ISO_STRUCTURE' default for all to be safe.
-                setViewMode('ISO_STRUCTURE');
-            }
+    const canAccess = (fw) => {
+        // 1. User Permission Check
+        const hasPermission = allowed === 'ALL' || allowed.includes(fw);
+        if (!hasPermission) return false;
+
+        // 2. Tenant Entitlement Check
+        if (loadingEntitlements) return false;
+
+        // Map UI Keys to Backend Codes
+        const codeMap = {
+            'ISO27001': 'ISO27001',
+            'SOC2': 'SOC2',
+            'NIST_CSF': 'NISTCSF', // Assumption, adjust if needed
+            'ISO42001': 'ISO42001'  // Assumption
+        };
+
+        // Return true if active
+        // Note: isFrameworkActive is robust (returns false if not found)
+        // Check partial match if needed for Mocks (e.g. ISO42001_MOCK)
+        if (fw === 'ISO42001') {
+            // Special handling for Mock/Dev code variance
+            return isFrameworkActive('ISO42001') || isFrameworkActive('ISO42001_MOCK');
         }
-        loadData();
-    }, [allowed]);
 
-    const loadData = async () => {
+        return isFrameworkActive(codeMap[fw] || fw);
+    };
+
+
+
+    const loadData = React.useCallback(async () => {
         try {
-            // Fetch Evidence AND Scope Settings
-            const token = localStorage.getItem('token');
-            const headers = { Authorization: `Bearer ${token}` };
+            // Fetch Evidence
+            const evidenceData = await auditService.getEvidence();
 
-            const [evidenceData, settingsRes] = await Promise.all([
-                auditService.getEvidence(),
-                axios.get(`${config.API_BASE_URL}/settings/scope`, { headers }).catch(() => ({ data: { content: {} } }))
-            ]);
+            // Fetch STRICT Scope Justifications if a framework is selected
+            let relevantExclusions = [];
+            if (selectedFramework) {
+                // strict API call: server-side filtering by 'ISO27001' or 'SOC2'
+                const scopeData = await auditService.getScopeJustifications(selectedFramework);
 
-            const scopeContent = settingsRes.data.content || {};
-            const soc2Principles = scopeContent.soc2_selected_principles || ['Security']; // Default
-            setScopeSettings(scopeContent);
+                // Helper: Convert array of objects to simple map for UI if needed, 
+                // or just store the raw list.
+                // The UI expects an object { 'Principle': 'Reason' } for the SOC 2 banner.
+                // We'll adapt the new data format (list of records) to this UI expectation.
+                relevantExclusions = scopeData.map(item => ({
+                    criteria: item.criteria_id,
+                    reason: item.justification_text
+                }));
+            }
+
+            // Store strictly filtered settings for UI Banner
+            setScopeSettings({
+                exclusions: relevantExclusions.reduce((acc, curr) => ({ ...acc, [curr.criteria]: curr.reason }), {})
+            });
 
             // SOA LOGIC: Filter out Non-Applicable items
             // 1. Standard Applicability
-            let scopes_items = evidenceData.filter(e => e.is_applicable !== false && e.status !== 'NOT_APPLICABLE');
+            // SOA LOGIC: Filter out Non-Applicable items (User Requested to KEEP them visible)
+            // 1. Standard Applicability - KEEP ALL, but ensure status is handled
+            let scopes_items = evidenceData;
 
             // 2. SOC 2 Dynamic Scoping (Filter by Principle)
-            scopes_items = scopes_items.filter(item => {
-                const id = item.control_id;
-                // Security is mandatory (CC)
-                if (id.startsWith('CC')) return true;
+            // STRICT ISOLATION: 
+            // If ISO 27001, we DO NOT filter by SOC 2 principles.
+            // If SOC 2, we filter based on what is in the "Scope Justifications" (NOT_APPLICABLE).
+            // Actually, for SOC 2, the 'ScopeSettings' logic was checking 'soc2_selected_principles'.
+            // If we are moving to strict isolation, we rely on the Evidence itself being marked.
+            // BUT, the evidence has weird IDs.
+            // Let's keep the existing ID filtering Logic for clarity but ensure it doesn't bleed.
 
-                // Optional Principles
-                if (id.startsWith('A') && !id.startsWith('A.')) return soc2Principles.includes('Availability'); // Avoid ISO 'A.' clash
-                if (id.startsWith('C') && !id.startsWith('C1')) return soc2Principles.includes('Confidentiality'); // C1 is usually Confidentiality, verify structure
-                if (id.startsWith('C') && !isNaN(parseInt(id[1])) && !id.startsWith('CC')) return soc2Principles.includes('Confidentiality');
-                if (id.startsWith('PI')) return soc2Principles.includes('Processing Integrity');
-                if (id.startsWith('P') && !isNaN(parseInt(id[1]))) return soc2Principles.includes('Privacy');
+            if (selectedFramework === 'SOC2') {
+                // For SOC 2, exclude items that map to excluded principles/criteria?
+                // Or just trust the evidence list?
+                // Current logic:
+                /*
+                scopes_items = scopes_items.filter(item => {
+                   // ... P, PI, C filtering ...
+                });
+                */
+                // Note: The previous logic relied on `soc2_selected_principles` from settings.
+                // We need to fetch that too if we want to filter evidence based on high-level selection.
+                // OR we can assume if it exists in evidence it is in scope, unless marked N/A.
+                // We will trust the evidence list for now, as that's simpler.
+            }
 
-                return true; // Keep ISO and others by default
-            });
+            // FETCH ASSESSMENTS
+            let assessmentMap = {};
+            if (selectedFramework) {
+                try {
+                    // Requires updated backend to support query params or just standard get
+                    const assessmentRes = await api.get('/auditor/assessments', { params: { framework_id: selectedFramework } });
+                    // Convert list to map: control_id -> assessment object
+                    (assessmentRes.data || []).forEach(a => {
+                        assessmentMap[a.control_id] = a;
+                    });
+                    setAssessments(assessmentMap);
+                } catch (e) {
+                    console.warn("Failed to fetch assessments", e);
+                }
+            } else {
+                setAssessments({});
+            }
 
             setEvidence(scopes_items);
 
-            // 1. STATS FOR CARDS (Existing)
+            // 1. STATS FOR CARDS (Existing) - NOW WITH OVERLAY
+            const getOverlayStatus = (item) => {
+                const assessment = assessmentMap[item.control_id];
+                return assessment ? assessment.status : item.status;
+            };
+
             const newStats = {
                 total: scopes_items.length,
-                verified: scopes_items.filter(e => ['VERIFIED', 'OBSERVATION', 'OFI'].includes(e.status)).length, // All "Blue/Green" states count as reviewed/conforming logic
-                pending: scopes_items.filter(e => e.status === 'PENDING').length,
-                major_nc: scopes_items.filter(e => e.status === 'MAJOR_NC').length,
-                minor_nc: scopes_items.filter(e => e.status === 'MINOR_NC').length,
-                observation: scopes_items.filter(e => e.status === 'OBSERVATION').length,
-                ofi: scopes_items.filter(e => e.status === 'OFI').length,
-                needs_clarification: scopes_items.filter(e => e.status === 'NEEDS_CLARIFICATION').length
+                verified: scopes_items.filter(e => ['COMPLIANT', 'VERIFIED'].includes(getOverlayStatus(e))).length,
+                pending: scopes_items.filter(e => ['PENDING'].includes(getOverlayStatus(e))).length,
+                major_nc: scopes_items.filter(e => ['MAJOR_NC', 'NON_CONFORMITY'].includes(getOverlayStatus(e))).length,
+                minor_nc: scopes_items.filter(e => ['MINOR_NC'].includes(getOverlayStatus(e))).length,
+                observation: scopes_items.filter(e => ['OBSERVATION'].includes(getOverlayStatus(e))).length,
+                ofi: scopes_items.filter(e => ['OFI'].includes(getOverlayStatus(e))).length,
+                needs_clarification: scopes_items.filter(e => ['NEEDS_CLARIFICATION'].includes(getOverlayStatus(e))).length
             };
             // setStats(newStats); // This will be updated below
 
@@ -161,37 +218,45 @@ const AuditorDashboard = () => {
             console.error("Failed to load audit data", err);
             setLoading(false);
         }
+    }, [selectedFramework]);
+
+    useEffect(() => {
+        // AUTO-SELECT LOGIC
+        if (allowed !== 'ALL') {
+            const frameworks = allowed.split(',');
+            if (frameworks.length === 1) {
+                const fw = frameworks[0].trim();
+                setSelectedFramework(fw);
+                // Ensure ViewMode is set so dashboard renders immediately
+                // For ISO, typically we might leave it null for sub-choice, but user likely wants to see content.
+                // Based on UI buttons: SOC2/NIST set 'ISO_STRUCTURE', ISO sets nothing?
+                // Actually, if ViewMode is null, the top bar "SWITCH" button thinks we are in dashboard mode but content is hidden?
+                // No, looking at render: if (!viewMode) return (Preference Screen).
+                // So for ISO, we must also set setViewMode('ISO_STRUCTURE') to skip the preference screen if desired.
+                // Or leave it null to let them choose "Standard vs Process". 
+                // Requirement: "bypass that screen".
+                // I will set it to 'ISO_STRUCTURE' default for all to be safe.
+                setViewMode('ISO_STRUCTURE');
+            }
+        }
+        loadData();
+    }, [allowed, loadData]);
+
+    const handleOpenDrawer = (item) => {
+        const existing = assessments[item.control_id];
+        setDrawerContext({
+            frameworkId: selectedFramework,
+            controlId: item.control_id,
+            evidenceData: item,
+            initialAssessment: existing
+        });
     };
 
-    const handleReviewSubmit = async () => {
-        if (!selectedEvidence) return;
-
-        // Validation - Require comment for any non-verified status
-        if (selectedOutcome !== 'VERIFIED' && !reviewComment.trim()) {
-            alert("Please provide a Finding/Note when marking an item as non-compliant or needing clarification.");
-            return;
-        }
-
-        try {
-            await auditService.reviewEvidence(selectedEvidence.id, {
-                status: selectedOutcome,
-                comment: reviewComment
-            });
-
-            // Refresh Data to reflect changes
-            await loadData();
-
-            // Close Modal & Reset Form
-            setSelectedEvidence(null);
-            setReviewComment('');
-
-        } catch (error) {
-            console.error("Failed to submit review:", error);
-            alert("Failed to submit review. Please try again.");
-        }
+    const handleSaveAssessment = () => {
+        loadData(); // Refresh all data
     };
 
-    const [selectedFramework, setSelectedFramework] = useState(null); // 'ISO27001' or 'SOC2'
+
 
     // 0. Base Filter: Framework Only (Used for Stats)
     const frameworkEvidence = React.useMemo(() => {
@@ -200,7 +265,7 @@ const AuditorDashboard = () => {
         // 1. Filter by Framework
         const filtered = evidence.filter(item => {
             if (selectedFramework === 'ISO27001') {
-                return !!item.control_id.match(/^(\d|A\.)/);
+                return !!item.control_id.match(/^(ISO27001-)?(\d|A\.)/);
             } else if (selectedFramework === 'SOC2') {
                 // Precise Match for SOC 2 (Matches CC1, A1, P1, C1, PI1)
                 // Use P\d to distinguish from NIST "PR" (Protect) which starts with P
@@ -210,6 +275,12 @@ const AuditorDashboard = () => {
             }
             return true;
         });
+
+        // DEBUG: Check results
+        console.log(`[DEBUG] Framework: ${selectedFramework}, Total Evidence: ${evidence.length}, Filtered: ${filtered.length}`);
+        if (evidence.length > 0 && filtered.length === 0) {
+            console.log("[DEBUG] First Evidence Item:", evidence[0]);
+        }
 
         // 2. Deduplicate by Control ID (Fix for 103 controls issue)
         // If multiple evidence items exist for one control, we just take the first one
@@ -229,15 +300,21 @@ const AuditorDashboard = () => {
         if (!selectedFramework) return stats; // Return initial/global stats if no framework selected
 
         const items = frameworkEvidence;
+
+        const getOverlayStatus = (item) => {
+            const assessment = assessments[item.control_id];
+            return assessment ? assessment.status : item.status;
+        };
+
         const newStats = {
             total: items.length,
-            verified: items.filter(e => ['VERIFIED', 'OBSERVATION', 'OFI'].includes(e.status)).length,
-            pending: items.filter(e => e.status === 'PENDING').length,
-            major_nc: items.filter(e => e.status === 'MAJOR_NC').length,
-            minor_nc: items.filter(e => e.status === 'MINOR_NC').length,
-            observation: items.filter(e => e.status === 'OBSERVATION').length,
-            ofi: items.filter(e => e.status === 'OFI').length,
-            needs_clarification: items.filter(e => e.status === 'NEEDS_CLARIFICATION').length,
+            verified: items.filter(e => ['COMPLIANT', 'VERIFIED'].includes(getOverlayStatus(e))).length,
+            pending: items.filter(e => ['PENDING'].includes(getOverlayStatus(e))).length,
+            major_nc: items.filter(e => ['MAJOR_NC', 'NON_CONFORMITY'].includes(getOverlayStatus(e))).length,
+            minor_nc: items.filter(e => ['MINOR_NC'].includes(getOverlayStatus(e))).length,
+            observation: items.filter(e => ['OBSERVATION'].includes(getOverlayStatus(e))).length,
+            ofi: items.filter(e => ['OFI'].includes(getOverlayStatus(e))).length,
+            needs_clarification: items.filter(e => ['NEEDS_CLARIFICATION'].includes(getOverlayStatus(e))).length,
             detailedData: [],
             conformityData: [],
             weaknessData: []
@@ -273,7 +350,7 @@ const AuditorDashboard = () => {
         newStats.detailedData = Object.values(detailedMap);
 
         return newStats;
-    }, [frameworkEvidence, selectedFramework, stats]);
+    }, [frameworkEvidence, selectedFramework, stats, assessments]);
 
 
     // 2. View Filter: Status + Search (Used for Rendering List)
@@ -376,6 +453,69 @@ const AuditorDashboard = () => {
                     sortedGroups[key] = groups[key].sort((a, b) => a.control_id.localeCompare(b.control_id, undefined, { numeric: true }));
                 });
                 return sortedGroups;
+            }
+
+            // ISO 42001 GROUPING
+            if (selectedFramework === 'ISO42001') {
+                filtered.forEach(item => {
+                    let key = 'Other';
+                    const id = item.control_id;
+
+                    const clauseMatch = id.match(/ISO42001-(\d+)/);
+                    const annexMatch = id.match(/ISO42001-A\.(\d+)/);
+
+                    if (clauseMatch && !id.includes("-A.")) {
+                        const clause = clauseMatch[1];
+                        const titles = {
+                            "4": "Clause 4: Context",
+                            "5": "Clause 5: Leadership",
+                            "6": "Clause 6: Planning",
+                            "7": "Clause 7: Support",
+                            "8": "Clause 8: Operation",
+                            "9": "Clause 9: Performance",
+                            "10": "Clause 10: Improvement"
+                        };
+                        key = titles[clause] || `Clause ${clause}`;
+                    } else if (annexMatch) {
+                        const annex = annexMatch[1];
+                        const titles = {
+                            "2": "Annex A.2: Policies",
+                            "3": "Annex A.3: Internal Org",
+                            "4": "Annex A.4: Resources",
+                            "5": "Annex A.5: Impact Assessment",
+                            "6": "Annex A.6: AI Lifecycle",
+                            "7": "Annex A.7: Data",
+                            "8": "Annex A.8: Info for Users",
+                            "9": "Annex A.9: Use of AI",
+                            "10": "Annex A.10: Third Party"
+                        };
+                        key = titles[annex] || `Annex A.${annex}`;
+                    }
+
+                    if (!groups[key]) groups[key] = [];
+                    groups[key].push(item);
+                });
+
+                // Sort Order
+                const keys = Object.keys(groups).sort((a, b) => {
+                    // Clauses first (numeric), then Annex
+                    const getScore = (k) => {
+                        if (k.startsWith("Clause 4")) return 4;
+                        if (k.startsWith("Clause 5")) return 5;
+                        if (k.startsWith("Clause 6")) return 6;
+                        if (k.startsWith("Clause 7")) return 7;
+                        if (k.startsWith("Clause 8")) return 8;
+                        if (k.startsWith("Clause 9")) return 9;
+                        if (k.startsWith("Clause 10")) return 10;
+                        if (k.startsWith("Annex A")) return 100 + parseInt(k.match(/A\.(\d+)/)?.[1] || 0);
+                        return 999;
+                    };
+                    return getScore(a) - getScore(b);
+                });
+
+                const sorted = {};
+                keys.forEach(k => sorted[k] = groups[k]);
+                return sorted;
             }
 
             // ISO GROUPING (Original Logic)
@@ -481,9 +621,15 @@ const AuditorDashboard = () => {
 
             const sortedGroups = {};
             sortedKeys.forEach(key => {
-                sortedGroups[key] = groups[key].sort((a, b) =>
-                    a.control_id.localeCompare(b.control_id, undefined, { numeric: true, sensitivity: 'base' })
-                );
+                // Sort items by SubProcess Name (Intent), then Control ID
+                sortedGroups[key] = groups[key].sort((a, b) => {
+                    const intentA = a.sub_process_name || '';
+                    const intentB = b.sub_process_name || '';
+
+                    if (intentA !== intentB) return intentA.localeCompare(intentB);
+
+                    return a.control_id.localeCompare(b.control_id, undefined, { numeric: true, sensitivity: 'base' });
+                });
             });
             return sortedGroups;
         }
@@ -588,6 +734,35 @@ const AuditorDashboard = () => {
                             </div>
 
                             <div className="mt-8 flex items-center gap-2 text-cyan-600 font-bold group-hover:translate-x-2 transition-transform">
+                                Select Framework <ArrowRight className="w-5 h-5" />
+                            </div>
+                        </button>
+                    )}
+
+                    {canAccess('ISO42001') && (
+                        <button
+                            onClick={() => { setSelectedFramework('ISO42001'); setViewMode('ISO_STRUCTURE'); }}
+                            className="bg-white p-8 rounded-2xl shadow-sm border-2 border-transparent hover:border-purple-500 hover:shadow-xl transition-all group text-left relative overflow-hidden"
+                        >
+                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <Shield className="w-32 h-32" />
+                            </div>
+                            <div className="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 text-purple-600 group-hover:scale-110 transition-transform">
+                                <Shield className="w-8 h-8" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">ISO 42001:2023</h3>
+                            <p className="text-gray-500 mb-6 font-medium">AI Management System</p>
+
+                            <div className="space-y-2">
+                                <div className="flex items-center gap-2 text-sm text-gray-600">
+                                    <CheckCircle className="w-4 h-4 text-green-500" /> Clauses 4-10
+                                </div>
+                                <div className="flex items-center gap-2 text-sm text-gray-600">
+                                    <CheckCircle className="w-4 h-4 text-green-500" /> Annex A (AI Controls)
+                                </div>
+                            </div>
+
+                            <div className="mt-8 flex items-center gap-2 text-purple-600 font-bold group-hover:translate-x-2 transition-transform">
                                 Select Framework <ArrowRight className="w-5 h-5" />
                             </div>
                         </button>
@@ -705,14 +880,12 @@ const AuditorDashboard = () => {
                         >
                             {selectedFramework === 'ISO27001' ? 'Clauses' : 'Domains'}
                         </button>
-                        {selectedFramework === 'ISO27001' && (
-                            <button
-                                onClick={() => setViewMode('PROCESS')}
-                                className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${viewMode === 'PROCESS' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
-                            >
-                                Process
-                            </button>
-                        )}
+                        <button
+                            onClick={() => setViewMode('PROCESS')}
+                            className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${viewMode === 'PROCESS' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                        >
+                            Process
+                        </button>
                     </div>
                 </div>
 
@@ -736,16 +909,16 @@ const AuditorDashboard = () => {
             {/* DASHBOARD CONTENT SWITCHER */}
             {(viewMode === 'ISO_STRUCTURE' || viewMode === 'PROCESS') && (
                 <>
-                    {/* SOC 2 EXCLUSIONS BANNER */}
-                    {scopeSettings && scopeSettings.soc2_exclusions && Object.keys(scopeSettings.soc2_exclusions).length > 0 && (
+                    {/* SCOPE EXCLUSIONS BANNER */}
+                    {scopeSettings && scopeSettings.exclusions && Object.keys(scopeSettings.exclusions).length > 0 && (
                         <div className="bg-orange-50 border-b border-orange-100 px-6 py-4">
                             <h3 className="text-sm font-bold text-orange-800 flex items-center gap-2 mb-2">
-                                <Info className="w-4 h-4" /> Scope Exclusions & Justifications
+                                <Info className="w-4 h-4" /> Scope Exclusions & Justifications ({selectedFramework})
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {Object.entries(scopeSettings.soc2_exclusions).map(([principle, reason]) => (
-                                    <div key={principle} className="bg-white p-3 rounded border border-orange-200 text-xs">
-                                        <div className="font-bold text-gray-700 mb-1">{principle}</div>
+                                {Object.entries(scopeSettings.exclusions).map(([criteria, reason]) => (
+                                    <div key={criteria} className="bg-white p-3 rounded border border-orange-200 text-xs">
+                                        <div className="font-bold text-gray-700 mb-1">{criteria}</div>
                                         <div className="text-gray-600 italic">"{reason}"</div>
                                     </div>
                                 ))}
@@ -855,49 +1028,70 @@ const AuditorDashboard = () => {
 
                                     <div className="divide-y divide-gray-100">
                                         {groupedEvidence[groupKey].map((item, index) => {
-                                            const showHeader = viewMode === 'PROCESS' && (index === 0 || item.control_id !== groupedEvidence[groupKey][index - 1].control_id);
+                                            // Show SubProcess Header if it changes (for Process View)
+                                            const showHeader = viewMode === 'PROCESS' && (
+                                                index === 0 ||
+                                                (item.sub_process_name || 'General') !== (groupedEvidence[groupKey][index - 1].sub_process_name || 'General')
+                                            );
 
                                             return (
                                                 <React.Fragment key={item.id}>
-                                                    {/* Process View Sub-Header */}
+                                                    {/* Process View Sub-Header (Intent) */}
                                                     {showHeader && (
                                                         <div className="bg-slate-50 border-y border-gray-200 px-6 py-2.5 sm:px-8 flex items-center gap-3">
-                                                            <span className="font-mono bg-indigo-100 text-indigo-700 font-bold px-2 py-0.5 rounded text-xs border border-indigo-200">{item.control_id}</span>
-                                                            <span className="font-semibold text-gray-800 text-sm">{item.control_name}</span>
+                                                            <Layers className="w-4 h-4 text-indigo-500" />
+                                                            <span className="font-semibold text-gray-800 text-sm">
+                                                                {item.sub_process_name || 'General Policy Intent'}
+                                                            </span>
                                                         </div>
                                                     )}
 
-                                                    <div className="p-4 hover:bg-blue-50/40 w-full text-left transition flex items-center justify-between group pl-6 border-l-4 border-l-transparent hover:border-l-blue-400">
+                                                    <div className={`p-4 w-full text-left transition flex items-center justify-between group pl-6 border-l-4 ${item.status === 'NOT_APPLICABLE' ? 'bg-gray-50 border-l-gray-300' : 'hover:bg-blue-50/40 border-l-transparent hover:border-l-blue-400'}`}>
                                                         <div className="flex items-center gap-4">
                                                             {getStatusIcon(item.status)}
                                                             <div>
-                                                                <h4 className="font-medium text-gray-900 text-sm flex items-center gap-2">
-                                                                    <span className="font-mono font-bold text-blue-600 bg-blue-50 px-1.5 rounded border border-blue-100 text-xs">
+                                                                <h4 className={`font-medium text-sm flex items-center gap-2 ${item.status === 'NOT_APPLICABLE' ? 'text-gray-500 line-through decoration-gray-400' : 'text-gray-900'}`}>
+                                                                    <span className={`font-mono font-bold px-1.5 rounded border text-xs ${item.status === 'NOT_APPLICABLE' ? 'bg-gray-100 text-gray-400 border-gray-200' : 'bg-blue-50 text-blue-600 border-blue-100'}`}>
                                                                         {item.control_id}
                                                                     </span>
                                                                     {item.control_name}
                                                                 </h4>
 
-                                                                <div className="flex items-center gap-2 mt-1">
-                                                                    <span className="text-xs text-gray-500">{item.resource_name}</span>
-                                                                    {item.badges && item.badges.map((badge, bIdx) => (
-                                                                        <span key={bIdx} className="text-[10px] bg-gray-100 text-gray-600 px-1 rounded border border-gray-200">
-                                                                            {badge}
-                                                                        </span>
-                                                                    ))}
-                                                                </div>
+                                                                {/* Justification Display for Not Applicable */}
+                                                                {item.status === 'NOT_APPLICABLE' ? (
+                                                                    <div className="mt-2 text-xs text-gray-500 bg-gray-100 p-2 rounded border border-gray-200 inline-block font-mono">
+                                                                        <span className="font-bold text-gray-700">NOT APPLICABLE:</span>
+                                                                        {item.justification_reason && <span className="text-gray-800 font-bold mx-1">[{item.justification_reason}]</span>}
+                                                                        <span className="italic">"{item.justification || "No justification provided."}"</span>
+                                                                    </div>
+                                                                ) : (
+                                                                    <div className="flex items-center gap-2 mt-1">
+                                                                        <span className="text-xs text-gray-500">{item.resource_name}</span>
+                                                                        {item.badges && item.badges.map((badge, bIdx) => (
+                                                                            <span key={bIdx} className="text-[10px] bg-gray-100 text-gray-600 px-1 rounded border border-gray-200">
+                                                                                {badge}
+                                                                            </span>
+                                                                        ))}
+                                                                    </div>
+                                                                )}
                                                             </div>
                                                         </div>
 
-                                                        <div className="flex items-center gap-4">
-                                                            <span className="text-xs text-gray-400 font-mono">{new Date(item.submitted_at).toLocaleDateString()}</span>
+                                                        {item.status !== 'NOT_APPLICABLE' && (
                                                             <button
-                                                                onClick={() => { setSelectedEvidence(item); setSelectedOutcome(item.status !== 'PENDING' ? item.status : 'VERIFIED'); }}
-                                                                className="px-3 py-1.5 text-xs font-medium border border-gray-300 rounded text-gray-600 hover:bg-white hover:border-blue-500 hover:text-blue-600 transition bg-white shadow-sm opacity-0 group-hover:opacity-100"
+                                                                onClick={() => handleOpenDrawer(item)}
+                                                                className="px-3 py-1.5 text-xs font-medium border border-gray-300 rounded text-gray-600 hover:bg-white hover:border-blue-500 hover:text-blue-600 transition bg-white shadow-sm opacity-100"
                                                             >
-                                                                Review
+                                                                Assess
                                                             </button>
-                                                        </div>
+
+                                                        )}
+
+                                                        {item.status === 'NOT_APPLICABLE' && (
+                                                            <div className="px-3 py-1 text-xs font-bold text-gray-400 border border-gray-200 rounded uppercase bg-gray-50">
+                                                                Excluded
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </React.Fragment>
                                             );
@@ -913,105 +1107,35 @@ const AuditorDashboard = () => {
                         </div>
                     </div>
                 </>
-            )}
-
-
-
-            {/* SECURE REVIEW MODAL (With Dropdown) */}
-            {
-                selectedEvidence && (
-                    <div
-                        className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
-                        onContextMenu={(e) => e.preventDefault()}
-                    >
-                        <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full flex flex-col max-h-[90vh] relative overflow-hidden select-none">
-
-                            {/* WATERMARK */}
-                            <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.03] z-0 rotate-[-12deg]">
-                                <span className="text-9xl font-black text-gray-900">CONFIDENTIAL</span>
-                            </div>
-
-                            <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center z-10 bg-white">
-                                <div>
-                                    <h3 className="font-bold text-lg text-gray-900 flex items-center gap-2">
-                                        <Lock className="w-5 h-5 text-red-600" />
-                                        Secure Evidence Review
-                                    </h3>
-                                    <p className="text-xs text-red-500 font-mono">DO NOT DISTRIBUTE • AUTHORIZED AUDITOR EYES ONLY</p>
-                                </div>
-                                <button onClick={() => setSelectedEvidence(null)} className="p-2 hover:bg-gray-100 rounded-full">
-                                    <X className="w-5 h-5 text-gray-500" />
-                                </button>
-                            </div>
-
-                            <div className="p-6 flex-1 overflow-y-auto z-10 relative">
-                                <div className="bg-slate-50 p-4 rounded-lg mb-6 border border-slate-200">
-                                    <h4 className="font-bold text-gray-900 mb-1 text-lg flex items-center gap-2">
-                                        <span className="bg-blue-600 text-white text-sm px-2 py-0.5 rounded">{selectedEvidence.control_id}</span>
-                                        {selectedEvidence.control_name}
-                                    </h4>
-                                    <p className="text-sm text-gray-600 mb-2">{selectedEvidence.control_description}</p>
-                                </div>
-
-                                <div className="space-y-4">
-                                    <div className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center bg-gray-50 min-h-[150px]">
-                                        <FileText className="w-12 h-12 text-gray-300 mb-2" />
-                                        <p className="font-medium text-gray-500">{selectedEvidence.resource_name}</p>
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        {/* AUDITOR OUTCOME SELECTOR */}
-                                        <div>
-                                            <label className="block text-xs font-bold text-gray-700 uppercase mb-2">Review Outcome</label>
-                                            <div className="relative">
-                                                <select
-                                                    value={selectedOutcome}
-                                                    onChange={(e) => setSelectedOutcome(e.target.value)}
-                                                    className="w-full appearance-none pl-3 pr-10 py-2 border border-gray-300 rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none bg-white"
-                                                >
-                                                    <option value="VERIFIED">Conforms</option>
-                                                    <option value="MINOR_NC">Partially Conforms (Minor NC)</option>
-                                                    <option value="MAJOR_NC">Needs Attention (Major NC)</option>
-                                                    <option value="OBSERVATION">Observation</option>
-                                                    <option value="OFI">Opportunity for Improvement (OFI)</option>
-                                                </select>
-                                                <ChevronDown className="absolute right-3 top-2.5 w-4 h-4 text-gray-500 pointer-events-none" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label className="block text-xs font-bold text-gray-700 uppercase mb-2">Findings / Notes</label>
-                                            <input
-                                                type="text"
-                                                value={reviewComment}
-                                                onChange={(e) => setReviewComment(e.target.value)}
-                                                placeholder="Optional for Conformance..."
-                                                className="w-full pl-3 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="p-6 border-t border-gray-200 bg-gray-50 rounded-b-xl flex justify-end z-10">
-                                <button onClick={handleReviewSubmit} className="bg-blue-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-blue-700 shadow-sm flex items-center justify-center gap-2">
-                                    <CheckCircle className="w-5 h-5" /> Submit Assessment
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )
+            )
             }
+
+            {/* SECURE REVIEW MODAL (With Dropdown) - REPLACED BY DRAWER */}
+
+            {/* ASSESSMENT DRAWER */}
+            <AssessmentDrawer
+                isOpen={!!drawerContext}
+                onClose={() => setDrawerContext(null)}
+                context={drawerContext}
+                onSave={handleSaveAssessment}
+            />
         </div >
     );
 };
 
 const getStatusIcon = (status) => {
     switch (status) {
+        case 'COMPLIANT':
         case 'VERIFIED': return <CheckCircle size={20} className="text-green-500" />;
-        case 'MAJOR_NC': return <AlertTriangle size={20} className="text-red-600 fill-red-100" />;
+
+        case 'MAJOR_NC':
+        case 'NON_CONFORMITY': return <AlertTriangle size={20} className="text-red-600 fill-red-100" />;
+
         case 'MINOR_NC': return <AlertTriangle size={20} className="text-red-400" />;
         case 'OBSERVATION': return <Info size={20} className="text-amber-500" />;
         case 'OFI': return <BarChart2 size={20} className="text-blue-500" />;
         case 'NEEDS_CLARIFICATION': return <MessageSquare size={20} className="text-orange-500" />;
+        case 'NOT_APPLICABLE': return <XCircle size={20} className="text-gray-400" />;
         default: return <Clock size={20} className="text-gray-300" />;
     }
 };

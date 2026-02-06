@@ -15,13 +15,14 @@ import {
 } from 'lucide-react';
 
 const PolicyDetail = () => {
-    const { id } = useParams();
+    const { id, tenantId } = useParams();
     const navigate = useNavigate();
     const [policy, setPolicy] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isEditorOpen, setIsEditorOpen] = useState(false);
 
     const [masterContent, setMasterContent] = useState(null);
+    const baseUrl = tenantId ? `/t/${tenantId}` : '';
 
     const fetchPolicy = async () => {
         try {
@@ -40,7 +41,7 @@ const PolicyDetail = () => {
 
         } catch (error) {
             console.error("Failed to fetch policy", error);
-            // navigate('/policies'); // Fallback
+            // navigate(`${baseUrl}/policies`); // Fallback
         } finally {
             setLoading(false);
         }
@@ -94,7 +95,7 @@ const PolicyDetail = () => {
             {/* Top Bar */}
             <div className="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shadow-sm">
                 <div className="flex items-center gap-4">
-                    <button onClick={() => navigate('/policies')} className="p-2 hover:bg-gray-100 rounded-full text-gray-500">
+                    <button onClick={() => navigate(`${baseUrl}/policies`)} className="p-2 hover:bg-gray-100 rounded-full text-gray-500">
                         <ArrowLeft className="w-5 h-5" />
                     </button>
                     <div>

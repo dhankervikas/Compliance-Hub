@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../services/api';
 import config from '../config';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
     Plus,
     Search,
@@ -62,6 +62,8 @@ const StandardsBadge = ({ frameworks }) => {
 
 const Policies = ({ readOnly = false }) => {
     const navigate = useNavigate();
+    const { tenantId } = useParams(); // Extract tenantId
+    const baseUrl = tenantId ? `/t/${tenantId}` : '';
     const [policies, setPolicies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -114,7 +116,7 @@ const Policies = ({ readOnly = false }) => {
             // Updated endpoint to clone master
             const res = await axios.post(`/policies/clone-master/${templateId}`);
             setShowTemplateModal(false);
-            navigate(`/policies/${res.data.id}`);
+            navigate(`${baseUrl}/policies/${res.data.id}`);
         } catch (error) {
             console.error("Failed to create from template", error);
             alert("Failed to create policy from template.");
@@ -131,7 +133,7 @@ const Policies = ({ readOnly = false }) => {
                 owner: "Compliance",
                 version: "0.1"
             });
-            navigate(`/policies/${res.data.id}`);
+            navigate(`${baseUrl}/policies/${res.data.id}`);
         } catch (error) {
             console.error("Failed to create policy", error);
         }
@@ -259,7 +261,7 @@ const Policies = ({ readOnly = false }) => {
                                 return (
                                     <tr
                                         key={policy.id}
-                                        onClick={() => navigate(`/policies/${policy.id}`)}
+                                        onClick={() => navigate(`${baseUrl}/policies/${policy.id}`)}
                                         className={`hover:bg-gray-50 transition-colors group cursor-pointer ${active ? 'bg-orange-50/30' : ''}`}
                                     >
                                         <td className="px-6 py-4">
@@ -283,7 +285,7 @@ const Policies = ({ readOnly = false }) => {
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             {policy.status !== 'Approved' ? (
-                                                <button className="px-3 py-1.5 bg-white border border-gray-200 rounded text-xs font-medium text-gray-700 hover:bg-gray-50 shadow-sm mr-2" onClick={(e) => { e.stopPropagation(); navigate(`/policies/${policy.id}`) }}>
+                                                <button className="px-3 py-1.5 bg-white border border-gray-200 rounded text-xs font-medium text-gray-700 hover:bg-gray-50 shadow-sm mr-2" onClick={(e) => { e.stopPropagation(); navigate(`${baseUrl}/policies/${policy.id}`) }}>
                                                     Start
                                                 </button>
                                             ) : (

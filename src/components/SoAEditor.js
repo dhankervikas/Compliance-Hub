@@ -16,7 +16,7 @@ const REASONS_FOR_INCLUSION = [
     "Business Requirement"
 ];
 
-const SoAEditor = () => {
+const SoAEditor = ({ controls: preLoadedControls }) => {
     const [controls, setControls] = useState([]);
     const [loading, setLoading] = useState(false);
     const [saving, setSaving] = useState(false);
@@ -25,22 +25,23 @@ const SoAEditor = () => {
     const [searchText, setSearchText] = useState("");
 
     useEffect(() => {
-        fetchControls();
-    }, []);
+        if (preLoadedControls && preLoadedControls.length > 0) {
+            setControls(preLoadedControls);
+            setLoading(false);
+        } else {
+            fetchControls();
+        }
+    }, [preLoadedControls]);
 
     const fetchControls = async () => {
+        if (preLoadedControls && preLoadedControls.length > 0) return;
+
         setLoading(true);
         try {
-            // Mock or Real API
-            // For now we assume we fetch the full list of controls for the framework
+            // Fallback to ISO 27001 default if no props
             const res = await axios.get(`${API_URL}/controls?framework_id=1`);
-            // Filter strict Annex A
             const annexControls = res.data.filter(c => c.control_id.startsWith('A.'));
-
-            // Deduplicate
             const uniqueControls = Array.from(new Map(annexControls.map(item => [item.control_id, item])).values());
-
-            // Natural Sort
             uniqueControls.sort((a, b) =>
                 a.control_id.localeCompare(b.control_id, undefined, { numeric: true, sensitivity: 'base' })
             );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Outlet, useLocation, Navigate } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, Navigate, useParams } from 'react-router-dom';
 import {
     Building, Globe, Server, Shield, Lock, Users,
     Briefcase, Activity, RefreshCw, FileText
@@ -7,6 +7,8 @@ import {
 
 const SettingsLayout = () => {
     const location = useLocation();
+    const { tenantId } = useParams();
+    const baseUrl = tenantId ? `/t/${tenantId}` : '';
 
     // The 10 Sections defined in Architecture
     const sections = [
@@ -22,9 +24,15 @@ const SettingsLayout = () => {
         { id: 'doc_preferences', label: 'Document Preferences', icon: FileText },
     ];
 
-    // Redirect to first section if at root /settings
-    if (location.pathname === '/settings' || location.pathname === '/settings/') {
-        return <Navigate to="/settings/org_profile" replace />;
+    // Redirect to first section if at root /settings (relative to tenant)
+    // Note: We check if the path ends with /settings or /settings/ to handle both absolute and relative checks if needed,
+    // but simply relying on the fact that this component renders at .../settings.
+    // However, since we are inside a tenant route, the path is /t/:id/settings.
+    const currentPath = location.pathname;
+    const settingsRoot = `${baseUrl}/settings`;
+
+    if (currentPath === settingsRoot || currentPath === `${settingsRoot}/`) {
+        return <Navigate to={`${settingsRoot}/org_profile`} replace />;
     }
 
     return (
@@ -43,7 +51,7 @@ const SettingsLayout = () => {
                     {sections.map((section) => (
                         <NavLink
                             key={section.id}
-                            to={`/settings/${section.id}`}
+                            to={`${settingsRoot}/${section.id}`}
                             className={({ isActive }) =>
                                 `flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md transition-colors ${isActive
                                     ? 'bg-blue-50 text-blue-700'

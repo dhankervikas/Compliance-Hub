@@ -94,7 +94,10 @@ const FrameworkDetail_HIPAA = () => {
         }
     };
 
-    const handleBack = () => navigate('/dashboard');
+    const handleBack = () => {
+        const baseUrl = window.location.pathname.match(/\/t\/([^/]+)/) ? `/t/${window.location.pathname.match(/\/t\/([^/]+)/)[1]}` : '';
+        navigate(`${baseUrl}/dashboard`);
+    };
 
     // FILTERING - RESTORED
     const filteredControls = controls.filter(c => {

@@ -5,6 +5,7 @@ import {
     CheckCircle, TrendingUp, AlertTriangle,
     Activity, Clock, RefreshCw
 } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 import LogDetailModal from './LogDetailModal';
 
@@ -14,6 +15,7 @@ const API_URL = config.API_BASE_URL;
 
 
 const SystemEffectiveness = () => {
+    console.log("DEBUG: Rendering SystemEffectiveness");
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
     const [lastScan, setLastScan] = useState(new Date().toLocaleTimeString());
@@ -34,9 +36,11 @@ const SystemEffectiveness = () => {
         }
     };
 
+    const location = useLocation(); // LISTENER FIX: Hook triggers re-render on route change
+
     useEffect(() => {
         fetchStats();
-    }, []);
+    }, [location.pathname]); // LISTENER FIX
 
     const handleRunScan = () => {
         // Trigger re-scan animation or API call
