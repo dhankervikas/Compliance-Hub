@@ -330,27 +330,53 @@ def seed_framework_controls(
     current_user = Depends(get_current_user)
 ):
     """
-    Force re-seed controls for a framework (specifically ISO 27001).
+    Force re-seed controls for a framework.
     WARNING: This deletes all existing controls for the framework!
+    Supports: ISO 27001, SOC 2, NIST CSF 2.0, ISO 42001.
     """
     # Resolve Tenant UUID if current_user.tenant_id is a slug
     from app.models.tenant import Tenant
     tenant = db.query(Tenant).filter(Tenant.slug == current_user.tenant_id).first()
     tenant_uuid = tenant.internal_tenant_id if tenant else current_user.tenant_id
 
-    # 1. Get Framework (Allow shared frameworks)
+    # 1. Get Framework
     framework = db.query(Framework).filter(Framework.id == framework_id).first()
     if not framework:
         raise HTTPException(status_code=404, detail="Framework not found")
 
-    # Only support ISO 27001 for now
-    # Only support ISO 27001 for now (Relaxed check)
-    if framework.code not in ["ISO27001", "ISO27001_2022"] and "ISO" not in framework.code:
-        raise HTTPException(status_code=400, detail=f"Seeding not supported for framework code: {framework.code}")
+    # 2. Determine Data Source
+    controls_data = []
+    
+    if "ISO" in framework.code and "27001" in framework.code:
+        try:
+            from app.utils.iso_data import ISO_CONTROLS_DATA
+            controls_data = ISO_CONTROLS_DATA
+        except ImportError:
+            pass
+    elif "SOC2" in framework.code:
+        try:
+            from app.utils.soc2_data import SOC2_CONTROLS_DATA
+            controls_data = SOC2_CONTROLS_DATA
+        except ImportError:
+            pass
+    elif "NIST" in framework.code:
+        try:
+            from app.utils.nist_data import NIST_CONTROLS_DATA
+            controls_data = NIST_CONTROLS_DATA
+        except ImportError:
+            pass
+    elif "ISO42001" in framework.code or "AI" in framework.code or "ISO" in framework.code: # Fallback for other ISOs if mapped
+         try:
+            from app.utils.iso42001_data import ISO42001_CONTROLS_DATA
+            controls_data = ISO42001_CONTROLS_DATA
+         except ImportError:
+            pass
+
+    if not controls_data:
+        raise HTTPException(status_code=400, detail=f"No seed data available for framework code: {framework.code}")
 
     try:
-        # 1.5. Clean References using RAW SQL (Scorched Earth Policy)
-        # This ensures we bypass any ORM complexity or missing cascades
+        # 3. Clean References using RAW SQL (Scorched Earth Policy)
         from sqlalchemy import text
 
         # Get all control IDs for this framework AND tenant
@@ -360,13 +386,11 @@ def seed_framework_controls(
         ).fetchall()
         control_ids = [row[0] for row in control_ids_result]
         
-        deleted_mappings = 0
         deleted_controls = 0
         
         if control_ids:
             # Format IDs for SQL IN clause
             ids_tuple = tuple(control_ids)
-            # Handle single item tuple syntax for SQL (1,) -> (1)
             ids_str = str(ids_tuple).replace(',)', ')') if len(control_ids) > 0 else "()"
             if len(control_ids) == 1:
                 ids_str = f"({control_ids[0]})"
@@ -383,11 +407,8 @@ def seed_framework_controls(
 
         db.commit()
         
-        # 3. Import ISO Data (Lazy import to avoid circular dep if any)
-        from app.utils.iso_data import ISO_CONTROLS_DATA
-        
         # 4. Insert New Controls
-        for data in ISO_CONTROLS_DATA:
+        for data in controls_data:
             control = Control(
                 framework_id=framework_id,
                 status=ControlStatus.NOT_STARTED,
@@ -399,14 +420,13 @@ def seed_framework_controls(
         db.commit()
         
         return {
-            "message": f"Fixed! Force Deleted {deleted_controls} controls. Inserted {len(ISO_CONTROLS_DATA)}. (Framework: {framework.code})",
+            "message": f"Fixed! Force Deleted {deleted_controls} controls. Inserted {len(controls_data)}. (Framework: {framework.code})",
             "stat_check": "OK"
         }
 
     except Exception as e:
         db.rollback()
-        print(f"SEEDING ERROR: {str(e)}") # Add Logging
-        # Return the specific error to the user
+        print(f"SEEDING ERROR: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Repair Failed: {str(e)}")
 
 @router.get("/diagnostic/stats")
