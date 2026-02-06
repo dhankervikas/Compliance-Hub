@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const useFilters = (initialFilters = {}) => {
     const [filters, setFilters] = useState({
@@ -12,7 +12,7 @@ const useFilters = (initialFilters = {}) => {
         setFilters(prev => ({ ...prev, [key]: value }));
     };
 
-    const applyFilters = (controls) => {
+    const applyFilters = useCallback((controls) => {
         return controls.filter(c => {
             // 1. Search Filter
             const searchLower = filters.search.toLowerCase();
@@ -34,11 +34,11 @@ const useFilters = (initialFilters = {}) => {
 
             return matchesSearch && matchesStatus && matchesOwner;
         });
-    };
+    }, [filters]); // Re-create only when filters change
 
     return {
         filters,
-        setFilters, // Expose full setter if needed
+        setFilters,
         updateFilter,
         applyFilters
     };

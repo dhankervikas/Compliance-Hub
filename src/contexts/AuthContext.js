@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Global 401 Interceptor
-    const interceptor = axios.interceptors.response.use(
+    const responseInterceptor = axios.interceptors.response.use(
       (response) => response,
       (error) => {
         if (error.response && error.response.status === 401) {
@@ -50,28 +50,46 @@ export const AuthProvider = ({ children }) => {
       }
     );
 
+    // Tenant Context Request Interceptor
+    // Extracts /t/:tenantId from URL and sets X-Target-Tenant-ID header
+    const requestInterceptor = axios.interceptors.request.use((config) => {
+      const match = window.location.pathname.match(/\/t\/([^/]+)/);
+      if (match && match[1]) {
+        config.headers['X-Target-Tenant-ID'] = match[1];
+        // console.log("[AuthContext] Masquerading as Tenant:", match[1]);
+      }
+      return config;
+    });
+
     loadUser();
 
-    // Cleanup interceptor on unmount/token change
+    // Cleanup interceptors
     return () => {
-      axios.interceptors.response.eject(interceptor);
+      axios.interceptors.response.eject(responseInterceptor);
+      axios.interceptors.request.eject(requestInterceptor);
     };
   }, [token]);
 
-  const login = async (username, password) => {
+  const login = async (username, password, tenantId = null) => {
     setError(null);
-    console.log("[AuthContext] Attempting login for:", username);
+    console.log(`[AuthContext] Attempting login for: ${username} (Tenant: ${tenantId || 'Global'})`);
     try {
       const formData = new URLSearchParams();
       formData.append('username', username);
       formData.append('password', password);
 
-      console.log(`[AuthContext] Sending POST to ${API_BASE_URL}/api/v1/auth/login...`);
-      const response = await axios.post(`${API_BASE_URL}/api/v1/auth/login`, formData, {
+      const reqConfig = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
-      });
+      };
+
+      if (tenantId) {
+        reqConfig.headers['X-Target-Tenant-ID'] = tenantId;
+      }
+
+      console.log(`[AuthContext] Sending POST to ${API_BASE_URL}/api/v1/auth/login...`);
+      const response = await axios.post(`${API_BASE_URL}/api/v1/auth/login`, formData, reqConfig);
 
       console.log("[AuthContext] Login response received:", response);
 
@@ -97,7 +115,12 @@ export const AuthProvider = ({ children }) => {
       return { success: true };
     } catch (err) {
       console.error("[AuthContext] Login process failed:", err);
-      let msg = err.response?.data?.detail || "Login failed";
+
+      // Prioritize server message, fall back to network/client message
+      let msg = err.response?.data?.detail
+        || err.message
+        || "Login failed (Unknown Error)";
+
       if (typeof msg === 'object') {
         try {
           msg = JSON.stringify(msg);

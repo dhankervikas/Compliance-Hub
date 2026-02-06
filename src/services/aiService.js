@@ -4,7 +4,7 @@ import config from '../config';
 const API_URL = config.API_BASE_URL + '/ai'; // Correctly append /ai path
 
 
-const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
+// const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions'; // comment it out
 
 export const AIService = {
     /**
@@ -14,51 +14,22 @@ export const AIService = {
      * @returns {Promise<string>} - The generated markdown policy.
      */
     generatePolicy: async (controlTitle, description) => {
-        const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
-
-        if (!apiKey) {
-            throw new Error("Missing API Key. Please add REACT_APP_OPENAI_API_KEY to your .env file.");
-        }
-
         try {
-            const prompt = `
-            You are a Chief Information Security Officer (CISO) writing a formal compliance policy.
-            
-            Write a detailed, professional policy section for the following control:
-            Control: "${controlTitle}"
-            Description: "${description}"
-            
-            Format: Markdown
-            Structure:
-            1. Purpose
-            2. Scope
-            3. Policy Statement (Detailed rules)
-            4. Enforcement
-            
-            Keep it concise but compliant with ISO 27001 / SOC 2 standards.
-            `;
+            const token = localStorage.getItem('token');
+            const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
 
             const response = await axios.post(
-                OPENAI_API_URL,
+                `${API_URL}/generate-policy`,
                 {
-                    model: "gpt-4o", // or gpt-3.5-turbo if preferred
-                    messages: [{ role: "user", content: prompt }],
-                    temperature: 0.7,
+                    title: controlTitle,
+                    description: description
                 },
-                {
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`,
-                        'Content-Type': 'application/json',
-                    },
-                }
+                { headers }
             );
 
-            return response.data.choices[0].message.content;
+            return response.data.content;
         } catch (error) {
             console.error("AI Generation Failed:", error);
-            if (error.response?.status === 401) {
-                throw new Error("Invalid OpenAI API Key.");
-            }
             throw new Error("Failed to generate policy. Please try again.");
         }
     },
@@ -68,7 +39,7 @@ export const AIService = {
      * Uses Backend Proxy to avoid exposing API Key.
      * @returns {Promise<Object>} - { requirements: [{ name, type, reasoning }] }
      */
-    analyzeControlRequirements: async (controlTitle, description, category = "General", controlId = null) => {
+    analyzeControlRequirements: async (controlTitle, description, category = "General", controlId = null, regenerate = false) => {
         try {
             const token = localStorage.getItem('token');
             // Allow public access or use token if available
@@ -80,7 +51,8 @@ export const AIService = {
                     title: controlTitle,
                     description: description,
                     category: category,
-                    control_id: controlId
+                    control_id: controlId,
+                    regenerate: regenerate
                 },
                 { headers }
             );

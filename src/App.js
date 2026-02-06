@@ -1,7 +1,14 @@
 import React from 'react';
+import api from './services/api';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { EntitlementProvider } from './contexts/EntitlementContext';
+import EntitlementGuard from './components/EntitlementGuard';
+import Unauthorized from './components/Unauthorized';
 import Login from './components/Login';
+import TenantLogin from './components/TenantLogin';
+import Workspaces from './components/Workspaces';
+import ComplianceDashboard from './components/ComplianceDashboard';
 import Dashboard from './components/Dashboard';
 import Sidebar from './components/Sidebar';
 import FrameworkDetail from './components/FrameworkDetail';
@@ -19,7 +26,12 @@ import SettingsLayout from './components/Settings/SettingsLayout';
 import SettingsForm from './components/Settings/SettingsForm';
 import ContextPage from './components/ContextPage';
 import UserManagement from './components/UserManagement';
+import Documents from './components/Documents';
+import AdminInbox from './components/AdminInbox';
 
+import TenantOnboardingWizard from './components/TenantOnboardingWizard';
+import PeopleDirectory from './components/PeopleDirectory';
+import IdentityRiskDashboard from './components/IdentityRiskDashboard';
 import ErrorBoundary from './components/ErrorBoundary'; // Import ErrorBoundary
 
 // --- PLACEHOLDER COMPONENT FOR NEW ROUTES ---
@@ -41,12 +53,19 @@ const PlaceholderPage = ({ title }) => (
 
 const ProtectedRoute = ({ children, allowedRoles = [] }) => {
     const { token, user, loading } = useAuth();
+    // Use location to determine where to redirect
+    const tenantMatch = window.location.pathname.match(/\/t\/([^/]+)/);
+    const tenantId = tenantMatch ? tenantMatch[1] : null;
 
     if (loading) {
         return <div className="flex h-screen items-center justify-center text-gray-500">Loading verification...</div>;
     }
 
     if (!token) {
+        // Context-Aware Redirect
+        if (tenantId) {
+            return <Navigate to={`/t/${tenantId}/login`} replace />;
+        }
         return <Navigate to="/login" replace />;
     }
 
@@ -61,9 +80,7 @@ const ProtectedRoute = ({ children, allowedRoles = [] }) => {
 
         // 2. Strict Role Check (if allowedRoles prop provided)
         if (allowedRoles.length > 0 && !allowedRoles.includes(role)) {
-            // If Admin tries to access Auditor page, maybe allow? Or redirect?
-            // For now, let's keep it simple.
-            // If strict check fails:
+            // Context aware return for unauthorized might be needed, but for now simple:
             return <Navigate to="/unauthorized" replace />;
         }
     }
@@ -72,10 +89,45 @@ const ProtectedRoute = ({ children, allowedRoles = [] }) => {
 };
 
 const ProtectedLayout = () => {
+    // Session Integrity Check
+    const { token } = useAuth();
+    // We need to extract tenantId from URL to verify against token
+    // Since this layout is inside /t/:tenantId, we can use window location or hook
+    // But useParams might not work if the Route defining params is the parent? 
+    // Actually the parent Route is `/t/:tenantId`. So useParams should work in Outlet or here.
+    // Let's force check via URL regex to be robust.const match = window.location.pathname.match(/\/t\/([^/]+)/);
+    const tenantId = window.location.pathname.match(/\/t\/([^/]+)/)?.[1];
+
+    React.useEffect(() => {
+        const checkSession = async () => {
+            if (!tenantId || !token) return;
+
+            try {
+                // Call Health Check
+                await api.get('/health/session-check', {
+                    params: { tenant_id: tenantId },
+                    headers: { 'X-Target-Tenant-ID': tenantId }
+                });
+            } catch (err) {
+                console.error("Session integrity failed:", err);
+                // If 403 or 500, force logout from this tenant context
+                // Redirect to login
+                window.location.href = `/t/${tenantId}/login`;
+            }
+        };
+
+        checkSession();
+        // Optional: Interval check? 
+        // const interval = setInterval(checkSession, 60000); return () => clearInterval(interval);
+    }, [tenantId, token]);
+
+    // CLEANUP: Removed console log after debugging
+
     return (
         <div className="flex h-screen bg-gray-50">
             <Sidebar />
             <div className="flex-1 overflow-auto ml-64">
+                {/* Standard Router Outlet - Listeners in Components handle updates */}
                 <Outlet />
             </div>
         </div>
@@ -87,102 +139,169 @@ function App() {
         <ErrorBoundary>
             <AuthProvider>
                 <Router>
-                    <Routes>
-                        <Route path="/login" element={<Login />} />
+                    <EntitlementProvider>
+                        <Routes>
+                            <Route path="/login" element={<Login />} />
 
-                        <Route path="/login" element={<Login />} />
+                            <Route path="/login" element={<Login />} />
 
-                        {/* MAIN APP LAYOUT (With Sidebar) */}
-                        <Route
-                            element={
-                                <ProtectedRoute>
-                                    <ProtectedLayout />
-                                </ProtectedRoute>
-                            }
-                        >
-                            {/* DASHBOARD */}
-                            <Route path="/dashboard" element={<Dashboard />} />
+                            {/* MAGIC LINK LOGIN */}
+                            <Route path="/t/:tenantId/login" element={<TenantLogin />} />
 
-                            {/* EFFECTIVENESS */}
-                            <Route path="/effectiveness" element={<SystemEffectiveness />} />
 
-                            {/* FRAMEWORKS */}
-                            <Route path="/frameworks/:id" element={<FrameworkDetail />} />
 
-                            {/* OVERVIEW */}
-                            <Route path="/controls" element={<PlaceholderPage title="Controls" />} />
-                            <Route path="/monitors" element={<PlaceholderPage title="Monitors" />} />
-                            <Route path="/get-started" element={<PlaceholderPage title="Get Started" />} />
+                            {/* SUPER ADMIN WORKSPACES */}
+                            <Route
+                                path="/super-admin"
+                                element={
+                                    <ProtectedRoute allowedRoles={['admin']}>
+                                        <Workspaces />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/super-admin/onboarding"
+                                element={
+                                    <ProtectedRoute allowedRoles={['admin']}>
+                                        <TenantOnboardingWizard />
+                                    </ProtectedRoute>
+                                }
+                            />
 
-                            {/* DOCUMENTS */}
-                            <Route path="/documents" element={<Evidence />} />
-                            <Route path="/policies" element={<Policies />} />
-                            <Route path="/policies/:id" element={<PolicyDetail />} />
-                            <Route path="/risk" element={<PlaceholderPage title="Risk Management" />} />
-                            <Route path="/vendors" element={<PlaceholderPage title="Vendors" />} />
+                            {/* TENANT CONTEXT LAYOUT */}
+                            <Route
+                                path="/t/:tenantId"
+                                element={
+                                    <ProtectedRoute>
+                                        <ProtectedLayout />
+                                    </ProtectedRoute>
+                                }
+                            >
+                                {/* DASHBOARD */}
+                                <Route path="dashboard" element={<Dashboard />} />
 
-                            {/* GOVERNANCE */}
-                            <Route path="/governance/context" element={<ContextPage />} />
+                                {/* COMPLIANCE DASHBOARD */}
+                                <Route path="compliance-dashboard" element={<ComplianceDashboard />} />
 
-                            {/* SETTINGS MODULE */}
-                            <Route path="/settings" element={<SettingsLayout />}>
-                                <Route path=":section" element={<SettingsForm />} />
+                                {/* EFFECTIVENESS */}
+                                <Route path="effectiveness" element={<SystemEffectiveness />} />
+
+                                {/* FRAMEWORKS */}
+                                <Route path="frameworks" element={<Navigate to="../dashboard" replace />} />
+                                <Route path="frameworks/:id" element={
+                                    <EntitlementGuard>
+                                        <FrameworkDetail />
+                                    </EntitlementGuard>
+                                } />
+
+                                {/* OVERVIEW */}
+                                <Route path="controls" element={<PlaceholderPage title="Controls" />} />
+                                <Route path="monitors" element={
+                                    <EntitlementGuard resource="feature" requiredId="aws_scanner">
+                                        <PlaceholderPage title="Monitors" />
+                                    </EntitlementGuard>
+                                } />
+                                <Route path="get-started" element={<PlaceholderPage title="Get Started" />} />
+
+
+                                {/* DOCUMENTS */}
+                                <Route path="documents" element={<Documents />} />
+                                <Route path="evidence" element={<Evidence />} />
+                                <Route path="policies" element={
+                                    <EntitlementGuard resource="feature" requiredId="policy_management">
+                                        <Policies />
+                                    </EntitlementGuard>
+                                } />
+                                <Route path="policies/:id" element={<PolicyDetail />} />
+                                <Route path="risk" element={
+                                    <EntitlementGuard resource="feature" requiredId="risk_management">
+                                        <PlaceholderPage title="Risk Management" />
+                                    </EntitlementGuard>
+                                } />
+                                <Route path="vendors" element={
+                                    <EntitlementGuard resource="feature" requiredId="vendor_management">
+                                        <PlaceholderPage title="Vendors" />
+                                    </EntitlementGuard>
+                                } />
+
+                                {/* GOVERNANCE */}
+                                <Route path="governance/context" element={<ContextPage />} />
+
+                                {/* SETTINGS MODULE */}
+                                <Route path="settings" element={<SettingsLayout />}>
+                                    <Route path=":section" element={<SettingsForm />} />
+                                </Route>
+
+                                {/* REPORTS */}
+                                <Route path="reports" element={<ReportsDashboard />} />
+                                <Route path="trust-report" element={<ReportsDashboard />} />
+
+                                {/* MANAGE */}
+                                <Route path="people" element={
+                                    <EntitlementGuard resource="feature" requiredId="people_management">
+                                        <PeopleDirectory />
+                                    </EntitlementGuard>
+                                } />
+                                <Route path="people/risks" element={<IdentityRiskDashboard />} />
+                                <Route path="groups" element={<PlaceholderPage title="Groups" />} />
+                                <Route path="computers" element={<PlaceholderPage title="Computers" />} />
+                                <Route path="checklists" element={<PlaceholderPage title="Checklists" />} />
+                                <Route path="access" element={<PlaceholderPage title="Access" />} />
+                                <Route path="access-reviews" element={<PlaceholderPage title="Access Reviews" />} />
+
+                                {/* SOA PREVIEW */}
+                                <Route path="soa-preview" element={<StatementOfApplicability />} />
+
+                                {/* AUDITOR PORTAL (Waitlist link in Sidebar) */}
+                                <Route path="auditor-portal" element={<InitiationWizard />} />
+                                <Route path="auditor-portal/dashboard" element={<AuditorDashboard />} />
+
+                                {/* ADMIN USER MANAGEMENT */}
+                                <Route path="admin/users" element={<UserManagement />} />
+
+                                {/* ADMIN INBOX */}
+                                <Route path="admin/inbox" element={<AdminInbox />} />
                             </Route>
 
-                            {/* REPORTS */}
-                            <Route path="/reports" element={<ReportsDashboard />} />
-                            <Route path="/trust-report" element={<ReportsDashboard />} />
+                            {/* PRINT LAYOUT (No Sidebar) */}
+                            <Route
+                                path="/print/policy/:id"
+                                element={
+                                    <ProtectedRoute>
+                                        <PrintLayout />
+                                    </ProtectedRoute>
+                                }
+                            />
 
-                            {/* MANAGE */}
-                            <Route path="/people" element={<PlaceholderPage title="People" />} />
-                            <Route path="/groups" element={<PlaceholderPage title="Groups" />} />
-                            <Route path="/computers" element={<PlaceholderPage title="Computers" />} />
-                            <Route path="/checklists" element={<PlaceholderPage title="Checklists" />} />
-                            <Route path="/access" element={<PlaceholderPage title="Access" />} />
-                            <Route path="/access-reviews" element={<PlaceholderPage title="Access Reviews" />} />
+                            {/* AUDITOR PORTAL (No Sidebar) */}
+                            <Route
+                                path="/auditor-portal"
+                                element={
+                                    <ProtectedRoute>
+                                        <InitiationWizard />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/auditor-portal/dashboard"
+                                element={
+                                    <ProtectedRoute>
+                                        <AuditorDashboard />
+                                    </ProtectedRoute>
+                                }
+                            />
 
-                            {/* SOA PREVIEW */}
-                            <Route path="/soa-preview" element={<StatementOfApplicability />} />
+                            {/* UNAUTHORIZED PAGE */}
+                            <Route path="/unauthorized" element={<Unauthorized />} />
 
-                            {/* ADMIN USER MANAGEMENT */}
-                            <Route path="/admin/users" element={<UserManagement />} />
-                        </Route>
-
-                        {/* PRINT LAYOUT (No Sidebar) */}
-                        <Route
-                            path="/print/policy/:id"
-                            element={
-                                <ProtectedRoute>
-                                    <PrintLayout />
-                                </ProtectedRoute>
-                            }
-                        />
-
-                        {/* AUDITOR PORTAL (No Sidebar) */}
-                        <Route
-                            path="/auditor-portal"
-                            element={
-                                <ProtectedRoute>
-                                    <InitiationWizard />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="/auditor-portal/dashboard"
-                            element={
-                                <ProtectedRoute>
-                                    <AuditorDashboard />
-                                </ProtectedRoute>
-                            }
-                        />
-
-                        {/* FALLBACK */}
-                        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                        <Route path="*" element={<Navigate to="/dashboard" replace />} />
-                    </Routes>
+                            {/* FALLBACK */}
+                            <Route path="/" element={<Navigate to="/login" replace />} />
+                            <Route path="*" element={<Navigate to="/login" replace />} />
+                        </Routes>
+                    </EntitlementProvider>
                 </Router>
             </AuthProvider>
-        </ErrorBoundary>
+        </ErrorBoundary >
     );
 }
 
