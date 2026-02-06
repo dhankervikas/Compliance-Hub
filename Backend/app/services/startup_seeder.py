@@ -97,7 +97,3 @@ def run_startup_seed():
         traceback.print_exc()
     finally:
         db.close()
-        import traceback
-        traceback.print_exc()
-    finally:
-        db.close()
