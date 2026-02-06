@@ -292,8 +292,7 @@ def _get_entitlements_logic(db: Session, tenant_slug: str):
     # Updated Logic: Check Slug, Internal ID (UUID), or PK ID
     tenant = db.query(Tenant).filter(
         (Tenant.slug == tenant_slug) | 
-        (Tenant.internal_tenant_id == tenant_slug) |
-        (Tenant.id == tenant_slug)
+        (Tenant.internal_tenant_id == tenant_slug)
     ).first()
     
     if not tenant:
