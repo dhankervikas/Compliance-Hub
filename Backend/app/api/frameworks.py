@@ -227,6 +227,40 @@ def link_tenant_frameworks(
             )
             db.add(link)
             created_links.append(fw_id)
+
+            # AUTO-SEEDING: Populate controls for new links if empty
+            # This ensures the dashboard isn't empty after setup
+            fw = db.query(Framework).filter(Framework.id == fw_id).first()
+            
+            # Check if seeding is supported (Currently ISO 27001)
+            # Use flexible check similar to seed endpoint
+            if fw and ("ISO" in fw.code or "ISO27001" in fw.code):
+                # Verify no controls exist for this tenant+framework to avoid duplicates
+                existing_controls = db.query(Control).filter(
+                    Control.framework_id == fw_id,
+                    Control.tenant_id == tenant_uuid
+                ).count()
+                
+                if existing_controls == 0:
+                    try:
+                        from app.models.control import Control, ControlStatus
+                        from app.utils.iso_data import ISO_CONTROLS_DATA
+                        
+                        for data in ISO_CONTROLS_DATA:
+                            control = Control(
+                                framework_id=fw_id,
+                                status=ControlStatus.NOT_STARTED,
+                                tenant_id=tenant_uuid,
+                                **data
+                            )
+                            db.add(control)
+                        # We don't commit here, it happens at the end of the transaction
+                        print(f"Auto-seeded {len(ISO_CONTROLS_DATA)} controls for Tenant {tenant_uuid}, FW {fw.code}")
+                    except Exception as e:
+                        print(f"Auto-seeding failed for {fw.code}: {e}")
+                        # Don't fail the request, just log it. The user can use 'Repair' if we had one, 
+                        # or we can rely on manual support.
+
             
     db.commit()
     
