@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import SecurityStatusBadge from './SecurityStatusBadge';
 import config from '../config';
 
 const Login = () => {
@@ -13,28 +12,14 @@ const Login = () => {
   const navigate = useNavigate();
   const { login, user, loading: authLoading } = useAuth();
 
-  // Redirect if already logged in or after successful login
   useEffect(() => {
-    console.log("[Login] Auth state:", { user, authLoading });
     if (user && !authLoading) {
-      const isTenantContext = window.location.pathname.includes('/t/');
-
-      // Only redirect if we're actually on /login to prevent loops
       if (window.location.pathname !== '/login') return;
 
-      if (user.username === 'admin' && !isTenantContext) {
-        console.log("[Login] Superadmin detected. Redirecting to Workspace Selection...");
+      if (user.username === 'admin') {
         navigate('/super-admin', { replace: true });
-      } else if (!isTenantContext) {
+      } else {
         const tenantId = user.tenant_id || 'default';
-        console.log("[Login] Standard user. Redirecting to Dashboard...");
-        navigate(`/t/${tenantId}/dashboard`, { replace: true });
-      }
-    }
-  }, [user, authLoading, navigate]);
-        // Only redirect standard users if they are not already in deep link
-        const tenantId = user.tenant_id || 'default';
-        console.log("[Login] Standard user. Redirecting to Dashboard...");
         navigate(`/t/${tenantId}/dashboard`, { replace: true });
       }
     }
@@ -46,30 +31,13 @@ const Login = () => {
     setLoading(true);
 
     try {
-      console.log("[Login] Submitting login...");
       const result = await login(username, password);
-      console.log("[Login] Result:", result);
 
       if (result.success) {
-        console.log("[Login] Login success. Checking role...");
-        // Check if user is default tenant admin to redirect to workspaces
-        // We need to parse the token or rely on user object if available immediately.
-        // Assuming 'user' state updates or using result.user if passed back.
-        // But context updates user asynchronously usually. 
-        // Let's decode token or just basic check.
-        // Actually, let's navigate to home, and let generic Auth redirection handle it?
-        // No, AuthContext usually just sets state.
-
         if (username === 'admin') {
-          console.log("[Login] Superadmin detected. Redirecting to Workspace Selection...");
           navigate('/super-admin');
         } else {
-          // If user object has tenant_id, use it. Otherwise, fallback or check localStorage for target redirect.
-          // For now, assuming standard users have tenant_id in their profile.
           const tenantId = result.user?.tenant_id || 'default';
-          console.log(`[Login] Standard user. Redirecting to Tenant Dashboard (${tenantId})...`);
-
-          // Check for deep link redirect
           const target = localStorage.getItem('target_tenant_redirect');
           if (target) {
             localStorage.removeItem('target_tenant_redirect');
@@ -83,7 +51,6 @@ const Login = () => {
         setLoading(false);
       }
     } catch (err) {
-      console.error("[Login] Unexpected error:", err);
       setError('An error occurred. Please try again.');
       setLoading(false);
     }
@@ -110,9 +77,7 @@ const Login = () => {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Username
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
             <input
               type="text"
               value={username}
@@ -124,9 +89,7 @@ const Login = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Password
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
             <input
               type="password"
               value={password}
@@ -146,10 +109,8 @@ const Login = () => {
           </button>
         </form>
 
-        <SecurityStatusBadge />
-
       </div>
-    </div >
+    </div>
   );
 };
 
