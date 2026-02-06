@@ -1211,534 +1211,538 @@ const FrameworkDetail = () => {
                                 </h1>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        {/* MIDDLE ROW: DASHBOARD WIDGETS */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                            {/* WIDGET 1: CONTROLS PROGRESS */}
-                            <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm flex flex-col justify-between">
-                                <div className="flex justify-between items-start mb-4">
-                                    <h3 className="text-lg font-bold text-gray-900">Controls</h3>
-                                    <button className="text-xs font-bold text-gray-500 hover:text-gray-900 border border-gray-200 px-2 py-1 rounded">View analytics</button>
+                <div className="w-full px-8 py-6">
+
+                    {/* MIDDLE ROW: DASHBOARD WIDGETS */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        {/* WIDGET 1: CONTROLS PROGRESS */}
+                        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm flex flex-col justify-between">
+                            <div className="flex justify-between items-start mb-4">
+                                <h3 className="text-lg font-bold text-gray-900">Controls</h3>
+                                <button className="text-xs font-bold text-gray-500 hover:text-gray-900 border border-gray-200 px-2 py-1 rounded">View analytics</button>
+                            </div>
+
+                            <div className="flex gap-8 items-end">
+                                {/* MAIN PROGRESS */}
+                                <div className="flex-1">
+                                    <div className="text-4xl font-extrabold text-gray-900 mb-2">{stats.percentage}%</div>
+                                    <div className="w-full bg-gray-100 rounded-full h-2 mb-2">
+                                        <div className="bg-green-500 h-2 rounded-full transition-all duration-1000" style={{ width: `${stats.percentage}%` }}></div>
+                                    </div>
+                                    <div className="text-xs font-medium text-gray-500 flex justify-between">
+                                        <span>{stats.implemented} completed</span>
+                                        <span>{stats.total} total</span>
+                                    </div>
                                 </div>
 
-                                <div className="flex gap-8 items-end">
-                                    {/* MAIN PROGRESS */}
-                                    <div className="flex-1">
-                                        <div className="text-4xl font-extrabold text-gray-900 mb-2">{stats.percentage}%</div>
-                                        <div className="w-full bg-gray-100 rounded-full h-2 mb-2">
-                                            <div className="bg-green-500 h-2 rounded-full transition-all duration-1000" style={{ width: `${stats.percentage}%` }}></div>
+                                {/* BREAKDOWN */}
+                                <div className="flex-1 space-y-3 pl-6 border-l border-gray-100">
+                                    <div>
+                                        <div className="flex justify-between text-xs font-bold text-gray-700 mb-1">
+                                            <span>Tests</span>
+                                            <span className="text-gray-400">{stats.tests?.passing || 0}/{stats.tests?.total || 0}</span>
                                         </div>
-                                        <div className="text-xs font-medium text-gray-500 flex justify-between">
-                                            <span>{stats.implemented} completed</span>
-                                            <span>{stats.total} total</span>
-                                        </div>
-                                    </div>
-
-                                    {/* BREAKDOWN */}
-                                    <div className="flex-1 space-y-3 pl-6 border-l border-gray-100">
-                                        <div>
-                                            <div className="flex justify-between text-xs font-bold text-gray-700 mb-1">
-                                                <span>Tests</span>
-                                                <span className="text-gray-400">{stats.tests?.passing || 0}/{stats.tests?.total || 0}</span>
-                                            </div>
-                                            <div className="w-full bg-gray-100 rounded-full h-1.5">
-                                                <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: `${stats.tests?.percentage || 0}%` }}></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div className="flex justify-between text-xs font-bold text-gray-700 mb-1">
-                                                <span>Documents</span>
-                                                <span className="text-gray-400">{stats.documents?.ready || 0}/{stats.documents?.total || 0}</span>
-                                            </div>
-                                            <div className="w-full bg-gray-100 rounded-full h-1.5">
-                                                <div className="bg-purple-500 h-1.5 rounded-full" style={{ width: `${stats.documents?.percentage || 0}%` }}></div>
-                                            </div>
+                                        <div className="w-full bg-gray-100 rounded-full h-1.5">
+                                            <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: `${stats.tests?.percentage || 0}%` }}></div>
                                         </div>
                                     </div>
-
+                                    <div>
+                                        <div className="flex justify-between text-xs font-bold text-gray-700 mb-1">
+                                            <span>Documents</span>
+                                            <span className="text-gray-400">{stats.documents?.ready || 0}/{stats.documents?.total || 0}</span>
+                                        </div>
+                                        <div className="w-full bg-gray-100 rounded-full h-1.5">
+                                            <div className="bg-purple-500 h-1.5 rounded-full" style={{ width: `${stats.documents?.percentage || 0}%` }}></div>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                {/* --- AI DOCUMENT REVIEWER INSIGHTS --- */}
-                                {latestAiAnalysis && (
-                                    <div className={`mt-6 p-4 rounded-lg border ${latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
-                                        <div className="flex items-center justify-between mb-2">
-                                            <h4 className={`text-sm font-bold ${latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'text-green-800' : 'text-red-800'}`}>
-                                                AI Document Analysis
-                                            </h4>
-                                            <span className="text-xs font-mono bg-white px-2 py-1 rounded border">
-                                                {latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'PASSED' : 'ACTION REQUIRED'}
-                                            </span>
-                                        </div>
-
-                                        {latestAiAnalysis.storage_status === "DELETED_CONFIDENTIAL" && (
-                                            <div className="mb-4 bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-                                                {/* HEADER */}
-                                                <div className="bg-gradient-to-r from-gray-50 to-white px-4 py-3 border-b border-gray-100 flex justify-between items-center">
-                                                    <h4 className="text-sm font-bold text-gray-800 flex items-center gap-2">
-                                                        <Shield className="w-4 h-4 text-green-600" />
-                                                        Compliance Attestation Card
-                                                    </h4>
-                                                    <span className="text-[10px] font-bold px-2 py-0.5 bg-green-100 text-green-800 rounded-full border border-green-200">
-                                                        EVIDENCE VERIFIED BY AI
-                                                    </span>
-                                                </div>
-
-                                                {/* BODY */}
-                                                <div className="p-4 space-y-4">
-                                                    {/* METADATA GRID */}
-                                                    <div className="grid grid-cols-2 gap-4">
-                                                        <div>
-                                                            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Status</span>
-                                                            <span className="text-sm font-bold text-gray-700">Verified & Purged</span>
-                                                        </div>
-                                                        <div>
-                                                            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Timestamp</span>
-                                                            <span className="text-sm font-mono text-gray-600">{new Date().toLocaleString()}</span>
-                                                        </div>
-                                                    </div>
-
-                                                    {/* SUMMARY */}
-                                                    <div>
-                                                        <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">AI Witness Statement</span>
-                                                        <p className="text-sm text-gray-700 italic border-l-2 border-green-500 pl-3 py-1 bg-green-50/50 rounded-r">
-                                                            "{latestAiAnalysis.summary || "Evidence context extracted and verified."}"
-                                                        </p>
-                                                    </div>
-
-                                                    {/* AUDIT RECEIPT */}
-                                                    <div className="bg-gray-50 rounded border border-gray-200 p-3">
-                                                        <div className="flex justify-between items-center mb-1">
-                                                            <span className="text-[10px] text-gray-500 font-bold flex items-center gap-1">
-                                                                SHA-256 AUDIT RECEIPT
-                                                                <div className="group relative inline-block">
-                                                                    <HelpCircle className="w-3 h-3 text-gray-400 cursor-help" />
-                                                                    <div className="hidden group-hover:block absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 bg-gray-900 text-white text-[10px] p-2 rounded z-50">
-                                                                        Confidential data is not stored on our servers. This hash serves as a permanent, verifiable proof of your compliance record.
-                                                                    </div>
-                                                                </div>
-                                                            </span>
-                                                            <button
-                                                                onClick={() => {
-                                                                    navigator.clipboard.writeText(latestAiAnalysis.file_hash);
-                                                                    alert("Hash copied to clipboard!");
-                                                                }}
-                                                                className="text-[10px] text-blue-600 hover:text-blue-800 font-bold flex items-center gap-1"
-                                                            >
-                                                                <Copy className="w-3 h-3" /> Copy Hash
-                                                            </button>
-                                                        </div>
-                                                        <div className="font-mono text-[10px] text-gray-500 break-all select-all">
-                                                            {latestAiAnalysis.file_hash}
-                                                        </div>
-
-                                                        <div className="mt-3 pt-3 border-t border-gray-200">
-                                                            <label className="flex items-center justify-center gap-2 cursor-pointer w-full text-xs font-bold text-gray-600 hover:text-gray-900 bg-white border border-gray-300 hover:bg-gray-50 py-2 rounded transition-colors">
-                                                                <Upload className="w-3 h-3" /> Verify Local File Match
-                                                                <input
-                                                                    type="file"
-                                                                    className="hidden"
-                                                                    onChange={(e) => verifyLocalFile(e, latestAiAnalysis.file_hash)}
-                                                                />
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )}
-                                        <p className="text-xs text-gray-700 mb-2 italic">"{latestAiAnalysis.summary}"</p>
-
-                                        {/* PII WARNING */}
-                                        {latestAiAnalysis.pii_status && latestAiAnalysis.pii_status.action !== "NONE" && (
-                                            <div className="mb-3 bg-red-100 border border-red-300 p-2 rounded flex items-center gap-2">
-                                                <span className="text-xl">🛡️</span>
-                                                <div>
-                                                    <p className="text-xs font-bold text-red-800">PRIVACY WARNING: {latestAiAnalysis.pii_status.action} REQUIRED</p>
-                                                    <p className="text-xs text-red-700">{latestAiAnalysis.pii_status.reasoning}</p>
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        {(!latestAiAnalysis.date_check_passed || latestAiAnalysis.final_verdict === 'FAIL') && (
-                                            <div className="mt-2">
-                                                <p className="text-xs font-semibold text-red-700">Gaps Identified:</p>
-                                                <ul className="list-disc list-inside text-xs text-red-600 mt-1 space-y-1">
-                                                    {!latestAiAnalysis.date_check_passed && <li>Document Date is older than 12 months or missing.</li>}
-                                                    {latestAiAnalysis.gaps_found && latestAiAnalysis.gaps_found.map((gap, i) => (
-                                                        <li key={i}>{gap}</li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        )}
-
-                                        {latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed && (
-                                            <div className="mt-3 text-xs text-green-700 flex items-center">
-                                                <span className="mr-2">✅</span>
-                                                <span>Forwarded to Admin for Final Signature.</span>
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
 
                             </div>
 
-                            {/* --- VERSION HISTORY --- AUDIT TIMELINE (MOCKED VISUAL) */}
-                            <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm flex flex-col">
-                                <div className="flex justify-between items-start mb-6">
-                                    <div className="flex items-center gap-3">
-                                        <h3 className="text-lg font-bold text-gray-900">Audit timeline</h3>
-                                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-orange-50 text-orange-700 border border-orange-100">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></div>
-                                            In audit
+                            {/* --- AI DOCUMENT REVIEWER INSIGHTS --- */}
+                            {latestAiAnalysis && (
+                                <div className={`mt-6 p-4 rounded-lg border ${latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
+                                    <div className="flex items-center justify-between mb-2">
+                                        <h4 className={`text-sm font-bold ${latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'text-green-800' : 'text-red-800'}`}>
+                                            AI Document Analysis
+                                        </h4>
+                                        <span className="text-xs font-mono bg-white px-2 py-1 rounded border">
+                                            {latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'PASSED' : 'ACTION REQUIRED'}
                                         </span>
                                     </div>
-                                    <div className="flex gap-2">
-                                        <button className="text-xs font-bold text-gray-600 border border-gray-200 px-3 py-1.5 rounded hover:bg-gray-50">View as auditor</button>
-                                    </div>
-                                </div>
 
-                                <p className="text-xs font-medium text-gray-500 mb-4">Now until July 26 <AlertCircle className="w-3 h-3 inline ml-1 text-gray-400" /></p>
-
-                                {/* TIMELINE VISUAL */}
-                                <div className="relative mt-2">
-                                    <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -z-10 transform -translate-y-1/2"></div>
-                                    <div className="absolute top-1/2 left-0 w-1/3 h-0.5 bg-orange-500 -z-10 transform -translate-y-1/2"></div>
-
-                                    <div className="flex justify-between items-center relative">
-                                        {['Now', 'May', 'Jul', 'Sep', 'Nov', 'Jan'].map((month, i) => (
-                                            <div key={month} className="flex flex-col items-center gap-2">
-                                                <div className={`w-3 h-3 rounded-full border-2 ${i < 3 ? 'bg-orange-500 border-orange-500' : 'bg-white border-gray-300'}`}></div>
-                                                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">{month}</span>
+                                    {latestAiAnalysis.storage_status === "DELETED_CONFIDENTIAL" && (
+                                        <div className="mb-4 bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                                            {/* HEADER */}
+                                            <div className="bg-gradient-to-r from-gray-50 to-white px-4 py-3 border-b border-gray-100 flex justify-between items-center">
+                                                <h4 className="text-sm font-bold text-gray-800 flex items-center gap-2">
+                                                    <Shield className="w-4 h-4 text-green-600" />
+                                                    Compliance Attestation Card
+                                                </h4>
+                                                <span className="text-[10px] font-bold px-2 py-0.5 bg-green-100 text-green-800 rounded-full border border-green-200">
+                                                    EVIDENCE VERIFIED BY AI
+                                                </span>
                                             </div>
-                                        ))}
-                                    </div>
+
+                                            {/* BODY */}
+                                            <div className="p-4 space-y-4">
+                                                {/* METADATA GRID */}
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div>
+                                                        <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Status</span>
+                                                        <span className="text-sm font-bold text-gray-700">Verified & Purged</span>
+                                                    </div>
+                                                    <div>
+                                                        <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Timestamp</span>
+                                                        <span className="text-sm font-mono text-gray-600">{new Date().toLocaleString()}</span>
+                                                    </div>
+                                                </div>
+
+                                                {/* SUMMARY */}
+                                                <div>
+                                                    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">AI Witness Statement</span>
+                                                    <p className="text-sm text-gray-700 italic border-l-2 border-green-500 pl-3 py-1 bg-green-50/50 rounded-r">
+                                                        "{latestAiAnalysis.summary || "Evidence context extracted and verified."}"
+                                                    </p>
+                                                </div>
+
+                                                {/* AUDIT RECEIPT */}
+                                                <div className="bg-gray-50 rounded border border-gray-200 p-3">
+                                                    <div className="flex justify-between items-center mb-1">
+                                                        <span className="text-[10px] text-gray-500 font-bold flex items-center gap-1">
+                                                            SHA-256 AUDIT RECEIPT
+                                                            <div className="group relative inline-block">
+                                                                <HelpCircle className="w-3 h-3 text-gray-400 cursor-help" />
+                                                                <div className="hidden group-hover:block absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 bg-gray-900 text-white text-[10px] p-2 rounded z-50">
+                                                                    Confidential data is not stored on our servers. This hash serves as a permanent, verifiable proof of your compliance record.
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                        <button
+                                                            onClick={() => {
+                                                                navigator.clipboard.writeText(latestAiAnalysis.file_hash);
+                                                                alert("Hash copied to clipboard!");
+                                                            }}
+                                                            className="text-[10px] text-blue-600 hover:text-blue-800 font-bold flex items-center gap-1"
+                                                        >
+                                                            <Copy className="w-3 h-3" /> Copy Hash
+                                                        </button>
+                                                    </div>
+                                                    <div className="font-mono text-[10px] text-gray-500 break-all select-all">
+                                                        {latestAiAnalysis.file_hash}
+                                                    </div>
+
+                                                    <div className="mt-3 pt-3 border-t border-gray-200">
+                                                        <label className="flex items-center justify-center gap-2 cursor-pointer w-full text-xs font-bold text-gray-600 hover:text-gray-900 bg-white border border-gray-300 hover:bg-gray-50 py-2 rounded transition-colors">
+                                                            <Upload className="w-3 h-3" /> Verify Local File Match
+                                                            <input
+                                                                type="file"
+                                                                className="hidden"
+                                                                onChange={(e) => verifyLocalFile(e, latestAiAnalysis.file_hash)}
+                                                            />
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                    <p className="text-xs text-gray-700 mb-2 italic">"{latestAiAnalysis.summary}"</p>
+
+                                    {/* PII WARNING */}
+                                    {latestAiAnalysis.pii_status && latestAiAnalysis.pii_status.action !== "NONE" && (
+                                        <div className="mb-3 bg-red-100 border border-red-300 p-2 rounded flex items-center gap-2">
+                                            <span className="text-xl">🛡️</span>
+                                            <div>
+                                                <p className="text-xs font-bold text-red-800">PRIVACY WARNING: {latestAiAnalysis.pii_status.action} REQUIRED</p>
+                                                <p className="text-xs text-red-700">{latestAiAnalysis.pii_status.reasoning}</p>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {(!latestAiAnalysis.date_check_passed || latestAiAnalysis.final_verdict === 'FAIL') && (
+                                        <div className="mt-2">
+                                            <p className="text-xs font-semibold text-red-700">Gaps Identified:</p>
+                                            <ul className="list-disc list-inside text-xs text-red-600 mt-1 space-y-1">
+                                                {!latestAiAnalysis.date_check_passed && <li>Document Date is older than 12 months or missing.</li>}
+                                                {latestAiAnalysis.gaps_found && latestAiAnalysis.gaps_found.map((gap, i) => (
+                                                    <li key={i}>{gap}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+
+                                    {latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed && (
+                                        <div className="mt-3 text-xs text-green-700 flex items-center">
+                                            <span className="mr-2">✅</span>
+                                            <span>Forwarded to Admin for Final Signature.</span>
+                                        </div>
+                                    )}
                                 </div>
+                            )}
 
+                        </div>
 
-
+                        {/* --- VERSION HISTORY --- AUDIT TIMELINE (MOCKED VISUAL) */}
+                        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm flex flex-col">
+                            <div className="flex justify-between items-start mb-6">
+                                <div className="flex items-center gap-3">
+                                    <h3 className="text-lg font-bold text-gray-900">Audit timeline</h3>
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-orange-50 text-orange-700 border border-orange-100">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></div>
+                                        In audit
+                                    </span>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button className="text-xs font-bold text-gray-600 border border-gray-200 px-3 py-1.5 rounded hover:bg-gray-50">View as auditor</button>
+                                </div>
                             </div>
+
+                            <p className="text-xs font-medium text-gray-500 mb-4">Now until July 26 <AlertCircle className="w-3 h-3 inline ml-1 text-gray-400" /></p>
+
+                            {/* TIMELINE VISUAL */}
+                            <div className="relative mt-2">
+                                <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -z-10 transform -translate-y-1/2"></div>
+                                <div className="absolute top-1/2 left-0 w-1/3 h-0.5 bg-orange-500 -z-10 transform -translate-y-1/2"></div>
+
+                                <div className="flex justify-between items-center relative">
+                                    {['Now', 'May', 'Jul', 'Sep', 'Nov', 'Jan'].map((month, i) => (
+                                        <div key={month} className="flex flex-col items-center gap-2">
+                                            <div className={`w-3 h-3 rounded-full border-2 ${i < 3 ? 'bg-orange-500 border-orange-500' : 'bg-white border-gray-300'}`}></div>
+                                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">{month}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+
+
                         </div>
                     </div>
-                    <div className="w-full px-8 py-8 space-y-8">
-                        {/* CONTROLS TOOLBAR (Actions Row) - Moved here for better layout */}
-                        <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
-                            <FrameworkSwitcher
-                                viewMode={viewMode}
-                                setViewMode={setViewMode}
-                                frameworkCode={framework?.code}
+                </div>
+                <div className="w-full px-8 py-8 space-y-8">
+                    {/* CONTROLS TOOLBAR (Actions Row) - Moved here for better layout */}
+                    <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4 transition-all">
+                        <FrameworkSwitcher
+                            viewMode={viewMode}
+                            setViewMode={setViewMode}
+                            frameworkCode={framework?.code}
+                        />
+                        <div className="flex-1 w-full md:w-auto flex justify-end">
+                            <ControlsToolbar
+                                filters={filters}
+                                updateFilter={updateFilter}
+                                availableGroups={socControls ? Object.keys(socControls).sort() : []}
+                                framework={framework}
                             />
-                            <div className="flex-1 w-full md:w-auto flex justify-end">
-                                <ControlsToolbar
-                                    filters={filters}
-                                    updateFilter={updateFilter}
-                                    availableGroups={socControls ? Object.keys(socControls).sort() : []}
-                                    framework={framework}
-                                />
-                            </div>
                         </div>
-                        {/* CONTENT AREA starts here */}
+                    </div>
+                    {/* CONTENT AREA starts here */}
 
-                        {/* CONTENT AREA */}
-                        <div className="space-y-10">
-                            {/* GROUPED SPECIAL VIEW (SOC 2 & ISO) */}
-                            {useGroupedView ? (
-                                viewMode === 'intent' ? (
-                                    <UserProcessView framework={framework} onSelectControl={setSelectedControl} filters={filters} />
-                                ) : (
-                                    Object.keys(socControls).sort((a, b) => {
-                                        // NIST Sorting Logic
-                                        if (isNIST) {
-                                            const NIST_ORDER = ["GOVERN", "IDENTIFY", "PROTECT", "DETECT", "RESPOND", "RECOVER"];
-                                            const idxA = NIST_ORDER.indexOf(a);
-                                            const idxB = NIST_ORDER.indexOf(b);
-                                            if (idxA !== -1 && idxB !== -1) return idxA - idxB;
-                                            if (idxA !== -1) return -1;
-                                            if (idxB !== -1) return 1;
-                                        }
-
-                                        // ISO 42001 Sorting Logic
-                                        if (isISO42001) {
-                                            const getScore = (k) => {
-                                                if (k.startsWith("Clause 4")) return 4;
-                                                if (k.startsWith("Clause 5")) return 5;
-                                                if (k.startsWith("Clause 6")) return 6;
-                                                if (k.startsWith("Clause 7")) return 7;
-                                                if (k.startsWith("Clause 8")) return 8;
-                                                if (k.startsWith("Clause 9")) return 9;
-                                                if (k.startsWith("Clause 10")) return 10;
-                                                if (k.startsWith("Annex A")) return 100 + parseInt(k.match(/A\.(\d+)/)?.[1] || 0);
-                                                return 999;
-                                            };
-                                            return getScore(a) - getScore(b);
-                                        }
-
-                                        // SOC 2 COSO Principles Sorting (Numerical)
-                                        if (isSOC2 && viewMode === 'intent') {
-                                            const getCosoScore = (k) => {
-                                                // Extract Principle Number "Principle 10: ..."
-                                                if (k.startsWith("Principle")) {
-                                                    const match = k.match(/Principle (\d+)/);
-                                                    return match ? parseInt(match[1]) : 0;
-                                                }
-                                                if (k.startsWith("COSO 1")) return 100;
-                                                if (k.startsWith("COSO 2")) return 200;
-                                                if (k.startsWith("COSO 3")) return 300;
-                                                if (k.startsWith("COSO 4")) return 400;
-                                                if (k.startsWith("COSO 5")) return 500;
-
-                                                if (k.startsWith("TSC: Logical")) return 1000;
-                                                if (k.startsWith("TSC: System")) return 1001;
-                                                if (k.startsWith("TSC: Change")) return 1002;
-                                                if (k.startsWith("TSC: Risk")) return 1003;
-                                                if (k.startsWith("TSC: Avail")) return 1004;
-                                                if (k.startsWith("TSC: Confid")) return 1005;
-                                                if (k.startsWith("TSC: Process")) return 1006;
-                                                if (k.startsWith("TSC: Privacy")) return 1007;
-                                                return 9999;
-                                            };
-                                            return getCosoScore(a) - getCosoScore(b);
-                                        }
-
-                                        // Section Sorting Logic
-                                        if (viewMode === 'standard' && !isISO27001) { // Added !isISO27001 just in case, but 'framework' is not used for ISO generally in this context
-                                            const ISO_THEMES = ["Organizational", "People", "Physical", "Technological"];
-                                            return ISO_THEMES.indexOf(a) - ISO_THEMES.indexOf(b);
-                                        }
-
-                                        // ISO 27001 Section (Clause/Annex) Sorting
-                                        if (isISO27001 && viewMode === 'standard') {
-                                            const getScore = (k) => {
-                                                if (k.startsWith("Clause 4")) return 4;
-                                                if (k.startsWith("Clause 5")) return 5;
-                                                if (k.startsWith("Clause 6")) return 6;
-                                                if (k.startsWith("Clause 7")) return 7;
-                                                if (k.startsWith("Clause 8")) return 8;
-                                                if (k.startsWith("Clause 9")) return 9;
-                                                if (k.startsWith("Clause 10")) return 10;
-                                                if (k.startsWith("Annex A")) return 100 + parseInt(k.match(/A\.(\d+)/)?.[1] || 0);
-                                                return 999;
-                                            };
-                                            return getScore(a) - getScore(b);
-                                        }
-
-                                        // Default ISO 27001 Custom Sort Order for Domains
-                                        const ISO_ORDER = [
-                                            "Governance",
-                                            "HR Security",
-                                            "Asset Management",
-                                            "Access Control (IAM)",
-                                            "Physical Security",
-                                            "Operations",
-                                            "Configuration Management",
-                                            "Cryptography",
-                                            "Logging & Monitoring",
-                                            "Clock Synchronization",
-                                            "Vulnerability Management",
-                                            "Capacity Management",
-                                            "Backup Management",
-                                            "Network Security",
-                                            "SDLC (Development)",
-                                            "Supplier Mgmt",
-                                            "Incident & Resilience",
-                                            "Threat Intel",
-                                            "Legal & Compliance",
-                                            "Risk Management",
-                                            "Performance Evaluation",
-                                            "Improvement"
-                                        ];
-
-                                        const idxA = ISO_ORDER.indexOf(a);
-                                        const idxB = ISO_ORDER.indexOf(b);
-
+                    {/* CONTENT AREA */}
+                    <div className="space-y-10">
+                        {/* GROUPED SPECIAL VIEW (SOC 2 & ISO) */}
+                        {useGroupedView ? (
+                            viewMode === 'intent' ? (
+                                <UserProcessView framework={framework} onSelectControl={setSelectedControl} filters={filters} />
+                            ) : (
+                                Object.keys(socControls).sort((a, b) => {
+                                    // NIST Sorting Logic
+                                    if (isNIST) {
+                                        const NIST_ORDER = ["GOVERN", "IDENTIFY", "PROTECT", "DETECT", "RESPOND", "RECOVER"];
+                                        const idxA = NIST_ORDER.indexOf(a);
+                                        const idxB = NIST_ORDER.indexOf(b);
                                         if (idxA !== -1 && idxB !== -1) return idxA - idxB;
                                         if (idxA !== -1) return -1;
                                         if (idxB !== -1) return 1;
-                                        return a.localeCompare(b);
-                                    }).map(category => {
-                                        // Create copy with slice() before sorting to avoid mutation errors
-                                        const controls = (socControls[category] || []).slice().sort((a, b) => {
-                                            const idA = (a.control_id || "").trim();
-                                            const idB = (b.control_id || "").trim();
+                                    }
 
-                                            // Weight: Clauses (4-10) = 1, Annex A = 2
-                                            const typeA = idA.startsWith("A") || idA.startsWith("a") ? 2 : 1;
-                                            const typeB = idB.startsWith("A") || idB.startsWith("a") ? 2 : 1;
+                                    // ISO 42001 Sorting Logic
+                                    if (isISO42001) {
+                                        const getScore = (k) => {
+                                            if (k.startsWith("Clause 4")) return 4;
+                                            if (k.startsWith("Clause 5")) return 5;
+                                            if (k.startsWith("Clause 6")) return 6;
+                                            if (k.startsWith("Clause 7")) return 7;
+                                            if (k.startsWith("Clause 8")) return 8;
+                                            if (k.startsWith("Clause 9")) return 9;
+                                            if (k.startsWith("Clause 10")) return 10;
+                                            if (k.startsWith("Annex A")) return 100 + parseInt(k.match(/A\.(\d+)/)?.[1] || 0);
+                                            return 999;
+                                        };
+                                        return getScore(a) - getScore(b);
+                                    }
 
-                                            if (typeA !== typeB) return typeA - typeB;
-
-                                            // Both are same type. Semantic sort.
-                                            // Strip non-numeric prefix
-                                            const partsA = idA.replace(/^[A-Za-z]+\./, '').split('.').map(x => parseInt(x, 10));
-                                            const partsB = idB.replace(/^[A-Za-z]+\./, '').split('.').map(x => parseInt(x, 10));
-
-                                            const len = Math.max(partsA.length, partsB.length);
-                                            for (let i = 0; i < len; i++) {
-                                                const valA = partsA[i] !== undefined ? partsA[i] : 0;
-                                                const valB = partsB[i] !== undefined ? partsB[i] : 0;
-                                                if (valA !== valB) return valA - valB;
+                                    // SOC 2 COSO Principles Sorting (Numerical)
+                                    if (isSOC2 && viewMode === 'intent') {
+                                        const getCosoScore = (k) => {
+                                            // Extract Principle Number "Principle 10: ..."
+                                            if (k.startsWith("Principle")) {
+                                                const match = k.match(/Principle (\d+)/);
+                                                return match ? parseInt(match[1]) : 0;
                                             }
-                                            return 0;
-                                        });
-                                        if (controls.length === 0) return null;
-                                        // eslint-disable-next-line no-unused-vars
-                                        const cosoText = COSO_DESCRIPTIONS[category] || COSO_DESCRIPTIONS["DEFAULT"];
+                                            if (k.startsWith("COSO 1")) return 100;
+                                            if (k.startsWith("COSO 2")) return 200;
+                                            if (k.startsWith("COSO 3")) return 300;
+                                            if (k.startsWith("COSO 4")) return 400;
+                                            if (k.startsWith("COSO 5")) return 500;
 
-                                        return (
-                                            <div key={`${category}-${viewMode}`} id={`section-${category}`} className="mb-8 scroll-mt-32">
-                                                <div className="mb-4">
-                                                    <h2 className="text-xl font-bold text-gray-900">{category}</h2>
-                                                </div>
-                                                <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-                                                    <table className="w-full">
-                                                        <thead>
-                                                            <tr className="bg-gray-50 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider border-b">
-                                                                <th className="px-6 py-3 w-12">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                                                    />
-                                                                </th>
-                                                                <th className="px-6 py-3">Control</th>
-                                                                <th className="px-6 py-3 w-48">Evidence Status</th>
-                                                                <th className="px-6 py-3 w-32">Standard Control</th>
-                                                                <th className="px-6 py-3 w-24">Owner</th>
-                                                                <th className="px-6 py-3 w-32">Category</th>
-                                                                <th className="px-6 py-3 w-20"></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody className="divide-y divide-gray-200">
-                                                            {controls.map(control => {
-                                                                const stats = getEvidenceStats(control.control_id); // Changed from c to control
-                                                                // eslint-disable-next-line no-unused-vars
-                                                                const evidenceStatus = stats.uploaded > 0
-                                                                    ? (stats.uploaded >= stats.total ? "Met" : "Partial")
-                                                                    : "Not Met";
+                                            if (k.startsWith("TSC: Logical")) return 1000;
+                                            if (k.startsWith("TSC: System")) return 1001;
+                                            if (k.startsWith("TSC: Change")) return 1002;
+                                            if (k.startsWith("TSC: Risk")) return 1003;
+                                            if (k.startsWith("TSC: Avail")) return 1004;
+                                            if (k.startsWith("TSC: Confid")) return 1005;
+                                            if (k.startsWith("TSC: Process")) return 1006;
+                                            if (k.startsWith("TSC: Privacy")) return 1007;
+                                            return 9999;
+                                        };
+                                        return getCosoScore(a) - getCosoScore(b);
+                                    }
 
-                                                                return (
-                                                                    <React.Fragment key={control.id}>
-                                                                        <tr
-                                                                            className={`hover:bg-gray-50 transition-colors cursor-pointer ${expandedControlId === control.id ? 'bg-blue-50/50' : ''}`}
-                                                                            onClick={() => setSelectedControl(control)}
-                                                                        >
-                                                                            <td className="px-6 py-4">
-                                                                                <input
-                                                                                    type="checkbox"
-                                                                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                                                                />
-                                                                            </td>
-                                                                            <td className="px-6 py-4">
-                                                                                <div className="flex flex-col">
-                                                                                    <span className="text-sm font-bold text-gray-900 leading-snug mb-1 line-clamp-3" title={control.description}>
-                                                                                        {control.description}
-                                                                                    </span>
-                                                                                    <span className="text-xs text-gray-500 font-medium">
-                                                                                        {control.title}
-                                                                                    </span>
-                                                                                </div>
-                                                                                {viewMode === 'intent' && (
-                                                                                    <div className="inline-flex items-center gap-1 ml-2 align-middle bg-gradient-to-r from-indigo-50 to-purple-50 px-2 py-0.5 rounded border border-indigo-100 group relative">
-                                                                                        <span className="text-[10px] font-bold text-indigo-600 tracking-tight">IMPACT:</span>
-                                                                                        <div className="flex -space-x-1">
-                                                                                            <div className="w-4 h-4 rounded-full bg-blue-100 border border-white flex items-center justify-center text-[8px] font-bold text-blue-700" title="ISO 27001">I</div>
-                                                                                            <div className="w-4 h-4 rounded-full bg-green-100 border border-white flex items-center justify-center text-[8px] font-bold text-green-700" title="SOC 2 Type II">S</div>
-                                                                                            <div className="w-4 h-4 rounded-full bg-purple-100 border border-white flex items-center justify-center text-[8px] font-bold text-purple-700" title="HIPAA">H</div>
-                                                                                            <div className="w-4 h-4 rounded-full bg-gray-100 border border-white flex items-center justify-center text-[8px] text-gray-600">+2</div>
-                                                                                        </div>
+                                    // Section Sorting Logic
+                                    if (viewMode === 'standard' && !isISO27001) { // Added !isISO27001 just in case, but 'framework' is not used for ISO generally in this context
+                                        const ISO_THEMES = ["Organizational", "People", "Physical", "Technological"];
+                                        return ISO_THEMES.indexOf(a) - ISO_THEMES.indexOf(b);
+                                    }
 
-                                                                                        {/* TOOLTIP */}
-                                                                                        <div className="hidden group-hover:block absolute bottom-full left-0 mb-2 w-48 bg-gray-900 text-white text-xs rounded p-2 shadow-xl z-50 pointer-events-none">
-                                                                                            <p className="font-bold mb-1">Universal Intent Multiplier</p>
-                                                                                            <p className="text-gray-300">Completing this task satisfies requirements in 5 active standards.</p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                )}
-                                                                            </td>
-                                                                            <td className="px-6 py-4">
-                                                                                <div className="flex items-center gap-2">
-                                                                                    {/* Audit Status Logic */}
-                                                                                    <div className="flex gap-1">
-                                                                                        {Array.from({ length: 4 }).map((_, i) => ( // Mock bars
-                                                                                            <div
-                                                                                                key={i}
-                                                                                                className={`h-3 w-1.5 rounded-full ${i < (stats.uploaded > 0 ? (stats.uploaded / stats.total) * 4 : 0) ? 'bg-green-500' : 'bg-gray-200'}`}
-                                                                                            />
-                                                                                        ))}
-                                                                                    </div>
-                                                                                    <span className="text-xs text-gray-500">
-                                                                                        {stats.uploaded}/{stats.total}
-                                                                                    </span>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td className="px-6 py-4">
-                                                                                <div className="flex items-center">
-                                                                                    <span className="text-sm text-gray-500 font-mono">
-                                                                                        {formatControlId(control.control_id)}
-                                                                                    </span>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td className="px-6 py-4">
-                                                                                <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                                                                                    System
-                                                                                </span>
-                                                                            </td>
-                                                                            <td className="px-6 py-4">
-                                                                                <div className="flex flex-col items-start gap-2">
-                                                                                    {/* 1. Work Type (Small Outline Badge) */}
-                                                                                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium border bg-white ${control.classification === 'AUTO' ? 'text-purple-700 border-purple-200' :
-                                                                                        control.classification === 'HYBRID' ? 'text-orange-700 border-orange-200' :
-                                                                                            'text-blue-700 border-blue-200'
-                                                                                        }`}>
-                                                                                        {control.classification || "MANUAL"}
-                                                                                    </span>
+                                    // ISO 27001 Section (Clause/Annex) Sorting
+                                    if (isISO27001 && viewMode === 'standard') {
+                                        const getScore = (k) => {
+                                            if (k.startsWith("Clause 4")) return 4;
+                                            if (k.startsWith("Clause 5")) return 5;
+                                            if (k.startsWith("Clause 6")) return 6;
+                                            if (k.startsWith("Clause 7")) return 7;
+                                            if (k.startsWith("Clause 8")) return 8;
+                                            if (k.startsWith("Clause 9")) return 9;
+                                            if (k.startsWith("Clause 10")) return 10;
+                                            if (k.startsWith("Annex A")) return 100 + parseInt(k.match(/A\.(\d+)/)?.[1] || 0);
+                                            return 999;
+                                        };
+                                        return getScore(a) - getScore(b);
+                                    }
 
-                                                                                    {/* 2. Functional Category (Solid Pill) */}
-                                                                                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-sm ${control.category === 'Technical' ? 'bg-purple-100 text-purple-800' :
-                                                                                        control.category === 'Operational' ? 'bg-green-100 text-green-800' :
-                                                                                            control.category === 'People' ? 'bg-pink-100 text-pink-800' :
-                                                                                                control.category === 'Legal' ? 'bg-orange-100 text-orange-800' :
-                                                                                                    'bg-blue-100 text-blue-800' // Governance (Default)
-                                                                                        }`}>
-                                                                                        {control.category || "Governance"}
-                                                                                    </span>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td className="px-6 py-4 text-right">
-                                                                                <button
-                                                                                    onClick={() => setExpandedControlId(expandedControlId === control.id ? null : control.id)}
-                                                                                    className="text-gray-400 hover:text-blue-600 p-1"
-                                                                                >
-                                                                                    {expandedControlId === control.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                                                                                </button>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </React.Fragment>
-                                                                );
-                                                            })}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                    // Default ISO 27001 Custom Sort Order for Domains
+                                    const ISO_ORDER = [
+                                        "Governance",
+                                        "HR Security",
+                                        "Asset Management",
+                                        "Access Control (IAM)",
+                                        "Physical Security",
+                                        "Operations",
+                                        "Configuration Management",
+                                        "Cryptography",
+                                        "Logging & Monitoring",
+                                        "Clock Synchronization",
+                                        "Vulnerability Management",
+                                        "Capacity Management",
+                                        "Backup Management",
+                                        "Network Security",
+                                        "SDLC (Development)",
+                                        "Supplier Mgmt",
+                                        "Incident & Resilience",
+                                        "Threat Intel",
+                                        "Legal & Compliance",
+                                        "Risk Management",
+                                        "Performance Evaluation",
+                                        "Improvement"
+                                    ];
+
+                                    const idxA = ISO_ORDER.indexOf(a);
+                                    const idxB = ISO_ORDER.indexOf(b);
+
+                                    if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+                                    if (idxA !== -1) return -1;
+                                    if (idxB !== -1) return 1;
+                                    return a.localeCompare(b);
+                                }).map(category => {
+                                    // Create copy with slice() before sorting to avoid mutation errors
+                                    const controls = (socControls[category] || []).slice().sort((a, b) => {
+                                        const idA = (a.control_id || "").trim();
+                                        const idB = (b.control_id || "").trim();
+
+                                        // Weight: Clauses (4-10) = 1, Annex A = 2
+                                        const typeA = idA.startsWith("A") || idA.startsWith("a") ? 2 : 1;
+                                        const typeB = idB.startsWith("A") || idB.startsWith("a") ? 2 : 1;
+
+                                        if (typeA !== typeB) return typeA - typeB;
+
+                                        // Both are same type. Semantic sort.
+                                        // Strip non-numeric prefix
+                                        const partsA = idA.replace(/^[A-Za-z]+\./, '').split('.').map(x => parseInt(x, 10));
+                                        const partsB = idB.replace(/^[A-Za-z]+\./, '').split('.').map(x => parseInt(x, 10));
+
+                                        const len = Math.max(partsA.length, partsB.length);
+                                        for (let i = 0; i < len; i++) {
+                                            const valA = partsA[i] !== undefined ? partsA[i] : 0;
+                                            const valB = partsB[i] !== undefined ? partsB[i] : 0;
+                                            if (valA !== valB) return valA - valB;
+                                        }
+                                        return 0;
+                                    });
+                                    if (controls.length === 0) return null;
+                                    // eslint-disable-next-line no-unused-vars
+                                    const cosoText = COSO_DESCRIPTIONS[category] || COSO_DESCRIPTIONS["DEFAULT"];
+
+                                    return (
+                                        <div key={`${category}-${viewMode}`} id={`section-${category}`} className="mb-8 scroll-mt-32">
+                                            <div className="mb-4">
+                                                <h2 className="text-xl font-bold text-gray-900">{category}</h2>
                                             </div>
-                                        );
-                                    })
-                                )
-                            ) : (
-                                /* STANDARD VIEW */
-                                processes.length > 0 ? processes.map(process => (
-                                    <div key={process.id} className="text-center py-12">Standard View Loaded</div>
-                                )) : <div className="text-center py-12">No data</div>
-                            )}
-                        </div>
-                    </div>
+                                            <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                                                <table className="w-full">
+                                                    <thead>
+                                                        <tr className="bg-gray-50 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider border-b">
+                                                            <th className="px-6 py-3 w-12">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                                                />
+                                                            </th>
+                                                            <th className="px-6 py-3">Control</th>
+                                                            <th className="px-6 py-3 w-48">Evidence Status</th>
+                                                            <th className="px-6 py-3 w-32">Standard Control</th>
+                                                            <th className="px-6 py-3 w-24">Owner</th>
+                                                            <th className="px-6 py-3 w-32">Category</th>
+                                                            <th className="px-6 py-3 w-20"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody className="divide-y divide-gray-200">
+                                                        {controls.map(control => {
+                                                            const stats = getEvidenceStats(control.control_id); // Changed from c to control
+                                                            // eslint-disable-next-line no-unused-vars
+                                                            const evidenceStatus = stats.uploaded > 0
+                                                                ? (stats.uploaded >= stats.total ? "Met" : "Partial")
+                                                                : "Not Met";
 
-                    {/* CONTROL DRAWER — Enhanced with AI Requirements, Evidence, Cross-Framework & Policy */}
-                    {selectedControl && (
-                        <EnhancedControlDetail
-                            controlId={formatControlId(selectedControl.control_id)}
-                            controlData={selectedControl}
-                            onClose={() => setSelectedControl(null)}
-                        />
-                    )}
+                                                            return (
+                                                                <React.Fragment key={control.id}>
+                                                                    <tr
+                                                                        className={`hover:bg-gray-50 transition-colors cursor-pointer ${expandedControlId === control.id ? 'bg-blue-50/50' : ''}`}
+                                                                        onClick={() => setSelectedControl(control)}
+                                                                    >
+                                                                        <td className="px-6 py-4">
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                                                            />
+                                                                        </td>
+                                                                        <td className="px-6 py-4">
+                                                                            <div className="flex flex-col">
+                                                                                <span className="text-sm font-bold text-gray-900 leading-snug mb-1 line-clamp-3" title={control.description}>
+                                                                                    {control.description}
+                                                                                </span>
+                                                                                <span className="text-xs text-gray-500 font-medium">
+                                                                                    {control.title}
+                                                                                </span>
+                                                                            </div>
+                                                                            {viewMode === 'intent' && (
+                                                                                <div className="inline-flex items-center gap-1 ml-2 align-middle bg-gradient-to-r from-indigo-50 to-purple-50 px-2 py-0.5 rounded border border-indigo-100 group relative">
+                                                                                    <span className="text-[10px] font-bold text-indigo-600 tracking-tight">IMPACT:</span>
+                                                                                    <div className="flex -space-x-1">
+                                                                                        <div className="w-4 h-4 rounded-full bg-blue-100 border border-white flex items-center justify-center text-[8px] font-bold text-blue-700" title="ISO 27001">I</div>
+                                                                                        <div className="w-4 h-4 rounded-full bg-green-100 border border-white flex items-center justify-center text-[8px] font-bold text-green-700" title="SOC 2 Type II">S</div>
+                                                                                        <div className="w-4 h-4 rounded-full bg-purple-100 border border-white flex items-center justify-center text-[8px] font-bold text-purple-700" title="HIPAA">H</div>
+                                                                                        <div className="w-4 h-4 rounded-full bg-gray-100 border border-white flex items-center justify-center text-[8px] text-gray-600">+2</div>
+                                                                                    </div>
+
+                                                                                    {/* TOOLTIP */}
+                                                                                    <div className="hidden group-hover:block absolute bottom-full left-0 mb-2 w-48 bg-gray-900 text-white text-xs rounded p-2 shadow-xl z-50 pointer-events-none">
+                                                                                        <p className="font-bold mb-1">Universal Intent Multiplier</p>
+                                                                                        <p className="text-gray-300">Completing this task satisfies requirements in 5 active standards.</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
+                                                                        </td>
+                                                                        <td className="px-6 py-4">
+                                                                            <div className="flex items-center gap-2">
+                                                                                {/* Audit Status Logic */}
+                                                                                <div className="flex gap-1">
+                                                                                    {Array.from({ length: 4 }).map((_, i) => ( // Mock bars
+                                                                                        <div
+                                                                                            key={i}
+                                                                                            className={`h-3 w-1.5 rounded-full ${i < (stats.uploaded > 0 ? (stats.uploaded / stats.total) * 4 : 0) ? 'bg-green-500' : 'bg-gray-200'}`}
+                                                                                        />
+                                                                                    ))}
+                                                                                </div>
+                                                                                <span className="text-xs text-gray-500">
+                                                                                    {stats.uploaded}/{stats.total}
+                                                                                </span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td className="px-6 py-4">
+                                                                            <div className="flex items-center">
+                                                                                <span className="text-sm text-gray-500 font-mono">
+                                                                                    {formatControlId(control.control_id)}
+                                                                                </span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td className="px-6 py-4">
+                                                                            <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                                                                                System
+                                                                            </span>
+                                                                        </td>
+                                                                        <td className="px-6 py-4">
+                                                                            <div className="flex flex-col items-start gap-2">
+                                                                                {/* 1. Work Type (Small Outline Badge) */}
+                                                                                <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium border bg-white ${control.classification === 'AUTO' ? 'text-purple-700 border-purple-200' :
+                                                                                    control.classification === 'HYBRID' ? 'text-orange-700 border-orange-200' :
+                                                                                        'text-blue-700 border-blue-200'
+                                                                                    }`}>
+                                                                                    {control.classification || "MANUAL"}
+                                                                                </span>
+
+                                                                                {/* 2. Functional Category (Solid Pill) */}
+                                                                                <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-sm ${control.category === 'Technical' ? 'bg-purple-100 text-purple-800' :
+                                                                                    control.category === 'Operational' ? 'bg-green-100 text-green-800' :
+                                                                                        control.category === 'People' ? 'bg-pink-100 text-pink-800' :
+                                                                                            control.category === 'Legal' ? 'bg-orange-100 text-orange-800' :
+                                                                                                'bg-blue-100 text-blue-800' // Governance (Default)
+                                                                                    }`}>
+                                                                                    {control.category || "Governance"}
+                                                                                </span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td className="px-6 py-4 text-right">
+                                                                            <button
+                                                                                onClick={() => setExpandedControlId(expandedControlId === control.id ? null : control.id)}
+                                                                                className="text-gray-400 hover:text-blue-600 p-1"
+                                                                            >
+                                                                                {expandedControlId === control.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                </React.Fragment>
+                                                            );
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    );
+                                })
+                            )
+                        ) : (
+                            /* STANDARD VIEW */
+                            processes.length > 0 ? processes.map(process => (
+                                <div key={process.id} className="text-center py-12">Standard View Loaded</div>
+                            )) : <div className="text-center py-12">No data</div>
+                        )}
+                    </div>
                 </div>
+
+                {/* CONTROL DRAWER — Enhanced with AI Requirements, Evidence, Cross-Framework & Policy */}
+                {selectedControl && (
+                    <EnhancedControlDetail
+                        controlId={formatControlId(selectedControl.control_id)}
+                        controlData={selectedControl}
+                        onClose={() => setSelectedControl(null)}
+                    />
+                )}
             </div>
+        </div >
         </>
     );
 };
