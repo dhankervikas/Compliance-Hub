@@ -1463,7 +1463,8 @@ const FrameworkDetail = () => {
                     {/* CONTENT AREA */}
                     <div className="space-y-10">
                         {/* GROUPED SPECIAL VIEW (SOC 2 & ISO) */}
-                        {useGroupedView ? (
+                        {useGroupedView ?
+
                             // UNIFIED BUSINESS & STANDARD VIEW (List Based)
                             // We now use the same List renderer for both, just grouped differently.
                             Object.keys(socControls).sort((a, b) => {
@@ -1741,7 +1742,7 @@ const FrameworkDetail = () => {
                                     </div>
                                 );
                             })
-                        )) : (
+                        ) : (
                             /* STANDARD VIEW */
                             processes.length > 0 ? processes.map(process => (
                         <div key={process.id} className="text-center py-12">Standard View Loaded</div>
