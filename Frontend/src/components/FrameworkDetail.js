@@ -1464,285 +1464,287 @@ const FrameworkDetail = () => {
                     <div className="space-y-10">
                         {/* GROUPED SPECIAL VIEW (SOC 2 & ISO) */}
                         {useGroupedView ? (
-                            viewMode === 'intent' && isISO27001 ? (
-                                <UserProcessView framework={framework} onSelectControl={setSelectedControl} filters={filters} />
-                            ) : (
-                                Object.keys(socControls).sort((a, b) => {
-                                    // NIST Sorting Logic
-                                    if (isNIST) {
-                                        const NIST_ORDER = ["GOVERN", "IDENTIFY", "PROTECT", "DETECT", "RESPOND", "RECOVER"];
-                                        const idxA = NIST_ORDER.indexOf(a);
-                                        const idxB = NIST_ORDER.indexOf(b);
+                            {
+                                useGroupedView?(
+                            // UNIFIED BUSINESS & STANDARD VIEW (List Based)
+                            // We now use the same List renderer for both, just grouped differently.
+                            true ? (
+                                    Object.keys(socControls).sort((a, b) => {
+                                        // NIST Sorting Logic
+                                        if (isNIST) {
+                                            const NIST_ORDER = ["GOVERN", "IDENTIFY", "PROTECT", "DETECT", "RESPOND", "RECOVER"];
+                                            const idxA = NIST_ORDER.indexOf(a);
+                                            const idxB = NIST_ORDER.indexOf(b);
+                                            if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+                                            if (idxA !== -1) return -1;
+                                            if (idxB !== -1) return 1;
+                                        }
+
+                                        // ISO 42001 Sorting Logic
+                                        if (isISO42001) {
+                                            const getScore = (k) => {
+                                                if (k.startsWith("Clause 4")) return 4;
+                                                if (k.startsWith("Clause 5")) return 5;
+                                                if (k.startsWith("Clause 6")) return 6;
+                                                if (k.startsWith("Clause 7")) return 7;
+                                                if (k.startsWith("Clause 8")) return 8;
+                                                if (k.startsWith("Clause 9")) return 9;
+                                                if (k.startsWith("Clause 10")) return 10;
+                                                if (k.startsWith("Annex A")) return 100 + parseInt(k.match(/A\.(\d+)/)?.[1] || 0);
+                                                return 999;
+                                            };
+                                            return getScore(a) - getScore(b);
+                                        }
+
+                                        // SOC 2 COSO Principles Sorting (Numerical)
+                                        if (isSOC2 && viewMode === 'intent') {
+                                            const getCosoScore = (k) => {
+                                                // Extract Principle Number "Principle 10: ..."
+                                                if (k.startsWith("Principle")) {
+                                                    const match = k.match(/Principle (\d+)/);
+                                                    return match ? parseInt(match[1]) : 0;
+                                                }
+                                                if (k.startsWith("COSO 1")) return 100;
+                                                if (k.startsWith("COSO 2")) return 200;
+                                                if (k.startsWith("COSO 3")) return 300;
+                                                if (k.startsWith("COSO 4")) return 400;
+                                                if (k.startsWith("COSO 5")) return 500;
+
+                                                if (k.startsWith("TSC: Logical")) return 1000;
+                                                if (k.startsWith("TSC: System")) return 1001;
+                                                if (k.startsWith("TSC: Change")) return 1002;
+                                                if (k.startsWith("TSC: Risk")) return 1003;
+                                                if (k.startsWith("TSC: Avail")) return 1004;
+                                                if (k.startsWith("TSC: Confid")) return 1005;
+                                                if (k.startsWith("TSC: Process")) return 1006;
+                                                if (k.startsWith("TSC: Privacy")) return 1007;
+                                                return 9999;
+                                            };
+                                            return getCosoScore(a) - getCosoScore(b);
+                                        }
+
+                                        // Section Sorting Logic
+                                        if (viewMode === 'standard' && !isISO27001) { // Added !isISO27001 just in case, but 'framework' is not used for ISO generally in this context
+                                            const ISO_THEMES = ["Organizational", "People", "Physical", "Technological"];
+                                            return ISO_THEMES.indexOf(a) - ISO_THEMES.indexOf(b);
+                                        }
+
+                                        // ISO 27001 Section (Clause/Annex) Sorting
+                                        if (isISO27001 && viewMode === 'standard') {
+                                            const getScore = (k) => {
+                                                if (k.startsWith("Clause 4")) return 4;
+                                                if (k.startsWith("Clause 5")) return 5;
+                                                if (k.startsWith("Clause 6")) return 6;
+                                                if (k.startsWith("Clause 7")) return 7;
+                                                if (k.startsWith("Clause 8")) return 8;
+                                                if (k.startsWith("Clause 9")) return 9;
+                                                if (k.startsWith("Clause 10")) return 10;
+                                                if (k.startsWith("Annex A")) return 100 + parseInt(k.match(/A\.(\d+)/)?.[1] || 0);
+                                                return 999;
+                                            };
+                                            return getScore(a) - getScore(b);
+                                        }
+
+                                        // Default ISO 27001 Custom Sort Order for Domains
+                                        const ISO_ORDER = [
+                                            "Governance",
+                                            "HR Security",
+                                            "Asset Management",
+                                            "Access Control (IAM)",
+                                            "Physical Security",
+                                            "Operations",
+                                            "Configuration Management",
+                                            "Cryptography",
+                                            "Logging & Monitoring",
+                                            "Clock Synchronization",
+                                            "Vulnerability Management",
+                                            "Capacity Management",
+                                            "Backup Management",
+                                            "Network Security",
+                                            "SDLC (Development)",
+                                            "Supplier Mgmt",
+                                            "Incident & Resilience",
+                                            "Threat Intel",
+                                            "Legal & Compliance",
+                                            "Risk Management",
+                                            "Performance Evaluation",
+                                            "Improvement"
+                                        ];
+
+                                        const idxA = ISO_ORDER.indexOf(a);
+                                        const idxB = ISO_ORDER.indexOf(b);
+
                                         if (idxA !== -1 && idxB !== -1) return idxA - idxB;
                                         if (idxA !== -1) return -1;
                                         if (idxB !== -1) return 1;
-                                    }
+                                        return a.localeCompare(b);
+                                    }).map(category => {
+                                        // Create copy with slice() before sorting to avoid mutation errors
+                                        const controls = (socControls[category] || []).slice().sort((a, b) => {
+                                            const idA = (a.control_id || "").trim();
+                                            const idB = (b.control_id || "").trim();
 
-                                    // ISO 42001 Sorting Logic
-                                    if (isISO42001) {
-                                        const getScore = (k) => {
-                                            if (k.startsWith("Clause 4")) return 4;
-                                            if (k.startsWith("Clause 5")) return 5;
-                                            if (k.startsWith("Clause 6")) return 6;
-                                            if (k.startsWith("Clause 7")) return 7;
-                                            if (k.startsWith("Clause 8")) return 8;
-                                            if (k.startsWith("Clause 9")) return 9;
-                                            if (k.startsWith("Clause 10")) return 10;
-                                            if (k.startsWith("Annex A")) return 100 + parseInt(k.match(/A\.(\d+)/)?.[1] || 0);
-                                            return 999;
-                                        };
-                                        return getScore(a) - getScore(b);
-                                    }
+                                            // Weight: Clauses (4-10) = 1, Annex A = 2
+                                            const typeA = idA.startsWith("A") || idA.startsWith("a") ? 2 : 1;
+                                            const typeB = idB.startsWith("A") || idB.startsWith("a") ? 2 : 1;
 
-                                    // SOC 2 COSO Principles Sorting (Numerical)
-                                    if (isSOC2 && viewMode === 'intent') {
-                                        const getCosoScore = (k) => {
-                                            // Extract Principle Number "Principle 10: ..."
-                                            if (k.startsWith("Principle")) {
-                                                const match = k.match(/Principle (\d+)/);
-                                                return match ? parseInt(match[1]) : 0;
+                                            if (typeA !== typeB) return typeA - typeB;
+
+                                            // Both are same type. Semantic sort.
+                                            // Strip non-numeric prefix
+                                            const partsA = idA.replace(/^[A-Za-z]+\./, '').split('.').map(x => parseInt(x, 10));
+                                            const partsB = idB.replace(/^[A-Za-z]+\./, '').split('.').map(x => parseInt(x, 10));
+
+                                            const len = Math.max(partsA.length, partsB.length);
+                                            for (let i = 0; i < len; i++) {
+                                                const valA = partsA[i] !== undefined ? partsA[i] : 0;
+                                                const valB = partsB[i] !== undefined ? partsB[i] : 0;
+                                                if (valA !== valB) return valA - valB;
                                             }
-                                            if (k.startsWith("COSO 1")) return 100;
-                                            if (k.startsWith("COSO 2")) return 200;
-                                            if (k.startsWith("COSO 3")) return 300;
-                                            if (k.startsWith("COSO 4")) return 400;
-                                            if (k.startsWith("COSO 5")) return 500;
+                                            return 0;
+                                        });
+                                        if (controls.length === 0) return null;
+                                        // eslint-disable-next-line no-unused-vars
+                                        const cosoText = COSO_DESCRIPTIONS[category] || COSO_DESCRIPTIONS["DEFAULT"];
 
-                                            if (k.startsWith("TSC: Logical")) return 1000;
-                                            if (k.startsWith("TSC: System")) return 1001;
-                                            if (k.startsWith("TSC: Change")) return 1002;
-                                            if (k.startsWith("TSC: Risk")) return 1003;
-                                            if (k.startsWith("TSC: Avail")) return 1004;
-                                            if (k.startsWith("TSC: Confid")) return 1005;
-                                            if (k.startsWith("TSC: Process")) return 1006;
-                                            if (k.startsWith("TSC: Privacy")) return 1007;
-                                            return 9999;
-                                        };
-                                        return getCosoScore(a) - getCosoScore(b);
-                                    }
+                                        return (
+                                            <div key={`${category}-${viewMode}`} id={`section-${category}`} className="mb-8 scroll-mt-32">
+                                                <div className="mb-4">
+                                                    <h2 className="text-xl font-bold text-gray-900">{category}</h2>
+                                                </div>
+                                                <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                                                    <table className="w-full">
+                                                        <thead>
+                                                            <tr className="bg-gray-50 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider border-b">
+                                                                <th className="px-6 py-3 w-12">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                                                    />
+                                                                </th>
+                                                                <th className="px-6 py-3">Control</th>
+                                                                <th className="px-6 py-3 w-48">Evidence Status</th>
+                                                                <th className="px-6 py-3 w-32">Standard Control</th>
+                                                                <th className="px-6 py-3 w-24">Owner</th>
+                                                                <th className="px-6 py-3 w-32">Category</th>
+                                                                <th className="px-6 py-3 w-20"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody className="divide-y divide-gray-200">
+                                                            {controls.map(control => {
+                                                                const stats = getEvidenceStats(control.control_id); // Changed from c to control
+                                                                // eslint-disable-next-line no-unused-vars
+                                                                const evidenceStatus = stats.uploaded > 0
+                                                                    ? (stats.uploaded >= stats.total ? "Met" : "Partial")
+                                                                    : "Not Met";
 
-                                    // Section Sorting Logic
-                                    if (viewMode === 'standard' && !isISO27001) { // Added !isISO27001 just in case, but 'framework' is not used for ISO generally in this context
-                                        const ISO_THEMES = ["Organizational", "People", "Physical", "Technological"];
-                                        return ISO_THEMES.indexOf(a) - ISO_THEMES.indexOf(b);
-                                    }
-
-                                    // ISO 27001 Section (Clause/Annex) Sorting
-                                    if (isISO27001 && viewMode === 'standard') {
-                                        const getScore = (k) => {
-                                            if (k.startsWith("Clause 4")) return 4;
-                                            if (k.startsWith("Clause 5")) return 5;
-                                            if (k.startsWith("Clause 6")) return 6;
-                                            if (k.startsWith("Clause 7")) return 7;
-                                            if (k.startsWith("Clause 8")) return 8;
-                                            if (k.startsWith("Clause 9")) return 9;
-                                            if (k.startsWith("Clause 10")) return 10;
-                                            if (k.startsWith("Annex A")) return 100 + parseInt(k.match(/A\.(\d+)/)?.[1] || 0);
-                                            return 999;
-                                        };
-                                        return getScore(a) - getScore(b);
-                                    }
-
-                                    // Default ISO 27001 Custom Sort Order for Domains
-                                    const ISO_ORDER = [
-                                        "Governance",
-                                        "HR Security",
-                                        "Asset Management",
-                                        "Access Control (IAM)",
-                                        "Physical Security",
-                                        "Operations",
-                                        "Configuration Management",
-                                        "Cryptography",
-                                        "Logging & Monitoring",
-                                        "Clock Synchronization",
-                                        "Vulnerability Management",
-                                        "Capacity Management",
-                                        "Backup Management",
-                                        "Network Security",
-                                        "SDLC (Development)",
-                                        "Supplier Mgmt",
-                                        "Incident & Resilience",
-                                        "Threat Intel",
-                                        "Legal & Compliance",
-                                        "Risk Management",
-                                        "Performance Evaluation",
-                                        "Improvement"
-                                    ];
-
-                                    const idxA = ISO_ORDER.indexOf(a);
-                                    const idxB = ISO_ORDER.indexOf(b);
-
-                                    if (idxA !== -1 && idxB !== -1) return idxA - idxB;
-                                    if (idxA !== -1) return -1;
-                                    if (idxB !== -1) return 1;
-                                    return a.localeCompare(b);
-                                }).map(category => {
-                                    // Create copy with slice() before sorting to avoid mutation errors
-                                    const controls = (socControls[category] || []).slice().sort((a, b) => {
-                                        const idA = (a.control_id || "").trim();
-                                        const idB = (b.control_id || "").trim();
-
-                                        // Weight: Clauses (4-10) = 1, Annex A = 2
-                                        const typeA = idA.startsWith("A") || idA.startsWith("a") ? 2 : 1;
-                                        const typeB = idB.startsWith("A") || idB.startsWith("a") ? 2 : 1;
-
-                                        if (typeA !== typeB) return typeA - typeB;
-
-                                        // Both are same type. Semantic sort.
-                                        // Strip non-numeric prefix
-                                        const partsA = idA.replace(/^[A-Za-z]+\./, '').split('.').map(x => parseInt(x, 10));
-                                        const partsB = idB.replace(/^[A-Za-z]+\./, '').split('.').map(x => parseInt(x, 10));
-
-                                        const len = Math.max(partsA.length, partsB.length);
-                                        for (let i = 0; i < len; i++) {
-                                            const valA = partsA[i] !== undefined ? partsA[i] : 0;
-                                            const valB = partsB[i] !== undefined ? partsB[i] : 0;
-                                            if (valA !== valB) return valA - valB;
-                                        }
-                                        return 0;
-                                    });
-                                    if (controls.length === 0) return null;
-                                    // eslint-disable-next-line no-unused-vars
-                                    const cosoText = COSO_DESCRIPTIONS[category] || COSO_DESCRIPTIONS["DEFAULT"];
-
-                                    return (
-                                        <div key={`${category}-${viewMode}`} id={`section-${category}`} className="mb-8 scroll-mt-32">
-                                            <div className="mb-4">
-                                                <h2 className="text-xl font-bold text-gray-900">{category}</h2>
-                                            </div>
-                                            <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-                                                <table className="w-full">
-                                                    <thead>
-                                                        <tr className="bg-gray-50 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider border-b">
-                                                            <th className="px-6 py-3 w-12">
-                                                                <input
-                                                                    type="checkbox"
-                                                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                                                />
-                                                            </th>
-                                                            <th className="px-6 py-3">Control</th>
-                                                            <th className="px-6 py-3 w-48">Evidence Status</th>
-                                                            <th className="px-6 py-3 w-32">Standard Control</th>
-                                                            <th className="px-6 py-3 w-24">Owner</th>
-                                                            <th className="px-6 py-3 w-32">Category</th>
-                                                            <th className="px-6 py-3 w-20"></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody className="divide-y divide-gray-200">
-                                                        {controls.map(control => {
-                                                            const stats = getEvidenceStats(control.control_id); // Changed from c to control
-                                                            // eslint-disable-next-line no-unused-vars
-                                                            const evidenceStatus = stats.uploaded > 0
-                                                                ? (stats.uploaded >= stats.total ? "Met" : "Partial")
-                                                                : "Not Met";
-
-                                                            return (
-                                                                <React.Fragment key={control.id}>
-                                                                    <tr
-                                                                        className={`hover:bg-gray-50 transition-colors cursor-pointer ${expandedControlId === control.id ? 'bg-blue-50/50' : ''}`}
-                                                                        onClick={() => setSelectedControl(control)}
-                                                                    >
-                                                                        <td className="px-6 py-4">
-                                                                            <input
-                                                                                type="checkbox"
-                                                                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                                                            />
-                                                                        </td>
-                                                                        <td className="px-6 py-4">
-                                                                            <div className="flex flex-col">
-                                                                                <span className="text-sm font-bold text-gray-900 leading-snug mb-1 line-clamp-3" title={control.description}>
-                                                                                    {control.description}
-                                                                                </span>
-                                                                                <span className="text-xs text-gray-500 font-medium">
-                                                                                    {control.title}
-                                                                                </span>
-                                                                            </div>
-                                                                            {viewMode === 'intent' && (
-                                                                                <div className="inline-flex items-center gap-1 ml-2 align-middle bg-gradient-to-r from-indigo-50 to-purple-50 px-2 py-0.5 rounded border border-indigo-100 group relative">
-                                                                                    <span className="text-[10px] font-bold text-indigo-600 tracking-tight">IMPACT:</span>
-                                                                                    <div className="flex -space-x-1">
-                                                                                        <div className="w-4 h-4 rounded-full bg-blue-100 border border-white flex items-center justify-center text-[8px] font-bold text-blue-700" title="ISO 27001">I</div>
-                                                                                        <div className="w-4 h-4 rounded-full bg-green-100 border border-white flex items-center justify-center text-[8px] font-bold text-green-700" title="SOC 2 Type II">S</div>
-                                                                                        <div className="w-4 h-4 rounded-full bg-purple-100 border border-white flex items-center justify-center text-[8px] font-bold text-purple-700" title="HIPAA">H</div>
-                                                                                        <div className="w-4 h-4 rounded-full bg-gray-100 border border-white flex items-center justify-center text-[8px] text-gray-600">+2</div>
-                                                                                    </div>
-
-                                                                                    {/* TOOLTIP */}
-                                                                                    <div className="hidden group-hover:block absolute bottom-full left-0 mb-2 w-48 bg-gray-900 text-white text-xs rounded p-2 shadow-xl z-50 pointer-events-none">
-                                                                                        <p className="font-bold mb-1">Universal Intent Multiplier</p>
-                                                                                        <p className="text-gray-300">Completing this task satisfies requirements in 5 active standards.</p>
-                                                                                    </div>
+                                                                return (
+                                                                    <React.Fragment key={control.id}>
+                                                                        <tr
+                                                                            className={`hover:bg-gray-50 transition-colors cursor-pointer ${expandedControlId === control.id ? 'bg-blue-50/50' : ''}`}
+                                                                            onClick={() => setSelectedControl(control)}
+                                                                        >
+                                                                            <td className="px-6 py-4">
+                                                                                <input
+                                                                                    type="checkbox"
+                                                                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                                                                />
+                                                                            </td>
+                                                                            <td className="px-6 py-4">
+                                                                                <div className="flex flex-col">
+                                                                                    <span className="text-sm font-bold text-gray-900 leading-snug mb-1 line-clamp-3" title={control.description}>
+                                                                                        {control.description}
+                                                                                    </span>
+                                                                                    <span className="text-xs text-gray-500 font-medium">
+                                                                                        {control.title}
+                                                                                    </span>
                                                                                 </div>
-                                                                            )}
-                                                                        </td>
-                                                                        <td className="px-6 py-4">
-                                                                            <div className="flex items-center gap-2">
-                                                                                {/* Audit Status Logic */}
-                                                                                <div className="flex gap-1">
-                                                                                    {Array.from({ length: 4 }).map((_, i) => ( // Mock bars
-                                                                                        <div
-                                                                                            key={i}
-                                                                                            className={`h-3 w-1.5 rounded-full ${i < (stats.uploaded > 0 ? (stats.uploaded / stats.total) * 4 : 0) ? 'bg-green-500' : 'bg-gray-200'}`}
-                                                                                        />
-                                                                                    ))}
-                                                                                </div>
-                                                                                <span className="text-xs text-gray-500">
-                                                                                    {stats.uploaded}/{stats.total}
-                                                                                </span>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td className="px-6 py-4">
-                                                                            <div className="flex items-center">
-                                                                                <span className="text-sm text-gray-500 font-mono">
-                                                                                    {formatControlId(control.control_id)}
-                                                                                </span>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td className="px-6 py-4">
-                                                                            <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                                                                                System
-                                                                            </span>
-                                                                        </td>
-                                                                        <td className="px-6 py-4">
-                                                                            <div className="flex flex-col items-start gap-2">
-                                                                                {/* 1. Work Type (Small Outline Badge) */}
-                                                                                <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium border bg-white ${control.classification === 'AUTO' ? 'text-purple-700 border-purple-200' :
-                                                                                    control.classification === 'HYBRID' ? 'text-orange-700 border-orange-200' :
-                                                                                        'text-blue-700 border-blue-200'
-                                                                                    }`}>
-                                                                                    {control.classification || "MANUAL"}
-                                                                                </span>
+                                                                                {viewMode === 'intent' && (
+                                                                                    <div className="inline-flex items-center gap-1 ml-2 align-middle bg-gradient-to-r from-indigo-50 to-purple-50 px-2 py-0.5 rounded border border-indigo-100 group relative">
+                                                                                        <span className="text-[10px] font-bold text-indigo-600 tracking-tight">IMPACT:</span>
+                                                                                        <div className="flex -space-x-1">
+                                                                                            <div className="w-4 h-4 rounded-full bg-blue-100 border border-white flex items-center justify-center text-[8px] font-bold text-blue-700" title="ISO 27001">I</div>
+                                                                                            <div className="w-4 h-4 rounded-full bg-green-100 border border-white flex items-center justify-center text-[8px] font-bold text-green-700" title="SOC 2 Type II">S</div>
+                                                                                            <div className="w-4 h-4 rounded-full bg-purple-100 border border-white flex items-center justify-center text-[8px] font-bold text-purple-700" title="HIPAA">H</div>
+                                                                                            <div className="w-4 h-4 rounded-full bg-gray-100 border border-white flex items-center justify-center text-[8px] text-gray-600">+2</div>
+                                                                                        </div>
 
-                                                                                {/* 2. Functional Category (Solid Pill) */}
-                                                                                <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-sm ${control.category === 'Technical' ? 'bg-purple-100 text-purple-800' :
-                                                                                    control.category === 'Operational' ? 'bg-green-100 text-green-800' :
-                                                                                        control.category === 'People' ? 'bg-pink-100 text-pink-800' :
-                                                                                            control.category === 'Legal' ? 'bg-orange-100 text-orange-800' :
-                                                                                                'bg-blue-100 text-blue-800' // Governance (Default)
-                                                                                    }`}>
-                                                                                    {control.category || "Governance"}
+                                                                                        {/* TOOLTIP */}
+                                                                                        <div className="hidden group-hover:block absolute bottom-full left-0 mb-2 w-48 bg-gray-900 text-white text-xs rounded p-2 shadow-xl z-50 pointer-events-none">
+                                                                                            <p className="font-bold mb-1">Universal Intent Multiplier</p>
+                                                                                            <p className="text-gray-300">Completing this task satisfies requirements in 5 active standards.</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                )}
+                                                                            </td>
+                                                                            <td className="px-6 py-4">
+                                                                                <div className="flex items-center gap-2">
+                                                                                    {/* Audit Status Logic */}
+                                                                                    <div className="flex gap-1">
+                                                                                        {Array.from({ length: 4 }).map((_, i) => ( // Mock bars
+                                                                                            <div
+                                                                                                key={i}
+                                                                                                className={`h-3 w-1.5 rounded-full ${i < (stats.uploaded > 0 ? (stats.uploaded / stats.total) * 4 : 0) ? 'bg-green-500' : 'bg-gray-200'}`}
+                                                                                            />
+                                                                                        ))}
+                                                                                    </div>
+                                                                                    <span className="text-xs text-gray-500">
+                                                                                        {stats.uploaded}/{stats.total}
+                                                                                    </span>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td className="px-6 py-4">
+                                                                                <div className="flex items-center">
+                                                                                    <span className="text-sm text-gray-500 font-mono">
+                                                                                        {formatControlId(control.control_id)}
+                                                                                    </span>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td className="px-6 py-4">
+                                                                                <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                                                                                    System
                                                                                 </span>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td className="px-6 py-4 text-right">
-                                                                            <button
-                                                                                onClick={() => setExpandedControlId(expandedControlId === control.id ? null : control.id)}
-                                                                                className="text-gray-400 hover:text-blue-600 p-1"
-                                                                            >
-                                                                                {expandedControlId === control.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                                                                            </button>
-                                                                        </td>
-                                                                    </tr>
-                                                                </React.Fragment>
-                                                            );
-                                                        })}
-                                                    </tbody>
-                                                </table>
+                                                                            </td>
+                                                                            <td className="px-6 py-4">
+                                                                                <div className="flex flex-col items-start gap-2">
+                                                                                    {/* 1. Work Type (Small Outline Badge) */}
+                                                                                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium border bg-white ${control.classification === 'AUTO' ? 'text-purple-700 border-purple-200' :
+                                                                                        control.classification === 'HYBRID' ? 'text-orange-700 border-orange-200' :
+                                                                                            'text-blue-700 border-blue-200'
+                                                                                        }`}>
+                                                                                        {control.classification || "MANUAL"}
+                                                                                    </span>
+
+                                                                                    {/* 2. Functional Category (Solid Pill) */}
+                                                                                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-sm ${control.category === 'Technical' ? 'bg-purple-100 text-purple-800' :
+                                                                                        control.category === 'Operational' ? 'bg-green-100 text-green-800' :
+                                                                                            control.category === 'People' ? 'bg-pink-100 text-pink-800' :
+                                                                                                control.category === 'Legal' ? 'bg-orange-100 text-orange-800' :
+                                                                                                    'bg-blue-100 text-blue-800' // Governance (Default)
+                                                                                        }`}>
+                                                                                        {control.category || "Governance"}
+                                                                                    </span>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td className="px-6 py-4 text-right">
+                                                                                <button
+                                                                                    onClick={() => setExpandedControlId(expandedControlId === control.id ? null : control.id)}
+                                                                                    className="text-gray-400 hover:text-blue-600 p-1"
+                                                                                >
+                                                                                    {expandedControlId === control.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </React.Fragment>
+                                                                );
+                                                            })}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                        </div>
-                                    );
-                                })
-                            )
+                                        );
+                                    })
+                                )
                         ) : (
                             /* STANDARD VIEW */
                             processes.length > 0 ? processes.map(process => (
