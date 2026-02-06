@@ -45,6 +45,7 @@ class Settings(BaseSettings):
         "http://127.0.0.1:8002",
         "https://compliance-hub-g1vy.vercel.app",
         "https://app.assurisk.ai",
+	"https://w7rnfgfmhu.us-east-1.awsapprunner.com",
     ]
 
     @field_validator("BACKEND_CORS_ORIGINS", mode='before')

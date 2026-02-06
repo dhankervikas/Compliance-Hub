@@ -6,6 +6,6 @@ const config = {
         ? `${process.env.REACT_APP_API_BASE_URL}/api/v1`
         : window.location.hostname === 'localhost'
             ? '/api/v1'
-            : 'https://compliance-backend-kuje.onrender.com/api/v1'
+          : 'https://w7rnfgfmhu.us-east-1.awsapprunner.com/api/v1'
 };
 export default config;
