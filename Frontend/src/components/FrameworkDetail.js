@@ -1742,7 +1742,6 @@ const FrameworkDetail = () => {
                     />
                 )}
             </div>
-        </div >
         </>
     );
 };
