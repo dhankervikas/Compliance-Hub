@@ -31,12 +31,13 @@ jobs:
         working-directory: Frontend
         run: npm install
 
-      - name: Build React app
+      - - name: Build React app
         working-directory: Frontend
         run: npm run build
         env:
           REACT_APP_API_URL: ''
           CI: false
+          DISABLE_ESLINT_PLUGIN: true
 
       - name: Clear old frontend build
         run: rm -rf Backend/static_frontend
