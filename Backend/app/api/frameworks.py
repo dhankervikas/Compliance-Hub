@@ -232,34 +232,57 @@ def link_tenant_frameworks(
             # This ensures the dashboard isn't empty after setup
             fw = db.query(Framework).filter(Framework.id == fw_id).first()
             
-            # Check if seeding is supported (Currently ISO 27001)
-            # Use flexible check similar to seed endpoint
-            if fw and ("ISO" in fw.code or "ISO27001" in fw.code):
-                # Verify no controls exist for this tenant+framework to avoid duplicates
-                existing_controls = db.query(Control).filter(
-                    Control.framework_id == fw_id,
-                    Control.tenant_id == tenant_uuid
-                ).count()
-                
-                if existing_controls == 0:
+            if fw:
+                # Determine which data to use
+                controls_data = []
+                if "ISO" in fw.code or "ISO27001" in fw.code:
                     try:
-                        from app.models.control import Control, ControlStatus
                         from app.utils.iso_data import ISO_CONTROLS_DATA
-                        
-                        for data in ISO_CONTROLS_DATA:
-                            control = Control(
-                                framework_id=fw_id,
-                                status=ControlStatus.NOT_STARTED,
-                                tenant_id=tenant_uuid,
-                                **data
-                            )
-                            db.add(control)
-                        # We don't commit here, it happens at the end of the transaction
-                        print(f"Auto-seeded {len(ISO_CONTROLS_DATA)} controls for Tenant {tenant_uuid}, FW {fw.code}")
-                    except Exception as e:
-                        print(f"Auto-seeding failed for {fw.code}: {e}")
-                        # Don't fail the request, just log it. The user can use 'Repair' if we had one, 
-                        # or we can rely on manual support.
+                        controls_data = ISO_CONTROLS_DATA
+                    except ImportError:
+                        pass
+                elif "SOC2" in fw.code:
+                    try:
+                        from app.utils.soc2_data import SOC2_CONTROLS_DATA
+                        controls_data = SOC2_CONTROLS_DATA
+                    except ImportError:
+                        pass
+                elif "NIST" in fw.code:
+                    try:
+                        from app.utils.nist_data import NIST_CONTROLS_DATA
+                        controls_data = NIST_CONTROLS_DATA
+                    except ImportError:
+                        pass
+                elif "ISO42001" in fw.code or "AI" in fw.code:
+                     try:
+                        from app.utils.iso42001_data import ISO42001_CONTROLS_DATA
+                        controls_data = ISO42001_CONTROLS_DATA
+                     except ImportError:
+                        pass
+
+                if controls_data:
+                    # Verify no controls exist for this tenant+framework to avoid duplicates
+                    existing_controls = db.query(Control).filter(
+                        Control.framework_id == fw_id,
+                        Control.tenant_id == tenant_uuid
+                    ).count()
+                    
+                    if existing_controls == 0:
+                        try:
+                            from app.models.control import Control, ControlStatus
+                            
+                            for data in controls_data:
+                                control = Control(
+                                    framework_id=fw_id,
+                                    status=ControlStatus.NOT_STARTED,
+                                    tenant_id=tenant_uuid,
+                                    **data
+                                )
+                                db.add(control)
+                            # We don't commit here, it happens at the end of the transaction
+                            print(f"Auto-seeded {len(controls_data)} controls for Tenant {tenant_uuid}, FW {fw.code}")
+                        except Exception as e:
+                            print(f"Auto-seeding failed for {fw.code}: {e}")
 
             
     db.commit()
