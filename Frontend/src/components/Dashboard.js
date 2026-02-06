@@ -113,20 +113,27 @@ const Dashboard = () => {
     useEffect(() => {
         const checkAndRepair = async () => {
             if (!loading && frameworks.length > 0) {
-                const isoFw = frameworks.find(f => f.code.includes("ISO") || f.code.includes("ISO27001"));
+                // Check ALL frameworks for missing data, not just ISO
+                for (const fw of frameworks) {
+                    // Check if supported framework implies it should have controls
+                    const isSupported = fw.code.includes("ISO") || fw.code.includes("SOC") || fw.code.includes("NIST") || fw.code.includes("AI");
 
-                // If ISO exists but has < 10 controls, it's likely unseeded.
-                if (isoFw && isoFw.total_controls < 10) {
-                    console.log("Detected unseeded framework. Triggering auto-repair...");
-                    try {
-                        // Show some UI indication if desirable, or just do it silently and refresh
-                        await api.post(`/frameworks/${isoFw.id}/seed-controls`);
-                        // Refresh data to show results
-                        fetchData();
-                    } catch (e) {
-                        console.error("Auto-repair failed:", e);
+                    if (isSupported && fw.total_controls < 5) {
+                        console.log(`Detected unseeded framework ${fw.code}. Triggering auto-repair...`);
+                        try {
+                            await api.post(`/frameworks/${fw.id}/seed-controls`);
+                            console.log(`Repaired ${fw.code}`);
+                        } catch (e) {
+                            console.error(`Auto-repair failed for ${fw.code}:`, e);
+                        }
                     }
                 }
+
+                // If we found any bad ones, we might want to refresh, but avoid infinite loops.
+                // We rely on the user refreshing or the next poll, OR we can trigger one fetch.
+                // Let's rely on the user's next action or a silent background refresh if needed.
+                // Actually, let's force a fetch if we repaired anything? 
+                // Hard to know if we repaired without tracking.
             }
         };
 

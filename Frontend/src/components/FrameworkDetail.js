@@ -948,17 +948,35 @@ const FrameworkDetail = () => {
                 const keys = Object.keys(grouped).sort((a, b) => {
                     // Clause sort helper
                     const getScore = (k) => {
-                        if (k.startsWith("Clause 4")) return 4;
-                        if (k.startsWith("Clause 5")) return 5;
-                        if (k.startsWith("Clause 6")) return 6;
-                        if (k.startsWith("Clause 7")) return 7;
-                        if (k.startsWith("Clause 8")) return 8;
-                        if (k.startsWith("Clause 9")) return 9;
-                        if (k.startsWith("Clause 10")) return 10;
-                        if (k.startsWith("Annex A.5")) return 500;
-                        if (k.startsWith("Annex A.6")) return 600;
-                        if (k.startsWith("Annex A.7")) return 700;
-                        if (k.startsWith("Annex A.8")) return 800;
+                        // NIST Standard Sort
+                        if (k.includes("GOVERN")) return 1;
+                        if (k.includes("IDENTIFY")) return 2;
+                        if (k.includes("PROTECT")) return 3;
+                        if (k.includes("DETECT")) return 4;
+                        if (k.includes("RESPOND")) return 5;
+                        if (k.includes("RECOVER")) return 6;
+
+                        // ISO Standard Sort
+                        if (k.startsWith("Clause 4")) return 10;
+                        if (k.startsWith("Clause 5")) return 11;
+                        if (k.startsWith("Clause 6")) return 12;
+                        if (k.startsWith("Clause 7")) return 13;
+                        if (k.startsWith("Clause 8")) return 14;
+                        if (k.startsWith("Clause 9")) return 15;
+                        if (k.startsWith("Clause 10")) return 16;
+
+                        // ISO Annex A Sort
+                        if (k.startsWith("Annex A.2")) return 20; // ISO 42001
+                        if (k.startsWith("Annex A.3")) return 30;
+                        if (k.startsWith("Annex A.4")) return 40;
+                        if (k.startsWith("Annex A.5")) return 50;
+                        if (k.startsWith("Annex A.6")) return 60;
+                        if (k.startsWith("Annex A.7")) return 70;
+                        if (k.startsWith("Annex A.8")) return 80;
+                        if (k.startsWith("Annex A.9")) return 90;
+                        if (k.startsWith("Annex A.10")) return 100;
+
+                        // SOC2 / Fallback
                         return 999;
                     };
                     return getScore(a) - getScore(b);
