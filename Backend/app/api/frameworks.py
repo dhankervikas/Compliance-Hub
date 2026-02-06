@@ -15,6 +15,90 @@ from app.models.intent_framework_crosswalk import IntentFrameworkCrosswalk
 from app.models.tenant import Tenant
 router = APIRouter()
 
+def _calculate_framework_stats(db, framework, tenant_uuid):
+    # Get Default Tenant UUID
+    from app.models.tenant import Tenant
+    default_tenant = db.query(Tenant).filter(Tenant.slug == "default_tenant").first()
+    default_tenant_uuid = default_tenant.internal_tenant_id if default_tenant else "default_tenant"
+
+    # Base query for controls visible to this tenant
+    control_query = db.query(Control).filter(
+        Control.framework_id == framework.id,
+        or_(Control.tenant_id == tenant_uuid, Control.tenant_id == default_tenant_uuid)
+    )
+
+    total_controls = control_query.count()
+
+    # normalize framework code for crosswalk (e.g. ISO 27001:2022 -> ISO27001)
+    fw_code = framework.code
+    # Simple mapping if needed, matching seed script
+    if "ISO" in fw_code and "27001" in fw_code:
+        fw_code = "ISO27001" 
+
+    implemented = db.query(Control).outerjoin(
+        IntentFrameworkCrosswalk,
+        and_(
+            Control.control_id == IntentFrameworkCrosswalk.control_reference,
+            IntentFrameworkCrosswalk.framework_id == fw_code
+        )
+    ).outerjoin(
+        UniversalIntent,
+        IntentFrameworkCrosswalk.intent_id == UniversalIntent.id
+    ).filter(
+        Control.framework_id == framework.id,
+        or_(Control.tenant_id == tenant_uuid, Control.tenant_id == default_tenant_uuid),
+        or_(
+            Control.status == ControlStatus.IMPLEMENTED,
+            UniversalIntent.status == IntentStatus.COMPLETED
+        )
+    ).count()
+    
+    # IN PROGRESS: Started AND (Parent Not Completed)
+    in_progress = db.query(Control).outerjoin(
+        IntentFrameworkCrosswalk,
+        and_(
+            Control.control_id == IntentFrameworkCrosswalk.control_reference,
+            IntentFrameworkCrosswalk.framework_id == fw_code
+        )
+    ).outerjoin(
+        UniversalIntent,
+        IntentFrameworkCrosswalk.intent_id == UniversalIntent.id
+    ).filter(
+        Control.framework_id == framework.id,
+        or_(Control.tenant_id == tenant_uuid, Control.tenant_id == default_tenant_uuid),
+        Control.status == ControlStatus.IN_PROGRESS,
+        or_(UniversalIntent.status != IntentStatus.COMPLETED, UniversalIntent.status == None)
+    ).count()
+    
+    # NOT STARTED: Not Started AND (Parent Not Completed)
+    not_started = db.query(Control).outerjoin(
+        IntentFrameworkCrosswalk,
+        and_(
+            Control.control_id == IntentFrameworkCrosswalk.control_reference,
+            IntentFrameworkCrosswalk.framework_id == fw_code
+        )
+    ).outerjoin(
+        UniversalIntent,
+        IntentFrameworkCrosswalk.intent_id == UniversalIntent.id
+    ).filter(
+        Control.framework_id == framework.id,
+        or_(Control.tenant_id == tenant_uuid, Control.tenant_id == default_tenant_uuid),
+        Control.status == ControlStatus.NOT_STARTED,
+        or_(UniversalIntent.status != IntentStatus.COMPLETED, UniversalIntent.status == None)
+    ).count()
+    
+    completion_percentage = (implemented / total_controls * 100) if total_controls > 0 else 0
+
+    return {
+        **framework.__dict__,
+        "total_controls": total_controls,
+        "implemented_controls": implemented,
+        "in_progress_controls": in_progress,
+        "not_started_controls": not_started,
+        "completion_percentage": round(completion_percentage, 2)
+    }
+
+
 
 @router.post("/", response_model=FrameworkSchema, status_code=status.HTTP_201_CREATED)
 def create_framework(
