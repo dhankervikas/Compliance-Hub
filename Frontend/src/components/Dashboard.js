@@ -79,10 +79,46 @@ const Dashboard = () => {
         fetchData();
     };
 
+    // AUTO-INIT: If no frameworks, automatically link ISO 27001 (Zero-Touch Onboarding)
+    useEffect(() => {
+        const autoInitialize = async () => {
+            if (!loading && frameworks.length === 0) {
+                try {
+                    // 1. Get Catalog
+                    const catRes = await api.get('/frameworks/?catalog=true');
+                    const catalog = catRes.data;
+
+                    // 2. Find ISO 27001 (Default Standard)
+                    const isoFw = catalog.find(f => f.code.includes("ISO27001") || f.code.includes("ISO"));
+
+                    if (isoFw) {
+                        console.log("Auto-initializing workspace with:", isoFw.name);
+                        // 3. Link it
+                        await api.post('/frameworks/tenant-link', { framework_ids: [isoFw.id] });
+                        // 4. Refresh Dashboard
+                        await handleSetupComplete();
+                    }
+                } catch (e) {
+                    console.error("Auto-init failed:", e);
+                }
+            }
+        };
+
+        if (!loading && frameworks.length === 0) {
+            autoInitialize();
+        }
+    }, [loading, frameworks.length]);
+
     // CHECK IF NEEDS SETUP
-    // If we have no frameworks, and are not loading, show Selector
+    // If we have no frameworks, show initializing state
     if (!loading && frameworks.length === 0) {
-        return <FrameworkSelector onComplete={handleSetupComplete} />;
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+                <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+                <h2 className="text-xl font-bold text-gray-900">Setting up your secure workspace...</h2>
+                <p className="text-gray-500">Applying default compliance standards.</p>
+            </div>
+        );
     }
 
     if (loading) return <div className="p-8 text-center text-gray-500">Loading Dashboard...</div>;
