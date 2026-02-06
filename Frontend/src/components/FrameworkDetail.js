@@ -837,6 +837,8 @@ const FrameworkDetail = () => {
                 if (!grouped[key]) grouped[key] = [];
                 grouped[key].push(c);
             });
+            console.log("DEBUG: Grouped Controls:", Object.keys(grouped), grouped);
+            setSocControls(grouped);
 
             // 3. SORT KEYS
             const sortedGrouped = {};
