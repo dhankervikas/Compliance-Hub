@@ -80,7 +80,7 @@ const COSO_DESCRIPTIONS = {
     "Asset Management": "Annex A.5, A.7, A.8: Inventory, Responsibility, and Media Handling",
     "Access Control (IAM)": "Annex A.5 & A.8: Logical Access, User Rights, and Authentication",
     "Physical Security": "Annex A.7: Secure Areas, Equipment, and Physical Entry",
-    "Operations": "Annex A.8: Malware, Backup, Logging, and Data Protection",
+    "Operations (General)": "Annex A.8: Malware, Backup, Logging, and Data Protection",
     "Configuration Management": "Annex A.8.9: Secure Configurations",
     "Cryptography": "Annex A.8.24: Encryption and Key Management",
     "Logging & Monitoring": "Annex A.8.15-16: Event Logging and System Monitoring",
@@ -111,7 +111,7 @@ const COSO_DESCRIPTIONS = {
     "Physical controls": "Annex A.7: Physical Security",
     "Technological controls": "Annex A.8: Technological Security",
 
-    "DEFAULT": [{ name: "AUTOGENERATE_BY_SYSTEM", type: "System", desc: "Generating Actionable Requirements..." }]
+    "DEFAULT": [{ name: "AUTOGENERATE_BY_AI", type: "AI", desc: "Generating Actionable Requirements..." }]
 };
 
 // GRANULAR EVIDENCE MAPPING (Keyed by Control Title Partial Match or Exact ID)
@@ -1147,9 +1147,9 @@ const FrameworkDetail = () => {
             e.target.value = null; // Reset input
 
             if (response.data.ai_analysis && response.data.ai_analysis.final_verdict === "PASS") {
-                alert("Automated Review Passed! Document forwarded to Admin for approval.");
+                alert("AI Review Passed! Document forwarded to Admin for approval.");
             } else {
-                alert("Automated Gap Analysis Complete. Please review the findings.");
+                alert("AI Gap Analysis Complete. Please review the findings.");
             }
 
         } catch (error) {
@@ -1287,7 +1287,7 @@ const FrameworkDetail = () => {
                                 <div className={`mt-6 p-4 rounded-lg border ${latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
                                     <div className="flex items-center justify-between mb-2">
                                         <h4 className={`text-sm font-bold ${latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'text-green-800' : 'text-red-800'}`}>
-                                            Automated Document Analysis
+                                            AI Document Analysis
                                         </h4>
                                         <span className="text-xs font-mono bg-white px-2 py-1 rounded border">
                                             {latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'PASSED' : 'ACTION REQUIRED'}
@@ -1303,7 +1303,7 @@ const FrameworkDetail = () => {
                                                     Compliance Attestation Card
                                                 </h4>
                                                 <span className="text-[10px] font-bold px-2 py-0.5 bg-green-100 text-green-800 rounded-full border border-green-200">
-                                                    EVIDENCE VERIFIED BY SYSTEM
+                                                    EVIDENCE VERIFIED BY AI
                                                 </span>
                                             </div>
 
@@ -1323,7 +1323,7 @@ const FrameworkDetail = () => {
 
                                                 {/* SUMMARY */}
                                                 <div>
-                                                    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Automated Witness Statement</span>
+                                                    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">AI Witness Statement</span>
                                                     <p className="text-sm text-gray-700 italic border-l-2 border-green-500 pl-3 py-1 bg-green-50/50 rounded-r">
                                                         "{latestAiAnalysis.summary || "Evidence context extracted and verified."}"
                                                     </p>
@@ -1468,7 +1468,7 @@ const FrameworkDetail = () => {
 
                             // UNIFIED BUSINESS & STANDARD VIEW (List Based)
                             // We now use the same List renderer for both, just grouped differently.
-                            Object.keys(socControls).sort((a, b) => {
+                            (Object.keys(socControls).sort((a, b) => {
                                 // NIST Sorting Logic
                                 if (isNIST) {
                                     const NIST_ORDER = ["GOVERN", "IDENTIFY", "PROTECT", "DETECT", "RESPOND", "RECOVER"];
@@ -1551,7 +1551,7 @@ const FrameworkDetail = () => {
                                     "Asset Management",
                                     "Access Control (IAM)",
                                     "Physical Security",
-                                    "Operations",
+                                    "Operations (General)",
                                     "Configuration Management",
                                     "Cryptography",
                                     "Logging & Monitoring",
@@ -1743,7 +1743,7 @@ const FrameworkDetail = () => {
                                     </div>
                                 );
                             })
-                           ) : (
+                            ) : (
                                 /* STANDARD VIEW */
                                 processes.length > 0 ? processes.map(process => (
                                     <div key={process.id} className="text-center py-12">Standard View Loaded</div>
