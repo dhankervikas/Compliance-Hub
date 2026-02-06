@@ -125,8 +125,14 @@ def startup_event():
             print("[STARTUP] SOC 2 Data appears healthy.")
         
         db_seed.close()
+
+        # --- RUN MASTER SEEDER FOR OTHER FRAMEWORKS ---
+        from app.services.startup_seeder import run_startup_seed
+        print("[STARTUP] Running Master Framework Seeder...")
+        run_startup_seed()
+
     except Exception as e:
-        print(f"[STARTUP ERROR] Failed to auto-seed SOC 2: {e}")
+        print(f"[STARTUP ERROR] Failed to auto-seed SOC 2 or Frameworks: {e}")
 
 print("[OK] CORS CONFIGURATION LOADED: Allowed access from localhost:3000 and localhost:3001")
 
