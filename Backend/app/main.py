@@ -1,3 +1,5 @@
+import os
+print(f"=== DATABASE_URL: {os.environ.get('DATABASE_URL', 'NOT SET')} ===")
 from fastapi import FastAPI, Depends
 print("!!! LOADER DEBUG: MAIN.PY LOADED !!!")
 from fastapi.middleware.cors import CORSMiddleware

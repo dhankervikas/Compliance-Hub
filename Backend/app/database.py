@@ -3,6 +3,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from app.config import settings
 
+print(f"=== DB URL from settings: {settings.DATABASE_URL[:50]}... ===")
+
 # Detect database type
 is_sqlite = settings.DATABASE_URL.startswith("sqlite")
 
@@ -20,6 +22,7 @@ else:
         pool_pre_ping=True,
         pool_size=5,
         max_overflow=10,
+        pool_timeout=30,
         echo=False
     )
 
