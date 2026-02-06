@@ -37,7 +37,7 @@ const getCategoryColor = (category) => {
         'Asset Management': 'bg-indigo-500',
         'Access Control (IAM)': 'bg-purple-500',
         'Risk Management': 'bg-orange-500',
-        'Operations (General)': 'bg-emerald-500',
+        'Operations': 'bg-emerald-500',
         'Physical Security': 'bg-slate-500',
         'Legal & Compliance': 'bg-red-500',
         'Human Resources': 'bg-pink-500',

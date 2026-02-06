@@ -52,13 +52,13 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [control, setControl] = useState(controlData || null);
-  
+
   // Requirements (AI-generated, cached)
   const [requirements, setRequirements] = useState([]);
   const [explanation, setExplanation] = useState('');
   const [reqCached, setReqCached] = useState(false);
   const [generatingReqs, setGeneratingReqs] = useState(false);
-  
+
   // Evidence
   const [evidenceMap, setEvidenceMap] = useState({}); // { reqIndex: [evidence] }
   const [allEvidence, setAllEvidence] = useState([]);
@@ -67,20 +67,20 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
   const [stagedFile, setStagedFile] = useState(null); // { file, reqIndex }
   const [uploadSuccess, setUploadSuccess] = useState(null); // { reqIndex, message }
   const [aiReviewDetail, setAiReviewDetail] = useState(null); // { reqIndex, review }
-  
+
   // Cross-framework
   const [crossFramework, setCrossFramework] = useState(null);
   const [loadingCross, setLoadingCross] = useState(false);
-  
+
   // Policy generator
   const [policyContent, setPolicyContent] = useState('');
   const [policyStatus, setPolicyStatus] = useState(null); // null, 'generating', 'draft', 'editing', 'review', 'approved'
   const [editingPolicy, setEditingPolicy] = useState(false);
   const [editedPolicyContent, setEditedPolicyContent] = useState('');
-  
+
   // Gap analysis
   const [gapResult, setGapResult] = useState(null);
-  
+
   // Active tab
   const [activeTab, setActiveTab] = useState('requirements');
 
@@ -156,7 +156,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
     setUploadSuccess(null);
     setAiReviewDetail(null);
     const reqName = requirements[reqIndex]?.name || '';
-    
+
     const formData = new FormData();
     formData.append('file', file);
     formData.append('requirement_name', reqName);
@@ -169,10 +169,10 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
       });
       if (!res.ok) throw new Error('Upload failed');
       const data = await res.json();
-      
+
       // Refresh evidence list
       await fetchEvidence();
-      
+
       // Show success confirmation
       setUploadSuccess({ reqIndex, message: `"${file.name}" uploaded successfully.` });
       setStagedFile(null);
@@ -309,7 +309,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
         <div style={{ ...styles.modal, padding: '60px', textAlign: 'center' }}>
           <div style={{ fontSize: '32px', marginBottom: '16px' }}>⚙️</div>
           <div style={{ fontSize: '15px', color: '#64748B', fontWeight: 500 }}>
-            {generatingReqs ? 'AI is generating requirements...' : 'Loading control...'}
+            {generatingReqs ? 'Generating requirements...' : 'Loading control...'}
           </div>
           <div style={{ fontSize: '12px', color: '#94A3B8', marginTop: '8px' }}>
             First time takes 3-5 seconds. Cached after that.
@@ -411,7 +411,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                   📄 Upload Evidence for this Control
                 </div>
                 <div style={{ fontSize: '12px', color: '#64748B', marginBottom: '10px' }}>
-                  One document can satisfy multiple requirements. Upload once — AI will check which requirements are met.
+                  One document can satisfy multiple requirements. Upload once — System will check which requirements are met.
                 </div>
 
                 {/* Staged file for control-level */}
@@ -456,7 +456,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                         Choose File or Drag & Drop
                       </div>
                       <div style={{ fontSize: '11px', color: '#94A3B8' }}>
-                        PDF, Word, Excel, PNG • AI reviews against all requirements
+                        PDF, Word, Excel, PNG • System reviews against all requirements
                       </div>
                     </label>
                   </div>
@@ -480,7 +480,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                     marginTop: '10px', color: '#FFF',
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                      <span style={{ fontSize: '13px', fontWeight: 700 }}>⚡ AI Evidence Review</span>
+                      <span style={{ fontSize: '13px', fontWeight: 700 }}>⚡ Automated Evidence Review</span>
                       <StatusBadge status={aiReviewDetail.review.final_verdict || 'PENDING'} />
                     </div>
                     {aiReviewDetail.review.summary && (
@@ -493,18 +493,18 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                       </p>
                     )}
                     {aiReviewDetail.review.gaps_found && aiReviewDetail.review.gaps_found.length > 0 &&
-                     aiReviewDetail.review.gaps_found[0] !== 'None' && (
-                      <div style={{ marginBottom: '8px' }}>
-                        <div style={{ fontSize: '11px', fontWeight: 600, color: '#F87171', marginBottom: '4px' }}>
-                          GAPS IDENTIFIED:
-                        </div>
-                        {aiReviewDetail.review.gaps_found.map((gap, gi) => (
-                          <div key={gi} style={{ fontSize: '12px', color: '#FCA5A5', paddingLeft: '10px', marginBottom: '2px' }}>
-                            • {gap}
+                      aiReviewDetail.review.gaps_found[0] !== 'None' && (
+                        <div style={{ marginBottom: '8px' }}>
+                          <div style={{ fontSize: '11px', fontWeight: 600, color: '#F87171', marginBottom: '4px' }}>
+                            GAPS IDENTIFIED:
                           </div>
-                        ))}
-                      </div>
-                    )}
+                          {aiReviewDetail.review.gaps_found.map((gap, gi) => (
+                            <div key={gi} style={{ fontSize: '12px', color: '#FCA5A5', paddingLeft: '10px', marginBottom: '2px' }}>
+                              • {gap}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     {aiReviewDetail.review.date_check_passed !== undefined && (
                       <div style={{ fontSize: '11px', color: aiReviewDetail.review.date_check_passed ? '#6EE7B7' : '#FCA5A5' }}>
                         {aiReviewDetail.review.date_check_passed
@@ -713,7 +713,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                                   Choose File or Drag & Drop
                                 </div>
                                 <div style={{ fontSize: '11px', color: '#94A3B8' }}>
-                                  PDF, Word, Excel, PNG supported • AI will review after upload
+                                  PDF, Word, Excel, PNG supported • System will review after upload
                                 </div>
                               </label>
                             </div>
@@ -739,7 +739,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                           }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                               <span style={{ fontSize: '13px', fontWeight: 700 }}>
-                                ⚡ AI Evidence Review
+                                ⚡ Automated Evidence Review
                               </span>
                               <StatusBadge status={aiReviewDetail.review.final_verdict || 'PENDING'} />
                             </div>
@@ -756,19 +756,19 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                             )}
 
                             {/* Gaps Found */}
-                            {aiReviewDetail.review.gaps_found && aiReviewDetail.review.gaps_found.length > 0 && 
-                             aiReviewDetail.review.gaps_found[0] !== 'None' && (
-                              <div style={{ marginBottom: '8px' }}>
-                                <div style={{ fontSize: '11px', fontWeight: 600, color: '#F87171', marginBottom: '4px' }}>
-                                  GAPS IDENTIFIED:
-                                </div>
-                                {aiReviewDetail.review.gaps_found.map((gap, gi) => (
-                                  <div key={gi} style={{ fontSize: '12px', color: '#FCA5A5', paddingLeft: '10px', marginBottom: '2px' }}>
-                                    • {gap}
+                            {aiReviewDetail.review.gaps_found && aiReviewDetail.review.gaps_found.length > 0 &&
+                              aiReviewDetail.review.gaps_found[0] !== 'None' && (
+                                <div style={{ marginBottom: '8px' }}>
+                                  <div style={{ fontSize: '11px', fontWeight: 600, color: '#F87171', marginBottom: '4px' }}>
+                                    GAPS IDENTIFIED:
                                   </div>
-                                ))}
-                              </div>
-                            )}
+                                  {aiReviewDetail.review.gaps_found.map((gap, gi) => (
+                                    <div key={gi} style={{ fontSize: '12px', color: '#FCA5A5', paddingLeft: '10px', marginBottom: '2px' }}>
+                                      • {gap}
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
 
                             {/* Date Check */}
                             {aiReviewDetail.review.date_check_passed !== undefined && (
@@ -945,7 +945,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                     Generate Audit-Ready Policy
                   </div>
                   <div style={{ fontSize: '13px', color: '#64748B', marginBottom: '16px' }}>
-                    AI will create a professional policy document for this control,
+                    System will create a professional policy document for this control,
                     ready for review and approval.
                   </div>
                   <button onClick={handleGeneratePolicy} style={styles.btn('primary')}>
@@ -957,7 +957,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
               {policyStatus === 'generating' && (
                 <div style={{ ...styles.card, textAlign: 'center', padding: '30px' }}>
                   <div style={{ fontSize: '28px', marginBottom: '8px' }}>⚙️</div>
-                  <div style={{ fontSize: '14px', color: '#64748B' }}>AI is drafting your policy...</div>
+                  <div style={{ fontSize: '14px', color: '#64748B' }}>System is drafting your policy...</div>
                   <div style={{ fontSize: '12px', color: '#94A3B8' }}>This takes 5-10 seconds</div>
                 </div>
               )}
@@ -1052,7 +1052,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                           .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                           .replace(/\*(.*?)\*/g, '<em>$1</em>')
                           .replace(/\n/g, '<br/>');
-                        
+
                         const fullHtml = `
                           <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
                           <head><meta charset="utf-8"><style>
@@ -1065,7 +1065,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                             th { background: #F2F2F2; font-weight: bold; }
                           </style></head>
                           <body>${htmlBody}</body></html>`;
-                        
+
                         const blob = new Blob([fullHtml], { type: 'application/msword' });
                         const url = URL.createObjectURL(blob);
                         const a = document.createElement('a');
