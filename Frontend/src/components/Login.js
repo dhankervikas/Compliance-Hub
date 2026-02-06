@@ -17,13 +17,21 @@ const Login = () => {
   useEffect(() => {
     console.log("[Login] Auth state:", { user, authLoading });
     if (user && !authLoading) {
-      // FIX: Check if we are in a tenant context
       const isTenantContext = window.location.pathname.includes('/t/');
 
+      // Only redirect if we're actually on /login to prevent loops
+      if (window.location.pathname !== '/login') return;
+
       if (user.username === 'admin' && !isTenantContext) {
-        console.log("[Login] Superadmin detected (Root Context). Redirecting to Workspace Selection...");
+        console.log("[Login] Superadmin detected. Redirecting to Workspace Selection...");
         navigate('/super-admin', { replace: true });
       } else if (!isTenantContext) {
+        const tenantId = user.tenant_id || 'default';
+        console.log("[Login] Standard user. Redirecting to Dashboard...");
+        navigate(`/t/${tenantId}/dashboard`, { replace: true });
+      }
+    }
+  }, [user, authLoading, navigate]);
         // Only redirect standard users if they are not already in deep link
         const tenantId = user.tenant_id || 'default';
         console.log("[Login] Standard user. Redirecting to Dashboard...");
