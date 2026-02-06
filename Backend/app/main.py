@@ -142,13 +142,18 @@ print("[OK] CORS CONFIGURATION LOADED: Allowed access from localhost:3000 and lo
 
 @app.get("/")
 async def root():
-    """Root endpoint"""
+    """Serve React frontend or API welcome"""
+    import os
+    from fastapi.responses import FileResponse
+    index_path = os.path.join(os.path.dirname(__file__), "..", "static_frontend", "index.html")
+    index_path = os.path.abspath(index_path)
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
     return {
         "message": "Welcome to Compliance Hub API",
         "version": settings.VERSION,
         "docs": "/docs"
     }
-
 
 @app.get("/health")
 async def health_check():
