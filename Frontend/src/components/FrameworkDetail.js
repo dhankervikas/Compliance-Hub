@@ -1462,7 +1462,7 @@ const FrameworkDetail = () => {
                     <div className="space-y-10">
                         {/* GROUPED SPECIAL VIEW (SOC 2 & ISO) */}
                         {useGroupedView ? (
-                            viewMode === 'intent' ? (
+                            viewMode === 'intent' && isISO27001 ? (
                                 <UserProcessView framework={framework} onSelectControl={setSelectedControl} filters={filters} />
                             ) : (
                                 Object.keys(socControls).sort((a, b) => {
