@@ -54,12 +54,18 @@ from fastapi.responses import JSONResponse
 async def validation_exception_handler(request, exc):
     import traceback
     error_msg = traceback.format_exc()
-    print(f"CRITICAL 500 ERROR: {error_msg}") # Log to console too
-    return JSONResponse(
+    print(f"CRITICAL 500 ERROR: {error_msg}")
+    response = JSONResponse(
         status_code=500,
-        content={"detail": error_msg},
+        content={"detail": "Internal server error"},
     )
-
+    origin = request.headers.get("origin", "")
+    if origin:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Allow-Methods"] = "*"
+        response.headers["Access-Control-Allow-Headers"] = "*"
+    return response
 
 from app.utils.security import get_password_hash
 from app.database import SessionLocal 
