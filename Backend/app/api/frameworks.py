@@ -9,7 +9,10 @@ from app.schemas.framework import FrameworkCreate, Framework as FrameworkSchema,
 from app.api.auth import get_current_user
 from pydantic import BaseModel
 from datetime import datetime
-
+from sqlalchemy import or_, and_, text
+from app.models.universal_intent import UniversalIntent, IntentStatus
+from app.models.intent_framework_crosswalk import IntentFrameworkCrosswalk
+from app.models.tenant import Tenant
 router = APIRouter()
 
 
@@ -35,7 +38,7 @@ def create_framework(
     return db_framework
 
 
-@router.get("/", response_model=List[FrameworkSchema])
+@router.get("/", response_model=List[FrameworkWithStats])
 def list_frameworks(
     skip: int = 0,
     limit: int = 100,
@@ -46,7 +49,7 @@ def list_frameworks(
     """
     Get all frameworks.
     - If catalog=True: Returns all Global frameworks (for selection).
-    - If catalog=False: Returns only frameworks active for the current tenant.
+    - If catalog=False: Returns only frameworks active for the current tenant WITH stats.
     """
     if current_user.tenant_id == "default_tenant":
         # Super Admin sees all frameworks
@@ -68,8 +71,26 @@ def list_frameworks(
                 TenantFramework.tenant_id == tenant_uuid,
                 TenantFramework.is_active == True
             ).offset(skip).limit(limit).all()
+            
+            # Enrich with stats
+            results = []
+            for fw in frameworks:
+                results.append(_calculate_framework_stats(db, fw, tenant_uuid))
+            return results
         
-    return frameworks
+    # For catalog or superadmin, return basic schema (mapped to WithStats with 0s)
+    # This ensures type safety
+    results = []
+    for fw in frameworks:
+        results.append({
+            **fw.__dict__,
+            "total_controls": 0,
+            "implemented_controls": 0,
+            "in_progress_controls": 0,
+            "not_started_controls": 0,
+            "completion_percentage": 0.0
+        })
+    return results
 
 
 class TenantLinkRequest(BaseModel):
@@ -157,97 +178,10 @@ def get_framework_stats(
     
     # Resolve Tenant UUID if current_user.tenant_id is a slug
     # This ensures we query controls using the correct UUID foreign key
-    from app.models.tenant import Tenant
     tenant = db.query(Tenant).filter(Tenant.slug == current_user.tenant_id).first()
     tenant_uuid = tenant.internal_tenant_id if tenant else current_user.tenant_id
 
-    # Get Default Tenant UUID
-    default_tenant = db.query(Tenant).filter(Tenant.slug == "default_tenant").first()
-    default_tenant_uuid = default_tenant.internal_tenant_id if default_tenant else "default_tenant"
-
-    # Calculate statistics using tenant_uuid OR default_tenant
-    from sqlalchemy import or_, and_, text
-    from app.models.universal_intent import UniversalIntent, IntentStatus
-    from app.models.intent_framework_crosswalk import IntentFrameworkCrosswalk
-
-    # Base query for controls visible to this tenant
-    control_query = db.query(Control).filter(
-        Control.framework_id == framework_id,
-        or_(Control.tenant_id == tenant_uuid, Control.tenant_id == default_tenant_uuid)
-    )
-
-    total_controls = control_query.count()
-
-    # IMPLEMENTED: Control is Implemented OR Parent Intent is Completed
-    # normalize framework code for crosswalk (e.g. ISO 27001:2022 -> ISO27001)
-    fw_code = framework.code
-    # Simple mapping if needed, matching seed script
-    if "ISO" in fw_code and "27001" in fw_code:
-        fw_code = "ISO27001" 
-
-    implemented = db.query(Control).outerjoin(
-        IntentFrameworkCrosswalk,
-        and_(
-            Control.control_id == IntentFrameworkCrosswalk.control_reference,
-            IntentFrameworkCrosswalk.framework_id == fw_code
-        )
-    ).outerjoin(
-        UniversalIntent,
-        IntentFrameworkCrosswalk.intent_id == UniversalIntent.id
-    ).filter(
-        Control.framework_id == framework_id,
-        or_(Control.tenant_id == tenant_uuid, Control.tenant_id == default_tenant_uuid),
-        or_(
-            Control.status == ControlStatus.IMPLEMENTED,
-            UniversalIntent.status == IntentStatus.COMPLETED
-        )
-    ).count()
-    
-    # IN PROGRESS: Started AND (Parent Not Completed)
-    in_progress = db.query(Control).outerjoin(
-        IntentFrameworkCrosswalk,
-        and_(
-            Control.control_id == IntentFrameworkCrosswalk.control_reference,
-            IntentFrameworkCrosswalk.framework_id == fw_code
-        )
-    ).outerjoin(
-        UniversalIntent,
-        IntentFrameworkCrosswalk.intent_id == UniversalIntent.id
-    ).filter(
-        Control.framework_id == framework_id,
-        or_(Control.tenant_id == tenant_uuid, Control.tenant_id == default_tenant_uuid),
-        Control.status == ControlStatus.IN_PROGRESS,
-        or_(UniversalIntent.status != IntentStatus.COMPLETED, UniversalIntent.status == None)
-    ).count()
-    
-    # NOT STARTED: Not Started AND (Parent Not Completed)
-    not_started = db.query(Control).outerjoin(
-        IntentFrameworkCrosswalk,
-        and_(
-            Control.control_id == IntentFrameworkCrosswalk.control_reference,
-            IntentFrameworkCrosswalk.framework_id == fw_code
-        )
-    ).outerjoin(
-        UniversalIntent,
-        IntentFrameworkCrosswalk.intent_id == UniversalIntent.id
-    ).filter(
-        Control.framework_id == framework_id,
-        or_(Control.tenant_id == tenant_uuid, Control.tenant_id == default_tenant_uuid),
-        Control.status == ControlStatus.NOT_STARTED,
-        or_(UniversalIntent.status != IntentStatus.COMPLETED, UniversalIntent.status == None)
-    ).count()
-    
-    completion_percentage = (implemented / total_controls * 100) if total_controls > 0 else 0
-    
-    return {
-        **framework.__dict__,
-        "total_controls": total_controls,
-        "implemented_controls": implemented,
-        "in_progress_controls": in_progress,
-        "not_started_controls": not_started,
-        "completion_percentage": round(completion_percentage, 2)
-    }
-
+    return _calculate_framework_stats(db, framework, tenant_uuid)
 @router.post("/{framework_id}/seed-controls", status_code=status.HTTP_201_CREATED)
 def seed_framework_controls(
     framework_id: int,
