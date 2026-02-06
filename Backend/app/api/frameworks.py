@@ -278,8 +278,11 @@ def seed_framework_controls(
         # This ensures we bypass any ORM complexity or missing cascades
         from sqlalchemy import text
 
-        # Get all control IDs for this framework
-        control_ids_result = db.execute(text("SELECT id FROM controls WHERE framework_id = :fid"), {"fid": framework_id}).fetchall()
+        # Get all control IDs for this framework AND tenant
+        control_ids_result = db.execute(
+            text("SELECT id FROM controls WHERE framework_id = :fid AND tenant_id = :tid"), 
+            {"fid": framework_id, "tid": tenant_uuid}
+        ).fetchall()
         control_ids = [row[0] for row in control_ids_result]
         
         deleted_mappings = 0
