@@ -4,10 +4,10 @@ on:
   push:
     branches: [main]
     paths:
-      - 'src/**'
-      - 'public/**'
-      - 'package.json'
-      - 'package-lock.json'
+      - 'Frontend/src/**'
+      - 'Frontend/public/**'
+      - 'Frontend/package.json'
+      - 'Frontend/package-lock.json'
 
   workflow_dispatch:
 
@@ -28,9 +28,11 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
+        working-directory: Frontend
         run: npm install
 
       - name: Build React app
+        working-directory: Frontend
         run: npm run build
         env:
           REACT_APP_API_URL: ''
@@ -40,7 +42,7 @@ jobs:
         run: rm -rf Backend/static_frontend
 
       - name: Copy build to Backend
-        run: cp -r build Backend/static_frontend
+        run: cp -r Frontend/build Backend/static_frontend
 
       - name: Commit and push
         run: |
