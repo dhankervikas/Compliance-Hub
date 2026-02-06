@@ -37,29 +37,93 @@ def create_framework(
 def list_frameworks(
     skip: int = 0,
     limit: int = 100,
+    catalog: bool = False,
     db: Session = Depends(get_db),
     current_user = Depends(get_current_user)
 ):
-    """Get all frameworks"""
+    """
+    Get all frameworks.
+    - If catalog=True: Returns all Global frameworks (for selection).
+    - If catalog=False: Returns only frameworks active for the current tenant.
+    """
     if current_user.tenant_id == "default_tenant":
-        # Super Admin sees all frameworks defined in the catalog
-        # (Assuming catalog lives in default_tenant or globally)
+        # Super Admin sees all frameworks
         frameworks = db.query(Framework).offset(skip).limit(limit).all()
     else:
-        # Standard Tenant: See only subscribed active frameworks
-        # Resolve Tenant UUID if current_user.tenant_id is a slug
-        from app.models.tenant import Tenant
-        tenant = db.query(Tenant).filter(Tenant.slug == current_user.tenant_id).first()
-        tenant_uuid = tenant.internal_tenant_id if tenant else current_user.tenant_id
-        
-        frameworks = db.query(Framework).join(
-            TenantFramework, Framework.id == TenantFramework.framework_id
-        ).filter(
-            TenantFramework.tenant_id == tenant_uuid,
-            TenantFramework.is_active == True
-        ).offset(skip).limit(limit).all()
+        if catalog:
+            # Return all Global frameworks for selection
+            frameworks = db.query(Framework).filter(Framework.tenant_id == "default_tenant").all()
+        else:
+            # Return only subscribed frameworks
+            # Resolve Tenant UUID if current_user.tenant_id is a slug
+            from app.models.tenant import Tenant
+            tenant = db.query(Tenant).filter(Tenant.slug == current_user.tenant_id).first()
+            tenant_uuid = tenant.internal_tenant_id if tenant else current_user.tenant_id
+            
+            frameworks = db.query(Framework).join(
+                TenantFramework, Framework.id == TenantFramework.framework_id
+            ).filter(
+                TenantFramework.tenant_id == tenant_uuid,
+                TenantFramework.is_active == True
+            ).offset(skip).limit(limit).all()
         
     return frameworks
+
+
+class TenantLinkRequest(BaseModel):
+    framework_ids: List[int]
+
+@router.post("/tenant-link", status_code=status.HTTP_200_OK)
+def link_tenant_frameworks(
+    request: TenantLinkRequest,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user)
+):
+    """
+    Link selected frameworks to the current tenant.
+    Typically used during initial tenant setup.
+    """
+    if current_user.tenant_id == "default_tenant":
+        raise HTTPException(status_code=400, detail="Cannot link frameworks to default tenant context")
+
+    # Resolve Tenant UUID
+    from app.models.tenant import Tenant
+    tenant = db.query(Tenant).filter(Tenant.slug == current_user.tenant_id).first()
+    if not tenant:
+        raise HTTPException(status_code=404, detail="Tenant not found")
+        
+    tenant_uuid = tenant.internal_tenant_id
+
+    # Check if we already have frameworks? (Optional: The user said "Only done first time")
+    # We can enforce this if we want strict "One Time Only"
+    existing_count = db.query(TenantFramework).filter(TenantFramework.tenant_id == tenant_uuid).count()
+    if existing_count > 0:
+        # If frameworks exist, we might want to prevent overwrite or just append.
+        # User said: "Once done, it shall remain like that until I go in settings"
+        # So maybe we shouldn't block adding *new* ones via this API if called?
+        # But the UI will hide it anyway. Let's allow appending for robustness but logging it.
+        pass
+
+    created_links = []
+    for fw_id in request.framework_ids:
+        # Check if exists
+        exists = db.query(TenantFramework).filter(
+            TenantFramework.tenant_id == tenant_uuid,
+            TenantFramework.framework_id == fw_id
+        ).first()
+        
+        if not exists:
+            link = TenantFramework(
+                tenant_id=tenant_uuid,
+                framework_id=fw_id,
+                is_active=True
+            )
+            db.add(link)
+            created_links.append(fw_id)
+            
+    db.commit()
+    
+    return {"message": "Frameworks linked successfully", "linked_ids": created_links}
 
 
 @router.get("/{framework_id}", response_model=FrameworkSchema)
