@@ -8,7 +8,6 @@ on:
       - 'Frontend/public/**'
       - 'Frontend/package.json'
       - 'Frontend/package-lock.json'
-
   workflow_dispatch:
 
 permissions:
@@ -17,34 +16,26 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
       - name: Install dependencies
         working-directory: Frontend
         run: npm install
-
-      - - name: Build React app
+      - name: Build React app
         working-directory: Frontend
-        run: npm run build
+        run: DISABLE_ESLINT_PLUGIN=true npm run build
         env:
           REACT_APP_API_URL: ''
           CI: false
-          DISABLE_ESLINT_PLUGIN: true
-
       - name: Clear old frontend build
         run: rm -rf Backend/static_frontend
-
       - name: Copy build to Backend
         run: cp -r Frontend/build Backend/static_frontend
-
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
