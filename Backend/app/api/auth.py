@@ -67,6 +67,11 @@ def get_current_user(
             db.expunge(user)
             user.tenant_id = effective_tenant_id
             
+    # GUARANTEE SUPER ADMIN ROLE
+    if username == "admin":
+        user.role = "admin"
+        user.is_superuser = True
+
     return user
 
 def get_current_active_user(current_user: User = Depends(get_current_user)):
