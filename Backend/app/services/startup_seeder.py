@@ -93,14 +93,10 @@ def run_startup_seed():
 
     except Exception as e:
         print(f"[STARTUP SEED] CRITICAL ERROR: {e}")
-        # Print stack trace to stdout for debugging logs
         import traceback
         traceback.print_exc()
     finally:
         db.close()
-
-    except Exception as e:
-        print(f"[STARTUP SEED] CRITICAL ERROR: {e}")
         import traceback
         traceback.print_exc()
     finally:
