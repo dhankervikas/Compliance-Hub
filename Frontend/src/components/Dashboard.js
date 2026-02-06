@@ -109,6 +109,30 @@ const Dashboard = () => {
         }
     }, [loading, frameworks.length]);
 
+    // AUTO-REPAIR: If frameworks exist but have no data (e.g. legacy link), Seed them
+    useEffect(() => {
+        const checkAndRepair = async () => {
+            if (!loading && frameworks.length > 0) {
+                const isoFw = frameworks.find(f => f.code.includes("ISO") || f.code.includes("ISO27001"));
+
+                // If ISO exists but has < 10 controls, it's likely unseeded.
+                if (isoFw && isoFw.total_controls < 10) {
+                    console.log("Detected unseeded framework. Triggering auto-repair...");
+                    try {
+                        // Show some UI indication if desirable, or just do it silently and refresh
+                        await api.post(`/frameworks/${isoFw.id}/seed-controls`);
+                        // Refresh data to show results
+                        fetchData();
+                    } catch (e) {
+                        console.error("Auto-repair failed:", e);
+                    }
+                }
+            }
+        };
+
+        checkAndRepair();
+    }, [loading, frameworks]);
+
     // CHECK IF NEEDS SETUP
     // If we have no frameworks, show initializing state
     if (!loading && frameworks.length === 0) {
