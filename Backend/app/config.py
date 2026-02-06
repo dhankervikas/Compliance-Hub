@@ -1,8 +1,3 @@
-notepad Backend\app\config.py
-```
-
-### Step 2: Select All (Ctrl+A), Delete everything, then paste this:
-```
 from pydantic_settings import BaseSettings
 from typing import Optional, List, Any
 from pydantic import field_validator, ValidationInfo
