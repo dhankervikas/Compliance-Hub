@@ -205,16 +205,41 @@ app.include_router(
     tags=["Requirements"]
 )
 
-# MOUNT STATIC FILES FOR REPORTS
+# MOUNT STATIC FILES FOR REPORTS AND SERVE REACT FRONTEND
 try:
     from fastapi.staticfiles import StaticFiles
+    from fastapi.responses import FileResponse
     import os
+    
     static_dir = os.path.join(os.path.dirname(__file__), "static")
     if not os.path.exists(static_dir):
         os.makedirs(static_dir)
-    app.mount("/static", StaticFiles(directory=static_dir), name="static")
+    app.mount("/api-static", StaticFiles(directory=static_dir), name="static")
+
+    # SERVE REACT FRONTEND
+    frontend_dir = os.path.join(os.path.dirname(__file__), "..", "static_frontend")
+    frontend_dir = os.path.abspath(frontend_dir)
+    
+    if os.path.exists(frontend_dir):
+        react_static = os.path.join(frontend_dir, "static")
+        if os.path.exists(react_static):
+            app.mount("/static", StaticFiles(directory=react_static), name="react-static")
+        
+        @app.get("/{full_path:path}")
+        async def serve_react(full_path: str):
+            if full_path.startswith("api/") or full_path.startswith("docs") or full_path.startswith("openapi"):
+                return None
+            file_path = os.path.join(frontend_dir, full_path)
+            if os.path.isfile(file_path):
+                return FileResponse(file_path)
+            return FileResponse(os.path.join(frontend_dir, "index.html"))
+        
+        print(f"[STARTUP] React frontend mounted from: {frontend_dir}")
+    else:
+        print(f"[STARTUP] No frontend build found at: {frontend_dir}")
+
 except Exception as e:
-    print(f"Warning: Could not mount static directory: {e}")
+    print(f"Warning: Could not mount static/frontend directory: {e}")
 
 @app.get("/api/v1/health-debug")
 def health_debug():
