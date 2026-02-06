@@ -44,7 +44,7 @@ class Settings(BaseSettings):
             return v
         raise ValueError(v)
     OPENAI_API_KEY: Optional[str] = None
-    class Config:
-    case_sensitive = True
-    extra = "ignore"
+   class Config:
+        case_sensitive = True
+        extra = "ignore"
 settings = Settings()
