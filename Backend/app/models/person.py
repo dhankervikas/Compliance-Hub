@@ -30,7 +30,7 @@ class Person(Base):
     job_title = Column(String, nullable=True)
     department = Column(String, nullable=True)
     
-    tenant_id = Column(String, ForeignKey("tenants.id"), nullable=False, default="default")
+    tenant_id = Column(String, ForeignKey("tenants.internal_tenant_id"), nullable=False, default)
     
     last_synced_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     created_at = Column(DateTime(timezone=True), server_default=func.now())
