@@ -1741,8 +1741,7 @@ const FrameworkDetail = () => {
                                     </div>
                                 );
                             })
-                        )
-                        ) : (
+                        )) : (
                             /* STANDARD VIEW */
                             processes.length > 0 ? processes.map(process => (
                         <div key={process.id} className="text-center py-12">Standard View Loaded</div>
