@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import config from '../config';
+import SecurityStatusBadge from './SecurityStatusBadge';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
-  const navigate = useNavigate();
-  const { login, user } = useAuth();
 
-  // Redirect if already logged in
+  const navigate = useNavigate();
+  const { login, user, loading: authLoading } = useAuth();
+
   useEffect(() => {
-    // DEBUGGING: Show the API URL to the user
-      if (user) {
-          navigate('/dashboard', { replace: true });
+    if (user && !authLoading) {
+      if (window.location.pathname !== '/login') return;
+
+      if (user.username === 'admin') {
+        navigate('/super-admin', { replace: true });
+      } else {
+        const tenantId = user.tenant_id || 'default';
+        navigate(`/t/${tenantId}/dashboard`, { replace: true });
       }
-  }, [user, navigate]);
+    }
+  }, [user, authLoading, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,15 +33,26 @@ const Login = () => {
 
     try {
       const result = await login(username, password);
-      
+
       if (result.success) {
-        navigate('/dashboard');
+        if (username === 'admin') {
+          navigate('/super-admin');
+        } else {
+          const tenantId = result.user?.tenant_id || 'default';
+          const target = localStorage.getItem('target_tenant_redirect');
+          if (target) {
+            localStorage.removeItem('target_tenant_redirect');
+            navigate(target);
+          } else {
+            navigate(`/t/${tenantId}/dashboard`);
+          }
+        }
       } else {
         setError(result.error || 'Login failed');
+        setLoading(false);
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
-    } finally {
       setLoading(false);
     }
   };
@@ -49,15 +67,18 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
-              {error}
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded break-words">
+              <strong>Error: </strong> {error}
+              {(error?.includes("Network") || error?.includes("failed")) && (
+                <div className="mt-2 text-xs text-gray-500">
+                  Target: {config.API_BASE_URL}
+                </div>
+              )}
             </div>
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Username
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
             <input
               type="text"
               value={username}
@@ -69,9 +90,7 @@ const Login = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Password
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
             <input
               type="password"
               value={password}
@@ -91,7 +110,7 @@ const Login = () => {
           </button>
         </form>
 
-
+        <SecurityStatusBadge />
       </div>
     </div>
   );
