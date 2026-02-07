@@ -113,7 +113,7 @@ const COSO_DESCRIPTIONS = {
     "Physical controls": "Annex A.7: Physical Security",
     "Technological controls": "Annex A.8: Technological Security",
 
-    "DEFAULT": [{ name: "AUTOGENERATE_BY_AI", type: "AI", desc: "Generating Actionable Requirements..." }]
+    "DEFAULT": [{ name: "AUTOGENERATE_BY_GENIE", type: "AI", desc: "Genie is Generating Actionable Requirements..." }]
 };
 
 // GRANULAR EVIDENCE MAPPING (Keyed by Control Title Partial Match or Exact ID)
@@ -1012,7 +1012,7 @@ const FrameworkDetail = () => {
             if (selectedControl.control_id) {
                 fetchVersionHistory(formatControlId(selectedControl.control_id));
             }
-            setGeneratedPolicy(null); // Reset AI draft
+            setGeneratedPolicy(null); // Reset Genie draft
             setLatestAiAnalysis(null);
         } else {
             setEvidenceList([]);
@@ -1105,7 +1105,7 @@ const FrameworkDetail = () => {
             alert(`Reviewing ${evidence.filename}... This may take a few seconds.`);
             const result = await AIService.reviewDocument(selectedControl.id, evidence.id);
             console.log("Review Result:", result);
-            alert(`AI Verdict: ${result.status} \n\nReasoning: ${result.reasoning} `);
+            alert(`Genie Verdict: ${result.status} \n\nReasoning: ${result.reasoning} `);
             fetchEvidence(selectedControl.id);
         } catch (error) {
             alert("Review Failed: " + error.message);
@@ -1154,9 +1154,9 @@ const FrameworkDetail = () => {
             e.target.value = null; // Reset input
 
             if (response.data.ai_analysis && response.data.ai_analysis.final_verdict === "PASS") {
-                alert("AI Review Passed! Document forwarded to Admin for approval.");
+                alert("Genie Review Passed! Document forwarded to Admin for approval.");
             } else {
-                alert("AI Gap Analysis Complete. Please review the findings.");
+                alert("Genie Gap Analysis Complete. Please review the findings.");
             }
 
         } catch (error) {
@@ -1289,12 +1289,12 @@ const FrameworkDetail = () => {
 
                             </div>
 
-                            {/* --- AI DOCUMENT REVIEWER INSIGHTS --- */}
+                            {/* --- GENIE DOCUMENT REVIEWER INSIGHTS --- */}
                             {latestAiAnalysis && (
                                 <div className={`mt-6 p-4 rounded-lg border ${latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
                                     <div className="flex items-center justify-between mb-2">
                                         <h4 className={`text-sm font-bold ${latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'text-green-800' : 'text-red-800'}`}>
-                                            AI Document Analysis
+                                            Genie Document Analysis
                                         </h4>
                                         <span className="text-xs font-mono bg-white px-2 py-1 rounded border">
                                             {latestAiAnalysis.final_verdict === 'PASS' && latestAiAnalysis.date_check_passed ? 'PASSED' : 'ACTION REQUIRED'}
@@ -1310,7 +1310,7 @@ const FrameworkDetail = () => {
                                                     Compliance Attestation Card
                                                 </h4>
                                                 <span className="text-[10px] font-bold px-2 py-0.5 bg-green-100 text-green-800 rounded-full border border-green-200">
-                                                    EVIDENCE VERIFIED BY AI
+                                                    EVIDENCE VERIFIED BY GENIE
                                                 </span>
                                             </div>
 
@@ -1330,7 +1330,7 @@ const FrameworkDetail = () => {
 
                                                 {/* SUMMARY */}
                                                 <div>
-                                                    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">AI Witness Statement</span>
+                                                    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Genie Witness Statement</span>
                                                     <p className="text-sm text-gray-700 italic border-l-2 border-green-500 pl-3 py-1 bg-green-50/50 rounded-r">
                                                         "{latestAiAnalysis.summary || "Evidence context extracted and verified."}"
                                                     </p>
@@ -1558,7 +1558,7 @@ const FrameworkDetail = () => {
                                     "Asset Management",
                                     "Access Control (IAM)",
                                     "Physical Security",
-                                    "Operations (General)",
+                                    "Operations",
                                     "Configuration Management",
                                     "Cryptography",
                                     "Logging & Monitoring",

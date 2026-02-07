@@ -8,7 +8,7 @@ const ControlDetailModal = ({ control, onClose, onUpdate }) => {
     const [aiAnalysis, setAiAnalysis] = useState(null);
     const [loadingAi, setLoadingAi] = useState(false);
 
-    // Mock AI Analysis fetch if backend endpoint exists
+    // Mock Genie Analysis fetch if backend endpoint exists
     const fetchAiAnalysis = async () => {
         setLoadingAi(true);
         try {
@@ -27,7 +27,7 @@ const ControlDetailModal = ({ control, onClose, onUpdate }) => {
             }, 1000);
 
         } catch (err) {
-            console.error("AI Analysis failed", err);
+            console.error("Genie Analysis failed", err);
             setLoadingAi(false);
         }
     };
@@ -76,7 +76,7 @@ const ControlDetailModal = ({ control, onClose, onUpdate }) => {
                         className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'ai' ? 'border-purple-600 text-purple-600' : 'border-transparent text-gray-500 hover:text-gray-700'
                             }`}
                     >
-                        <Brain className="w-4 h-4" /> AI Insight
+                        <Brain className="w-4 h-4" /> Genie Insight
                     </button>
                 </div>
 
@@ -143,7 +143,7 @@ const ControlDetailModal = ({ control, onClose, onUpdate }) => {
 
                                 {(!control.ai_requirements_json && !aiAnalysis) && (
                                     <div className="text-center py-8 text-gray-400 italic">
-                                        No implementation tasks defined. Run AI Analysis to generate.
+                                        No implementation tasks defined. Run Genie Analysis to generate.
                                     </div>
                                 )}
                             </div>

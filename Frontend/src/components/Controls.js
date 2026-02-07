@@ -168,7 +168,7 @@ const Controls = () => {
                                         {isRowExpanded && (
                                             <div className="px-16 py-6 bg-gray-50 border-t border-gray-100 grid grid-cols-1 lg:grid-cols-2 gap-8 animate-slide-in">
 
-                                                {/* Left: Info & AI */}
+                                                {/* Left: Info & Genie */}
                                                 <div className="space-y-4">
                                                     <div>
                                                         <h4 className="text-xs font-bold text-gray-500 uppercase mb-2">Description</h4>
@@ -177,7 +177,7 @@ const Controls = () => {
 
                                                     <div className="bg-white p-4 rounded-lg border border-purple-100 shadow-sm">
                                                         <div className="flex items-center gap-2 mb-2 text-purple-700 font-semibold text-sm">
-                                                            <Bot className="w-4 h-4" /> AI Analysis
+                                                            <Bot className="w-4 h-4" /> Genie Analysis
                                                         </div>
                                                         {assessments[control.id] ? (
                                                             <div className="text-sm">

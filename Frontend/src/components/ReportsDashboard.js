@@ -165,7 +165,7 @@ const ReportsDashboard = () => {
 
         const filtered = data.filter(row => {
             const matchesSearch =
-                row["AI Control Title"]?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                row["Genie Control Title"]?.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 row["Mapped ISO 42001 ID"]?.toLowerCase().includes(searchTerm.toLowerCase());
 
             const matchesModule = selectedModule === 'All' || row["AI Category"] === selectedModule;
@@ -179,7 +179,7 @@ const ReportsDashboard = () => {
                 <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                     <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                         <TrendingUp className="text-indigo-500 w-5 h-5" />
-                        AI Framework to ISO 42001 Mapping
+                        Genie Framework to ISO 42001 Mapping
                     </h3>
 
                     <div className="flex flex-wrap gap-2">
@@ -215,7 +215,7 @@ const ReportsDashboard = () => {
                     <table className="w-full text-sm text-left">
                         <thead className="text-xs text-gray-500 uppercase bg-gray-50 sticky top-0 z-10 shadow-sm">
                             <tr>
-                                <th className="px-4 py-3 bg-gray-50">AI ID & Domain</th>
+                                <th className="px-4 py-3 bg-gray-50">Genie ID & Domain</th>
                                 <th className="px-4 py-3 bg-gray-50">Control Details</th>
                                 <th className="px-4 py-3 bg-gray-50">Requirements</th>
                                 <th className="px-4 py-3 bg-gray-50">ISO 42001 Match</th>
@@ -235,7 +235,7 @@ const ReportsDashboard = () => {
 
                                     {/* Description (Title) */}
                                     <td className="px-4 py-3 min-w-[200px]">
-                                        <div className="font-medium text-gray-800">{row["AI Control Title"]}</div>
+                                        <div className="font-medium text-gray-800">{row["Genie Control Title"]}</div>
                                     </td>
 
                                     {/* Requirements */}
@@ -326,7 +326,7 @@ const ReportsDashboard = () => {
                             className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-indigo-700 transition-colors shadow-lg"
                         >
                             <TrendingUp className="w-4 h-4" />
-                            AI Standards Mapping (.xlsx)
+                            Genie Standards Mapping (.xlsx)
                         </a>
                     </div>
                 </div>

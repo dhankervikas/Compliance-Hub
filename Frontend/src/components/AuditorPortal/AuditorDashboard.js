@@ -585,7 +585,7 @@ const AuditorDashboard = () => {
                 "Asset Management",
                 "Access Control (IAM)",
                 "Physical Security",
-                "Operations (General)",
+                "Operations",
                 "Configuration Management",
                 "Cryptography",
                 "Logging & Monitoring",
@@ -751,14 +751,14 @@ const AuditorDashboard = () => {
                                 <Shield className="w-8 h-8" />
                             </div>
                             <h3 className="text-2xl font-bold text-gray-900 mb-2">ISO 42001:2023</h3>
-                            <p className="text-gray-500 mb-6 font-medium">AI Management System</p>
+                            <p className="text-gray-500 mb-6 font-medium">Management System</p>
 
                             <div className="space-y-2">
                                 <div className="flex items-center gap-2 text-sm text-gray-600">
                                     <CheckCircle className="w-4 h-4 text-green-500" /> Clauses 4-10
                                 </div>
                                 <div className="flex items-center gap-2 text-sm text-gray-600">
-                                    <CheckCircle className="w-4 h-4 text-green-500" /> Annex A (AI Controls)
+                                    <CheckCircle className="w-4 h-4 text-green-500" /> Annex A (Controls)
                                 </div>
                             </div>
 

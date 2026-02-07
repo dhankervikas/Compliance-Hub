@@ -328,7 +328,7 @@ const TenantOnboardingWizard = () => {
                                 <label className="block text-sm font-medium text-slate-400 mb-1">AIMS Scope (Clause 4.1)</label>
                                 <textarea
                                     className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 outline-none h-24"
-                                    placeholder="Describe the boundaries of your AI Management System..."
+                                    placeholder="Describe the boundaries of your Management System..."
                                     value={formData.aims_scope}
                                     onChange={e => setFormData({ ...formData, aims_scope: e.target.value })}
                                 />
@@ -338,7 +338,7 @@ const TenantOnboardingWizard = () => {
                                 <label className="block text-sm font-medium text-slate-400 mb-1">Security Leader Role (Clause 5.3)</label>
                                 <input
                                     className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 outline-none"
-                                    placeholder="e.g. CISO, AI Ethics Officer"
+                                    placeholder="e.g. CISO, Ethics Officer"
                                     value={formData.security_leader_role}
                                     onChange={e => setFormData({ ...formData, security_leader_role: e.target.value })}
                                 />
@@ -351,7 +351,7 @@ const TenantOnboardingWizard = () => {
                                     checked={formData.existing_policies}
                                     onChange={e => setFormData({ ...formData, existing_policies: e.target.checked })}
                                 />
-                                <span className="text-slate-300 text-sm">We have existing AI security policies to import</span>
+                                <span className="text-slate-300 text-sm">We have existing security policies to import</span>
                             </label>
                         </div>
                     )}

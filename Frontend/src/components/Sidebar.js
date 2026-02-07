@@ -53,7 +53,7 @@ const Sidebar = () => {
             key: 'document',
             label: 'DOCUMENT',
             items: [
-                { label: 'Policies', path: `${baseUrl}/policies`, icon: FileText },
+                { label: 'Policy Library', path: `${baseUrl}/policies`, icon: FileText },
                 { label: 'Documents', path: `${baseUrl}/documents`, icon: ShieldCheck },
                 { label: 'Evidence', path: `${baseUrl}/evidence`, icon: Upload },
                 { label: 'Risk management', path: `${baseUrl}/risk`, icon: AlertTriangle },

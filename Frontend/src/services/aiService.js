@@ -29,7 +29,7 @@ export const AIService = {
 
             return response.data.content;
         } catch (error) {
-            console.error("AI Generation Failed:", error);
+            console.error("Genie Generation Failed:", error);
             throw new Error("Failed to generate policy. Please try again.");
         }
     },
@@ -59,7 +59,7 @@ export const AIService = {
 
             return response.data;
         } catch (error) {
-            console.error("AI Analysis Failed:", error);
+            console.error("Genie Analysis Failed:", error);
             return null;
         }
     },

@@ -140,8 +140,8 @@ const PolicyEditor = ({ policy, masterContent, onRestore, onClose, onSave, readO
             });
             editor.commands.setContent(marked.parse(res.data.content));
         } catch (error) {
-            console.error("AI Generation failed", error);
-            alert("AI Generation failed. Please try again.");
+            console.error("Genie Generation failed", error);
+            alert("Genie Generation failed. Please try again.");
         } finally {
             setIsGenerating(false);
         }
@@ -168,7 +168,7 @@ const PolicyEditor = ({ policy, masterContent, onRestore, onClose, onSave, readO
             editor.commands.insertContent(newText);
         } catch (error) {
             console.error("Rewrite failed", error);
-            alert("AI Rewrite failed.");
+            alert("Genie Rewrite failed.");
         } finally {
             setRewriteLoading(false);
         }

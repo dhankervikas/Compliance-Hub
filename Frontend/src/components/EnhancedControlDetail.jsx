@@ -310,7 +310,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
         <div style={{ ...styles.modal, padding: '60px', textAlign: 'center' }}>
           <div style={{ fontSize: '32px', marginBottom: '16px' }}>⚙️</div>
           <div style={{ fontSize: '15px', color: '#64748B', fontWeight: 500 }}>
-            {generatingReqs ? 'AI is generating requirements...' : 'Loading control...'}
+            {generatingReqs ? 'Genie is generating requirements...' : 'Loading control...'}
           </div>
           <div style={{ fontSize: '12px', color: '#94A3B8', marginTop: '8px' }}>
             First time takes 3-5 seconds. Cached after that.
@@ -412,7 +412,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                   📄 Upload Evidence for this Control
                 </div>
                 <div style={{ fontSize: '12px', color: '#64748B', marginBottom: '10px' }}>
-                  One document can satisfy multiple requirements. Upload once — AI will check which requirements are met.
+                  One document can satisfy multiple requirements. Upload once — Genie will check which requirements are met.
                 </div>
 
                 {/* Staged file for control-level */}
@@ -457,7 +457,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                         Choose File or Drag & Drop
                       </div>
                       <div style={{ fontSize: '11px', color: '#94A3B8' }}>
-                        PDF, Word, Excel, PNG • AI reviews against all requirements
+                        PDF, Word, Excel, PNG • Genie reviews against all requirements
                       </div>
                     </label>
                   </div>
@@ -481,7 +481,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                     marginTop: '10px', color: '#FFF',
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                      <span style={{ fontSize: '13px', fontWeight: 700 }}>⚡ AI Evidence Review</span>
+                      <span style={{ fontSize: '13px', fontWeight: 700 }}>⚡ Genie Evidence Review</span>
                       <StatusBadge status={aiReviewDetail.review.final_verdict || 'PENDING'} />
                     </div>
                     {aiReviewDetail.review.summary && (
@@ -525,7 +525,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                 </div>
                 <button
                   onClick={() => {
-                    if (window.confirm('This will regenerate all requirements using AI. Existing data will be replaced. Continue?')) {
+                    if (window.confirm('This will regenerate all requirements using Genie. Existing data will be replaced. Continue?')) {
                       fetchRequirements(true);
                     }
                   }}
@@ -714,7 +714,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                                   Choose File or Drag & Drop
                                 </div>
                                 <div style={{ fontSize: '11px', color: '#94A3B8' }}>
-                                  PDF, Word, Excel, PNG supported • AI will review after upload
+                                  PDF, Word, Excel, PNG supported • Genie will review after upload
                                 </div>
                               </label>
                             </div>
@@ -740,7 +740,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                           }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                               <span style={{ fontSize: '13px', fontWeight: 700 }}>
-                                ⚡ AI Evidence Review
+                                ⚡ Genie Evidence Review
                               </span>
                               <StatusBadge status={aiReviewDetail.review.final_verdict || 'PENDING'} />
                             </div>
@@ -946,7 +946,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                     Generate Audit-Ready Policy
                   </div>
                   <div style={{ fontSize: '13px', color: '#64748B', marginBottom: '16px' }}>
-                    AI will create a professional policy document for this control,
+                    Genie will create a professional policy document for this control,
                     ready for review and approval.
                   </div>
                   <button onClick={handleGeneratePolicy} style={styles.btn('primary')}>
@@ -958,7 +958,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
               {policyStatus === 'generating' && (
                 <div style={{ ...styles.card, textAlign: 'center', padding: '30px' }}>
                   <div style={{ fontSize: '28px', marginBottom: '8px' }}>⚙️</div>
-                  <div style={{ fontSize: '14px', color: '#64748B' }}>AI is drafting your policy...</div>
+                  <div style={{ fontSize: '14px', color: '#64748B' }}>Genie is drafting your policy...</div>
                   <div style={{ fontSize: '12px', color: '#94A3B8' }}>This takes 5-10 seconds</div>
                 </div>
               )}

@@ -113,7 +113,7 @@ const SoAEditor = ({ controls: preLoadedControls }) => {
 
             handleChange(control.control_id, 'justification', res.data.justification);
         } catch (err) {
-            alert("AI Generation Failed");
+            alert("Genie Generation Failed");
         } finally {
             setAiThinking(null);
         }

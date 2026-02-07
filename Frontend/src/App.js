@@ -18,6 +18,7 @@ import ReportsDashboard from './components/ReportsDashboard';
 import StatementOfApplicability from './components/StatementOfApplicability';
 import InitiationWizard from './components/AuditorPortal/InitiationWizard';
 import AuditorDashboard from './components/AuditorPortal/AuditorDashboard';
+import PoliciesDashboard from './components/PoliciesDashboard';
 import Policies from './components/Policies';
 import PolicyDetail from './components/PolicyDetail';
 import PrintLayout from './components/PrintLayout';
@@ -209,7 +210,7 @@ function App() {
                                 <Route path="evidence" element={<Evidence />} />
                                 <Route path="policies" element={
                                     <EntitlementGuard resource="feature" requiredId="policy_management">
-                                        <Policies />
+                                        <PoliciesDashboard />
                                     </EntitlementGuard>
                                 } />
                                 <Route path="policies/:id" element={<PolicyDetail />} />
