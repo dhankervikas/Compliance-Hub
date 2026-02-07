@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import config from '../config';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8002/api/v1';
+const API_BASE = config.API_BASE_URL;
 
 // ─── Status Badge Component ───
 const StatusBadge = ({ status }) => {
