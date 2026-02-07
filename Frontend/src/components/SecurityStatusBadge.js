@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
-import { ShieldCheck, Lock, Users, Activity } from 'lucide-react';
+import { ShieldCheck, Lock, Users, Activity, AlertTriangle } from 'lucide-react';
 
 const SecurityStatusBadge = () => {
     const [status, setStatus] = useState(null);
@@ -16,7 +16,7 @@ const SecurityStatusBadge = () => {
                 console.error("Failed to fetch security status", err);
                 const errorMsg = err.response?.status
                     ? `Status: ${err.response.status}`
-                    : err.message;
+                    : "Connecting..."; // Show connecting instead of error initially
                 setStatus({ error: true, errorMsg });
             } finally {
                 setLoading(false);
@@ -30,37 +30,57 @@ const SecurityStatusBadge = () => {
         return () => clearInterval(interval);
     }, []);
 
-    if (loading) return <div className="text-xs text-gray-400 text-center mt-4">Verifying System Integrity...</div>;
 
-    // Error State
-    if (status?.error) return (
-        <div className="mt-8 border-t border-gray-100 pt-6 text-center">
-            <div className="flex items-center justify-center gap-2 text-xs text-red-500 mb-2">
-                <ShieldCheck size={14} />
-                <span>System Integrity Check Unavailable</span>
-            </div>
-            <p className="text-[10px] text-gray-400">
-                {status.errorMsg || "Please contact support."}
-            </p>
-        </div>
-    );
-
-    if (!status) return null; // Don't show if API fails
-
-    const Indicator = ({ label, active, icon: Icon }) => (
+    // Helper to render indicators (even in mock/loading state if needed)
+    const Indicator = ({ label, active, icon: Icon, loading }) => (
         <div className="flex flex-col items-center gap-1 group cursor-help relative">
-            <div className={`p-1.5 rounded-full transition-all duration-500 ${active ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
+            <div className={`p-1.5 rounded-full transition-all duration-500 ${loading ? 'bg-gray-100 text-gray-400 animate-pulse' : active ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
                 <Icon size={14} />
             </div>
             <span className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">{label}</span>
-            <div className={`w-1.5 h-1.5 rounded-full mt-1 ${active ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
+            <div className={`w-1.5 h-1.5 rounded-full mt-1 ${loading ? 'bg-gray-300' : active ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
 
             {/* Tooltip */}
             <div className="absolute bottom-full mb-2 hidden group-hover:block bg-gray-900 text-white text-xs p-2 rounded w-32 text-center z-10">
-                {active ? `${label} Active` : `${label} Offline`}
+                {loading ? "Checking..." : active ? `${label} Active` : `${label} Offline`}
             </div>
         </div>
     );
+
+    // If completely failed/loading, show a skeleton or "Checking" state instead of nothing
+    if (loading || (!status && !loading)) {
+        return (
+            <div className="mt-8 border-t border-gray-100 pt-6">
+                <div className="flex justify-center gap-8 opacity-50">
+                    <Indicator label="Isolation" loading={true} icon={Users} />
+                    <Indicator label="Encryption" loading={true} icon={Lock} />
+                    <Indicator label="Guard" loading={true} icon={Activity} />
+                </div>
+                <div className="text-center mt-4">
+                    <span className="text-[10px] text-gray-400">Verifying System Integrity...</span>
+                </div>
+            </div>
+        );
+    }
+
+    // Error State (But still show icons in red/offline)
+    if (status?.error) {
+        return (
+            <div className="mt-8 border-t border-gray-100 pt-6">
+                <div className="flex justify-center gap-8">
+                    <Indicator label="Isolation" active={false} icon={Users} />
+                    <Indicator label="Encryption" active={false} icon={Lock} />
+                    <Indicator label="Guard" active={false} icon={Activity} />
+                </div>
+                <div className="text-center mt-4">
+                    <span className="inline-flex items-center gap-1 text-[10px] text-red-500 bg-red-50 px-2 py-1 rounded-full border border-red-100">
+                        <AlertTriangle size={10} />
+                        System Check Unavailable
+                    </span>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="mt-8 border-t border-gray-100 pt-6">
