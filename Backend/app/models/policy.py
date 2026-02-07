@@ -16,6 +16,7 @@ class Policy(Base):
     content = Column(Text, nullable=False) # Markdown/HTML content
     version = Column(String, default="1.0")
     status = Column(String, default="Draft") # Draft, Review, Approved
+    folder = Column(String, default="Uncategorized") # Governance, People, Technology, Operations
     owner = Column(String, default="Compliance Team")
     linked_frameworks = Column(String, nullable=True) # e.g. "ISO 27001, SOC 2"
     

@@ -1,47 +1,35 @@
-
 from app.database import SessionLocal
+from app.models.process import Process
+from app.models.universal_intent import UniversalIntent
+from app.models.intent_framework_crosswalk import IntentFrameworkCrosswalk
 from app.models.control import Control
-from app.models.framework import Framework
-from app.models.process import Process, SubProcess
-from sqlalchemy import func
 
-def check_process_data():
+def debug_data():
     db = SessionLocal()
     try:
-        frameworks = db.query(Framework).all()
-        for fw in frameworks:
-            print(f"\n--- Framework: {fw.name} ({fw.code}) ---")
+        print("--- PROCESSES ---")
+        procs = db.query(Process).all()
+        for p in procs:
+            print(f"ID: {p.id}, Name: {p.name}, FW: {p.framework_code}")
             
-            # Count controls with mapped processes
-            # Join Control -> SubProcess -> Process
-            controls_with_process = db.query(Control).join(Control.sub_processes).filter(
-                Control.framework_id == fw.id
-            ).distinct().count()
-            
-            total_controls = db.query(Control).filter(Control.framework_id == fw.id).count()
-            
-            print(f"Total Controls: {total_controls}")
-            print(f"Controls with Process: {controls_with_process} ({(controls_with_process/total_controls*100) if total_controls else 0:.1f}%)")
-            
-            # List top processes by control count
-            if controls_with_process > 0:
-                top_processes = db.query(
-                    Process.name, func.count(Control.id)
-                ).join(SubProcess, Process.id == SubProcess.process_id)\
-                 .join(Control, Control.sub_processes)\
-                 .filter(Control.framework_id == fw.id)\
-                 .group_by(Process.name)\
-                 .order_by(func.count(Control.id).desc())\
-                 .limit(10).all()
-                
-                print("Top Processes:")
-                for p, c in top_processes:
-                    print(f"  - {p}: {c}")
-            else:
-                print("  (No processes mapped)")
+        print("\n--- UNIVERSAL INTENTS (Sample) ---")
+        intents = db.query(UniversalIntent).limit(20).all()
+        for i in intents:
+            print(f"ID: {i.id}, Category: {i.category}, Text: {i.intent_text}")
+
+        print("\n--- CROSSWALKS (Sample) ---")
+        cws = db.query(IntentFrameworkCrosswalk).limit(20).all()
+        for cw in cws:
+            print(f"IntentID: {cw.intent_id}, Ref: {cw.control_reference}, FW: {cw.framework_id}")
+
+        print("\n--- CONTROLS (Governance vs Operations check) ---")
+        gov_ctrls = db.query(Control).filter(Control.category == "Governance").count()
+        ops_ctrls = db.query(Control).filter(Control.category == "Operations").count()
+        print(f"Governance Controls: {gov_ctrls}")
+        print(f"Operations Controls: {ops_ctrls}")
 
     finally:
         db.close()
 
 if __name__ == "__main__":
-    check_process_data()
+    debug_data()

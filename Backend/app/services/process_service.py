@@ -32,18 +32,32 @@ class ProcessService:
                 "controls": []
             }
             
-            # 3. Resolve Controls via Intent
+            # Track seen controls to avoid duplicates
+            seen_control_ids = set()
+
+            # A. Fetch explicitly mapped controls via SubProcesses
+            for sp in proc.sub_processes:
+                for c in sp.controls:
+                    if c.id not in seen_control_ids:
+                        if c.framework_id == fw.id: # Ensure framework match
+                            proc_data["controls"].append({
+                                "id": c.id,
+                                "control_id": c.control_id,
+                                "title": c.title,
+                                "description": c.description,
+                                "status": c.status,
+                                "framework_id": c.framework_id,
+                                "assignee": {"name": c.owner_rel.name, "initials": c.owner_rel.initials} if c.owner_rel else None
+                            })
+                            seen_control_ids.add(c.id)
+
+            # B. Resolve Controls via Intent (Fallback/Auto-Map)
             # Process.name (Category) -> UniversalIntent.category
-            # UniversalIntent -> Crosswalk -> Control
-            
-            # Find ID range of intents for this process category
-            # Note: This relies on the 'category' string matching. In a stricter schema, we'd use IDs.
             proc_name_clean = proc.name.strip()
             intents = db.query(UniversalIntent).filter(UniversalIntent.category == proc_name_clean).all()
             intent_ids = [i.id for i in intents]
             
             if intent_ids:
-                # Find Crosswalk entries for this framework
                 crosswalks = db.query(IntentFrameworkCrosswalk).filter(
                     IntentFrameworkCrosswalk.intent_id.in_(intent_ids),
                     IntentFrameworkCrosswalk.framework_id == framework_code
@@ -51,7 +65,6 @@ class ProcessService:
                 
                 control_refs = [cw.control_reference for cw in crosswalks]
                 
-                # Fetch actual Controls
                 if control_refs:
                     controls = db.query(Control).filter(
                         Control.framework_id == fw.id,
@@ -59,15 +72,17 @@ class ProcessService:
                     ).all()
                     
                     for c in controls:
-                        proc_data["controls"].append({
-                            "id": c.id,
-                            "control_id": c.control_id,
-                            "title": c.title,
-                            "description": c.description,
-                            "status": c.status,
-                            "framework_id": c.framework_id,
-                            "assignee": {"name": c.owner_rel.name, "initials": c.owner_rel.initials} if c.owner_rel else None
-                        })
+                        if c.id not in seen_control_ids:
+                             proc_data["controls"].append({
+                                "id": c.id,
+                                "control_id": c.control_id,
+                                "title": c.title,
+                                "description": c.description,
+                                "status": c.status,
+                                "framework_id": c.framework_id,
+                                "assignee": {"name": c.owner_rel.name, "initials": c.owner_rel.initials} if c.owner_rel else None
+                            })
+                             seen_control_ids.add(c.id)
             
             result.append(proc_data)
             
