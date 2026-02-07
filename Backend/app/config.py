@@ -89,8 +89,10 @@ class Settings(BaseSettings):
             
             if 'SecretString' in get_secret_value_response:
                 secret = get_secret_value_response['SecretString']
-                print("[CONFIG] Successfully retrieved OPENAI_API_KEY from Secrets Manager.")
-                return secret
+                if secret:
+                    clean_secret = secret.strip()
+                    print(f"[CONFIG] Successfully retrieved OPENAI_API_KEY from Secrets Manager. (Len: {len(clean_secret)})")
+                    return clean_secret
                 
         except ImportError:
             # boto3 not installed (local dev without requirements)
@@ -100,7 +102,7 @@ class Settings(BaseSettings):
             # Log but don't crash - let the app start without AI
             print(f"[CONFIG WARNING] Failed to fetch secret from AWS: {e}")
             
-        return v
+        return v.strip() if v else v
 
     class Config:
         case_sensitive = True
