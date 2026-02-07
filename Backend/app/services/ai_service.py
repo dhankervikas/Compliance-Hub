@@ -517,6 +517,8 @@ def generate_business_text(control_id: str, standard_text: str):
         
         # AGGRESSIVE STRIP: Remove any newlines or spaces from the key
         api_key = str(settings.OPENAI_API_KEY).strip()
+        
+        headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}"
         }
