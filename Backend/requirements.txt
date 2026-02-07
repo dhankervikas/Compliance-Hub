@@ -20,3 +20,4 @@ anthropic>=0.18.0
 gunicorn
 reportlab
 python-docx
+boto3>=1.34.0

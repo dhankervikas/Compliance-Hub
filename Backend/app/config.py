@@ -58,6 +58,50 @@ class Settings(BaseSettings):
 
     OPENAI_API_KEY: Optional[str] = None
 
+    @field_validator("OPENAI_API_KEY", mode='before')
+    def fetch_openai_key(cls, v: Any, info: ValidationInfo) -> Any:
+        """
+        If OPENAI_API_KEY is missing from env vars, try to fetch it from AWS Secrets Manager.
+        """
+        if v:
+            return v
+            
+        # Fallback: Try AWS Secrets Manager
+        try:
+            import boto3
+            from botocore.exceptions import ClientError
+            
+            # Explicitly checking for a secret named 'OPENAI_API_KEY'
+            secret_name = "OPENAI_API_KEY"
+            region_name = os.getenv("AWS_REGION", "us-east-1")
+
+            print(f"[CONFIG] Attempting to fetch '{secret_name}' from AWS Secrets Manager ({region_name})...")
+            
+            session = boto3.session.Session()
+            client = session.client(
+                service_name='secretsmanager',
+                region_name=region_name
+            )
+            
+            get_secret_value_response = client.get_secret_value(
+                SecretId=secret_name
+            )
+            
+            if 'SecretString' in get_secret_value_response:
+                secret = get_secret_value_response['SecretString']
+                print("[CONFIG] Successfully retrieved OPENAI_API_KEY from Secrets Manager.")
+                return secret
+                
+        except ImportError:
+            # boto3 not installed (local dev without requirements)
+            pass
+        except Exception as e:
+            # Catchall (ClientError, NoCredentials, etc)
+            # Log but don't crash - let the app start without AI
+            print(f"[CONFIG WARNING] Failed to fetch secret from AWS: {e}")
+            
+        return v
+
     class Config:
         case_sensitive = True
         extra = "ignore"
