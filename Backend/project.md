@@ -89,6 +89,23 @@ The goal is to transform the traditional ISO 27001 view into a "Process-First" (
 ### 6. Requirements Generating Operational Tasks Instead of Compliance Requirements
 - **Status**: **FIXED**. AI prompt rewritten to generate proper compliance verification checkpoints (e.g., "Policy is approved by top management" instead of "Draft a policy").
 
+## ✅ Resolved Issues (Feb 6, 2026)
+
+### 1. Operations Process Mapping
+- **Status**: **FIXED**. Restored monolithic "Operations" process and mapped specific controls (A.8.1, A.8.7, A.8.10, A.8.19) as requested.
+- **Adjustments**: Moved A.8.12 to Cryptography, A.8.18 to Access Control (IAM).
+
+### 2. Policy Library Implementation
+- **Status**: **COMPLETED**.
+- **Backend**: Added `folder` column to Policy model, created CRUD endpoints (`api/policies.py`).
+- **Frontend**:
+  - **Dashboard**: Folder-based view (Governance, People, etc.) with progress bars.
+  - **Detail View**: Version history, "Send for Acceptance" (mock), and Standard Mappings.
+  - **Sidebar**: Renamed "Policies" to "Policy Library".
+
+### 3. UI Sanitation
+- **Status**: **COMPLETED**. Replaced all "AI" mentions with "Genie" or "System" across dashboards and control details.
+
 ## 🏗️ Architecture
 
 ### API Routes (requirements.py)
