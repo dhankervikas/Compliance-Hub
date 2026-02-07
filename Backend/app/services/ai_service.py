@@ -235,15 +235,43 @@ Source Determination:
 
     # Combined Prompt
     try:
-        if not client:
+        api_key = settings.OPENAI_API_KEY
+        if not api_key:
             raise ValueError("AI Client not initialized (Missing API Key)")
 
-        content = generate_ai_response(
-            system_prompt=system_prompt,
-            user_prompt=user_message,
-            max_tokens=1024,
-            json_mode=True
+        # Direct HTTP Request to bypass SDK connection issues
+        import requests
+        
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}"
+        }
+        
+        payload = {
+            "model": "gpt-4-turbo-preview",
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message}
+            ],
+            "response_format": {"type": "json_object"},
+            "max_tokens": 1024,
+            "temperature": 0.2
+        }
+        
+        print(f"!!! GENERATING WITH PROVIDER: openai - Model: gpt-4-turbo-preview (Direct HTTP) !!!")
+        
+        response = requests.post(
+            "https://api.openai.com/v1/chat/completions",
+            headers=headers,
+            json=payload,
+            timeout=30 # Explicit timeout
         )
+        
+        if response.status_code != 200:
+            raise Exception(f"OpenAI API Error ({response.status_code}): {response.text}")
+            
+        result = response.json()
+        content = result['choices'][0]['message']['content']
         
         # Clean potential markdown wrappers (Redundant if json_mode=True but safe)
         if "```json" in content:
@@ -453,19 +481,48 @@ def generate_business_text(control_id: str, standard_text: str):
         "business_description": "..."
     }}
     """
-    
+    # Combined Prompt
     try:
-        if not client:
-            raise ValueError("AI Client not initialized")
-            
-        content = generate_ai_response(
-            system_prompt=system_prompt,
-            user_prompt=user_message,
-            max_tokens=500,
-            json_mode=True
+        api_key = settings.OPENAI_API_KEY
+        if not api_key:
+            raise ValueError("AI Client not initialized (Missing API Key)")
+
+        # Direct HTTP Request to bypass SDK connection issues
+        import requests
+        import json
+        
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}"
+        }
+        
+        payload = {
+            "model": "gpt-4-turbo-preview",
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message}
+            ],
+            "response_format": {"type": "json_object"},
+            "max_tokens": 1024,
+            "temperature": 0.2
+        }
+        
+        print(f"!!! GENERATING WITH PROVIDER: openai - Model: gpt-4-turbo-preview (Direct HTTP) !!!")
+        
+        response = requests.post(
+            "https://api.openai.com/v1/chat/completions",
+            headers=headers,
+            json=payload,
+            timeout=30 # Explicit timeout
         )
         
-        # Clean markdown
+        if response.status_code != 200:
+            raise Exception(f"OpenAI API Error ({response.status_code}): {response.text}")
+            
+        result = response.json()
+        content = result['choices'][0]['message']['content']
+        
+        # Clean potential markdown wrappers (Redundant if json_mode=True but safe)
         if "```json" in content:
             content = content.replace("```json", "").replace("```", "")
         elif "```" in content:

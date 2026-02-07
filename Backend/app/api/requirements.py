@@ -229,8 +229,8 @@ def get_cross_framework_mapping(
                 c.status,
                 f.name AS framework_name,
                 f.id AS framework_id,
-                ui.name AS intent_name,
-                ui.id AS intent_id
+                ui.category AS intent_name,
+                ui.intent_id AS intent_id
             FROM intent_framework_crosswalk ifc1
             JOIN intent_framework_crosswalk ifc2 
                 ON ifc1.intent_id = ifc2.intent_id 
