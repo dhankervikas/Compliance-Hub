@@ -37,19 +37,43 @@ def generate_ai_response(system_prompt: str, user_prompt: str, max_tokens: int =
     print(f"!!! GENERATING WITH PROVIDER: {PROVIDER} - Model: {MODEL_NAME} !!!")
 
     try:
+        # AGGRESSIVE STRIP: Remove any newlines or spaces from the key
+        # Explicitly fetch from settings or env to ensure we have the latest
+        raw_key = settings.OPENAI_API_KEY or os.getenv("OPENAI_API_KEY")
+        if not raw_key:
+             raise ValueError("API Key is missing")
+        
+        api_key = str(raw_key).strip()
+
         if PROVIDER == "openai":
-            messages = [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ]
-            response = client.chat.completions.create(
-                model=MODEL_NAME,
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=0.7,
-                response_format={"type": "json_object"} if json_mode else None
+            import requests
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}"
+            }
+            
+            payload = {
+                "model": MODEL_NAME or "gpt-4-turbo-preview",
+                "messages": [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
+                "response_format": {"type": "json_object"} if json_mode else None,
+                "max_tokens": max_tokens,
+                "temperature": 0.7
+            }
+            
+            response = requests.post(
+                "https://api.openai.com/v1/chat/completions",
+                headers=headers,
+                json=payload,
+                timeout=30
             )
-            return response.choices[0].message.content
+            
+            if response.status_code != 200:
+                 raise Exception(f"OpenAI API Error ({response.status_code}): {response.text}")
+                 
+            return response.json()['choices'][0]['message']['content']
             
     except Exception as e:
         print(f"AI Generation Error ({PROVIDER}): {e}")
@@ -491,7 +515,8 @@ def generate_business_text(control_id: str, standard_text: str):
         import requests
         import json
         
-        headers = {
+        # AGGRESSIVE STRIP: Remove any newlines or spaces from the key
+        api_key = str(settings.OPENAI_API_KEY).strip()
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}"
         }
