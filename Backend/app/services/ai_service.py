@@ -158,23 +158,22 @@ def suggest_evidence(title: str, description: str, category: str, control_id: in
                     "ai generated"
                 ]
 
-               # --- CONSISTENCY LOCK START ---
+                # --- CONSISTENCY LOCK START ---
                 if control.ai_requirements_json and not regenerate:
                     requirements = json.loads(control.ai_requirements_json)
                     explanation = control.ai_explanation or "Regulatory Intent Summary"
                     
-                    # Check if the data is actually useful (more than 0 requirements)
-                    if len(requirements) > 0:
+                    # SELF-HEALING: If this was a System Generated Fallback, and we have AI now, REGENERATE.
+                    if "System Generated" in explanation or "Standard Compliance Requirement" in explanation:
+                         print(f"DEBUG: Self-Healing triggered for Control {control_id} (Replacing Fallback)")
+                         # Do not return. Fall through to AI generation.
+                    elif len(requirements) > 0:
                         print(f"DEBUG: CONSISTENCY LOCK - Using stored data for {control_id}")
                         return {
                             "explanation": explanation,
                             "requirements": requirements
                         }
                     # --- CONSISTENCY LOCK END ---
-                    return {
-                        "explanation": explanation,
-                        "requirements": requirements
-                    }
             except Exception as e:
                 print(f"Error parsing stored JSON: {e}")
                 # Fallthrough to generate new
