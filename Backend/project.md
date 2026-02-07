@@ -143,7 +143,8 @@ The goal is to transform the traditional ISO 27001 view into a "Process-First" (
 
 ## 🛠 Active Errors & Unresolved Tasks
 
-*None at this time. System is fully operational.*
+### 1. CI/CD Pipeline Conflict
+- **Status**: **ATTEMPTED FIX**. GitHub Actions fails to push because it doesn't pull latest changes first. Added `git pull --rebase` to `build-frontend.yml`. Verification pending next build.
 
 ## 📋 Next Steps (Roadmap)
 1. ⭐ **Bulk Requirements Generation** — Generate requirements for all 123 controls in one batch
