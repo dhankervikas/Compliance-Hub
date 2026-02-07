@@ -604,97 +604,82 @@ def analyze_gap(control_title: str, requirements: list, uploaded_files: list):
             "reasoning": "AI Service unavailable."
         }
 
+from app.services.policy_templates import get_master_template
+
 def generate_premium_policy(control_title: str, policy_name: str, company_profile: dict, control_description: str):
     """
-    Generates a professional, ISO 27001:2022 compliant policy with context-awareness and self-correction.
+    The Compliance Compiler Engine.
+    Uses 'Master Templates' (Legal Bones) + 'Tenant Profile' (Context) + AI (Compiler) to generate
+    Audit-Ready policies without hallucination or fluff.
     """
-    # 1. Construct Prompt with Context & Guardrails
-    profile_str = "\n".join([f"- {k}: {v}" for k, v in company_profile.items()])
+    # 1. Retrieve the Master Template (The Static Library)
+    master_template = get_master_template(policy_name)
     
-    system_prompt = (
-        "You are an expert Chief Compliance Officer (CCO) and Legal Counsel for a regulated enterprise.\\n"
-        "Your task is to draft a 'Comprehensive Governance Policy' that strictly adheres to the Master Template below.\\n"
-        "DO NOT create a simple checklist or operating procedure. You are writing Law for the organization.\\n\\n"
-        "REQUIRED STRUCTURE (Use these exact headers):\\n"
-        "1. Policy Statement (The Mandate)\\n"
-        "2. Scope & Applicability (Who/What)\\n"
-        "3. Detailed Regulatory Clauses (The Core Rules)\\n"
-        "4. Enforcement & Penalties (Legal Consequences)\\n"
-        "5. Technical Standards (ISO/SOC2 Ref)\\n\\n"
-        "TONE & STYLE:\\n"
-        "- Authoritative: Use 'shall', 'must', 'is strictly prohibited'.\\n"
-        "- Specific: Do not say 'audits should happen'. Say 'The Internal Audit function shall execute an independent review annually'.\\n"
-        "- Comprehensive: Include details like 'Independence of Auditors', 'Audit Universe', 'Reporting obligations'.\\n"
-        "- No Introductory Fluff: Start immediately with the Metadata Table."
-    )
+    # 2. Build the Tenant Profile (The Dynamic Input)
+    # Ensure specific fields exist or imply them
+    industry = company_profile.get("Industry", "Technology")
+    stack = company_profile.get("Tech Stack", "AWS, Office 365") # Default if missing
     
-    owner = company_profile.get("Policy Owner", "Chief Compliance Officer")
-    approver = company_profile.get("Policy Approver", "Board of Directors")
-    
-    user_message = f"""
-    Draft the official "{policy_name}" based on the control requirements below.
-    
-    ## Context Profile
-    {profile_str}
-    
-    ## Control Requirements
-    {control_description}
-    
-    ## DIRECTIVES:
-    1. **Policy Statement**: Write a high-level mandate establishing this specific security domain as a corporate priority.
-    2. **Detailed Regulatory Clauses**: Break down the control into specific sub-policies. For example, if this is about Auditing, include clauses for 'Audit Independence', 'Frequency', 'Reporting', and 'Follow-up'.
-    3. **Enforcement**: Include standard legal language: "Violations of this policy may result in disciplinary action, up to and including termination of employment and legal prosecution."
-    
-    ## REQUIRED METADATA HEADERS (Markdown Table):
-    | Document Control | |
-    | :--- | :--- |
-    | **Classification** | Restricted |
-    | **Owner** | {owner} |
-    | **Approver** | {approver} |
-    | **Version** | 2.0 (Master) |
-    | **Effective Date** | [Current Date] |
+    profile_context = f"""
+    TENANT PROFILE:
+    - Organization: {company_profile.get('Company Name', 'The Organization')}
+    - Industry: {industry}
+    - Tech Stack: {stack}
+    - Policy Owner: {company_profile.get('Policy Owner', 'CISO')}
+    - Approver: {company_profile.get('Policy Approver', 'Board Directors')}
+    """
 
-    Start with the Table, then the Headers.
+    # 3. System Role - The Principal GRC Architect (The Compiler)
+    system_prompt = (
+        "You are the Principal GRC Architect (The Compliance Compiler).\\n"
+        "Your duty is to transform high-level compliance frameworks into enforceable, technical, and audit-ready policies.\\n"
+        "You must prioritize measurability and evidence-based control statements.\\n\\n"
+        "OPERATIONAL GUARDRAILS:\\n"
+        "1. REFERENCE THE MASTER: Use the provided Master Template as your structural base. Do not deviate from its headers.\\n"
+        "2. CONTEXTUAL INJECTION: Replace all placeholders (e.g., {{CLOUD_STACK}}, {{PESTEL_POLITICAL}}) with specific, realistic data for the Tenant's Industry.\\n"
+        "3. PESTEL ALIGNMENT (Clause 4): Look up current 2024-2026 geopolitical/tech trends for the [Tenant Industry]. List 3 specific external risks.\\n"
+        "4. STATUTORY MAPPING: Based on the Tenant's implied geography (assumed Global/US/EU mix if unknown), MUST include GDPR Art. 32 or CCPA requirements where relevant.\\n"
+        "5. EVIDENCE DEFINITION: For every MUST/SHALL statement, append: '* **Evidence**: [Specific Artifact Description]'.\\n"
+        "6. DEPTH: If encryption is mentioned, specify 'AES-256' and 'TLS 1.3'. If Access Control, specify 'RBAC' and 'MFA'."
+    )
+
+    # 4. The Compiler Instruction
+    user_message = f"""
+    COMPILE THIS POLICY.
+
+    INPUTS:
+    1. **Master Template**:
+    ```markdown
+    {master_template}
+    ```
+
+    2. **Tenant Profile**:
+    {profile_context}
+
+    3. **Control Requirement (The Trigger)**:
+    {control_title}: {control_description}
+
+    INSTRUCTIONS:
+    - "Compile" the final policy by filling in all {{PLACEHOLDERS}} in the Master Template with intelligent, industry-specific context.
+    - If the template has a '2024 Climate Change Amendment' placeholder, generating a specific statement on how climate change affects {industry} availability.
+    - Keep the "Compliance Mapping" table intact and populate it with real mappings.
+    - Output the FULLY COMPILED Markdown document.
     """
     
     try:
         if not client:
             raise ValueError("AI Client not initialized")
 
-        # Generation Step
-        draft_content = generate_ai_response(
+        # Compile Step
+        return generate_ai_response(
             system_prompt=system_prompt,
             user_prompt=user_message,
-            max_tokens=2500
+            max_tokens=3500 # Increased for full policy compilation
         )
-        
-        # 2. Self-Correction / Audit Step
-        audit_system_prompt = "You are a strict Policy Reviewer."
-        
-        audit_message = f"""
-        Review the following policy draft against the requirement: "{control_title}".
-        
-        Draft:
-        {draft_content[:6000]}... (truncated)
-        
-        CHECKLIST:
-        1. Does it mention specific technologies ({profile_str})?
-        2. Is there a 'Compliance Mapping' table at the end?
-        3. Is the tone professional?
-        
-        If PERFECT, return the draft as is.
-        If FLAWS found, rewrite the specific sections to fix them and return the IMPROVED version.
-        """
-        
-        # We'll skip the second call for speed unless strictly requested, Claude Sonnet is usually very good.
-        # But leaving the structure here if we needed to uncomment it.
-        # For now, just return the draft.
-        
-        return draft_content
 
     except Exception as e:
-        print(f"Policy Generation Error: {e}")
-        return f"## Error Generating Policy\n\nReason: {str(e)}"
+        print(f"Policy Compiler Error: {e}")
+        return f"## Error compiling Policy\n\nReason: {str(e)}"
 
 def generate_artifact_content(control_title: str, artifact_name: str, context: str):
     # Legacy wrapper
