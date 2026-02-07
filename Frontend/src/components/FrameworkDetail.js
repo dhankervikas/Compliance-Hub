@@ -80,7 +80,9 @@ const COSO_DESCRIPTIONS = {
     "Asset Management": "Annex A.5, A.7, A.8: Inventory, Responsibility, and Media Handling",
     "Access Control (IAM)": "Annex A.5 & A.8: Logical Access, User Rights, and Authentication",
     "Physical Security": "Annex A.7: Secure Areas, Equipment, and Physical Entry",
-    "Operations (General)": "Annex A.8: Malware, Backup, Logging, and Data Protection",
+    "Physical Security": "Annex A.7: Secure Areas, Equipment, and Physical Entry",
+    "Operations": "Annex A.8: Malware, Backup, Logging, and Data Protection",
+    "Operations (General)": "Annex A.8: Malware, Backup, Logging, and Data Protection", // Legacy Mapping
     "Configuration Management": "Annex A.8.9: Secure Configurations",
     "Cryptography": "Annex A.8.24: Encryption and Key Management",
     "Logging & Monitoring": "Annex A.8.15-16: Event Logging and System Monitoring",
@@ -548,7 +550,9 @@ const FrameworkDetail = () => {
             // Filter by Framework AND check for SoA Applicability
             let allControls = ctrlRes.data
                 .filter(c => c.framework_id === parseInt(id))
-                .filter(c => c.is_applicable !== false);
+                .filter(c => c.is_applicable !== false)
+                // HOTFIX: Remove Placeholder Data
+                .filter(c => !c.title.includes("Placeholder Control") && c.control_id !== 'ISO27001-1-');
 
             // SOC 2 DYNAMIC SCOPING FILTER
             if (isSOC2 && scopeSettings.soc2_selected_principles) {
@@ -663,6 +667,9 @@ const FrameworkDetail = () => {
             const grouped = {};
             uniqueControls.forEach(c => {
                 let key;
+
+                // NORMALIZE CATEGORY NAMES
+                if (c.category === "Operations (General)") c.category = "Operations";
 
                 // --- MODE 1: STANDARD VIEW (Strict ISO/SOC2 Structure) ---
                 if (viewMode === 'standard') {
