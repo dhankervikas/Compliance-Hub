@@ -604,50 +604,72 @@ def analyze_gap(control_title: str, requirements: list, uploaded_files: list):
             "reasoning": "AI Service unavailable."
         }
 
-from app.services.policy_templates import get_master_template
+def _get_iso_folder(control_id: str) -> str:
+    """
+    Determines the ISO 27001:2022 Folder based on Control ID.
+    Annex A 5 = Organizational
+    Annex A 6 = People
+    Annex A 7 = Physical
+    Annex A 8 = Technological
+    Clause 4-10 = Governance
+    """
+    if "5." in control_id: return "Annex_A/Organizational"
+    if "6." in control_id: return "Annex_A/People"
+    if "7." in control_id: return "Annex_A/Physical"
+    if "8." in control_id: return "Annex_A/Technological"
+    return "Governance/Clauses"
 
 def generate_premium_policy(control_title: str, policy_name: str, company_profile: dict, control_description: str):
     """
-    The Compliance Compiler Engine.
-    Uses 'Master Templates' (Legal Bones) + 'Tenant Profile' (Context) + AI (Compiler) to generate
-    Audit-Ready policies without hallucination or fluff.
+    The Compliance Compiler Engine (Version 2.0).
+    Now includes Operational Metadata:
+    1. File Naming Convention
+    2. Folder Assignment
+    3. Reviewer's Note
     """
     # 1. Retrieve the Master Template (The Static Library)
     master_template = get_master_template(policy_name)
     
     # 2. Build the Tenant Profile (The Dynamic Input)
-    # Ensure specific fields exist or imply them
     industry = company_profile.get("Industry", "Technology")
-    stack = company_profile.get("Tech Stack", "AWS, Office 365") # Default if missing
+    stack = company_profile.get("Tech Stack", "AWS, Office 365")
     
+    # 3. Operational Logic (File & Folder)
+    # Extract ID from title (e.g. "5.1 Access") -> "5.1"
+    control_id = control_title.split(" ")[0] if " " in control_title else "0.0"
+    iso_folder = _get_iso_folder(control_id)
+    safe_name = policy_name.replace(" ", "_").replace("/", "-")
+    file_name = f"{control_id}_{safe_name}_v1.0.md"
+
     profile_context = f"""
     TENANT PROFILE:
     - Organization: {company_profile.get('Company Name', 'The Organization')}
     - Industry: {industry}
     - Tech Stack: {stack}
-    - Policy Owner: {company_profile.get('Policy Owner', 'CISO')}
-    - Approver: {company_profile.get('Policy Approver', 'Board Directors')}
+    - Statutory Baseline: {company_profile.get('Region', 'Global')}
     """
 
-    # 3. System Role - The Principal GRC Architect (The Compiler)
+    # 4. System Role
     system_prompt = (
         "You are the Principal GRC Architect (The Compliance Compiler).\\n"
         "Your duty is to transform high-level compliance frameworks into enforceable, technical, and audit-ready policies.\\n"
         "You must prioritize measurability and evidence-based control statements.\\n\\n"
         "OPERATIONAL GUARDRAILS:\\n"
-        "1. REFERENCE THE MASTER: Use the provided Master Template as your structural base. Do not deviate from its headers.\\n"
-        "2. CONTEXTUAL INJECTION: Replace all placeholders (e.g., {{CLOUD_STACK}}, {{PESTEL_POLITICAL}}) with specific, realistic data for the Tenant's Industry.\\n"
-        "3. PESTEL ALIGNMENT (Clause 4): Look up current 2024-2026 geopolitical/tech trends for the [Tenant Industry]. List 3 specific external risks.\\n"
-        "4. STATUTORY MAPPING: Based on the Tenant's implied geography (assumed Global/US/EU mix if unknown), MUST include GDPR Art. 32 or CCPA requirements where relevant.\\n"
-        "5. EVIDENCE DEFINITION: For every MUST/SHALL statement, append: '* **Evidence**: [Specific Artifact Description]'.\\n"
-        "6. DEPTH: If encryption is mentioned, specify 'AES-256' and 'TLS 1.3'. If Access Control, specify 'RBAC' and 'MFA'."
+        "1. FILE METADATA: You MUST include a 'Reviewer\\'s Note' block at the very top of the file.\\n"
+        "2. CONTEXTUAL INJECTION: Replace placeholders in the Master Template with specific data.\\n"
+        "3. PESTEL & STATUTORY: Analyze risks (Clause 4.1) and laws (GDPR/CCPA) based on Industry/Region.\\n"
+        "4. EVIDENCE: Every requirement must list an specific 'Audit Artifact'.\\n"
     )
 
-    # 4. The Compiler Instruction
+    # 5. Compiler Instruction
     user_message = f"""
     COMPILE THIS POLICY.
 
-    INPUTS:
+    ## OPERATIONAL METADATA:
+    - **Target File Name**: {file_name}
+    - **Target Folder**: {iso_folder}
+
+    ## INPUTS:
     1. **Master Template**:
     ```markdown
     {master_template}
@@ -656,14 +678,31 @@ def generate_premium_policy(control_title: str, policy_name: str, company_profil
     2. **Tenant Profile**:
     {profile_context}
 
-    3. **Control Requirement (The Trigger)**:
+    3. **Control Requirement**:
     {control_title}: {control_description}
 
-    INSTRUCTIONS:
-    - "Compile" the final policy by filling in all {{PLACEHOLDERS}} in the Master Template with intelligent, industry-specific context.
-    - If the template has a '2024 Climate Change Amendment' placeholder, generating a specific statement on how climate change affects {industry} availability.
-    - Keep the "Compliance Mapping" table intact and populate it with real mappings.
-    - Output the FULLY COMPILED Markdown document.
+    ## INSTRUCTION:
+    Generate the FULL policy document.
+    
+    CRITICAL: The output MUST start with this exact block:
+    
+    ---
+    # Reviewer's Note (AI Generated)
+    **File**: `{file_name}`
+    **Folder**: `{iso_folder}`
+    
+    **Context Used**:
+    - **Industry**: {industry}
+    - **Stack**: {stack}
+    
+    **Statutory Coverage**:
+    - [List specific laws satisfied, e.g. GDPR Art 32]
+    
+    **Required Evidence**:
+    - [List key artifacts an auditor will need]
+    ---
+    
+    (Then follow with the Policy Content starting with the Metadata Table).
     """
     
     try:
@@ -674,7 +713,7 @@ def generate_premium_policy(control_title: str, policy_name: str, company_profil
         return generate_ai_response(
             system_prompt=system_prompt,
             user_prompt=user_message,
-            max_tokens=3500 # Increased for full policy compilation
+            max_tokens=3500
         )
 
     except Exception as e:
