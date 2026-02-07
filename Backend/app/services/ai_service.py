@@ -607,12 +607,19 @@ def analyze_gap(control_title: str, requirements: list, uploaded_files: list):
 def _get_iso_folder(control_id: str) -> str:
     """
     Determines the ISO 27001:2022 Folder based on Control ID.
-    Annex A 5 = Organizational
-    Annex A 6 = People
-    Annex A 7 = Physical
-    Annex A 8 = Technological
-    Clause 4-10 = Governance
+    Updated for "Control-Level Depth" structure.
     """
+    # Specific Mapping for 05-08 Series
+    if control_id.startswith("05") or control_id.startswith("5.29") or control_id.startswith("5.30"):
+        return "05_Operational_Resilience"
+    if control_id.startswith("06") or control_id.startswith("7.5") or control_id.startswith("9.2") or control_id.startswith("5.31"):
+        return "06_Compliance_Governance"
+    if control_id.startswith("07") or control_id.startswith("7.7") or control_id.startswith("7.10") or control_id.startswith("7.14"):
+        return "07_Technical_Asset_Lifecycle"
+    if control_id.startswith("08") or control_id.startswith("8.5") or control_id.startswith("8.32"):
+        return "08_Systems_Operations"
+
+    # Fallback to Standard Annex A
     if "5." in control_id: return "Annex_A/Organizational"
     if "6." in control_id: return "Annex_A/People"
     if "7." in control_id: return "Annex_A/Physical"
@@ -621,25 +628,64 @@ def _get_iso_folder(control_id: str) -> str:
 
 def generate_premium_policy(control_title: str, policy_name: str, company_profile: dict, control_description: str):
     """
-    The Compliance Compiler Engine (Version 2.0).
-    Now includes Operational Metadata:
-    1. File Naming Convention
-    2. Folder Assignment
-    3. Reviewer's Note
+    The Compliance Compiler Engine (Version 2.1).
+    Now includes:
+    1. Smart Folder Logic (05-08)
+    2. Policy vs. Procedure Differentiation
+    3. IdP/SSO Priority for Passwords
+    4. Auto-Audit Calendar
     """
-    # 1. Retrieve the Master Template (The Static Library)
+    # 1. Retrieve Master Template
     master_template = get_master_template(policy_name)
     
-    # 2. Build the Tenant Profile (The Dynamic Input)
+    # 2. Build Tenant Profile
     industry = company_profile.get("Industry", "Technology")
-    stack = company_profile.get("Tech Stack", "AWS, Office 365")
+    stack = company_profile.get("Tech Stack", "AWS, Office 365, Okta")
     
-    # 3. Operational Logic (File & Folder)
-    # Extract ID from title (e.g. "5.1 Access") -> "5.1"
+    # 3. Operational Logic
     control_id = control_title.split(" ")[0] if " " in control_title else "0.0"
     iso_folder = _get_iso_folder(control_id)
     safe_name = policy_name.replace(" ", "_").replace("/", "-")
     file_name = f"{control_id}_{safe_name}_v1.0.md"
+
+    # 4. Smart Logic Injection
+    special_instructions = ""
+    
+    # Logic A: Policy vs Procedure
+    doc_type = "Policy"
+    if "Procedure" in policy_name or "Plan" in policy_name:
+        doc_type = "Procedure"
+        special_instructions += (
+            "## DOCTYPE: PROCEDURE (ACTIONABLE STEPS)\\n"
+            "- Draft the 'Step-by-Step HOW', not just the 'What'.\\n"
+            "- Include specific operational steps (e.g., '1. Log into Console', '2. Navigate to...').\\n"
+            "   - For Secure Disposal: Distinguish between 'Physical Destruction' vs 'Cryptographic Erasing'.\\n"
+        )
+    else:
+        special_instructions += (
+            "## DOCTYPE: POLICY (GOVERNANCE)\\n"
+            "- Draft the high-level 'What' and 'Why'. Focus on mandates and prohibitions.\\n"
+        )
+
+    # Logic B: Password / Auth (IdP Priority)
+    if "Password" in policy_name or "Authentication" in policy_name:
+        if "Okta" in stack or "Entra" in stack or "SSO" in stack:
+            special_instructions += (
+                "## CONTEXT: IDENTITY PROVIDER (SSO) DETECTED\\n"
+                "- The organization uses an IdP (e.g., Okta/Entra).\\n"
+                "- You MUST prioritize IdP configurations over local password rules.\\n"
+                "- Mandate 'Single Sign-On (SSO)' for all compatible apps.\\n"
+                "- Enforce MFA at the IdP level.\\n"
+            )
+
+    # Logic C: Internal Audit (Calendar)
+    if "Audit" in policy_name and "Program" in policy_name:
+        special_instructions += (
+            "## GENERATION TASK: AUDIT CALENDAR\\n"
+            "- You MUST generate a 12-month 'Internal Audit Calendar' table.\\n"
+            "- Schedule high-risk controls (Access Control, Change Management) for semi-annual review (Twice a year).\\n"
+            "- Schedule lower-risk controls for annual review.\\n"
+        )
 
     profile_context = f"""
     TENANT PROFILE:
@@ -649,25 +695,26 @@ def generate_premium_policy(control_title: str, policy_name: str, company_profil
     - Statutory Baseline: {company_profile.get('Region', 'Global')}
     """
 
-    # 4. System Role
+    # 5. System Role
     system_prompt = (
         "You are the Principal GRC Architect (The Compliance Compiler).\\n"
-        "Your duty is to transform high-level compliance frameworks into enforceable, technical, and audit-ready policies.\\n"
-        "You must prioritize measurability and evidence-based control statements.\\n\\n"
+        "Your duty is to transform high-level compliance frameworks into enforceable, technical, and audit-ready documents.\\n"
+        "You must differentiate between high-level POLICIES and step-by-step PROCEDURES.\\n\\n"
         "OPERATIONAL GUARDRAILS:\\n"
-        "1. FILE METADATA: You MUST include a 'Reviewer\\'s Note' block at the very top of the file.\\n"
-        "2. CONTEXTUAL INJECTION: Replace placeholders in the Master Template with specific data.\\n"
-        "3. PESTEL & STATUTORY: Analyze risks (Clause 4.1) and laws (GDPR/CCPA) based on Industry/Region.\\n"
-        "4. EVIDENCE: Every requirement must list an specific 'Audit Artifact'.\\n"
+        "1. FILE METADATA: You MUST include a 'Reviewer\\'s Note' block at the very top.\\n"
+        "2. CONTEXTUAL INJECTION: Replace placeholders with specific data.\\n"
+        "3. EVIDENCE: Every requirement must list a specific 'Audit Artifact'.\\n"
+        "4. DEPTH: Specificity is key (AES-256, TLS 1.3, RBAC).\\n"
     )
 
-    # 5. Compiler Instruction
+    # 6. Compiler Instruction
     user_message = f"""
-    COMPILE THIS POLICY.
+    COMPILE THIS DOCUMENT.
 
     ## OPERATIONAL METADATA:
     - **Target File Name**: {file_name}
     - **Target Folder**: {iso_folder}
+    - **Document Type**: {doc_type}
 
     ## INPUTS:
     1. **Master Template**:
@@ -680,9 +727,11 @@ def generate_premium_policy(control_title: str, policy_name: str, company_profil
 
     3. **Control Requirement**:
     {control_title}: {control_description}
+    
+    {special_instructions}
 
     ## INSTRUCTION:
-    Generate the FULL policy document.
+    Generate the FULL document.
     
     CRITICAL: The output MUST start with this exact block:
     
@@ -690,19 +739,17 @@ def generate_premium_policy(control_title: str, policy_name: str, company_profil
     # Reviewer's Note (AI Generated)
     **File**: `{file_name}`
     **Folder**: `{iso_folder}`
+    **DocType**: `{doc_type}`
     
-    **Context Used**:
-    - **Industry**: {industry}
+    **Context Analyzed**:
     - **Stack**: {stack}
-    
-    **Statutory Coverage**:
-    - [List specific laws satisfied, e.g. GDPR Art 32]
+    - **Logic Applied**: [e.g. IdP Priority, Audit Calendar, etc.]
     
     **Required Evidence**:
-    - [List key artifacts an auditor will need]
+    - [List key artifacts]
     ---
     
-    (Then follow with the Policy Content starting with the Metadata Table).
+    (Then follow with the Content).
     """
     
     try:
