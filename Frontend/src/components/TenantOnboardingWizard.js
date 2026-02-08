@@ -43,6 +43,7 @@ const TenantOnboardingWizard = () => {
             setAvailableFrameworks(res.data);
         } catch (err) {
             console.error("Failed to fetch frameworks", err);
+            setAvailableFrameworks([]);
         }
     };
 
@@ -56,7 +57,7 @@ const TenantOnboardingWizard = () => {
     };
 
     const isISO42001Selected = () => {
-        const iso = availableFrameworks.find(f => f.code.includes('42001'));
+        const iso = (availableFrameworks || []).find(f => f.code && f.code.includes('42001'));
         return iso && formData.framework_ids.includes(iso.id);
     };
 
@@ -280,7 +281,7 @@ const TenantOnboardingWizard = () => {
                             <p className="text-slate-400 text-sm mb-4">Select the standards this tenant will adhere to.</p>
 
                             <div className="space-y-3 max-h-60 overflow-y-auto">
-                                {availableFrameworks.map(fw => {
+                                {(availableFrameworks || []).map(fw => {
                                     const isSelected = formData.framework_ids.includes(fw.id);
                                     return (
                                         <div
