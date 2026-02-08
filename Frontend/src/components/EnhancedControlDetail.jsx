@@ -529,8 +529,13 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                       fetchRequirements(true);
                     }
                   }}
-                  disabled={generatingReqs}
-                  style={{ ...styles.btn(), opacity: generatingReqs ? 0.5 : 1 }}
+                  disabled={generatingReqs || requirements.length > 0}
+                  style={{
+                    ...styles.btn(),
+                    opacity: (generatingReqs || requirements.length > 0) ? 0.5 : 1,
+                    cursor: (generatingReqs || requirements.length > 0) ? 'not-allowed' : 'pointer'
+                  }}
+                  title={requirements.length > 0 ? "Requirements are locked" : ""}
                 >
                   {generatingReqs ? '⏳ Generating...' : '🔄 Regenerate'}
                 </button>
