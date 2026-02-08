@@ -19,7 +19,8 @@ const TenantOnboardingWizard = () => {
         name: '',
         slug: '',
         admin_email: '',
-        admin_username: '',
+        admin_email: '',
+        // admin_username removed - using email
         password: '',
         framework_ids: [],
 
@@ -63,10 +64,37 @@ const TenantOnboardingWizard = () => {
 
     const totalSteps = isISO42001Selected() ? 4 : 3;
 
-    const handleNext = () => setStep(step + 1);
-    const handleBack = () => setStep(step - 1);
+    const validateStep = (currentStep) => {
+        if (currentStep === 1) {
+            if (!formData.name.trim()) return "Organization Name is required.";
+            if (!formData.slug.trim()) return "URL Slug is required.";
+            if (!formData.admin_email.trim()) return "Admin Email is required.";
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.admin_email)) return "Invalid email format.";
+            if (!formData.password) return "Password is required.";
+            if (formData.password.length < 8) return "Password must be at least 8 characters.";
+        }
+        return null;
+    };
+
+    const handleNext = () => {
+        const errorMsg = validateStep(step);
+        if (errorMsg) {
+            setError(errorMsg);
+            return;
+        }
+        setError(null);
+        setStep(step + 1);
+    };
+
+    const handleBack = () => {
+        setError(null);
+        setStep(step - 1);
+    };
 
     const handleSubmit = async () => {
+        const errorMsg = validateStep(step); // Validate final step/context if needed, or re-validate all?
+        // For now, identity is step 1. Step 3/4 are optional context.
+
         setLoading(true);
         setError(null);
         try {
@@ -205,17 +233,7 @@ const TenantOnboardingWizard = () => {
                                 </div>
                             </div>
 
-                            {/* CREDENTIALS */}
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-slate-400 mb-1">Admin Username</label>
-                                    <input
-                                        className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 outline-none"
-                                        placeholder="admin_acme"
-                                        value={formData.admin_username}
-                                        onChange={e => setFormData({ ...formData, admin_username: e.target.value })}
-                                    />
-                                </div>
+                            <div className="grid grid-cols-1 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium text-slate-400 mb-1">Password</label>
                                     <input
@@ -394,7 +412,7 @@ const TenantOnboardingWizard = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
