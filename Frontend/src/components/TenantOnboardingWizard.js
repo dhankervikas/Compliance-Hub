@@ -40,7 +40,7 @@ const TenantOnboardingWizard = () => {
     const fetchFrameworks = async () => {
         try {
             const res = await api.get('/frameworks');
-            setAvailableFrameworks(res.data);
+            setAvailableFrameworks(res.data || []);
         } catch (err) {
             console.error("Failed to fetch frameworks", err);
             setAvailableFrameworks([]);
@@ -301,7 +301,7 @@ const TenantOnboardingWizard = () => {
                                         </div>
                                     );
                                 })}
-                                {availableFrameworks.length === 0 && (
+                                {(availableFrameworks || []).length === 0 && (
                                     <div className="text-center text-slate-500 py-8 italic">
                                         No frameworks found.
                                     </div>
