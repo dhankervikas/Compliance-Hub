@@ -37,7 +37,6 @@ jobs:
       - name: Copy build to Backend
         run: cp -r Frontend/build Backend/static_frontend
       - name: Commit and push
-      - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
