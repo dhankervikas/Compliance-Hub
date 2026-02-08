@@ -91,7 +91,7 @@ const COSO_DESCRIPTIONS = {
     "Capacity Management": "Annex A.8.6: Resource Management",
     "Backup Management": "Annex A.8.13: Information Backup",
     "Network Security": "Annex A.5 & A.8: Network Services, Segregation, and Transfer",
-    "SDLC (Development)": "Annex A.8: Secure Development, Testing, and Change Management",
+    "Secure Software Development Life Cycle (SSDLC)": "Annex A.8: Secure Development, Testing, and Change Management",
     "Third Party Risk Management": "Annex A.5: Supplier Relationships and Service Monitoring",
     "Incident & Resilience": "Clause 7.4 & Annex A.5: Incident Management and Business Continuity",
     "Threat Intelligence": "Annex A.5.7: Threat Intelligence",

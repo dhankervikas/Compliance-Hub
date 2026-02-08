@@ -15,7 +15,7 @@ export const BUSINESS_PROCESSES = [
     "Capacity Management",
     "Backup Management",
     "Network Security",
-    "SDLC (Development)",
+    "Secure Software Development Life Cycle (SSDLC)",
     "Third Party Risk Management",
     "Incident & Resilience",
     "Threat Intelligence",
@@ -44,6 +44,8 @@ export const normalizeProcessName = (name) => {
     if (lower.includes("supplier") || lower.includes("vendor") || lower.includes("third")) return "Third Party Risk Management";
     if (lower.includes("physical")) return "Physical Security";
     if (lower.includes("logging") || lower.includes("monitor")) return "Logging & Monitoring";
+    if (lower.includes("operations")) return "IT Operations"; // Fix: Map legacy "Operations" to "IT Operations"
+    if (lower.includes("sdlc") || lower.includes("development") || lower.includes("software")) return "Secure Software Development Life Cycle (SSDLC)"; // Fix: New Name
     if (lower.includes("change")) return "Governance"; // Specifically requested for Change Mgmt
 
     // Fallback: Force Governance instead of Uncategorized
