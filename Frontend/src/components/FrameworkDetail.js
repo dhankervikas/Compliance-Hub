@@ -671,6 +671,14 @@ const FrameworkDetail = () => {
                 // NORMALIZE CATEGORY NAMES
                 if (c.category === "Operations (General)") c.category = "Operations";
 
+                // HOTFIX: Force specific controls to correct categories (Data Correction)
+                // This ensures display is correct even if DB data is stale.
+                if (c.control_id === "A.8.12") c.category = "Cryptography"; // Data Leakage
+                if (c.control_id === "A.8.11") c.category = "Cryptography"; // Data Masking
+                if (c.control_id === "A.8.1") c.category = "IT Operations"; // User Endpoint Devices
+                if (c.control_id === "A.8.10") c.category = "IT Operations"; // Information Deletion
+                if (c.control_id === "A.8.18") c.category = "IT Operations"; // Privileged Utility Programs
+
                 // --- MODE 1: STANDARD VIEW (Strict ISO/SOC2 Structure) ---
                 if (viewMode === 'standard') {
                     if (isISO27001) {
