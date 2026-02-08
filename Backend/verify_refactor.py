@@ -34,8 +34,8 @@ USER_MAPPING = {
     "Vulnerability Management": ["A.8.8"],
     "Capacity Management": ["A.8.6"],
     "Backup Management": ["A.8.13"],
-    "Network Security": ["A.5.14", "A.8.20", "A.8.21", "A.8.22", "A.8.23"],
-    "SDLC (Development)": ["A.5.8", "A.8.25", "A.8.26", "A.8.27", "A.8.28", "A.8.29", "A.8.30", "A.8.31", "A.8.32", "A.8.33"],
+    "Network Security": ["A.8.20", "A.8.21", "A.8.22", "A.8.23", "A.5.14"],
+    "Secure Software Development Life Cycle (SSDLC)": ["A.8.25", "A.8.26", "A.8.27", "A.8.28", "A.8.29", "A.8.30", "A.8.31", "A.8.32", "A.8.33", "A.5.8"],
     "Third Party Risk Management": ["A.5.19", "A.5.20", "A.5.21", "A.5.22", "A.5.23"], # Was Supplier Mgmt
     "Incident & Resilience": ["ISO_7.4", "A.5.24", "A.5.25", "A.5.26", "A.5.27", "A.5.28", "A.5.29", "A.5.30", "A.8.14"],
     "Threat Intelligence": ["A.5.7"], # Was Threat Intel

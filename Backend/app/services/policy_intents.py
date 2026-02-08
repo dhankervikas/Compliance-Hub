@@ -35,7 +35,7 @@ POLICY_CONTROL_MAP = {
     # Actually A.5.33 is in "Legal and Compliance" in user list.
     "Protection of Records": ["A.5.33"],
     
-    # Operational Policies (ISO Clause 8 & Annex A)
+    # Operations
     "Access Control Policy": ["A.5.15", "A.5.16", "A.5.18", "A.8.2", "A.8.3", "CC6.1", "CC6.2"],
     "Acceptable Use Policy": ["A.5.10", "A.5.29", "CC1.4"],
     "Asset Management Policy": ["A.5.9", "A.5.10", "A.5.11", "A.5.12", "A.5.13"], # Removed A.5.14, moved to Network

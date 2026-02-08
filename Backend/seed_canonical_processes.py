@@ -40,7 +40,7 @@ def seed_canonical_processes():
         "Capacity Management",
         "Backup Management",
         "Network Security",
-        "SDLC (Development)",
+        "Secure Software Development Life Cycle (SSDLC)",
         "Third Party Risk Management", # Was Supplier Mgmt
         "Incident & Resilience",
         "Threat Intelligence", # Was Threat Intel
@@ -59,7 +59,7 @@ def seed_canonical_processes():
         "ISMS Roles and Responsibilities": "Governance",
         "Document Control Procedure": "Governance",
         "Documented information": "Governance", # If exists
-        "Security in Project Management": "SDLC (Development)", # Moved to SDLC per user
+        "Security in Project Management": "Secure Software Development Life Cycle (SSDLC)", # Moved to SDLC per user
         
         # Risk Management
         "Risk Assessment Methodology": "Risk Management",
@@ -125,7 +125,7 @@ def seed_canonical_processes():
         
         # Configuration Management
         "Configuration Management": "Configuration Management",
-        "Change Management Policy": "SDLC (Development)", # A.8.32 -> SDLC per user
+        "Change Management Policy": "Secure Software Development Life Cycle (SSDLC)", # A.8.32 -> SDLC per user
         
         # Cryptography
         "Cryptography Policy": "Cryptography",
@@ -152,10 +152,10 @@ def seed_canonical_processes():
         "Information Transfer": "Network Security",
         
         # SDLC (Development)
-        "Secure Development Policy": "SDLC (Development)",
-        "Testing": "SDLC (Development)",
-        "Outsourced Development": "SDLC (Development)",
-        "Separation of Environments": "SDLC (Development)",
+        "Secure Development Policy": "Secure Software Development Life Cycle (SSDLC)",
+        "Testing": "Secure Software Development Life Cycle (SSDLC)",
+        "Outsourced Development": "Secure Software Development Life Cycle (SSDLC)",
+        "Separation of Environments": "Secure Software Development Life Cycle (SSDLC)",
         # "Test Data": "SDLC (Development)", 
         
         # Supplier Mgmt
