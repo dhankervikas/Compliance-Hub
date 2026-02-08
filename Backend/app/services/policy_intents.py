@@ -11,47 +11,47 @@ from typing import Dict, List
 # This is the master mapping of policies to their required controls
 POLICY_CONTROL_MAP = {
     # Context & Scope Documents (Mandatory for ISO 27001 Clause 4)
-    "ISMS Scope": ["ISO_4.1", "ISO_4.3"],
+    "ISMS Scope": ["ISO_4.1", "ISO_4.3", "ISO_4.4"],
     "Context of the Organization": ["ISO_4.1", "ISO_4.2"],
-    "Interested Parties": ["ISO_4.2", "A.5.5", "A.5.6"],
+    "Interested Parties": ["ISO_4.2", "A.5.5", "A.5.6", "A.5.37"], # added 5.37 per user
     
     # Leadership Documents (ISO Clause 5)
     "Information Security Policy": ["ISO_5.2", "A.5.1", "CC1.1", "CC1.2"],
     "Management Commitment Statement": ["ISO_5.1", "CC1.1"],
-    "ISMS Roles and Responsibilities": ["ISO_5.3", "A.5.2", "A.5.3", "A.5.4", "CC1.3"],
+    "ISMS Roles and Responsibilities": ["ISO_5.3", "ISO_7.1", "A.5.2", "A.5.3", "A.5.4", "CC1.3"], # Added ISO_7.1 here for Governance mapping
     
     # Planning Documents (ISO Clause 6)
-    "Risk Assessment Methodology": ["ISO_6.1.2", "A.5.7", "CC3.2"],
-    "Risk Treatment Plan": ["ISO_6.1.3", "A.5.7"],
+    "Risk Assessment Methodology": ["ISO_6.1.1", "ISO_6.1.2", "CC3.2"], # Added ISO_6.1.1 (was 6.1)
+    "Threat Intelligence": ["A.5.7"],
+    "Risk Treatment Plan": ["ISO_6.1.3"],
     "Statement of Applicability (SoA)": ["ISO_6.1.3", "A.5.1"],
-    "Information Security Objectives": ["ISO_6.2"],
+    "Operational Procedures": ["ISO_8.1", "ISO_8.2", "ISO_8.3", "ISO_6.3"], # Risk Management controls per user
     
     # Support Documents (ISO Clause 7)
-    "Competence and Awareness Policy": ["ISO_7.2", "ISO_7.3", "A.6.3"],
+    "Competence and Awareness Policy": ["ISO_7.2", "ISO_7.3", "A.6.3"], # Removed ISO_7.1 (moved to Governance)
     "Information Security Training Program": ["A.6.3", "CC1.4"],
-    "Document Control Procedure": ["ISO_7.5", "A.5.33", "A.5.37"],
+    "Document Control Procedure": ["ISO_7.5", "ISO_7.5.1", "ISO_7.5.2", "ISO_7.5.3", "A.5.33"], # Moved A.5.33 here (Legal) or keep? User wants A.5.33 in Legal. 
+    # A.5.33 Protection of Records. Let's make a specific intent for Legal if needed.
+    # Actually A.5.33 is in "Legal and Compliance" in user list.
+    "Protection of Records": ["A.5.33"],
     
     # Operational Policies (ISO Clause 8 & Annex A)
     "Access Control Policy": ["A.5.15", "A.5.16", "A.5.18", "A.8.2", "A.8.3", "CC6.1", "CC6.2"],
     "Acceptable Use Policy": ["A.5.10", "A.5.29", "CC1.4"],
-    "Asset Management Policy": ["A.5.9", "A.5.10", "A.5.11", "A.5.14", "CC6.5"],
-    "Backup and Recovery Policy": ["A.8.13", "A.8.14", "CC3.1"],
-    "Business Continuity Policy": ["A.5.29", "A.5.30", "CC3.1"],
+    "Asset Management Policy": ["A.5.9", "A.5.10", "A.5.11", "A.5.12", "A.5.13"], # Removed A.5.14, moved to Network
+    "Backup and Recovery Policy": ["A.8.13", "CC3.1"], # Removed A.8.14 (moved to Incident)
+    "Business Continuity Policy": ["A.5.29", "A.5.30", "CC3.1"], # Kept here, mapped to Incident in seed
     "Change Management Policy": ["A.8.32", "CC8.1"],
-    "Cryptography Policy": ["A.8.24", "CC6.1"],
+    "Cryptography Policy": ["A.8.24", "A.8.11", "A.8.12", "CC6.1"], # Added 8.11, 8.12
     "Data Classification Policy": ["A.5.12", "A.5.13", "CC6.5"],
-    "Data Protection and Privacy Policy": [
-        "A.5.34", "A.8.11", "CC6.5",
-        "P1.1", "P1.2", "P2.1", "P2.2", "P3.1", "P3.2", "P3.3", "P4.1", "P4.2", "P4.3",
-        "P5.1", "P5.2", "P6.1", "P6.2", "P6.3", "P6.4", "P7.1", "P8.1", "P8.2", "P8.3"
-    ],
+    "Data Protection and Privacy Policy": ["A.5.34", "P1.1"], # Moved A.8.11 to Crypto
     "Incident Response Policy": ["A.5.24", "A.5.25", "A.5.26", "CC7.3"],
     "Mobile Device Policy": ["A.6.7", "A.8.3", "CC6.3"],
-    "Network Security Policy": ["A.8.20", "A.8.21", "A.8.22", "CC6.6"],
+    "Network Security Policy": ["A.8.20", "A.8.21", "A.8.22", "A.8.23", "A.5.14", "CC6.6"], # added 8.23 and 5.14
     "Password Policy": ["A.5.17", "A.8.5", "CC6.1"],
-    "Physical Security Policy": ["A.7.1", "A.7.2", "A.7.3", "A.7.4", "CC6.4"],
+    "Physical Security Policy": ["A.7.1", "A.7.2", "A.7.3", "A.7.4", "A.7.5", "A.7.6", "CC6.4"], # Added 7.5, 7.6
     "Remote Access Policy": ["A.6.7", "A.8.3", "CC6.7"],
-    "Secure Development Policy": ["A.8.25", "A.8.26", "A.8.27", "A.8.28", "CC8.1"],
+    "Secure Development Policy": ["A.8.25", "A.8.26", "A.8.27", "A.8.28", "A.8.30", "A.8.31", "A.8.32", "A.8.33", "CC8.1"], # Added 8.30-33
     "Third-Party Security Policy": ["A.5.19", "A.5.20", "A.5.21", "A.5.22", "CC9.1"],
     "Vulnerability Management Policy": ["A.8.8", "CC7.1"],
     
@@ -62,7 +62,11 @@ POLICY_CONTROL_MAP = {
     "ICT Supply Chain Management": ["A.5.22", "CC9.1"],
     "Monitoring and Review of Supplier Services": ["A.5.23"],
     "Information Transfer": ["A.5.14"],
-    "Incident Management": ["A.5.24", "A.5.25", "A.5.26", "A.5.27", "CC7.3"],
+    "Incident Management": ["A.5.24", "A.5.25", "A.5.26", "A.5.27", "A.5.29", "A.5.30", "A.8.14", "CC7.3", "ISO_7.4"], # Added 5.29, 5.30, 8.14, 7.4
+    "Communication": ["A.5.8"], # Just a placeholder or removed if ISO_7.4 moved. 
+    # Actually wait, "Communication" in seed might be mapped to Incident? 
+    # Checking seed script... "Communication" is NOT in seed map. 
+    # So adding ISO_7.4 directly to Incident Management is safest.
     "Evidence Collection": ["A.5.28"],
     "Legal and Compliance Requirements": ["A.5.31", "A.5.32"],
     "Independent Review": ["A.5.35", "A.5.36"],
@@ -81,6 +85,8 @@ POLICY_CONTROL_MAP = {
     "Securing Offices and Facilities": ["A.7.3"],
     "Working in Secure Areas": ["A.7.4"],
     "Desk and Screen Policy": ["A.7.7"],
+    "Protecting against physical and environmental threats": ["A.7.5"],
+    "Working in secure areas": ["A.7.6"],
     "Equipment Siting and Protection": ["A.7.8"],
     "Security of Assets Off-Premises": ["A.7.9"],
     "Storage Media": ["A.7.10"],
@@ -98,7 +104,7 @@ POLICY_CONTROL_MAP = {
     "Capacity Management": ["A.8.6"],
     "Protection Against Malware": ["A.8.7", "CC7.2"],
     "Configuration Management": ["A.8.9", "CC8.1"],
-    "Information Deletion": ["A.8.10"],
+    "Information Deletion": ["A.8.10"], # Is Operations
     "Data Masking": ["A.8.11"],
     "Data Leakage Prevention": ["A.8.12"],
     "Logging and Monitoring": ["A.8.15", "A.8.16", "CC7.2"],
@@ -114,7 +120,10 @@ POLICY_CONTROL_MAP = {
     # Performance Evaluation (Clause 9)
     "Monitoring and Measurement": ["ISO_9.1"],
     "Internal Audit Program": ["ISO_9.2.1", "ISO_9.2.2"],
-    "Management Review": ["ISO_9.3.1", "ISO_9.3.2", "ISO_9.3.3"]
+    "Management Review": ["ISO_9.3.1", "ISO_9.3.2", "ISO_9.3.3"],
+    "Information Security Objectives": ["ISO_6.2", "A.8.34"], # Performance Eval + Added A.8.34
+    "Continual Improvement": ["ISO_10.1"],
+    "Nonconformity and Corrective Action": ["ISO_10.2"]
 }
 
 

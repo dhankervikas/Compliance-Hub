@@ -23,12 +23,15 @@ def seed_canonical_processes():
     
     # 1. Define the 22 Canonical Processes
     CANONICAL_PROCESSES = [
-        "Governance & Policy",
-        "HR Security",
+        "Governance", # Was Governance & Policy
+        "Risk Management",
+        "IT Operations", # Was Operations
+        "Performance Evaluation",
+        "Improvement",
+        "Human Resources Management", # Was HR Security
         "Asset Management",
-        "Access Control (IAM)",
+        "Access Management", # Was Access Control (IAM)
         "Physical Security",
-        "Operations",
         "Configuration Management",
         "Cryptography",
         "Logging & Monitoring",
@@ -38,160 +41,156 @@ def seed_canonical_processes():
         "Backup Management",
         "Network Security",
         "SDLC (Development)",
-        "Supplier Mgmt",
+        "Third Party Risk Management", # Was Supplier Mgmt
         "Incident & Resilience",
-        "Threat Intel",
-        "Legal & Compliance",
-        "Risk Management",
-	"Performance Evaluation",
-        "Improvement"
+        "Threat Intelligence", # Was Threat Intel
+        "Legal & Compliance"
     ]
     
     # 2. Define Mapping: Policy/Intent Name -> Canonical Process
     # This maps the keys from POLICY_CONTROL_MAP to the list above
     INTENT_TO_PROCESS_MAP = {
-        # Governance
-        "ISMS Scope": "Governance & Policy",
-        "Context of the Organization": "Governance & Policy",
-        "Interested Parties": "Governance & Policy",
-        "Information Security Policy": "Governance & Policy",
-        "Management Commitment Statement": "Governance & Policy",
-        "ISMS Roles and Responsibilities": "Governance & Policy",
-        "Document Control Procedure": "Governance & Policy",
-        "Documented information": "Governance & Policy", # If exists
-        "Security in Project Management": "Governance & Policy",
+        # Governance & Policy
+        "ISMS Scope": "Governance",
+        "Context of the Organization": "Governance",
+        "Interested Parties": "Governance",
+        "Information Security Policy": "Governance",
+        "Management Commitment Statement": "Governance",
+        "ISMS Roles and Responsibilities": "Governance",
+        "Document Control Procedure": "Governance",
+        "Documented information": "Governance", # If exists
+        "Security in Project Management": "SDLC (Development)", # Moved to SDLC per user
         
-        # Risk
+        # Risk Management
         "Risk Assessment Methodology": "Risk Management",
         "Risk Treatment Plan": "Risk Management",
         "Statement of Applicability (SoA)": "Risk Management",
-        "Information Security Objectives": "Risk Management",
+        "Operational Procedures": "Risk Management", # 8.1 Operational planning -> Risk (User list has 8.1 under Risk)
+        # "Information Security Objectives": "Performance Evaluation", # 6.2 moved
         
-        # HR
-        "Competence and Awareness Policy": "HR Security",
-        "Information Security Training Program": "HR Security",
-        "Screening": "HR Security",
-        "Terms and Conditions of Employment": "HR Security",
-        "Disciplinary Process": "HR Security",
-        "Responsibilities After Termination": "HR Security",
-        "Confidentiality Agreements": "HR Security",
-        "Teleworking": "HR Security",
-        "Information Security Event Reporting": "HR Security", # Could be incident, but often HR
+        # HR Security
+        "Competence and Awareness Policy": "Human Resources Management",
+        "Information Security Training Program": "Human Resources Management",
+        "Screening": "Human Resources Management",
+        "Terms and Conditions of Employment": "Human Resources Management",
+        "Disciplinary Process": "Human Resources Management",
+        "Responsibilities After Termination": "Human Resources Management",
+        "Confidentiality Agreements": "Human Resources Management",
+        "Teleworking": "Human Resources Management",
+        "Information Security Event Reporting": "Human Resources Management",
         
-        # Asset
+        # Asset Management
         "Asset Management Policy": "Asset Management",
         "Acceptable Use Policy": "Asset Management",
         "Data Classification Policy": "Asset Management",
-        "Information Deletion": "Asset Management",
-        "Data Masking": "Asset Management", # Or Crypto? Asset fits well for classification
-        "Data Leakage Prevention": "Asset Management", # Or Ops
+        "Information Deletion": "IT Operations", # Per user list: A.8.10 is Operations
+        "Data Masking": "Cryptography", # Per user list: A.8.11 is Crypto
+        "Data Leakage Prevention": "Cryptography", # Per user list: A.8.12 is Crypto
         "Secure Disposal": "Asset Management",
         "Storage Media": "Asset Management",
-        "Security of Assets Off-Premises": "Asset Management",
-
-        # Access
-        "Access Control Policy": "Access Control (IAM)",
-        "Mobile Device Policy": "Access Control (IAM)", # Often grouped here
-        "Password Policy": "Access Control (IAM)",
-        "Remote Access Policy": "Access Control (IAM)",
-        "User Endpoint Devices": "Access Control (IAM)",
-        "Privileged Access Rights": "Access Control (IAM)",
-        "Information Access Restriction": "Access Control (IAM)",
-        "Access to Source Code": "Access Control (IAM)",
-        "Secure Authentication": "Access Control (IAM)",
-        "Use of Privileged Utility Programs": "Access Control (IAM)",
+        "Security of Assets Off-Premises": "Physical Security", # Per user list: A.7.9 -> Physical
         
-        # Physical
+        # Access Control (IAM)
+        "Access Control Policy": "Access Management",
+        "Mobile Device Policy": "Access Management", 
+        "Password Policy": "Access Management",
+        "Remote Access Policy": "Access Management",
+        "User Endpoint Devices": "IT Operations", # A.8.1 -> Operations per user
+        "Privileged Access Rights": "Access Management",
+        "Information Access Restriction": "Access Management",
+        "Access to Source Code": "Access Management",
+        "Secure Authentication": "Access Management",
+        "Use of Privileged Utility Programs": "IT Operations", # A.8.18 -> Operations per user
+        
+        # Physical Security
         "Physical Security Policy": "Physical Security",
         "Physical Entry Controls": "Physical Security",
         "Securing Offices and Facilities": "Physical Security",
         "Working in Secure Areas": "Physical Security",
         "Desk and Screen Policy": "Physical Security",
+        "Protecting against physical and environmental threats": "Physical Security",
+        "Working in secure areas": "Physical Security",
         "Equipment Siting and Protection": "Physical Security",
+        # "Supporting Utilities" -> Physical
         "Supporting Utilities": "Physical Security",
         "Cabling Security": "Physical Security",
         "Equipment Maintenance": "Physical Security",
         
         # Operations
-        "Operations": "Operations",
-        "Protection Against Malware": "Operations",
-        "Software Installation": "Operations",
-        "Technical Vulnerabilities": "Vulnerability Management", # Specific map
-        "Operational Procedures": "Operations",
-        "Malware Protection": "Operations",
+        "Operations": "IT Operations",
+        "Protection Against Malware": "IT Operations",
+        "Software Installation": "IT Operations",
+        "Operational Procedures": "Risk Management", # Moved to Risk above, removing from here if duplicate or ensuring it's not here
+        "Malware Protection": "IT Operations",
         
-        # Config
-        "Configuration Management": "Configuration Management", # From Policy map
-        "Change Management Policy": "Configuration Management", # Or Ops
+        # Configuration Management
+        "Configuration Management": "Configuration Management",
+        "Change Management Policy": "SDLC (Development)", # A.8.32 -> SDLC per user
         
-        # Crypto
+        # Cryptography
         "Cryptography Policy": "Cryptography",
         
-        # Logging
-        "Logging and Monitoring": "Logging & Monitoring",
+        # Logging & Monitoring
+        "Logging and Monitoring": "Logging & Monitoring", # A.8.15, A.8.16
+        
+        # Clock Sync
         "Clock Synchronization": "Clock Synchronization",
         
-        # Vuln
+        # Vulnerability Management
         "Vulnerability Management Policy": "Vulnerability Management",
         
-        # Capacity
+        # Capacity Management
         "Capacity Management": "Capacity Management",
         
-        # Backup
+        # Backup Management
         "Backup and Recovery Policy": "Backup Management",
         
-        # Network
+        # Network Security
         "Network Security Policy": "Network Security",
         "Networks Segregation": "Network Security",
         "Web Filtering": "Network Security",
-        "Network Security Management": "Network Security",
-        "Information Transfer": "Network Security", # Or Asset
+        "Information Transfer": "Network Security",
         
-        # SDLC
+        # SDLC (Development)
         "Secure Development Policy": "SDLC (Development)",
         "Testing": "SDLC (Development)",
         "Outsourced Development": "SDLC (Development)",
         "Separation of Environments": "SDLC (Development)",
-        "System Change Control": "SDLC (Development)",
-        "Test Data": "SDLC (Development)",
-        # "Access to Source Code" mapped to Access Control above, could be here too.
+        # "Test Data": "SDLC (Development)", 
         
-        # Supplier
-        "Third-Party Security Policy": "Supplier Mgmt",
-        "Information Security in Supplier Relationships": "Supplier Mgmt",
-        "Supplier Security Policy": "Supplier Mgmt",
-        "Supplier Security Agreements": "Supplier Mgmt",
-        "ICT Supply Chain Management": "Supplier Mgmt",
-        "Monitoring and Review of Supplier Services": "Supplier Mgmt",
+        # Supplier Mgmt
+        "Third-Party Security Policy": "Third Party Risk Management",
+        "Information Security in Supplier Relationships": "Third Party Risk Management",
+        "Supplier Security Agreements": "Third Party Risk Management",
+        "ICT Supply Chain Management": "Third Party Risk Management",
+        "Monitoring and Review of Supplier Services": "Third Party Risk Management",
         
-        # Incident
+        # Incident & Resilience
         "Incident Response Policy": "Incident & Resilience",
-        "Business Continuity Policy": "Incident & Resilience",
+        "Communication": "Incident & Resilience", # Mapped to Incident controls in Intents
+        "Business Continuity Policy": "Incident & Resilience", 
         "Incident Management": "Incident & Resilience",
         "Evidence Collection": "Incident & Resilience",
         
-        # Threat
-        "Threat Intelligence": "Threat Intel",
-        # "Threat Intelligence" might appear in Risk Policy, but let's check
-        # ISO A.5.7 is threat intel.
+        # Threat Intel
+        "Threat Intelligence": "Threat Intelligence",
         
-        # Legal
+        # Legal & Compliance
         "Data Protection and Privacy Policy": "Legal & Compliance",
         "Legal and Compliance Requirements": "Legal & Compliance",
-        "Independent Review of Information Security": "Legal & Compliance",
-        "Compliance with Legal and Contractual Requirements": "Legal & Compliance",
+        "Independent Review": "Legal & Compliance",
         "Intellectual Property Rights": "Legal & Compliance",
         "Protection of Records": "Legal & Compliance",
-        "Privacy and Protection of PII": "Legal & Compliance",
         
         # Performance Evaluation
         "Monitoring and Measurement": "Performance Evaluation",
         "Internal Audit Program": "Performance Evaluation",
         "Management Review": "Performance Evaluation",
-        "Independent Review": "Legal & Compliance", # Keep this as Legal if preferred, or move to Performance if it fits A.18
+        "Information Security Objectives": "Performance Evaluation", # 6.2 -> Performance per user
         
         # Improvement
-        # "Corrective Action" etc.
+        "Continual Improvement": "Improvement",
+        "Nonconformity and Corrective Action": "Improvement"
     }
     
     # 3. Clear Existing
@@ -220,10 +219,10 @@ def seed_canonical_processes():
         # Find parent
         parent_name = INTENT_TO_PROCESS_MAP.get(intent_name)
         
-        # Fallback for unmapped items -> "Governance and Policy" or "Operations"
+        # Fallback for unmapped items -> "Governance" or "IT Operations"
         if not parent_name:
-            if "Policy" in intent_name: parent_name = "Governance and Policy"
-            else: parent_name = "Operations"
+            if "Policy" in intent_name: parent_name = "Governance"
+            else: parent_name = "IT Operations"
             # print(f"Warning: Unmapped Intent '{intent_name}' -> Defaulting to {parent_name}")
             
         parent_proc = process_obj_map.get(parent_name)
