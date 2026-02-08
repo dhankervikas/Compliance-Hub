@@ -40,6 +40,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
           git add Backend/static_frontend -f
-          git diff --staged --quiet || (git commit -m "Auto-build: Update frontend static files" && git push)
+          # Discard changes to package-lock.json or other Frontend files to prevent infinite loop & rebase errors
+          git checkout HEAD -- Frontend/
+          git diff --staged --quiet || git commit -m "Auto-build: Update frontend static files"
+          git pull --rebase origin main
+          git push
