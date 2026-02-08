@@ -328,7 +328,10 @@ def _get_entitlements_logic(db: Session, tenant_slug: str):
         })
         
     # 2. Features
-    AVAILABLE_FEATURES = ["aws_scanner", "github_scanner", "custom_reports", "sso_integration"]
+    AVAILABLE_FEATURES = [
+        "aws_scanner", "github_scanner", "custom_reports", "sso_integration",
+        "policy_management", "risk_management", "vendor_management", "people_management"
+    ]
     
     current_features = db.query(TenantFeature).filter(
         TenantFeature.tenant_id == tenant.internal_tenant_id,
@@ -336,11 +339,18 @@ def _get_entitlements_logic(db: Session, tenant_slug: str):
     ).all()
     active_usage_keys = {f.feature_key for f in current_features}
     
+    # CORE MODULES ALWAYS ENABLED (Temporary Override until Billing is live)
+    CORE_MODULES = {"policy_management", "risk_management", "vendor_management", "people_management"}
+
     feat_list = []
     for key in AVAILABLE_FEATURES:
+        is_active = key in active_usage_keys
+        if key in CORE_MODULES:
+            is_active = True # Force enable core modules
+            
         feat_list.append({
             "key": key,
-            "is_active": key in active_usage_keys
+            "is_active": is_active
         })
         
     # 3. Account Status
