@@ -109,7 +109,12 @@ POLICY_CONTROL_MAP = {
     "Web Filtering": ["A.8.23"],
     "Testing": ["A.8.29"],
     "Outsourced Development": ["A.8.30"],
-    "Separation of Environments": ["A.8.31"]
+    "Separation of Environments": ["A.8.31"],
+    
+    # Performance Evaluation (Clause 9)
+    "Monitoring and Measurement": ["ISO_9.1"],
+    "Internal Audit Program": ["ISO_9.2.1", "ISO_9.2.2"],
+    "Management Review": ["ISO_9.3.1", "ISO_9.3.2", "ISO_9.3.3"]
 }
 
 

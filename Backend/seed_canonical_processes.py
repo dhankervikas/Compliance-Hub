@@ -19,16 +19,16 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 db = SessionLocal()
 
 def seed_canonical_processes():
-    print("[-] Seeding 21 Canonical Processes...")
+    print("[-] Seeding 22 Canonical Processes...")
     
-    # 1. Define the 21 Canonical Processes
+    # 1. Define the 22 Canonical Processes
     CANONICAL_PROCESSES = [
         "Governance & Policy",
         "HR Security",
         "Asset Management",
         "Access Control (IAM)",
         "Physical Security",
-        "Operations (General)",
+        "Operations",
         "Configuration Management",
         "Cryptography",
         "Logging & Monitoring",
@@ -43,6 +43,7 @@ def seed_canonical_processes():
         "Threat Intel",
         "Legal & Compliance",
         "Risk Management",
+	"Performance Evaluation",
         "Improvement"
     ]
     
@@ -112,12 +113,12 @@ def seed_canonical_processes():
         "Equipment Maintenance": "Physical Security",
         
         # Operations
-        "Operations": "Operations (General)",
-        "Protection Against Malware": "Operations (General)",
-        "Software Installation": "Operations (General)",
+        "Operations": "Operations",
+        "Protection Against Malware": "Operations",
+        "Software Installation": "Operations",
         "Technical Vulnerabilities": "Vulnerability Management", # Specific map
-        "Operational Procedures": "Operations (General)",
-        "Malware Protection": "Operations (General)",
+        "Operational Procedures": "Operations",
+        "Malware Protection": "Operations",
         
         # Config
         "Configuration Management": "Configuration Management", # From Policy map
@@ -183,10 +184,11 @@ def seed_canonical_processes():
         "Protection of Records": "Legal & Compliance",
         "Privacy and Protection of PII": "Legal & Compliance",
         
-        # Performance
-        "Independent Review": "Legal & Compliance", # Changed from Performance evaluation
-        # "Internal Audit" -> Performance
-        # "Management Review" -> Performance
+        # Performance Evaluation
+        "Monitoring and Measurement": "Performance Evaluation",
+        "Internal Audit Program": "Performance Evaluation",
+        "Management Review": "Performance Evaluation",
+        "Independent Review": "Legal & Compliance", # Keep this as Legal if preferred, or move to Performance if it fits A.18
         
         # Improvement
         # "Corrective Action" etc.
