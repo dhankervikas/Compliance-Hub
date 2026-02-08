@@ -250,6 +250,20 @@ except Exception as e:
 def health_debug():
     return {"status": "debug-ok"}
 
+@app.get("/force-seed-public")
+def force_seed_public():
+    """
+    Temporary endpoint to force DB seeding in Prod if startup event failed.
+    """
+    try:
+        from app.services.startup_seeder import run_startup_seed
+        run_startup_seed()
+        return {"status": "success", "message": "Seeding completed successfully."}
+    except Exception as e:
+        import traceback
+        return {"status": "error", "message": str(e), "traceback": traceback.format_exc()}
+
+
 @app.get("/db-stats-public")
 
 def get_stats_public(db: SessionLocal = Depends(get_db)):
