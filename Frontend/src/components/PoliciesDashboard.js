@@ -25,9 +25,10 @@ const PoliciesDashboard = () => {
     const fetchPolicies = async () => {
         try {
             const res = await axios.get('/policies');
-            setPolicies(res.data);
+            setPolicies(res.data || []);
         } catch (err) {
             console.error("Failed to fetch policies", err);
+            setPolicies([]);
         } finally {
             setLoading(false);
         }
@@ -35,7 +36,7 @@ const PoliciesDashboard = () => {
 
     // Helper to group policies
     const getPoliciesInFolder = (folderName) => {
-        return policies.filter(p => p.folder && p.folder.toLowerCase().includes(folderName.split('_')[1].toLowerCase()));
+        return (policies || []).filter(p => p.folder && p.folder.toLowerCase().includes(folderName.split('_')[1].toLowerCase()));
     };
 
     const calculateProgress = (folderParams) => {
@@ -117,10 +118,10 @@ const PoliciesDashboard = () => {
                     <tbody className="divide-y divide-gray-100">
                         {loading ? (
                             <tr><td colSpan="5" className="p-6 text-center text-gray-500">Loading policies...</td></tr>
-                        ) : policies.length === 0 ? (
+                        ) : (policies || []).length === 0 ? (
                             <tr><td colSpan="5" className="p-6 text-center text-gray-500">No policies found. Create your first policy.</td></tr>
                         ) : (
-                            policies.map(policy => (
+                            (policies || []).map(policy => (
                                 <tr key={policy.id} className="hover:bg-gray-50 transition-colors group">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
@@ -137,8 +138,8 @@ const PoliciesDashboard = () => {
                                     </td>
                                     <td className="px-6 py-4">
                                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${policy.status === 'Approved' ? 'bg-green-100 text-green-800' :
-                                                policy.status === 'Review' ? 'bg-yellow-100 text-yellow-800' :
-                                                    'bg-gray-100 text-gray-800'
+                                            policy.status === 'Review' ? 'bg-yellow-100 text-yellow-800' :
+                                                'bg-gray-100 text-gray-800'
                                             }`}>
                                             {policy.status}
                                         </span>
