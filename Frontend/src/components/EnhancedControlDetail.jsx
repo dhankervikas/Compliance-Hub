@@ -523,22 +523,7 @@ const EnhancedControlDetail = ({ controlId, controlData, onClose }) => {
                   {requirements.length} requirements generated
                   {reqCached && <span style={{ color: '#059669' }}> • Locked (consistent)</span>}
                 </div>
-                <button
-                  onClick={() => {
-                    if (window.confirm('This will regenerate all requirements using Genie. Existing data will be replaced. Continue?')) {
-                      fetchRequirements(true);
-                    }
-                  }}
-                  disabled={generatingReqs || requirements.length > 0}
-                  style={{
-                    ...styles.btn(),
-                    opacity: (generatingReqs || requirements.length > 0) ? 0.5 : 1,
-                    cursor: (generatingReqs || requirements.length > 0) ? 'not-allowed' : 'pointer'
-                  }}
-                  title={requirements.length > 0 ? "Requirements are locked" : ""}
-                >
-                  {generatingReqs ? '⏳ Generating...' : '🔄 Regenerate'}
-                </button>
+                {/* Regenerate button removed per user request - requirements are fixed once generated */}
               </div>
 
               {/* Requirements List */}
