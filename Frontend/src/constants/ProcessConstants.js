@@ -1,12 +1,12 @@
 // MASTER LIST OF 21 BUSINESS PROCESSES
 // This is the Single Source of Truth for "Business View" grouping.
 export const BUSINESS_PROCESSES = [
-    "Governance & Policy",
-    "HR Security",
+    "Governance",
+    "Human Resources Management",
     "Asset Management",
-    "Access Control (IAM)",
+    "Access Management",
     "Physical Security",
-    "Operations (General)",
+    "IT Operations",
     "Configuration Management",
     "Cryptography",
     "Logging & Monitoring",
@@ -16,9 +16,9 @@ export const BUSINESS_PROCESSES = [
     "Backup Management",
     "Network Security",
     "SDLC (Development)",
-    "Supplier Mgmt",
+    "Third Party Risk Management",
     "Incident & Resilience",
-    "Threat Intel",
+    "Threat Intelligence",
     "Legal & Compliance",
     "Risk Management",
     "Performance Evaluation",
@@ -37,15 +37,15 @@ export const normalizeProcessName = (name) => {
     const lower = name.toLowerCase();
 
     if (lower.includes("risk")) return "Risk Management";
-    if (lower.includes("hr") || lower.includes("human")) return "HR Security";
+    if (lower.includes("hr") || lower.includes("human")) return "Human Resources Management";
     if (lower.includes("asset")) return "Asset Management";
-    if (lower.includes("access") || lower.includes("identity")) return "Access Control (IAM)";
+    if (lower.includes("access") || lower.includes("identity")) return "Access Management";
     if (lower.includes("incident")) return "Incident & Resilience";
-    if (lower.includes("supplier") || lower.includes("vendor")) return "Supplier Mgmt";
+    if (lower.includes("supplier") || lower.includes("vendor") || lower.includes("third")) return "Third Party Risk Management";
     if (lower.includes("physical")) return "Physical Security";
     if (lower.includes("logging") || lower.includes("monitor")) return "Logging & Monitoring";
-    if (lower.includes("change")) return "Governance & Policy"; // Specifically requested for Change Mgmt
+    if (lower.includes("change")) return "Governance"; // Specifically requested for Change Mgmt
 
-    // Fallback: Force Governance & Policy instead of Uncategorized
-    return "Governance & Policy";
+    // Fallback: Force Governance instead of Uncategorized
+    return "Governance";
 };

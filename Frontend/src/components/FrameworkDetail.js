@@ -75,14 +75,14 @@ const COSO_DESCRIPTIONS = {
     "P2.0": "Privacy: Collection, use, retention, and disposal.",
 
     // ISO 27001 PROCESS GROUPS (Custom Restructure)
-    "Governance & Policy": "Clauses 4-7 & Annex A.5: Leadership, Policies, and Organizational Context",
-    "HR Security": "Clauses 7 & Annex A.6: Human Resource Security (Screening to Termination)",
+    "Governance": "Clauses 4-7 & Annex A.5: Leadership, Policies, and Organizational Context",
+    "Human Resources Management": "Clauses 7 & Annex A.6: Human Resource Security (Screening to Termination)",
     "Asset Management": "Annex A.5, A.7, A.8: Inventory, Responsibility, and Media Handling",
-    "Access Control (IAM)": "Annex A.5 & A.8: Logical Access, User Rights, and Authentication",
+    "Access Management": "Annex A.5 & A.8: Logical Access, User Rights, and Authentication",
     "Physical Security": "Annex A.7: Secure Areas, Equipment, and Physical Entry",
-    "Physical Security": "Annex A.7: Secure Areas, Equipment, and Physical Entry",
-    "Operations": "Annex A.8: Malware, Backup, Logging, and Data Protection",
-    "Operations (General)": "Annex A.8: Malware, Backup, Logging, and Data Protection", // Legacy Mapping
+    // "Physical Security": "Annex A.7: Secure Areas, Equipment, and Physical Entry", // Remove duplicate
+    "IT Operations": "Annex A.8: Malware, Backup, Logging, and Data Protection",
+    "Operations": "Annex A.8: Malware, Backup, Logging, and Data Protection", // Legacy Mapping
     "Configuration Management": "Annex A.8.9: Secure Configurations",
     "Cryptography": "Annex A.8.24: Encryption and Key Management",
     "Logging & Monitoring": "Annex A.8.15-16: Event Logging and System Monitoring",
@@ -92,9 +92,9 @@ const COSO_DESCRIPTIONS = {
     "Backup Management": "Annex A.8.13: Information Backup",
     "Network Security": "Annex A.5 & A.8: Network Services, Segregation, and Transfer",
     "SDLC (Development)": "Annex A.8: Secure Development, Testing, and Change Management",
-    "Supplier Mgmt": "Annex A.5: Supplier Relationships and Service Monitoring",
+    "Third Party Risk Management": "Annex A.5: Supplier Relationships and Service Monitoring",
     "Incident & Resilience": "Clause 7.4 & Annex A.5: Incident Management and Business Continuity",
-    "Threat Intel": "Annex A.5.7: Threat Intelligence",
+    "Threat Intelligence": "Annex A.5.7: Threat Intelligence",
     "Legal & Compliance": "Annex A.5 & A.8: Legal Requirements, Privacy, and IPR",
     "Risk Management": "Clauses 6 & 8: Risk Assessment and Treatment",
     "Performance Evaluation": "Clauses 9 & Annex A.5: Audit, Review, and Monitoring",
